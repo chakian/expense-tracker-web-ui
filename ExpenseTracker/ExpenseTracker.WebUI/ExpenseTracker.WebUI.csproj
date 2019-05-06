@@ -142,6 +142,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
+    <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Entities\UserEntity.cs" />
@@ -149,6 +150,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Base\BaseModel.cs" />
+    <Compile Include="Models\ContextObjects\Expense.cs" />
+    <Compile Include="Models\ExpenseTrackerContext.cs" />
     <Compile Include="Models\Expense\AddModel.cs" />
     <Compile Include="Models\User\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -190,6 +193,11 @@
     <Content Include="tsScripts\tsconfig.json" />
     <Content Include="Views\Shared\_TopMenuBar.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Expense\Create.cshtml" />
+    <Content Include="Views\Expense\Delete.cshtml" />
+    <Content Include="Views\Expense\Details.cshtml" />
+    <Content Include="Views\Expense\Edit.cshtml" />
+    <Content Include="Views\Expense\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
