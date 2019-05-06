@@ -8,5 +8,5 @@ function ClickMeButton() {
 }
 
 function NewFunc() {
-    return "test mest23";
+    return "test mest22";
 }

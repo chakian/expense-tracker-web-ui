@@ -256,5 +256,5 @@ paket-files/
 *.jfm
 
 #We are using typescript, so ignore js files in tsScripts folder
-tsScripts/*.js
-tsScripts/*.js.map
+**/tsScripts/*.js
+**/tsScripts/*.js.map
