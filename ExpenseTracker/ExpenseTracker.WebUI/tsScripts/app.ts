@@ -8,9 +8,5 @@ function ClickMeButton() {
 }
 
 function NewFunc() {
-    return "test cagdas";
-}
-
-function NewFunc2() {
-    return "test cagdas";
+    return "test mest23";
 }
