@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A8FACEB6-36A9-4EBF-BA41-756EE6DA1A6E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{A118025B-92C9-46C8-80AA-9C8C8399F2E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,7 +24,6 @@ Global
 		{4CD2810A-29C6-4CB2-B30C-56586B78A761}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CD2810A-29C6-4CB2-B30C-56586B78A761}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD45DAEF-6126-444B-906B-EF4AFC0F605B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD45DAEF-6126-444B-906B-EF4AFC0F605B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD45DAEF-6126-444B-906B-EF4AFC0F605B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD45DAEF-6126-444B-906B-EF4AFC0F605B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
