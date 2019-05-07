@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ExpenseTracker.Business.Context.DbModels;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
-namespace ExpenseTracker.WebUI.Models
+namespace ExpenseTracker.Business.Context
 {
     public class ExpenseTrackerContext : DbContext
     {
@@ -20,6 +17,6 @@ namespace ExpenseTracker.WebUI.Models
         {
         }
 
-        public System.Data.Entity.DbSet<ExpenseTracker.WebUI.Models.ContextObjects.Expense> Expenses { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
     }
 }

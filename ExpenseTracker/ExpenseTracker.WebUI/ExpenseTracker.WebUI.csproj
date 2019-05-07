@@ -151,7 +151,6 @@
     </Compile>
     <Compile Include="Models\Base\BaseModel.cs" />
     <Compile Include="Models\ContextObjects\Expense.cs" />
-    <Compile Include="Models\ExpenseTrackerContext.cs" />
     <Compile Include="Models\Expense\AddModel.cs" />
     <Compile Include="Models\User\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -220,6 +219,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExpenseTracker.Business\ExpenseTracker.Business.csproj">
+      <Project>{DE2EFAE3-AC6A-432A-9BCA-05169B654339}</Project>
+      <Name>ExpenseTracker.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

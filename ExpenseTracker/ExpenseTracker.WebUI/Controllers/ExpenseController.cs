@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using ExpenseTracker.WebUI.Models;
+using ExpenseTracker.Business.Context;
 using ExpenseTracker.WebUI.Models.Expense;
 
 namespace ExpenseTracker.WebUI.Controllers
@@ -18,19 +18,19 @@ namespace ExpenseTracker.WebUI.Controllers
         }
 
         // GET: Expense/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Models.ContextObjects.Expense addModel = db.Expenses.Find(id);
-            if (addModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(addModel);
-        }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Models.ContextObjects.Expense addModel = db.Expenses.Find(id);
+        //    if (addModel == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(addModel);
+        //}
 
         // GET: Expense/Create
         public ActionResult Create()
@@ -41,34 +41,34 @@ namespace ExpenseTracker.WebUI.Controllers
         // POST: Expense/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Date,Amount,Description,AccountID")] Models.ContextObjects.Expense addModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Expenses.Add(addModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,Date,Amount,Description,AccountID")] Models.ContextObjects.Expense addModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Expenses.Add(addModel);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(addModel);
-        }
+        //    return View(addModel);
+        //}
 
         // GET: Expense/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Models.ContextObjects.Expense addModel = db.Expenses.Find(id);
-            if (addModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(addModel);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Models.ContextObjects.Expense addModel = db.Expenses.Find(id);
+        //    if (addModel == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(addModel);
+        //}
 
         // POST: Expense/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -87,30 +87,30 @@ namespace ExpenseTracker.WebUI.Controllers
         }
 
         // GET: Expense/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Models.ContextObjects.Expense addModel = db.Expenses.Find(id);
-            if (addModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(addModel);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Models.ContextObjects.Expense addModel = db.Expenses.Find(id);
+        //    if (addModel == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(addModel);
+        //}
 
         // POST: Expense/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Models.ContextObjects.Expense addModel = db.Expenses.Find(id);
-            db.Expenses.Remove(addModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Models.ContextObjects.Expense addModel = db.Expenses.Find(id);
+        //    db.Expenses.Remove(addModel);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
