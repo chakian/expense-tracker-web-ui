@@ -15,5 +15,7 @@ namespace ExpenseTracker.Business.Context.DbModels
         #endregion
 
         public Budget Budget { get; set; }
+
+        public virtual List<BudgetPlanCategory> BudgetPlanCategories { get; set; }
     }
 }

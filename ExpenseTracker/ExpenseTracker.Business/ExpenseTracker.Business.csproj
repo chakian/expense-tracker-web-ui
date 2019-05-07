@@ -54,6 +54,7 @@
     <Compile Include="Context\DbModels\Base\LookupEntity.cs" />
     <Compile Include="Context\DbModels\Budget.cs" />
     <Compile Include="Context\DbModels\BudgetPlan.cs" />
+    <Compile Include="Context\DbModels\BudgetPlanCategory.cs" />
     <Compile Include="Context\DbModels\BudgetUser.cs" />
     <Compile Include="Context\DbModels\Category.cs" />
     <Compile Include="Context\DbModels\Currency.cs" />
@@ -70,6 +71,5 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

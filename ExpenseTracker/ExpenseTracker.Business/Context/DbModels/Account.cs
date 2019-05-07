@@ -10,10 +10,8 @@ namespace ExpenseTracker.Business.Context.DbModels
 
         #region Foreign Keys
         public int BudgetID { get; set; }
-        public int CurrencyID { get; set; }
         #endregion
 
         public Budget Budget { get; set; }
-        public Currency Currencies { get; set; }
     }
 }
