@@ -5,18 +5,16 @@ namespace ExpenseTracker.Business.Context
 {
     public class ExpenseTrackerContext : DbContext
     {
-        // You can add custom code to this file. Changes will not be overwritten.
-        // 
-        // If you want Entity Framework to drop and regenerate your database
-        // automatically whenever you change your model schema, please use data migrations.
-        // For more information refer to the documentation:
-        //TODO: Code First
-        // http://msdn.microsoft.com/en-us/data/jj591621.aspx
-    
         public ExpenseTrackerContext() : base("name=ExpenseTrackerContext")
         {
         }
 
-        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Budget> Budgets { get; set; }
+        public DbSet<BudgetUser> BudgetUsers { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
     }
 }

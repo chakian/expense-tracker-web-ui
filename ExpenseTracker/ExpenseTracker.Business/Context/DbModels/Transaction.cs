@@ -2,11 +2,16 @@
 
 namespace ExpenseTracker.Business.Context.DbModels
 {
-    public class Expense
+    public class Transaction : AuditableEntity
     {
-        public int ID { get; set; }
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
+
+        #region Foreign Keys
+        public int CategoryID { get; set; }
+        #endregion
+
+        public Category Category { get; set; }
     }
 }

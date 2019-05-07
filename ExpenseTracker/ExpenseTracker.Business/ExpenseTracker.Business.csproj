@@ -48,7 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\DbModels\Expense.cs" />
+    <Compile Include="Context\DbModels\Account.cs" />
+    <Compile Include="Context\DbModels\Base\AuditableEntity.cs" />
+    <Compile Include="Context\DbModels\Base\BaseEntity.cs" />
+    <Compile Include="Context\DbModels\Base\LookupEntity.cs" />
+    <Compile Include="Context\DbModels\Budget.cs" />
+    <Compile Include="Context\DbModels\BudgetPlan.cs" />
+    <Compile Include="Context\DbModels\BudgetUser.cs" />
+    <Compile Include="Context\DbModels\Category.cs" />
+    <Compile Include="Context\DbModels\Currency.cs" />
+    <Compile Include="Context\DbModels\Transaction.cs" />
+    <Compile Include="Context\DbModels\User.cs" />
     <Compile Include="Context\ExpenseTrackerContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,5 +67,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
