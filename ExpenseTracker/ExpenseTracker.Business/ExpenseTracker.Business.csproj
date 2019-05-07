@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Context\DbModels\Expense.cs" />
     <Compile Include="Context\ExpenseTrackerContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
