@@ -22,16 +22,19 @@ namespace ExpenseTracker.Business.Migrations
                         UpdateUserId = c.Int(),
                         UpdateTime = c.DateTime(),
                         IsActive = c.Boolean(nullable: false),
+                        User_UserId = c.Int(),
                     })
                 .PrimaryKey(t => t.AccountId)
                 .ForeignKey("dbo.AccountTypes", t => t.AccountTypeId, cascadeDelete: true)
-                .ForeignKey("dbo.Budgets", t => t.BudgetId, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.InsertUserId, cascadeDelete: true)
+                .ForeignKey("dbo.Budgets", t => t.BudgetId)
+                .ForeignKey("dbo.Users", t => t.User_UserId)
+                .ForeignKey("dbo.Users", t => t.InsertUserId)
                 .ForeignKey("dbo.Users", t => t.UpdateUserId)
                 .Index(t => t.AccountTypeId)
                 .Index(t => t.BudgetId)
                 .Index(t => t.InsertUserId)
-                .Index(t => t.UpdateUserId);
+                .Index(t => t.UpdateUserId)
+                .Index(t => t.User_UserId);
             
             CreateTable(
                 "dbo.AccountTypes",
@@ -55,14 +58,17 @@ namespace ExpenseTracker.Business.Migrations
                         UpdateUserId = c.Int(),
                         UpdateTime = c.DateTime(),
                         IsActive = c.Boolean(nullable: false),
+                        User_UserId = c.Int(),
                     })
                 .PrimaryKey(t => t.BudgetId)
+                .ForeignKey("dbo.Users", t => t.User_UserId)
                 .ForeignKey("dbo.Currencies", t => t.CurrencyId, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.InsertUserId, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.UpdateUserId)
                 .Index(t => t.CurrencyId)
                 .Index(t => t.InsertUserId)
-                .Index(t => t.UpdateUserId);
+                .Index(t => t.UpdateUserId)
+                .Index(t => t.User_UserId);
             
             CreateTable(
                 "dbo.BudgetUsers",
@@ -77,19 +83,18 @@ namespace ExpenseTracker.Business.Migrations
                         UpdateTime = c.DateTime(),
                         IsActive = c.Boolean(nullable: false),
                         User_UserId = c.Int(),
-                        User_UserId1 = c.Int(),
                     })
                 .PrimaryKey(t => t.BudgetUserId)
                 .ForeignKey("dbo.Budgets", t => t.BudgetId, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.User_UserId)
-                .ForeignKey("dbo.Users", t => t.InsertUserId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.InsertUserId)
                 .ForeignKey("dbo.Users", t => t.UpdateUserId)
-                .ForeignKey("dbo.Users", t => t.User_UserId1)
+                .ForeignKey("dbo.Users", t => t.UserId)
                 .Index(t => t.BudgetId)
+                .Index(t => t.UserId)
                 .Index(t => t.InsertUserId)
                 .Index(t => t.UpdateUserId)
-                .Index(t => t.User_UserId)
-                .Index(t => t.User_UserId1);
+                .Index(t => t.User_UserId);
             
             CreateTable(
                 "dbo.Users",
@@ -112,27 +117,6 @@ namespace ExpenseTracker.Business.Migrations
                 .Index(t => t.UpdateUserId);
             
             CreateTable(
-                "dbo.Categories",
-                c => new
-                    {
-                        CategoryId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        BudgetId = c.Int(nullable: false),
-                        InsertUserId = c.Int(nullable: false),
-                        InsertTime = c.DateTime(nullable: false),
-                        UpdateUserId = c.Int(),
-                        UpdateTime = c.DateTime(),
-                        IsActive = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.CategoryId)
-                .ForeignKey("dbo.Budgets", t => t.BudgetId, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.InsertUserId, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.UpdateUserId)
-                .Index(t => t.BudgetId)
-                .Index(t => t.InsertUserId)
-                .Index(t => t.UpdateUserId);
-            
-            CreateTable(
                 "dbo.BudgetPlanCategories",
                 c => new
                     {
@@ -145,16 +129,19 @@ namespace ExpenseTracker.Business.Migrations
                         UpdateUserId = c.Int(),
                         UpdateTime = c.DateTime(),
                         IsActive = c.Boolean(nullable: false),
+                        User_UserId = c.Int(),
                     })
                 .PrimaryKey(t => t.BudgetPlanCategoryId)
                 .ForeignKey("dbo.BudgetPlans", t => t.BudgetPlanId, cascadeDelete: true)
                 .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.InsertUserId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.InsertUserId)
                 .ForeignKey("dbo.Users", t => t.UpdateUserId)
+                .ForeignKey("dbo.Users", t => t.User_UserId)
                 .Index(t => t.BudgetPlanId)
                 .Index(t => t.CategoryId)
                 .Index(t => t.InsertUserId)
-                .Index(t => t.UpdateUserId);
+                .Index(t => t.UpdateUserId)
+                .Index(t => t.User_UserId);
             
             CreateTable(
                 "dbo.BudgetPlans",
@@ -169,24 +156,41 @@ namespace ExpenseTracker.Business.Migrations
                         UpdateUserId = c.Int(),
                         UpdateTime = c.DateTime(),
                         IsActive = c.Boolean(nullable: false),
+                        User_UserId = c.Int(),
                     })
                 .PrimaryKey(t => t.BudgetPlanId)
                 .ForeignKey("dbo.Budgets", t => t.BudgetId, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.InsertUserId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.InsertUserId)
                 .ForeignKey("dbo.Users", t => t.UpdateUserId)
+                .ForeignKey("dbo.Users", t => t.User_UserId)
                 .Index(t => t.BudgetId)
                 .Index(t => t.InsertUserId)
-                .Index(t => t.UpdateUserId);
+                .Index(t => t.UpdateUserId)
+                .Index(t => t.User_UserId);
             
             CreateTable(
-                "dbo.Currencies",
+                "dbo.Categories",
                 c => new
                     {
-                        CurrencyId = c.Int(nullable: false, identity: true),
+                        CategoryId = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        BudgetId = c.Int(nullable: false),
+                        InsertUserId = c.Int(nullable: false),
+                        InsertTime = c.DateTime(nullable: false),
+                        UpdateUserId = c.Int(),
+                        UpdateTime = c.DateTime(),
                         IsActive = c.Boolean(nullable: false),
+                        User_UserId = c.Int(),
                     })
-                .PrimaryKey(t => t.CurrencyId);
+                .PrimaryKey(t => t.CategoryId)
+                .ForeignKey("dbo.Budgets", t => t.BudgetId)
+                .ForeignKey("dbo.Users", t => t.InsertUserId)
+                .ForeignKey("dbo.Users", t => t.UpdateUserId)
+                .ForeignKey("dbo.Users", t => t.User_UserId)
+                .Index(t => t.BudgetId)
+                .Index(t => t.InsertUserId)
+                .Index(t => t.UpdateUserId)
+                .Index(t => t.User_UserId);
             
             CreateTable(
                 "dbo.Transactions",
@@ -204,6 +208,7 @@ namespace ExpenseTracker.Business.Migrations
                         UpdateUserId = c.Int(),
                         UpdateTime = c.DateTime(),
                         IsActive = c.Boolean(nullable: false),
+                        User_UserId = c.Int(),
                     })
                 .PrimaryKey(t => t.TransactionId)
                 .ForeignKey("dbo.Categories", t => t.CategoryId)
@@ -211,79 +216,103 @@ namespace ExpenseTracker.Business.Migrations
                 .ForeignKey("dbo.Accounts", t => t.SourceAccountId, cascadeDelete: true)
                 .ForeignKey("dbo.Accounts", t => t.TargetAccountId)
                 .ForeignKey("dbo.Users", t => t.UpdateUserId)
+                .ForeignKey("dbo.Users", t => t.User_UserId)
                 .Index(t => t.CategoryId)
                 .Index(t => t.SourceAccountId)
                 .Index(t => t.TargetAccountId)
                 .Index(t => t.InsertUserId)
-                .Index(t => t.UpdateUserId);
+                .Index(t => t.UpdateUserId)
+                .Index(t => t.User_UserId);
+            
+            CreateTable(
+                "dbo.Currencies",
+                c => new
+                    {
+                        CurrencyId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        IsActive = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.CurrencyId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Transactions", "UpdateUserId", "dbo.Users");
-            DropForeignKey("dbo.Transactions", "TargetAccountId", "dbo.Accounts");
-            DropForeignKey("dbo.Transactions", "SourceAccountId", "dbo.Accounts");
-            DropForeignKey("dbo.Transactions", "InsertUserId", "dbo.Users");
-            DropForeignKey("dbo.Transactions", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Accounts", "UpdateUserId", "dbo.Users");
             DropForeignKey("dbo.Accounts", "InsertUserId", "dbo.Users");
             DropForeignKey("dbo.Budgets", "UpdateUserId", "dbo.Users");
             DropForeignKey("dbo.Budgets", "InsertUserId", "dbo.Users");
             DropForeignKey("dbo.Budgets", "CurrencyId", "dbo.Currencies");
-            DropForeignKey("dbo.Categories", "UpdateUserId", "dbo.Users");
-            DropForeignKey("dbo.Categories", "InsertUserId", "dbo.Users");
+            DropForeignKey("dbo.BudgetUsers", "UserId", "dbo.Users");
+            DropForeignKey("dbo.BudgetUsers", "UpdateUserId", "dbo.Users");
+            DropForeignKey("dbo.BudgetUsers", "InsertUserId", "dbo.Users");
+            DropForeignKey("dbo.Users", "UpdateUserId", "dbo.Users");
+            DropForeignKey("dbo.Transactions", "User_UserId", "dbo.Users");
+            DropForeignKey("dbo.Transactions", "UpdateUserId", "dbo.Users");
+            DropForeignKey("dbo.Transactions", "TargetAccountId", "dbo.Accounts");
+            DropForeignKey("dbo.Transactions", "SourceAccountId", "dbo.Accounts");
+            DropForeignKey("dbo.Transactions", "InsertUserId", "dbo.Users");
+            DropForeignKey("dbo.Transactions", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.Users", "InsertUserId", "dbo.Users");
+            DropForeignKey("dbo.Categories", "User_UserId", "dbo.Users");
+            DropForeignKey("dbo.BudgetUsers", "User_UserId", "dbo.Users");
+            DropForeignKey("dbo.Budgets", "User_UserId", "dbo.Users");
+            DropForeignKey("dbo.BudgetPlans", "User_UserId", "dbo.Users");
+            DropForeignKey("dbo.BudgetPlanCategories", "User_UserId", "dbo.Users");
             DropForeignKey("dbo.BudgetPlanCategories", "UpdateUserId", "dbo.Users");
             DropForeignKey("dbo.BudgetPlanCategories", "InsertUserId", "dbo.Users");
+            DropForeignKey("dbo.Categories", "UpdateUserId", "dbo.Users");
+            DropForeignKey("dbo.Categories", "InsertUserId", "dbo.Users");
             DropForeignKey("dbo.BudgetPlanCategories", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.Categories", "BudgetId", "dbo.Budgets");
             DropForeignKey("dbo.BudgetPlans", "UpdateUserId", "dbo.Users");
             DropForeignKey("dbo.BudgetPlans", "InsertUserId", "dbo.Users");
             DropForeignKey("dbo.BudgetPlanCategories", "BudgetPlanId", "dbo.BudgetPlans");
             DropForeignKey("dbo.BudgetPlans", "BudgetId", "dbo.Budgets");
-            DropForeignKey("dbo.Categories", "BudgetId", "dbo.Budgets");
-            DropForeignKey("dbo.BudgetUsers", "User_UserId1", "dbo.Users");
-            DropForeignKey("dbo.BudgetUsers", "UpdateUserId", "dbo.Users");
-            DropForeignKey("dbo.BudgetUsers", "InsertUserId", "dbo.Users");
-            DropForeignKey("dbo.Users", "UpdateUserId", "dbo.Users");
-            DropForeignKey("dbo.Users", "InsertUserId", "dbo.Users");
-            DropForeignKey("dbo.BudgetUsers", "User_UserId", "dbo.Users");
+            DropForeignKey("dbo.Accounts", "User_UserId", "dbo.Users");
             DropForeignKey("dbo.BudgetUsers", "BudgetId", "dbo.Budgets");
             DropForeignKey("dbo.Accounts", "BudgetId", "dbo.Budgets");
             DropForeignKey("dbo.Accounts", "AccountTypeId", "dbo.AccountTypes");
+            DropIndex("dbo.Transactions", new[] { "User_UserId" });
             DropIndex("dbo.Transactions", new[] { "UpdateUserId" });
             DropIndex("dbo.Transactions", new[] { "InsertUserId" });
             DropIndex("dbo.Transactions", new[] { "TargetAccountId" });
             DropIndex("dbo.Transactions", new[] { "SourceAccountId" });
             DropIndex("dbo.Transactions", new[] { "CategoryId" });
+            DropIndex("dbo.Categories", new[] { "User_UserId" });
+            DropIndex("dbo.Categories", new[] { "UpdateUserId" });
+            DropIndex("dbo.Categories", new[] { "InsertUserId" });
+            DropIndex("dbo.Categories", new[] { "BudgetId" });
+            DropIndex("dbo.BudgetPlans", new[] { "User_UserId" });
             DropIndex("dbo.BudgetPlans", new[] { "UpdateUserId" });
             DropIndex("dbo.BudgetPlans", new[] { "InsertUserId" });
             DropIndex("dbo.BudgetPlans", new[] { "BudgetId" });
+            DropIndex("dbo.BudgetPlanCategories", new[] { "User_UserId" });
             DropIndex("dbo.BudgetPlanCategories", new[] { "UpdateUserId" });
             DropIndex("dbo.BudgetPlanCategories", new[] { "InsertUserId" });
             DropIndex("dbo.BudgetPlanCategories", new[] { "CategoryId" });
             DropIndex("dbo.BudgetPlanCategories", new[] { "BudgetPlanId" });
-            DropIndex("dbo.Categories", new[] { "UpdateUserId" });
-            DropIndex("dbo.Categories", new[] { "InsertUserId" });
-            DropIndex("dbo.Categories", new[] { "BudgetId" });
             DropIndex("dbo.Users", new[] { "UpdateUserId" });
             DropIndex("dbo.Users", new[] { "InsertUserId" });
-            DropIndex("dbo.BudgetUsers", new[] { "User_UserId1" });
             DropIndex("dbo.BudgetUsers", new[] { "User_UserId" });
             DropIndex("dbo.BudgetUsers", new[] { "UpdateUserId" });
             DropIndex("dbo.BudgetUsers", new[] { "InsertUserId" });
+            DropIndex("dbo.BudgetUsers", new[] { "UserId" });
             DropIndex("dbo.BudgetUsers", new[] { "BudgetId" });
+            DropIndex("dbo.Budgets", new[] { "User_UserId" });
             DropIndex("dbo.Budgets", new[] { "UpdateUserId" });
             DropIndex("dbo.Budgets", new[] { "InsertUserId" });
             DropIndex("dbo.Budgets", new[] { "CurrencyId" });
+            DropIndex("dbo.Accounts", new[] { "User_UserId" });
             DropIndex("dbo.Accounts", new[] { "UpdateUserId" });
             DropIndex("dbo.Accounts", new[] { "InsertUserId" });
             DropIndex("dbo.Accounts", new[] { "BudgetId" });
             DropIndex("dbo.Accounts", new[] { "AccountTypeId" });
-            DropTable("dbo.Transactions");
             DropTable("dbo.Currencies");
+            DropTable("dbo.Transactions");
+            DropTable("dbo.Categories");
             DropTable("dbo.BudgetPlans");
             DropTable("dbo.BudgetPlanCategories");
-            DropTable("dbo.Categories");
             DropTable("dbo.Users");
             DropTable("dbo.BudgetUsers");
             DropTable("dbo.Budgets");

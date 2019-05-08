@@ -22,6 +22,13 @@ namespace ExpenseTracker.Business.Context.DbModels
         public User UpdateUser { get; set; }
         public DateTime? UpdateTime { get; set; }
 
+        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<Budget> Budgets { get; set; }
+        public virtual ICollection<BudgetPlan> BudgetPlans { get; set; }
+        public virtual ICollection<BudgetPlanCategory> BudgetPlanCategories { get; set; }
         public virtual ICollection<BudgetUser> BudgetUsers { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
+
     }
 }
