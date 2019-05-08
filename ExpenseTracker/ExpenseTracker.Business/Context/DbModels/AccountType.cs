@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace ExpenseTracker.Business.Context.DbModels
+﻿namespace ExpenseTracker.Business.Context.DbModels
 {
-    public class AccountType : LookupEntity
+    public class AccountType : BaseEntity
     {
-        public virtual List<Account> Accounts { get; set; }
+        public int AccountTypeId { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace ExpenseTracker.Business.Context.DbModels
+﻿namespace ExpenseTracker.Business.Context.DbModels
 {
-    public class Currency : LookupEntity
+    public class Currency : BaseEntity
     {
-        public virtual List<Account> Accounts { get; set; }
+        public int CurrencyId { get; set; }
+        public string Name { get; set; }
     }
 }

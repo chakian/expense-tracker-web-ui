@@ -4,14 +4,16 @@ namespace ExpenseTracker.Business.Context.DbModels
 {
     public class BudgetPlanCategory : AuditableEntity
     {
+        public int BudgetPlanCategoryId { get; set; }
+
         public decimal PlannedAmount { get; set; }
 
         #region Foreign Keys
-        public int BudgetPlanID { get; set; }
-        public int CategoryID { get; set; }
-        #endregion
-
+        public int BudgetPlanId { get; set; }
         public BudgetPlan BudgetPlan { get; set; }
+
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
+        #endregion
     }
 }

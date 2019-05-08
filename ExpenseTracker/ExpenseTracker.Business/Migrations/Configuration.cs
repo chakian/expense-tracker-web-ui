@@ -13,19 +13,19 @@ namespace ExpenseTracker.Business.Migrations
         protected override void Seed(Context.ExpenseTrackerContext context)
         {
             context.AccountTypes.AddOrUpdate(
-                p => p.LookupID,
-                new Context.DbModels.AccountType { LookupID = 1, LookupValue = "Bank Account", IsActive = true },
-                new Context.DbModels.AccountType { LookupID = 2, LookupValue = "Savings Account", IsActive = true },
-                new Context.DbModels.AccountType { LookupID = 3, LookupValue = "Credit Card", IsActive = true }
+                p => p.AccountTypeId,
+                new Context.DbModels.AccountType { AccountTypeId = 1, Name = "Bank Account", IsActive = true },
+                new Context.DbModels.AccountType { AccountTypeId = 2, Name = "Savings Account", IsActive = true },
+                new Context.DbModels.AccountType { AccountTypeId = 3, Name = "Credit Card", IsActive = true }
             );
 
             context.Currencies.AddOrUpdate(
-                p=>p.LookupID,
-                new Context.DbModels.Currency { LookupID = 1, LookupValue = "TL", IsActive = true },
-                new Context.DbModels.Currency { LookupID = 2, LookupValue = "USD", IsActive = true },
-                new Context.DbModels.Currency { LookupID = 3, LookupValue = "EUR", IsActive = true },
-                new Context.DbModels.Currency { LookupID = 999, LookupValue = "Money", IsActive = true }
-                //new Context.DbModels.Currency { LookupID = 5, LookupValue = "Bank Account", IsActive = true },
+                p=>p.CurrencyId,
+                new Context.DbModels.Currency { CurrencyId = 1, Name = "TL", IsActive = true },
+                new Context.DbModels.Currency { CurrencyId = 2, Name = "USD", IsActive = true },
+                new Context.DbModels.Currency { CurrencyId = 3, Name = "EUR", IsActive = true },
+                new Context.DbModels.Currency { CurrencyId = 999, Name = "Money", IsActive = true }
+                //new Context.DbModels.Currency { CurrencyId = 5, LookupValue = "Bank Account", IsActive = true },
                 //new Context.DbModels.Currency { LookupID = 6, LookupValue = "Bank Account", IsActive = true },
                 //new Context.DbModels.Currency { LookupID = 7, LookupValue = "Bank Account", IsActive = true },
                 //new Context.DbModels.Currency { LookupID = 8, LookupValue = "Bank Account", IsActive = true },

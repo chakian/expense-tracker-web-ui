@@ -9,6 +9,21 @@ namespace ExpenseTracker.Business.Context
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasOptional(u => u.InsertUser)
+                .WithMany()
+                .HasForeignKey(u => u.InsertUserId);
+
+            modelBuilder.Entity<User>()
+                .HasOptional(u => u.UpdateUser)
+                .WithMany()
+                .HasForeignKey(u => u.UpdateUserId);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Budget> Budgets { get; set; }
         public DbSet<BudgetUser> BudgetUsers { get; set; }
