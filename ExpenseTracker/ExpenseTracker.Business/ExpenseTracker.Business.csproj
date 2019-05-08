@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DbModels\Account.cs" />
+    <Compile Include="Context\DbModels\AccountType.cs" />
     <Compile Include="Context\DbModels\Base\AuditableEntity.cs" />
     <Compile Include="Context\DbModels\Base\BaseEntity.cs" />
     <Compile Include="Context\DbModels\Base\LookupEntity.cs" />

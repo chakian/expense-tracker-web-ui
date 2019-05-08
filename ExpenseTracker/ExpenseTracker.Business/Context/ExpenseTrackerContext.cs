@@ -15,6 +15,9 @@ namespace ExpenseTracker.Business.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<AccountType> AccountTypes { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+        public DbSet<BudgetPlan> BudgetPlans { get; set; }
+        public DbSet<BudgetPlanCategory> BudgetPlanCategories { get; set; }
     }
 }
