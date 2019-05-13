@@ -10,7 +10,7 @@ namespace ExpenseTracker.Business.Context.DbModels
         public int BudgetId { get; set; }
         public virtual Budget Budget { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public virtual User User { get; set; }
     }
 }

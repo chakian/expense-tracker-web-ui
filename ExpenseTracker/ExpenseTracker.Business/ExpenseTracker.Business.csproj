@@ -103,6 +103,10 @@
     <Compile Include="Migrations\201905131846426_InitialCreate.Designer.cs">
       <DependentUpon>201905131846426_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905132202385_AddIdentity.cs" />
+    <Compile Include="Migrations\201905132202385_AddIdentity.Designer.cs">
+      <DependentUpon>201905132202385_AddIdentity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -112,6 +116,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905131846426_InitialCreate.resx">
       <DependentUpon>201905131846426_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905132202385_AddIdentity.resx">
+      <DependentUpon>201905132202385_AddIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
