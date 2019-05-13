@@ -13,7 +13,7 @@ namespace ExpenseTracker.Business.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201905081908390_InitialCreate"; }
+            get { return "201905131846426_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

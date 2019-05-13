@@ -20,11 +20,11 @@ namespace ExpenseTracker.Business.Migrations
             );
 
             context.Currencies.AddOrUpdate(
-                p=>p.CurrencyId,
-                new Context.DbModels.Currency { CurrencyId = 1, Name = "TL", IsActive = true },
-                new Context.DbModels.Currency { CurrencyId = 2, Name = "USD", IsActive = true },
-                new Context.DbModels.Currency { CurrencyId = 3, Name = "EUR", IsActive = true },
-                new Context.DbModels.Currency { CurrencyId = 999, Name = "Money", IsActive = true }
+                p => p.CurrencyId,
+                new Context.DbModels.Currency { CurrencyId = 1, CurrencyCode = "TRY", DisplayName = "TL", LongName="Türk Lirasý", IsActive = true },
+                new Context.DbModels.Currency { CurrencyId = 2, CurrencyCode = "USD", DisplayName = "USD", LongName = "Amerikan Dolarý", IsActive = true },
+                new Context.DbModels.Currency { CurrencyId = 3, CurrencyCode = "EUR", DisplayName = "EUR", LongName = "Euro", IsActive = true },
+                new Context.DbModels.Currency { CurrencyId = 999, CurrencyCode = "MONEY", DisplayName = "Para", LongName = "Para", IsActive = true }
                 //new Context.DbModels.Currency { CurrencyId = 5, LookupValue = "Bank Account", IsActive = true },
                 //new Context.DbModels.Currency { LookupID = 6, LookupValue = "Bank Account", IsActive = true },
                 //new Context.DbModels.Currency { LookupID = 7, LookupValue = "Bank Account", IsActive = true },

@@ -8,12 +8,10 @@ namespace ExpenseTracker.Business.Context.DbModels
 
         public decimal PlannedAmount { get; set; }
 
-        #region Foreign Keys
         public int BudgetPlanId { get; set; }
-        public BudgetPlan BudgetPlan { get; set; }
+        public virtual BudgetPlan BudgetPlan { get; set; }
 
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
-        #endregion
+        public virtual Category Category { get; set; }
     }
 }

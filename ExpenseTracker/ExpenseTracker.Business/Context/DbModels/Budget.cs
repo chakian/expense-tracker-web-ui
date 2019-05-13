@@ -1,20 +1,32 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ExpenseTracker.Business.Context.DbModels
 {
     public class Budget : AuditableEntity
     {
+        public Budget()
+        {
+            Accounts = new HashSet<Account>();
+            BudgetPlans = new HashSet<BudgetPlan>();
+            BudgetUsers = new HashSet<BudgetUser>();
+            Categories = new HashSet<Category>();
+        }
+
         public int BudgetId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
-        #region Foreign Keys
         public int CurrencyId { get; set; }
-        public Currency Currency { get; set; }
-        #endregion
+        public virtual Currency Currency { get; set; }
+
+        public virtual ICollection<Account> Accounts { get; set; }
+
+        public virtual ICollection<BudgetPlan> BudgetPlans { get; set; }
 
         public virtual ICollection<BudgetUser> BudgetUsers { get; set; }
+
         public virtual ICollection<Category> Categories { get; set; }
-        public virtual ICollection<Account> Accounts { get; set; }
     }
 }
