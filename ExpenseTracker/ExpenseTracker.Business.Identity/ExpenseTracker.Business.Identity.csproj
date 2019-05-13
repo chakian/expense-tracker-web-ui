@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DE2EFAE3-AC6A-432A-9BCA-05169B654339}</ProjectGuid>
+    <ProjectGuid>{49EFA300-25E1-449A-AC7E-7E5FEC1BC72B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExpenseTracker.Business</RootNamespace>
-    <AssemblyName>ExpenseTracker.Business</AssemblyName>
+    <RootNamespace>ExpenseTracker.Business.Identity</RootNamespace>
+    <AssemblyName>ExpenseTracker.Business.Identity</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,10 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -67,8 +67,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,44 +75,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\DbModels\Account.cs" />
-    <Compile Include="Context\DbModels\AccountType.cs" />
-    <Compile Include="Context\DbModels\Base\AuditableEntity.cs" />
-    <Compile Include="Context\DbModels\Base\BaseEntity.cs" />
-    <Compile Include="Context\DbModels\Budget.cs" />
-    <Compile Include="Context\DbModels\BudgetPlan.cs" />
-    <Compile Include="Context\DbModels\BudgetPlanCategory.cs" />
-    <Compile Include="Context\DbModels\BudgetUser.cs" />
-    <Compile Include="Context\DbModels\Category.cs" />
-    <Compile Include="Context\DbModels\Currency.cs" />
-    <Compile Include="Context\DbModels\Transaction.cs" />
-    <Compile Include="Context\DbModels\User.cs" />
-    <Compile Include="Context\ExpenseTrackerContext.cs" />
-    <Compile Include="Context\FluentConfiguration\AuditableEntityConfiguration.cs" />
-    <Compile Include="Context\FluentConfiguration\BudgetConfiguration.cs" />
-    <Compile Include="Context\FluentConfiguration\BudgetUserConfiguration.cs" />
-    <Compile Include="Context\FluentConfiguration\UserConfiguration.cs" />
-    <Compile Include="Context\FluentConfiguration\CategoryConfiguration.cs" />
-    <Compile Include="Context\FluentConfiguration\AccountConfiguration.cs" />
-    <Compile Include="Identity\ExpenseSignInManager.cs" />
-    <Compile Include="Identity\User.cs" />
-    <Compile Include="Identity\ExpenseUserManager.cs" />
-    <Compile Include="Migrations\201905131846426_InitialCreate.cs" />
-    <Compile Include="Migrations\201905131846426_InitialCreate.Designer.cs">
-      <DependentUpon>201905131846426_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ExpenseUser.cs" />
+    <Compile Include="ExpenseUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905131846426_InitialCreate.resx">
-      <DependentUpon>201905131846426_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

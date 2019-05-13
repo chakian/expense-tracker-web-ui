@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExpenseTracker.Business.Identity;
+using System;
 
 namespace ExpenseTracker.Business.Context.DbModels
 {

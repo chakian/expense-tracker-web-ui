@@ -1,10 +1,12 @@
 ﻿using ExpenseTracker.Business.Context.DbModels;
 using ExpenseTracker.Business.Context.FluentConfiguration;
+using ExpenseTracker.Business.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 
 namespace ExpenseTracker.Business.Context
 {
-    public class ExpenseTrackerContext : DbContext
+    public class ExpenseTrackerContext : IdentityDbContext<User>
     {
         public ExpenseTrackerContext()
             : base("name=ExpenseTrackerContext")
@@ -20,7 +22,7 @@ namespace ExpenseTracker.Business.Context
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        //public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -30,9 +32,13 @@ namespace ExpenseTracker.Business.Context
 
             BudgetConfiguration.Configure(modelBuilder);
 
+            BudgetUserConfiguration.Configure(modelBuilder);
+
             CategoryConfiguration.Configure(modelBuilder);
 
-            UserConfiguration.Configure(modelBuilder);
+            //UserConfiguration.Configure(modelBuilder);
         }
+
+        public static ExpenseTrackerContext Create() => new ExpenseTrackerContext();
     }
 }
