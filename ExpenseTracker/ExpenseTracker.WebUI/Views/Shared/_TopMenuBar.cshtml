@@ -6,22 +6,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("Expense Tracker", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("HT", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li>@Html.ActionLink("New Expense", "Add", "Expense")</li>
-                    <li>@Html.ActionLink("Budgets", "Index", "Budget")</li>
-                    <li>@Html.ActionLink("Budget Accounts", "Index", "BudgetAccount")</li>
-                    <li>@Html.ActionLink("Budget Categories", "Index", "Categories")</li>
-                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                    <li>@Html.ActionLink("Harcama Girişi", "Add", "Expense")</li>
+                    <li>@Html.ActionLink("Bütçeler", "Index", "Budget")</li>
+                    <li>@Html.ActionLink("Bütçe Hesapları", "Index", "BudgetAccount")</li>
+                    <li>@Html.ActionLink("Bütçe Kategorileri", "Index", "Categories")</li>
+                    <li>@Html.ActionLink("Çıkış", "Logout", "Account")</li>
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                    <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                    <li>@Html.ActionLink("Giriş", "Login", "Account")</li>
+                    <li>@Html.ActionLink("Kayıt", "Register", "Account")</li>
                 }
             </ul>
         </div>
