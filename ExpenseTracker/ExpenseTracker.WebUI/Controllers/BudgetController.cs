@@ -17,7 +17,8 @@ namespace ExpenseTracker.WebUI.Controllers
         // GET: Budget
         public ActionResult Index()
         {
-            var budgets = db.Budgets.Where(b => b.IsActive).Include(b => b.Currency).Include(b => b.InsertUser).Include(b => b.UpdateUser);
+            string userId = User.Identity.GetUserId();
+            var budgets = db.Budgets.Where(b => b.IsActive && b.BudgetUsers.Any(bu => bu.UserId.Equals(userId))).Include(b => b.Currency);//.Include(b => b.InsertUser).Include(b => b.UpdateUser);
             return View(budgets.ToList());
         }
 
@@ -29,6 +30,9 @@ namespace ExpenseTracker.WebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Budget budget = db.Budgets.Find(id);
+            budget.InsertUser = db.Users.Find(budget.InsertUserId);
+            budget.UpdateUser = db.Users.Find(budget.UpdateUserId);
+
             if (budget == null)
             {
                 return HttpNotFound();
