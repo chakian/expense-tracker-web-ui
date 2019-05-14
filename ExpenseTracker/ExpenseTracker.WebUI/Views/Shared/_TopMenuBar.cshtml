@@ -11,15 +11,15 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                @if (Model.IsLoggedIn)
+                @if (User.Identity.IsAuthenticated)
                 {
                     <li>@Html.ActionLink("New Expense", "Add", "Expense")</li>
-                    <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Login", "Login", "User")</li>
-                    <li>@Html.ActionLink("Register", "Register", "User")</li>
+                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                    <li>@Html.ActionLink("Register", "Register", "Account")</li>
                 }
             </ul>
         </div>
