@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ExpenseTracker.Business.Identity
 {
+    [Table("Users")]
     public class User : IdentityUser
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
@@ -16,5 +19,13 @@ namespace ExpenseTracker.Business.Identity
         }
 
         public bool IsActive { get; set; }
+
+        public string InsertUserId { get; set; }
+        public User InsertUser { get; set; }
+        public DateTime InsertTime { get; set; }
+
+        public string UpdateUserId { get; set; }
+        public User UpdateUser { get; set; }
+        public DateTime? UpdateTime { get; set; }
     }
 }

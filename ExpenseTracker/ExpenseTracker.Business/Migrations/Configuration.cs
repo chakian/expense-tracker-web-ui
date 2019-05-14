@@ -25,17 +25,7 @@ namespace ExpenseTracker.Business.Migrations
                 new Context.DbModels.Currency { CurrencyId = 2, CurrencyCode = "USD", DisplayName = "USD", LongName = "Amerikan Dolarý", IsActive = true },
                 new Context.DbModels.Currency { CurrencyId = 3, CurrencyCode = "EUR", DisplayName = "EUR", LongName = "Euro", IsActive = true },
                 new Context.DbModels.Currency { CurrencyId = 999, CurrencyCode = "MONEY", DisplayName = "Para", LongName = "Para", IsActive = true }
-                //new Context.DbModels.Currency { CurrencyId = 5, LookupValue = "Bank Account", IsActive = true },
-                //new Context.DbModels.Currency { LookupID = 6, LookupValue = "Bank Account", IsActive = true },
-                //new Context.DbModels.Currency { LookupID = 7, LookupValue = "Bank Account", IsActive = true },
-                //new Context.DbModels.Currency { LookupID = 8, LookupValue = "Bank Account", IsActive = true },
-                //new Context.DbModels.Currency { LookupID = 9, LookupValue = "Bank Account", IsActive = true },
-                //new Context.DbModels.Currency { LookupID = 10, LookupValue = "Bank Account", IsActive = true },
-                //new Context.DbModels.Currency { LookupID = 11, LookupValue = "Bank Account", IsActive = true },
-                //new Context.DbModels.Currency { LookupID = 12, LookupValue = "Bank Account", IsActive = true },
-                //new Context.DbModels.Currency { LookupID = 13, LookupValue = "Bank Account", IsActive = true },
-                //new Context.DbModels.Currency { LookupID = 14, LookupValue = "Bank Account", IsActive = true },
-                //new Context.DbModels.Currency { LookupID = 15, LookupValue = "Bank Account", IsActive = true }
+                //new Context.DbModels.Currency { CurrencyId = 5, CurrencyCode = "CUR", DisplayName = "Para", LongName = "Para Birimi", IsActive = true },
             );
         }
     }

@@ -22,7 +22,6 @@ namespace ExpenseTracker.Business.Context
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
-        //public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -38,7 +37,7 @@ namespace ExpenseTracker.Business.Context
 
             CategoryConfiguration.Configure(modelBuilder);
 
-            //UserConfiguration.Configure(modelBuilder);
+            IdentityConfiguration.Configure(modelBuilder);
         }
 
         public static ExpenseTrackerContext Create() => new ExpenseTrackerContext();
