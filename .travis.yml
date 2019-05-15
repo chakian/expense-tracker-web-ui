@@ -1,0 +1,5 @@
+language: csharp
+solution: ExpenseTracker/ExpenseTracker.sln
+
+notifications:
+  slack: expense-track:mNMAHFGxdauQTnjxWwJz2yZ5
