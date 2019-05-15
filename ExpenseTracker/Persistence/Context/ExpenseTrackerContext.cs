@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Persistence.Context.DbModels;
+﻿using ExpenseTracker.Interfaces.Context;
+using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.Persistence.Context.FluentConfiguration;
 using ExpenseTracker.Persistence.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -6,7 +7,7 @@ using System.Data.Entity;
 
 namespace ExpenseTracker.Persistence.Context
 {
-    public class ExpenseTrackerContext : IdentityDbContext<User>
+    public class ExpenseTrackerContext : IdentityDbContext<User>//, IDbContext
     {
         public ExpenseTrackerContext()
             : base("name=ExpenseTrackerContext")
