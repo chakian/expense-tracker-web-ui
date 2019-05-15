@@ -267,9 +267,9 @@
       <Project>{DE2EFAE3-AC6A-432A-9BCA-05169B654339}</Project>
       <Name>ExpenseTracker.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Persistence\Persistence.csproj">
+    <ProjectReference Include="..\Persistence\ExpenseTracker.Persistence.csproj">
       <Project>{EACAE983-5259-49A9-A7B5-FA5A4C14C2DB}</Project>
-      <Name>Persistence</Name>
+      <Name>ExpenseTracker.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

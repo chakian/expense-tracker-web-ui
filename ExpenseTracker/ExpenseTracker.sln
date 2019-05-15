@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{76464A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Interfaces", "ExpenseTracker.Interfaces\ExpenseTracker.Interfaces.csproj", "{7154BA1F-9A4A-4A09-A28C-4B1CFDD1C0C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{EACAE983-5259-49A9-A7B5-FA5A4C14C2DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Persistence", "Persistence\ExpenseTracker.Persistence.csproj", "{EACAE983-5259-49A9-A7B5-FA5A4C14C2DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

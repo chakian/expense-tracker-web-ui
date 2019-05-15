@@ -61,9 +61,9 @@
     <Folder Include="User\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Persistence\Persistence.csproj">
+    <ProjectReference Include="..\Persistence\ExpenseTracker.Persistence.csproj">
       <Project>{EACAE983-5259-49A9-A7B5-FA5A4C14C2DB}</Project>
-      <Name>Persistence</Name>
+      <Name>ExpenseTracker.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
