@@ -1,1 +1,2 @@
 language: csharp
+solution: ExpenseTracker/ExpenseTracker.sln
