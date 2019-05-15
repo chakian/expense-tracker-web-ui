@@ -1,5 +1,6 @@
 ﻿using System;
-using ExpenseTracker.Business.Identity;
+using ExpenseTracker.Persistence.Context;
+using ExpenseTracker.Persistence.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -13,7 +14,7 @@ namespace ExpenseTracker.WebUI
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(Business.Context.ExpenseTrackerContext.Create);
+            app.CreatePerOwinContext(ExpenseTrackerContext.Create);
             app.CreatePerOwinContext<ExpenseUserManager>(ExpenseUserManager.Create);
             app.CreatePerOwinContext<ExpenseSignInManager>(ExpenseSignInManager.Create);
 

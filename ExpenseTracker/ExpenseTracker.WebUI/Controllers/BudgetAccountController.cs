@@ -3,8 +3,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using ExpenseTracker.Business.Context;
-using ExpenseTracker.Business.Context.DbModels;
+using ExpenseTracker.Persistence.Context;
+using ExpenseTracker.Persistence.Context.DbModels;
 using Microsoft.AspNet.Identity;
 
 namespace ExpenseTracker.WebUI.Controllers

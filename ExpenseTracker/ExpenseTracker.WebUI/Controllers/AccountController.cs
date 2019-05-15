@@ -1,4 +1,4 @@
-﻿using ExpenseTracker.Business.Identity;
+﻿using ExpenseTracker.Persistence.Identity;
 using ExpenseTracker.WebUI.Models.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
