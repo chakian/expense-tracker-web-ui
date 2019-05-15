@@ -10,7 +10,7 @@ namespace ExpenseTracker.Business
 
         public List<Budget> GetBudgetsOfUser(string userId)
         {
-            throw new System.Exception();
+            throw new System.Exception();a
         }
     }
 }
