@@ -8,7 +8,7 @@ namespace ExpenseTracker.WebUI.Controllers
     [RequireHttps]
     public class BaseController : Controller
     {
-        protected readonly ExpenseTrackerContext db;
+        protected readonly ExpenseTrackerContext context;
 
         protected string UserId
         {
@@ -24,12 +24,21 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public BaseController()
         {
-            db = DbContextFactory.GetExpenseTrackerContext();
+            context = DbContextFactory.GetExpenseTrackerContext();
         }
 
         protected ActionResult ReturnUnauthorized(string message = null)
         {
             return new HttpUnauthorizedResult(string.IsNullOrEmpty(message) ? "Yetkisiz İşlem" : message);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                context.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

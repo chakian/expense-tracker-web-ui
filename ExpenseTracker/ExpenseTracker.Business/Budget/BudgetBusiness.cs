@@ -16,5 +16,20 @@ namespace ExpenseTracker.Business
                 .Include(b => b.Currency)
                 .ToList();
         }
+
+        public Budget GetBudgetDetails(int budgetId, string userId)
+        {
+            Budget budget = context.Budgets.Find(budgetId);
+
+            if (budget == null || !budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
+            {
+                return null;
+            }
+
+            budget.InsertUser = context.Users.Find(budget.InsertUserId);
+            budget.UpdateUser = context.Users.Find(budget.UpdateUserId);
+
+            return budget;
+        }
     }
 }

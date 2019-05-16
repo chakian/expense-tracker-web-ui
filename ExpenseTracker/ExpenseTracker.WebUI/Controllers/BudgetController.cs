@@ -1,21 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using ExpenseTracker.Business;
 using ExpenseTracker.Persistence.Context.DbModels;
-using Microsoft.AspNet.Identity;
 
 namespace ExpenseTracker.WebUI.Controllers
 {
     [Authorize]
     public class BudgetController : BaseController
     {
-        private const string UNAUTHORIZED_MESSAGE = "Bu bütçe üzerinde yetkiniz bulunmamaktadır";
+        //TODO: private const string UNAUTHORIZED_MESSAGE = "Bu bütçe üzerinde yetkiniz bulunmamaktadır";
+
+        private readonly BudgetBusiness budgetBusiness;
+
+        public BudgetController()
+        {
+            budgetBusiness = new BudgetBusiness(context);
+        }
+
         // GET: Budget
         public ActionResult Index()
         {
-            var budgets = db.Budgets.Where(b => b.IsActive && b.BudgetUsers.Any(bu => bu.UserId.Equals(UserId))).Include(b => b.Currency);//.Include(b => b.InsertUser).Include(b => b.UpdateUser);
+            List<Budget> budgets = budgetBusiness.GetBudgetsOfUser(UserId);
             return View(budgets.ToList());
         }
 
@@ -26,19 +35,14 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Budget budget = db.Budgets.Find(id);
+
+            Budget budget = budgetBusiness.GetBudgetDetails(id.Value, UserId);
 
             if (budget == null)
             {
+                //TODO: return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
                 return HttpNotFound();
             }
-            else if (!budget.BudgetUsers.Any(bu => bu.UserId.Equals(UserId)))
-            {
-                return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
-            }
-
-            budget.InsertUser = db.Users.Find(budget.InsertUserId);
-            budget.UpdateUser = db.Users.Find(budget.UpdateUserId);
 
             return View(budget);
         }
@@ -46,7 +50,7 @@ namespace ExpenseTracker.WebUI.Controllers
         // GET: Budget/Create
         public ActionResult Create()
         {
-            ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "CurrencyCode");
+            ViewBag.CurrencyId = new SelectList(context.Currencies, "CurrencyId", "CurrencyCode");
             return View();
         }
 
@@ -65,12 +69,12 @@ namespace ExpenseTracker.WebUI.Controllers
                 budget.UpdateTime = DateTime.Now;
                 budget.IsActive = true;
 
-                db.Budgets.Add(budget);
-                db.SaveChanges();
+                context.Budgets.Add(budget);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
+            ViewBag.CurrencyId = new SelectList(context.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
             return View(budget);
         }
 
@@ -82,7 +86,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Budget budget = db.Budgets.Find(id);
+            Budget budget = context.Budgets.Find(id);
 
             if (budget == null)
             {
@@ -92,7 +96,7 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
             }
-            ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
+            ViewBag.CurrencyId = new SelectList(context.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
             return View(budget);
         }
 
@@ -105,7 +109,7 @@ namespace ExpenseTracker.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var budgetUserList = db.BudgetUsers.AsNoTracking().Where(bu => bu.BudgetId.Equals(budget.BudgetId)).ToList();
+                var budgetUserList = context.BudgetUsers.AsNoTracking().Where(bu => bu.BudgetId.Equals(budget.BudgetId)).ToList();
                 if (!budgetUserList.Any(bu => bu.UserId.Equals(UserId)))
                 {
                     return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
@@ -114,11 +118,11 @@ namespace ExpenseTracker.WebUI.Controllers
                 budget.UpdateUserId = UserId;
                 budget.UpdateTime = DateTime.Now;
 
-                db.Entry(budget).State = EntityState.Modified;
-                db.SaveChanges();
+                context.Entry(budget).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
+            ViewBag.CurrencyId = new SelectList(context.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
             return View(budget);
         }
 
@@ -129,7 +133,7 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Budget budget = db.Budgets.Find(id);
+            Budget budget = context.Budgets.Find(id);
             if (budget == null)
             {
                 return HttpNotFound();
@@ -146,26 +150,17 @@ namespace ExpenseTracker.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Budget budget = db.Budgets.Find(id);
+            Budget budget = context.Budgets.Find(id);
 
-            var budgetUserList = db.BudgetUsers.AsNoTracking().Where(bu => bu.BudgetId.Equals(budget.BudgetId)).ToList();
+            var budgetUserList = context.BudgetUsers.AsNoTracking().Where(bu => bu.BudgetId.Equals(budget.BudgetId)).ToList();
             if (!budgetUserList.Any(bu => bu.UserId.Equals(UserId)))
             {
                 return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
             }
 
-            db.Budgets.Remove(budget);
-            db.SaveChanges();
+            context.Budgets.Remove(budget);
+            context.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

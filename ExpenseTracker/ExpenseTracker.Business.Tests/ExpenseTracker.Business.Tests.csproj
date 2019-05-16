@@ -82,8 +82,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\BaseBudgetTest.cs" />
     <Compile Include="Base\BaseQueryTest.cs" />
-    <Compile Include="Budget\BudgetTests.cs" />
+    <Compile Include="BudgetTests\ListBudgetsOfUserTests.cs" />
+    <Compile Include="BudgetTests\GetBudgetDetailTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
