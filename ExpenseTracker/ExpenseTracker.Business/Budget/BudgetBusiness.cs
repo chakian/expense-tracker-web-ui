@@ -1,6 +1,8 @@
 ﻿using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace ExpenseTracker.Business
 {
@@ -10,7 +12,9 @@ namespace ExpenseTracker.Business
 
         public List<Budget> GetBudgetsOfUser(string userId)
         {
-            throw new System.Exception();
+            return context.Budgets.Where(b => b.IsActive && b.BudgetUsers.Any(bu => bu.IsActive && bu.UserId.Equals(userId)))
+                .Include(b => b.Currency)
+                .ToList();
         }
     }
 }
