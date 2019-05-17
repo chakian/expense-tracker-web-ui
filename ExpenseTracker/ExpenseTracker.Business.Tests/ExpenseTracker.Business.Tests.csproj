@@ -86,6 +86,7 @@
     <Compile Include="Base\BaseQueryTest.cs" />
     <Compile Include="BudgetTests\ListBudgetsOfUserTests.cs" />
     <Compile Include="BudgetTests\GetBudgetDetailTests.cs" />
+    <Compile Include="LookupTests\CurrencyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

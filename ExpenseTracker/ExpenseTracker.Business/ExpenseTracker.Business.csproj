@@ -60,7 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseBusiness.cs" />
-    <Compile Include="Budget\BudgetBusiness.cs" />
+    <Compile Include="BudgetBusiness\BudgetBusiness.cs" />
+    <Compile Include="LookupBusiness\CurrencyBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

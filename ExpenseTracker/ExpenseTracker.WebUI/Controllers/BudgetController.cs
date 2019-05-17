@@ -12,7 +12,7 @@ namespace ExpenseTracker.WebUI.Controllers
     [Authorize]
     public class BudgetController : BaseController
     {
-        //TODO: private const string UNAUTHORIZED_MESSAGE = "Bu bütçe üzerinde yetkiniz bulunmamaktadır";
+        private const string UNAUTHORIZED_MESSAGE = "Bu bütçe üzerinde yetkiniz bulunmamaktadır";
 
         private readonly BudgetBusiness budgetBusiness;
 
@@ -50,7 +50,10 @@ namespace ExpenseTracker.WebUI.Controllers
         // GET: Budget/Create
         public ActionResult Create()
         {
-            ViewBag.CurrencyId = new SelectList(context.Currencies, "CurrencyId", "CurrencyCode");
+            CurrencyBusiness currencyBusiness = new CurrencyBusiness(context);
+
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "CurrencyCode");
+
             return View();
         }
 
