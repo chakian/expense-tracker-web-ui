@@ -180,6 +180,9 @@
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Models\Base\BaseModel.cs" />
+    <Compile Include="Models\BudgetRelated\BudgetCreateModel.cs" />
+    <Compile Include="Models\BudgetRelated\BudgetDetailModel.cs" />
+    <Compile Include="Models\BudgetRelated\BudgetListModel.cs" />
     <Compile Include="Models\ContextObjects\Expense.cs" />
     <Compile Include="Models\Expense\AddModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
