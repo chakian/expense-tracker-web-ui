@@ -96,17 +96,12 @@
     <Compile Include="Identity\ExpenseSignInManager.cs" />
     <Compile Include="Identity\ExpenseUserManager.cs" />
     <Compile Include="Identity\User.cs" />
-    <Compile Include="Migrations\201905141726379_InitialCreate.cs" />
-    <Compile Include="Migrations\201905141726379_InitialCreate.Designer.cs">
-      <DependentUpon>201905141726379_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201905202050246_InitialCreate.cs" />
+    <Compile Include="Migrations\201905202050246_InitialCreate.Designer.cs">
+      <DependentUpon>201905202050246_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905141726379_InitialCreate.resx">
-      <DependentUpon>201905141726379_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -117,6 +112,11 @@
       <Project>{7154BA1F-9A4A-4A09-A28C-4B1CFDD1C0C2}</Project>
       <Name>ExpenseTracker.Interfaces</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201905202050246_InitialCreate.resx">
+      <DependentUpon>201905202050246_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
