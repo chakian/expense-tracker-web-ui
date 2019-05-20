@@ -1,6 +1,9 @@
-﻿using ExpenseTracker.Persistence.Context;
+﻿using ExpenseTracker.Business;
+using ExpenseTracker.Persistence.Context;
+using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.WebUI.Helpers;
 using Microsoft.AspNet.Identity;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ExpenseTracker.WebUI.Controllers
@@ -20,6 +23,27 @@ namespace ExpenseTracker.WebUI.Controllers
                 }
                 return string.Empty;
             }
+        }
+
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            base.OnActionExecuted(filterContext);
+
+            int? activeBudgetId = (int?)Session["ActiveBudgetId"];
+            if (!activeBudgetId.HasValue)
+            {
+                Budget budget = new BudgetBusiness(context).GetBudgetsOfUser(UserId).FirstOrDefault();
+                if(budget != null)
+                {
+                    activeBudgetId = budget.BudgetId;
+                    Session["ActiveBudgetId"] = activeBudgetId.Value;
+                }
+                else
+                {
+                    activeBudgetId = -1;
+                }
+            }
+            ViewBag.ActiveBudgetId = activeBudgetId.Value;
         }
 
         public BaseController()

@@ -2,5 +2,6 @@
 {
     public class BaseModel
     {
+        public int ActiveBudgetId { get; set; }
     }
 }

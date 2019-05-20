@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ExpenseTracker.Business;
@@ -40,7 +39,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public ActionResult Create()
         {
-            SetViewBagValues();
+            SetViewBagValues(null, null);
             return View();
         }
 
@@ -63,7 +62,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 return RedirectToAction("Index");
             }
 
-            SetViewBagValues();
+            SetViewBagValues(account.AccountTypeId, account.BudgetId);
             return View(account);
         }
 
@@ -81,7 +80,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 return HttpNotFound();
             }
 
-            SetViewBagValues();
+            SetViewBagValues(account.AccountTypeId, account.BudgetId);
             return View(account);
         }
 
@@ -99,17 +98,17 @@ namespace ExpenseTracker.WebUI.Controllers
                 return RedirectToAction("Index");
             }
 
-            SetViewBagValues();
+            SetViewBagValues(account.AccountTypeId, account.BudgetId);
             return View(account);
         }
 
-        private void SetViewBagValues()
+        private void SetViewBagValues(int? selectedAccountTypeId, int? selectedBudgetId)
         {
             BudgetBusiness budgetBusiness = new BudgetBusiness(context);
             AccountTypeBusiness accountTypeBusiness = new AccountTypeBusiness(context);
 
-            ViewBag.AccountTypeId = new SelectList(accountTypeBusiness.GetAccountTypeList(), "AccountTypeId", "Name");
-            ViewBag.BudgetId = new SelectList(budgetBusiness.GetBudgetsOfUser(UserId), "BudgetId", "Name");
+            ViewBag.AccountTypeId = new SelectList(accountTypeBusiness.GetAccountTypeList(), "AccountTypeId", "Name", selectedAccountTypeId);
+            ViewBag.BudgetId = new SelectList(budgetBusiness.GetBudgetsOfUser(UserId), "BudgetId", "Name", selectedBudgetId);
         }
 
         public ActionResult Delete(int? id)
@@ -134,7 +133,11 @@ namespace ExpenseTracker.WebUI.Controllers
 
             if(account != null)
             {
-                context.Accounts.Remove(account);
+                account.UpdateUserId = UserId;
+                account.UpdateTime = DateTime.Now;
+                account.IsActive = false;
+
+                context.Entry(account).State = EntityState.Modified;
                 context.SaveChanges();
             }
             
