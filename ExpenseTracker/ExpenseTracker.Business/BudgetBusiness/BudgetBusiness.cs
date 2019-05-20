@@ -11,12 +11,9 @@ namespace ExpenseTracker.Business
     {
         public BudgetBusiness(ExpenseTrackerContext context) : base(context) { }
 
-        public List<Budget> GetBudgetsOfUser(string userId)
-        {
-            return context.Budgets.Where(b => b.IsActive && b.BudgetUsers.Any(bu => bu.IsActive && bu.UserId.Equals(userId)))
+        public List<Budget> GetBudgetsOfUser(string userId) => context.Budgets.Where(b => b.IsActive && b.BudgetUsers.Any(bu => bu.IsActive && bu.UserId.Equals(userId)))
                 .Include(b => b.Currency)
                 .ToList();
-        }
 
         public Budget GetBudgetDetails(int budgetId, string userId)
         {
@@ -42,15 +39,17 @@ namespace ExpenseTracker.Business
 
         private Budget CreateBudget_NoCommit(string name, int currencyId, string userId)
         {
-            Budget budget = new Budget();
-            budget.InsertUserId = userId;
-            budget.InsertTime = DateTime.Now;
-            budget.UpdateUserId = userId;
-            budget.UpdateTime = DateTime.Now;
-            budget.IsActive = true;
+            Budget budget = new Budget
+            {
+                InsertUserId = userId,
+                InsertTime = DateTime.Now,
+                UpdateUserId = userId,
+                UpdateTime = DateTime.Now,
+                IsActive = true,
 
-            budget.Name = name;
-            budget.CurrencyId = currencyId;
+                Name = name,
+                CurrencyId = currencyId
+            };
 
             context.Budgets.Add(budget);
 

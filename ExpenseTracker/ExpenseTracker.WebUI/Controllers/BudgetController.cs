@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ExpenseTracker.Business;
@@ -127,8 +126,12 @@ namespace ExpenseTracker.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 bool success = budgetBusiness.UpdateBudget(model.Id, model.Name, model.CurrencyId, UserId);
-                //TODO: Operate on success
-                //return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
+                if (!success)
+                {
+                    return new HttpUnauthorizedResult();
+                    //TODO: Operate on success
+                    //return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
+                }
 
                 return RedirectToAction("Index");
             }
