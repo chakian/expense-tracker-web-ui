@@ -19,7 +19,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public ActionResult Index()
         {
-            var accounts = budgetAccountBusiness.GetAccountsOfUser(UserId);
+            var accounts = budgetAccountBusiness.GetAccountsOfUser(UserId, ActiveBudgetId);
             return View(accounts);
         }
 
@@ -39,16 +39,18 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public ActionResult Create()
         {
-            SetViewBagValues(null, null);
+            SetViewBagValues(null);
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AccountId,Name,StartingBalance,CurrentBalance,AccountTypeId,BudgetId")] Account account)
+        public ActionResult Create([Bind(Include = "AccountId,Name,StartingBalance,CurrentBalance,AccountTypeId")] Account account)
         {
-            if (ModelState.IsValid && new BudgetBusiness(context).GetBudgetDetails(account.BudgetId, UserId) != null)
+            if (ModelState.IsValid && new BudgetBusiness(context).GetBudgetDetails(ActiveBudgetId, UserId) != null)
             {
+                account.BudgetId = ActiveBudgetId;
+
                 account.InsertUserId = UserId;
                 account.InsertTime = DateTime.Now;
                 account.UpdateUserId = UserId;
@@ -62,7 +64,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 return RedirectToAction("Index");
             }
 
-            SetViewBagValues(account.AccountTypeId, account.BudgetId);
+            SetViewBagValues(account.AccountTypeId);
             return View(account);
         }
 
@@ -80,7 +82,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 return HttpNotFound();
             }
 
-            SetViewBagValues(account.AccountTypeId, account.BudgetId);
+            SetViewBagValues(account.AccountTypeId);
             return View(account);
         }
 
@@ -98,17 +100,17 @@ namespace ExpenseTracker.WebUI.Controllers
                 return RedirectToAction("Index");
             }
 
-            SetViewBagValues(account.AccountTypeId, account.BudgetId);
+            SetViewBagValues(account.AccountTypeId);
             return View(account);
         }
 
-        private void SetViewBagValues(int? selectedAccountTypeId, int? selectedBudgetId)
+        private void SetViewBagValues(int? selectedAccountTypeId)//, int? selectedBudgetId)
         {
-            BudgetBusiness budgetBusiness = new BudgetBusiness(context);
+            //BudgetBusiness budgetBusiness = new BudgetBusiness(context);
             AccountTypeBusiness accountTypeBusiness = new AccountTypeBusiness(context);
 
             ViewBag.AccountTypeId = new SelectList(accountTypeBusiness.GetAccountTypeList(), "AccountTypeId", "Name", selectedAccountTypeId);
-            ViewBag.BudgetId = new SelectList(budgetBusiness.GetBudgetsOfUser(UserId), "BudgetId", "Name", selectedBudgetId);
+            //ViewBag.BudgetId = new SelectList(budgetBusiness.GetBudgetsOfUser(UserId), "BudgetId", "Name", selectedBudgetId);
         }
 
         public ActionResult Delete(int? id)

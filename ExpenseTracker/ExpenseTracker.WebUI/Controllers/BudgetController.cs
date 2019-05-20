@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net;
 using System.Web.Mvc;
 using ExpenseTracker.Business;
@@ -202,7 +203,19 @@ namespace ExpenseTracker.WebUI.Controllers
         public ActionResult SetActive(int budgetId)
         {
             Session["ActiveBudgetId"] = budgetId;
+            Session["ActiveBudgetName"] = budgetBusiness.GetBudgetDetails(budgetId, UserId).Name;
+
+            var user = context.Users.Find(UserId);
+            user.ActiveBudgetId = budgetId;
+            context.Entry(user).State = EntityState.Modified;
+            context.SaveChanges();
+
             return RedirectToAction("SelectActiveBudget");
+        }
+
+        public ActionResult Manage()
+        {
+            return View();
         }
     }
 }
