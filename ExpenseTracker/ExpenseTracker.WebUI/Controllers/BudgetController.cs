@@ -51,33 +51,24 @@ namespace ExpenseTracker.WebUI.Controllers
         public ActionResult Create()
         {
             CurrencyBusiness currencyBusiness = new CurrencyBusiness(context);
-
             ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "CurrencyCode");
 
             return View();
         }
 
         // POST: Budget/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BudgetId,Name,CurrencyId")] Budget budget)
         {
             if (ModelState.IsValid)
             {
-                budget.InsertUserId = UserId;
-                budget.InsertTime = DateTime.Now;
-                budget.UpdateUserId = UserId;
-                budget.UpdateTime = DateTime.Now;
-                budget.IsActive = true;
-
-                context.Budgets.Add(budget);
-                context.SaveChanges();
+                budgetBusiness.CreateBudget(budget.Name, budget.CurrencyId, UserId);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CurrencyId = new SelectList(context.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
+            CurrencyBusiness currencyBusiness = new CurrencyBusiness(context);
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "CurrencyCode", budget.CurrencyId);
             return View(budget);
         }
 
@@ -89,23 +80,20 @@ namespace ExpenseTracker.WebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Budget budget = context.Budgets.Find(id);
+            Budget budget = budgetBusiness.GetBudgetDetails(id.Value, UserId);
 
             if (budget == null)
             {
+                //TODO: return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
                 return HttpNotFound();
             }
-            else if (!budget.BudgetUsers.Any(bu => bu.UserId.Equals(UserId)))
-            {
-                return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
-            }
-            ViewBag.CurrencyId = new SelectList(context.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
+
+            CurrencyBusiness currencyBusiness = new CurrencyBusiness(context);
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "CurrencyCode", budget.CurrencyId);
             return View(budget);
         }
 
         // POST: Budget/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "BudgetId,Name,CurrencyId,InsertUserId,InsertTime,IsActive")] Budget budget)
@@ -118,14 +106,15 @@ namespace ExpenseTracker.WebUI.Controllers
                     return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
                 }
 
-                budget.UpdateUserId = UserId;
-                budget.UpdateTime = DateTime.Now;
+                bool success = budgetBusiness.UpdateBudget(budget.BudgetId, budget.Name, budget.CurrencyId, UserId);
+                //TODO: Operate on success
+                //return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
 
-                context.Entry(budget).State = EntityState.Modified;
-                context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CurrencyId = new SelectList(context.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
+
+            CurrencyBusiness currencyBusiness = new CurrencyBusiness(context);
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "CurrencyCode", budget.CurrencyId);
             return View(budget);
         }
 
@@ -136,14 +125,13 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Budget budget = context.Budgets.Find(id);
+
+            Budget budget = budgetBusiness.GetBudgetDetails(id.Value, UserId);
+
             if (budget == null)
             {
+                //TODO: return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
                 return HttpNotFound();
-            }
-            else if (!budget.BudgetUsers.Any(bu => bu.UserId.Equals(UserId)))
-            {
-                return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
             }
             return View(budget);
         }
@@ -153,16 +141,13 @@ namespace ExpenseTracker.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Budget budget = context.Budgets.Find(id);
-
-            var budgetUserList = context.BudgetUsers.AsNoTracking().Where(bu => bu.BudgetId.Equals(budget.BudgetId)).ToList();
-            if (!budgetUserList.Any(bu => bu.UserId.Equals(UserId)))
+            bool success = budgetBusiness.DeleteBudget(id, UserId);
+            if(!success)
             {
-                return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
+                //TODO: return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
+                return HttpNotFound();
             }
 
-            context.Budgets.Remove(budget);
-            context.SaveChanges();
             return RedirectToAction("Index");
         }
     }

@@ -13,9 +13,12 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li>@Html.ActionLink("Harcama Girişi", "Add", "Expense")</li>
+                    <li>@Html.ActionLink("Harcamalar", "List", "Expense")</li>
+                    <li>@Html.ActionLink("Rapor", "Report", "Budget")</li>
                     <li>@Html.ActionLink("Bütçeler", "Index", "Budget")</li>
                     <li>@Html.ActionLink("Bütçe Hesapları", "Index", "BudgetAccount")</li>
                     <li>@Html.ActionLink("Bütçe Kategorileri", "Index", "Categories")</li>
+                    <li>@Html.ActionLink("Bildirim Ayarları", "Notifications", "User")</li>
                     <li>@Html.ActionLink("Çıkış", "Logout", "Account")</li>
                 }
                 else

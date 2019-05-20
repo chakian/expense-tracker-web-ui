@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ExpenseTracker.Persistence.Context.DbModels.Budget>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Bütçelerim";
 }
 
-<h2>Index</h2>
+<h2>Bütçelerim</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Yeni Oluştur", "Create")
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,9 @@
         @Html.DisplayFor(modelItem => item.Currency.CurrencyCode)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.BudgetId }) |
-        @Html.ActionLink("Details", "Details", new { id = item.BudgetId }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.BudgetId })
+        @Html.ActionLink("Düzenle", "Edit", new { id = item.BudgetId }) |
+        @Html.ActionLink("Detay", "Details", new { id = item.BudgetId }) |
+        @Html.ActionLink("Sil", "Delete", new { id = item.BudgetId })
     </td>
 </tr>
 }
