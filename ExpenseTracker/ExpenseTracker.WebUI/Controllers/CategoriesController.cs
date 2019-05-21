@@ -20,7 +20,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public ActionResult Index()
         {
-            var categories = budgetCategoryBusiness.GetCategoriesOfUser(UserId);
+            var categories = budgetCategoryBusiness.GetCategoriesOfUser(UserId, ActiveBudgetId);
             return View(categories);
         }
 

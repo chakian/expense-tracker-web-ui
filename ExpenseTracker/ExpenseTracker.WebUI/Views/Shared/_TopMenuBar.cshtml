@@ -15,7 +15,7 @@
                     string budgetName = ViewBag.ActiveBudgetName;
                     <li>@Html.ActionLink("Harcama Girişi", "Add", "Expense")</li>
                     <li>@Html.ActionLink("Harcamalar", "List", "Expense")</li>
-                    <li>@Html.ActionLink("Rapor", "Report", "Budget")</li>
+                    <li>@Html.ActionLink("Rapor", "Index", "Report")</li>
                     if (string.IsNullOrEmpty(budgetName))
                     {
                         <li>@Html.ActionLink("Aktif Bütçe Belirle", "SelectActiveBudget", "Budget")</li>
@@ -24,7 +24,7 @@
                     {
                         <li>@Html.ActionLink("Aktif Bütçe: '" + budgetName + "'", "Manage", "Budget")</li>
                     }
-                    <li>@Html.ActionLink("Bildirim Ayarları", "Notifications", "User")</li>
+                    @*<li>@Html.ActionLink("Bildirim Ayarları", "Notifications", "User")</li>*@
                     <li>@Html.ActionLink("Çıkış", "Logout", "Account")</li>
                 }
                 else

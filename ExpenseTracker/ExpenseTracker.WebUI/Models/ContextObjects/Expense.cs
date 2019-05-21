@@ -2,7 +2,7 @@
 
 namespace ExpenseTracker.WebUI.Models.ContextObjects
 {
-    public class Expense : BaseModel
+    public class Expense
     {
         public int ID { get; set; }
         public DateTime Date { get; set; }
