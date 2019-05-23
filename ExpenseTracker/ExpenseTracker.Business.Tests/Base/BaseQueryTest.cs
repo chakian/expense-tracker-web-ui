@@ -36,7 +36,7 @@ namespace ExpenseTracker.Business.Tests
             context.SaveChanges();
         }
 
-        protected void CreateDefaultUsers()
+        protected void CreateDefaultUsers(string defaultTestUserId)
         {
             var user = new User { IsActive = true, UserName = "A", Id = "a", Email = "a@a.a" };
             context.Users.Add(user);
@@ -44,7 +44,7 @@ namespace ExpenseTracker.Business.Tests
             user = new User { IsActive = true, UserName = "B", Id = "b", Email = "b@b.b" };
             context.Users.Add(user);
 
-            user = new User { IsActive = true, UserName = "TEST", Id = "test", Email = "test@test.test" };
+            user = new User { IsActive = true, UserName = "TEST", Id = defaultTestUserId, Email = "test@test.test" };
             context.Users.Add(user);
 
             context.SaveChanges();

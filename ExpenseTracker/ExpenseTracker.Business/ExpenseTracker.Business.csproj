@@ -63,6 +63,7 @@
     <Compile Include="BudgetBusiness\BudgetAccountBusiness.cs" />
     <Compile Include="BudgetBusiness\BudgetBusiness.cs" />
     <Compile Include="BudgetBusiness\BudgetCategoryBusiness.cs" />
+    <Compile Include="BudgetBusiness\BudgetPlanBusiness.cs" />
     <Compile Include="BudgetBusiness\BudgetUserBusiness.cs" />
     <Compile Include="LookupBusiness\AccountTypeBusiness.cs" />
     <Compile Include="LookupBusiness\CurrencyBusiness.cs" />
@@ -78,6 +79,10 @@
     <Folder Include="User\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExpenseTracker.Common\ExpenseTracker.Common.csproj">
+      <Project>{65C9F7E5-739A-401A-A9FE-76EC2B583067}</Project>
+      <Name>ExpenseTracker.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExpenseTracker.Persistence\ExpenseTracker.Persistence.csproj">
       <Project>{EACAE983-5259-49A9-A7B5-FA5A4C14C2DB}</Project>
       <Name>ExpenseTracker.Persistence</Name>

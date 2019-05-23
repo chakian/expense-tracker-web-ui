@@ -3,11 +3,13 @@
     ViewBag.Title = "Bütçe Planlama";
 }
 
-<h2>Bütçe Planlama - @Model.BudgetPlan.Month.ToString().PadLeft(2, '0')/@Model.BudgetPlan.Year.ToString()</h2>
+<h2>Bütçe Planlama - @Model.BudgetPlan.MonthName @Model.BudgetPlan.Year.ToString()</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.BudgetPlan.BudgetPlanId)
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })

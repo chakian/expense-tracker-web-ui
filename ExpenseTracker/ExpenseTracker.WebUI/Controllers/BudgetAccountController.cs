@@ -106,11 +106,9 @@ namespace ExpenseTracker.WebUI.Controllers
 
         private void SetViewBagValues(int? selectedAccountTypeId)//, int? selectedBudgetId)
         {
-            //BudgetBusiness budgetBusiness = new BudgetBusiness(context);
             AccountTypeBusiness accountTypeBusiness = new AccountTypeBusiness(context);
 
             ViewBag.AccountTypeId = new SelectList(accountTypeBusiness.GetAccountTypeList(), "AccountTypeId", "Name", selectedAccountTypeId);
-            //ViewBag.BudgetId = new SelectList(budgetBusiness.GetBudgetsOfUser(UserId), "BudgetId", "Name", selectedBudgetId);
         }
 
         public ActionResult Delete(int? id)

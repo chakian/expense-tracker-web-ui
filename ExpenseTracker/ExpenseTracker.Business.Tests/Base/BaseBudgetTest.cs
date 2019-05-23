@@ -7,15 +7,44 @@ namespace ExpenseTracker.Business.Tests
 {
     public class BaseBudgetTest : BaseQueryTest
     {
+        protected int DefaultTestBudgetId = -1;
+        protected const string DefaultTestUserId = "test";
+
         [TestInitialize()]
-        public void BaseBudgetTestInitialize()
+        public void BaseTestInitialize()
         {
-            var connection = Effort.DbConnectionFactory.CreateTransient();
-            context = new ExpenseTrackerContext(connection);
+            if (context == null)
+            {
+                var connection = Effort.DbConnectionFactory.CreateTransient();
+                context = new ExpenseTrackerContext(connection);
+            }
 
             CreateDefaultCurrencies();
-            CreateDefaultUsers();
+            CreateDefaultUsers(DefaultTestUserId);
 
+            CreateDefaultBudgetsAndAssignUsers();
+        }
+
+        private void CreateDefaultBudgetsAndAssignUsers()
+        {
+            CreateDefaultBudgets();
+            AssignDefaultUserToDefaultBudget();
+        }
+
+        protected void AssignDefaultUserToDefaultBudget()
+        {
+            var budgetUserData = new List<Dbo.BudgetUser>();
+            var budgetUser = CreateNewAuthorizedEntity<Dbo.BudgetUser>();
+            budgetUser.BudgetId = DefaultTestBudgetId;
+            budgetUser.UserId = DefaultTestUserId;
+            budgetUserData.Add(budgetUser);
+
+            context.BudgetUsers.AddRange(budgetUserData);
+            context.SaveChanges();
+        }
+
+        protected void CreateDefaultBudgets()
+        {
             var budgetData = new List<Dbo.Budget>();
             for (int i = 1; i <= 10; i++)
             {
@@ -27,24 +56,7 @@ namespace ExpenseTracker.Business.Tests
             context.Budgets.AddRange(budgetData);
             context.SaveChanges();
 
-            var budgetUserData = new List<Dbo.BudgetUser>();
-            var budgetUser = CreateNewAuthorizedEntity<Dbo.BudgetUser>();
-            budgetUser.BudgetId = 1;
-            budgetUser.UserId = "test";
-            budgetUserData.Add(budgetUser);
-
-            budgetUser = CreateNewAuthorizedEntity<Dbo.BudgetUser>();
-            budgetUser.BudgetId = 2;
-            budgetUser.UserId = "test";
-            budgetUserData.Add(budgetUser);
-
-            budgetUser = CreateNewAuthorizedEntity<Dbo.BudgetUser>();
-            budgetUser.BudgetId = 3;
-            budgetUser.UserId = "test";
-            budgetUserData.Add(budgetUser);
-
-            context.BudgetUsers.AddRange(budgetUserData);
-            context.SaveChanges();
+            DefaultTestBudgetId = budgetData[0].BudgetId;
         }
     }
 }

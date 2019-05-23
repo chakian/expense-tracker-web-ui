@@ -12,7 +12,7 @@ namespace ExpenseTracker.Business
         {
         }
 
-        public List<Category> GetCategoriesOfUser(string userId, int budgetId) => context.Categories.Where(a => a.BudgetId == budgetId && a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
+        public List<Category> GetCategoriesOfUser(string userId, int budgetId) => context.Categories.Where(a => a.IsActive && a.BudgetId == budgetId && a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
             .Include(a => a.Budget)
             .Include(a => a.InsertUser)
             .Include(a => a.UpdateUser)

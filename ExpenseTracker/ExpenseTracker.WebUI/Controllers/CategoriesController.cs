@@ -40,7 +40,6 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public ActionResult Create()
         {
-            SetViewBagValues(null);
             return View();
         }
 
@@ -50,6 +49,8 @@ namespace ExpenseTracker.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.BudgetId = ActiveBudgetId;
+
                 category.InsertUserId = User.Identity.GetUserId();
                 category.InsertTime = DateTime.Now;
                 category.UpdateUserId = User.Identity.GetUserId();
@@ -61,7 +62,6 @@ namespace ExpenseTracker.WebUI.Controllers
                 return RedirectToAction("Index");
             }
 
-            SetViewBagValues(category.BudgetId);
             return View(category);
         }
 
@@ -77,7 +77,6 @@ namespace ExpenseTracker.WebUI.Controllers
                 return HttpNotFound();
             }
 
-            SetViewBagValues(category.BudgetId);
             return View(category);
         }
 
@@ -95,7 +94,6 @@ namespace ExpenseTracker.WebUI.Controllers
                 return RedirectToAction("Index");
             }
 
-            SetViewBagValues(category.BudgetId);
             return View(category);
         }
 
@@ -125,12 +123,6 @@ namespace ExpenseTracker.WebUI.Controllers
             context.Entry(category).State = EntityState.Modified;
             context.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        private void SetViewBagValues(int? selectedBudgetId)
-        {
-            BudgetBusiness budgetBusiness = new BudgetBusiness(context);
-            ViewBag.BudgetId = new SelectList(budgetBusiness.GetBudgetsOfUser(UserId), "BudgetId", "Name", selectedBudgetId);
         }
     }
 }
