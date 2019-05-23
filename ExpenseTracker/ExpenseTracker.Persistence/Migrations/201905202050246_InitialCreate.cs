@@ -141,6 +141,7 @@ namespace ExpenseTracker.Persistence.Migrations
                         InsertTime = c.DateTime(nullable: false),
                         UpdateUserId = c.String(maxLength: 128),
                         UpdateTime = c.DateTime(),
+                        ActiveBudgetId = c.Int(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),

@@ -10,8 +10,10 @@
 <body>
     @Html.Partial("_TopMenuBar")
     <div class="container body-content">
-        @RenderBody()
-        <br /><br /><br /><hr />
+        <div id="main-body">
+            @RenderBody()
+        </div>
+        <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Harcama Takibi</p>
         </footer>

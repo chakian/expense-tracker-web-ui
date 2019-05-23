@@ -1,0 +1,34 @@
+﻿@model BudgetPlanUpdateModel
+@{
+    ViewBag.Title = "Bütçe Planlama";
+}
+
+<h2>Bütçe Planlama - @Model.BudgetPlan.MonthName @Model.BudgetPlan.Year.ToString()</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.BudgetPlan.BudgetPlanId)
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @foreach (var category in Model.Categories)
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => category.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => category.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => category.CategoryName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Oluştur" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

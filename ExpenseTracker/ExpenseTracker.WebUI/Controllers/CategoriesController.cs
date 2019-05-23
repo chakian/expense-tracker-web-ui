@@ -1,34 +1,36 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using ExpenseTracker.Persistence.Context;
+using ExpenseTracker.Business;
 using ExpenseTracker.Persistence.Context.DbModels;
 using Microsoft.AspNet.Identity;
 
 namespace ExpenseTracker.WebUI.Controllers
 {
     [Authorize]
-    public class CategoriesController : Controller
+    public class CategoriesController : BaseController
     {
-        private ExpenseTrackerContext db = new ExpenseTrackerContext();
+        private readonly BudgetCategoryBusiness budgetCategoryBusiness;
 
-        // GET: Categories
-        public ActionResult Index()
+        public CategoriesController()
         {
-            var categories = db.Categories.Include(c => c.Budget).Include(c => c.InsertUser).Include(c => c.UpdateUser);
-            return View(categories.ToList());
+            budgetCategoryBusiness = new BudgetCategoryBusiness(context);
         }
 
-        // GET: Categories/Details/5
+        public ActionResult Index()
+        {
+            var categories = budgetCategoryBusiness.GetCategoriesOfUser(UserId, ActiveBudgetId);
+            return View(categories);
+        }
+
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = budgetCategoryBusiness.GetCategoryById(id.Value, UserId);
             if (category == null)
             {
                 return HttpNotFound();
@@ -36,56 +38,48 @@ namespace ExpenseTracker.WebUI.Controllers
             return View(category);
         }
 
-        // GET: Categories/Create
         public ActionResult Create()
         {
-            ViewBag.BudgetId = new SelectList(db.Budgets, "BudgetId", "Name");
             return View();
         }
 
-        // POST: Categories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoryId,Name,BudgetId")] Category category)
         {
             if (ModelState.IsValid)
             {
+                category.BudgetId = ActiveBudgetId;
+
                 category.InsertUserId = User.Identity.GetUserId();
                 category.InsertTime = DateTime.Now;
                 category.UpdateUserId = User.Identity.GetUserId();
                 category.UpdateTime = DateTime.Now;
                 category.IsActive = true;
 
-                db.Categories.Add(category);
-                db.SaveChanges();
+                context.Categories.Add(category);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BudgetId = new SelectList(db.Budgets, "BudgetId", "Name", category.BudgetId);
             return View(category);
         }
 
-        // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = budgetCategoryBusiness.GetCategoryById(id.Value, UserId);
             if (category == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BudgetId = new SelectList(db.Budgets, "BudgetId", "Name", category.BudgetId);
+
             return View(category);
         }
 
-        // POST: Categories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CategoryId,Name,BudgetId,InsertUserId,InsertTime,IsActive")] Category category)
@@ -95,22 +89,21 @@ namespace ExpenseTracker.WebUI.Controllers
                 category.UpdateUserId = User.Identity.GetUserId();
                 category.UpdateTime = DateTime.Now;
 
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
+                context.Entry(category).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BudgetId = new SelectList(db.Budgets, "BudgetId", "Name", category.BudgetId);
+
             return View(category);
         }
 
-        // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = budgetCategoryBusiness.GetCategoryById(id.Value, UserId);
             if (category == null)
             {
                 return HttpNotFound();
@@ -118,24 +111,18 @@ namespace ExpenseTracker.WebUI.Controllers
             return View(category);
         }
 
-        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            Category category = context.Categories.Find(id);
+            category.UpdateUserId = User.Identity.GetUserId();
+            category.UpdateTime = DateTime.Now;
+            category.IsActive = false;
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            context.Entry(category).State = EntityState.Modified;
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

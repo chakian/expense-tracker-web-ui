@@ -6,7 +6,6 @@ namespace ExpenseTracker.Business
     {
         protected readonly ExpenseTrackerContext context;
 
-        private BaseBusiness() { }
         public BaseBusiness(ExpenseTrackerContext context)
         {
             this.context = context;

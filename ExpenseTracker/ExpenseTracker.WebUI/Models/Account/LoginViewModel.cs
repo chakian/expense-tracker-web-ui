@@ -2,7 +2,7 @@
 
 namespace ExpenseTracker.WebUI.Models.Account
 {
-    public class LoginViewModel
+    public class LoginViewModel : BaseModel
     {
         [Required]
         [Display(Name = "Email")]

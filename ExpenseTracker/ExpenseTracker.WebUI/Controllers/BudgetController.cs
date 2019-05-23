@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ExpenseTracker.Business;
 using ExpenseTracker.Persistence.Context.DbModels;
+using ExpenseTracker.WebUI.Models.BudgetRelated;
 
 namespace ExpenseTracker.WebUI.Controllers
 {
@@ -24,8 +23,18 @@ namespace ExpenseTracker.WebUI.Controllers
         // GET: Budget
         public ActionResult Index()
         {
+            BudgetListModel model = new BudgetListModel
+            {
+                BudgetList = new List<BasicBudgetInfo>()
+            };
+
             List<Budget> budgets = budgetBusiness.GetBudgetsOfUser(UserId);
-            return View(budgets.ToList());
+            budgets.ForEach(b =>
+            {
+                model.BudgetList.Add(new BasicBudgetInfo { Id = b.BudgetId, Name = b.Name, CurrencyDisplayName = b.Currency.DisplayName });
+            });
+
+            return View(model);
         }
 
         // GET: Budget/Details/5
@@ -44,41 +53,41 @@ namespace ExpenseTracker.WebUI.Controllers
                 return HttpNotFound();
             }
 
-            return View(budget);
+            BudgetDetailModel model = new BudgetDetailModel
+            {
+                Id = budget.BudgetId,
+                Name = budget.Name,
+                CurrencyLongName = budget.Currency.LongName
+            };
+
+            return View(model);
         }
 
         // GET: Budget/Create
         public ActionResult Create()
         {
             CurrencyBusiness currencyBusiness = new CurrencyBusiness(context);
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName");
 
-            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "CurrencyCode");
+            BudgetCreateModel model = new BudgetCreateModel();
 
-            return View();
+            return View(model);
         }
 
         // POST: Budget/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BudgetId,Name,CurrencyId")] Budget budget)
+        public ActionResult Create(BudgetCreateModel model)
         {
             if (ModelState.IsValid)
             {
-                budget.InsertUserId = UserId;
-                budget.InsertTime = DateTime.Now;
-                budget.UpdateUserId = UserId;
-                budget.UpdateTime = DateTime.Now;
-                budget.IsActive = true;
-
-                context.Budgets.Add(budget);
-                context.SaveChanges();
+                budgetBusiness.CreateBudget(model.Name, model.CurrencyId, UserId);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CurrencyId = new SelectList(context.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
-            return View(budget);
+            CurrencyBusiness currencyBusiness = new CurrencyBusiness(context);
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName", model.CurrencyId);
+            return View(model);
         }
 
         // GET: Budget/Edit/5
@@ -89,44 +98,49 @@ namespace ExpenseTracker.WebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Budget budget = context.Budgets.Find(id);
+            Budget budget = budgetBusiness.GetBudgetDetails(id.Value, UserId);
 
             if (budget == null)
             {
+                //TODO: return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
                 return HttpNotFound();
             }
-            else if (!budget.BudgetUsers.Any(bu => bu.UserId.Equals(UserId)))
+
+            BudgetDetailModel model = new BudgetDetailModel
             {
-                return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
-            }
-            ViewBag.CurrencyId = new SelectList(context.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
-            return View(budget);
+                Id = budget.BudgetId,
+                Name = budget.Name,
+                CurrencyId = budget.CurrencyId
+            };
+
+            CurrencyBusiness currencyBusiness = new CurrencyBusiness(context);
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName", model.CurrencyId);
+
+            return View(model);
         }
 
         // POST: Budget/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BudgetId,Name,CurrencyId,InsertUserId,InsertTime,IsActive")] Budget budget)
+        public ActionResult Edit(BudgetDetailModel model)
         {
             if (ModelState.IsValid)
             {
-                var budgetUserList = context.BudgetUsers.AsNoTracking().Where(bu => bu.BudgetId.Equals(budget.BudgetId)).ToList();
-                if (!budgetUserList.Any(bu => bu.UserId.Equals(UserId)))
+                bool success = budgetBusiness.UpdateBudget(model.Id, model.Name, model.CurrencyId, UserId);
+                if (!success)
                 {
-                    return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
+                    return new HttpUnauthorizedResult();
+                    //TODO: Operate on success
+                    //return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
                 }
 
-                budget.UpdateUserId = UserId;
-                budget.UpdateTime = DateTime.Now;
-
-                context.Entry(budget).State = EntityState.Modified;
-                context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CurrencyId = new SelectList(context.Currencies, "CurrencyId", "CurrencyCode", budget.CurrencyId);
-            return View(budget);
+
+            CurrencyBusiness currencyBusiness = new CurrencyBusiness(context);
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName", model.CurrencyId);
+
+            return View(model);
         }
 
         // GET: Budget/Delete/5
@@ -136,16 +150,23 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Budget budget = context.Budgets.Find(id);
+
+            Budget budget = budgetBusiness.GetBudgetDetails(id.Value, UserId);
+
             if (budget == null)
             {
+                //TODO: return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
                 return HttpNotFound();
             }
-            else if (!budget.BudgetUsers.Any(bu => bu.UserId.Equals(UserId)))
+
+            BudgetDetailModel model = new BudgetDetailModel
             {
-                return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
-            }
-            return View(budget);
+                Id = budget.BudgetId,
+                CurrencyLongName = budget.Currency.LongName,
+                Name = budget.Name
+            };
+
+            return View(model);
         }
 
         // POST: Budget/Delete/5
@@ -153,17 +174,48 @@ namespace ExpenseTracker.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Budget budget = context.Budgets.Find(id);
-
-            var budgetUserList = context.BudgetUsers.AsNoTracking().Where(bu => bu.BudgetId.Equals(budget.BudgetId)).ToList();
-            if (!budgetUserList.Any(bu => bu.UserId.Equals(UserId)))
+            bool success = budgetBusiness.DeleteBudget(id, UserId);
+            if(!success)
             {
-                return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
+                //TODO: return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
+                return HttpNotFound();
             }
 
-            context.Budgets.Remove(budget);
-            context.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult SelectActiveBudget()
+        {
+            BudgetListModel model = new BudgetListModel
+            {
+                BudgetList = new List<BasicBudgetInfo>()
+            };
+
+            List<Budget> budgets = budgetBusiness.GetBudgetsOfUser(UserId);
+            budgets.ForEach(b =>
+            {
+                model.BudgetList.Add(new BasicBudgetInfo { Id = b.BudgetId, Name = b.Name, CurrencyDisplayName = b.Currency.DisplayName });
+            });
+
+            return View(model);
+        }
+
+        public ActionResult SetActive(int budgetId)
+        {
+            Session["ActiveBudgetId"] = budgetId;
+            Session["ActiveBudgetName"] = budgetBusiness.GetBudgetDetails(budgetId, UserId).Name;
+
+            var user = context.Users.Find(UserId);
+            user.ActiveBudgetId = budgetId;
+            context.Entry(user).State = EntityState.Modified;
+            context.SaveChanges();
+
+            return RedirectToAction("SelectActiveBudget");
+        }
+
+        public ActionResult Manage()
+        {
+            return View();
         }
     }
 }

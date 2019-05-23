@@ -13,7 +13,7 @@ namespace ExpenseTracker.Persistence.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201905141726379_InitialCreate"; }
+            get { return "201905202050246_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

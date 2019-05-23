@@ -27,5 +27,7 @@ namespace ExpenseTracker.Persistence.Identity
         public string UpdateUserId { get; set; }
         public User UpdateUser { get; set; }
         public DateTime? UpdateTime { get; set; }
+
+        public int? ActiveBudgetId { get; set; }
     }
 }

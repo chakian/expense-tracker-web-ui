@@ -12,16 +12,14 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
         {
             // ARRANGE
             var business = new BudgetBusiness(context);
-            string userId = "test";
+            string userId = DefaultTestUserId;
 
             // ACT
             var budgets = business.GetBudgetsOfUser(userId);
 
             //ASSERT
-            Assert.AreEqual(3, budgets.Count);
+            Assert.AreEqual(1, budgets.Count);
             Assert.AreEqual("Budget_1", budgets[0].Name);
-            Assert.AreEqual("Budget_2", budgets[1].Name);
-            Assert.AreEqual("Budget_3", budgets[2].Name);
         }
 
         [TestMethod]
@@ -40,7 +38,7 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             context.Budgets.Add(budget);
             var budgetUser = CreateNewAuthorizedEntity<BudgetUser>();
             budgetUser.BudgetId = 11;
-            budgetUser.UserId = "test";
+            budgetUser.UserId = DefaultTestUserId;
             context.BudgetUsers.Add(budgetUser);
             context.SaveChanges();
 
@@ -48,7 +46,7 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             var budgets = business.GetBudgetsOfUser(userId);
 
             //ASSERT
-            Assert.AreEqual(3, budgets.Count);
+            Assert.AreEqual(1, budgets.Count);
             Assert.IsNull(budgets.FirstOrDefault(b => b.Name.Equals(nonExistingBudgetName)));
         }
     }

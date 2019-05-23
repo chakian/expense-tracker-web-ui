@@ -170,6 +170,7 @@
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\BudgetAccountController.cs" />
     <Compile Include="Controllers\BudgetController.cs" />
+    <Compile Include="Controllers\BudgetPlanController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Entities\UserEntity.cs" />
@@ -180,6 +181,12 @@
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Models\Base\BaseModel.cs" />
+    <Compile Include="Models\BudgetRelated\BudgetCreateModel.cs" />
+    <Compile Include="Models\BudgetRelated\BudgetDetailModel.cs" />
+    <Compile Include="Models\BudgetRelated\BudgetListModel.cs" />
+    <Compile Include="Models\BudgetRelated\BudgetPlanUpdateModel.cs" />
+    <Compile Include="Models\ContextObjects\BudgetPlan.cs" />
+    <Compile Include="Models\ContextObjects\BudgetPlanCategory.cs" />
     <Compile Include="Models\ContextObjects\Expense.cs" />
     <Compile Include="Models\Expense\AddModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -241,6 +248,9 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Budget\SelectActiveBudget.cshtml" />
+    <Content Include="Views\Budget\Manage.cshtml" />
+    <Content Include="Views\BudgetPlan\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

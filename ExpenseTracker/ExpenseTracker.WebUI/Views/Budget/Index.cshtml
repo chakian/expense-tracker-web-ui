@@ -1,37 +1,38 @@
-﻿@model IEnumerable<ExpenseTracker.Persistence.Context.DbModels.Budget>
+﻿@model ExpenseTracker.WebUI.Models.BudgetRelated.BudgetListModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Bütçelerim";
 }
 
-<h2>Index</h2>
+<h2>Bütçelerim</h2>
+<p>@Html.ActionLink("Aktif bütçeyi değiştir", "SelectActiveBudget")</p>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Yeni Oluştur", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Bütçe Adı
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Currency.CurrencyCode)
+            Para Birimi
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.BudgetList) {
 <tr>
     <td>
         @Html.DisplayFor(modelItem => item.Name)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Currency.CurrencyCode)
+        @Html.DisplayFor(modelItem => item.CurrencyDisplayName)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.BudgetId }) |
-        @Html.ActionLink("Details", "Details", new { id = item.BudgetId }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.BudgetId })
+        @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Detay", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Sil", "Delete", new { id = item.Id })
     </td>
 </tr>
 }

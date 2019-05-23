@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using ExpenseTracker.Persistence.Context;
+using ExpenseTracker.Business;
 using ExpenseTracker.Persistence.Context.DbModels;
-using Microsoft.AspNet.Identity;
 
 namespace ExpenseTracker.WebUI.Controllers
 {
     [Authorize]
-    public class BudgetAccountController : Controller
+    public class BudgetAccountController : BaseController
     {
-        private ExpenseTrackerContext db = new ExpenseTrackerContext();
+        private readonly BudgetAccountBusiness budgetAccountBusiness;
+
+        public BudgetAccountController()
+        {
+            budgetAccountBusiness = new BudgetAccountBusiness(context);
+        }
 
         public ActionResult Index()
         {
-            string userId = User.Identity.GetUserId();
-
-            var accounts = db.Accounts.Where(a => a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId))).Include(a => a.AccountType).Include(a => a.Budget);
-            return View(accounts.ToList());
+            var accounts = budgetAccountBusiness.GetAccountsOfUser(UserId, ActiveBudgetId);
+            return View(accounts);
         }
 
         public ActionResult Details(int? id)
@@ -28,7 +29,7 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = db.Accounts.Find(id);
+            Account account = budgetAccountBusiness.GetAccountById(id.Value, UserId);
             if (account == null)
             {
                 return HttpNotFound();
@@ -38,34 +39,32 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public ActionResult Create()
         {
-            string userId = User.Identity.GetUserId();
-
-            ViewBag.AccountTypeId = new SelectList(db.AccountTypes, "AccountTypeId", "Name");
-            ViewBag.BudgetId = new SelectList(db.Budgets.Where(b => b.BudgetUsers.Any(bu => bu.UserId.Equals(userId))), "BudgetId", "Name");
+            SetViewBagValues(null);
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AccountId,Name,StartingBalance,CurrentBalance,AccountTypeId,BudgetId")] Account account)
+        public ActionResult Create([Bind(Include = "AccountId,Name,StartingBalance,CurrentBalance,AccountTypeId")] Account account)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && new BudgetBusiness(context).GetBudgetDetails(ActiveBudgetId, UserId) != null)
             {
-                account.InsertUserId = User.Identity.GetUserId();
+                account.BudgetId = ActiveBudgetId;
+
+                account.InsertUserId = UserId;
                 account.InsertTime = DateTime.Now;
-                account.UpdateUserId = User.Identity.GetUserId();
+                account.UpdateUserId = UserId;
                 account.UpdateTime = DateTime.Now;
                 account.IsActive = true;
 
                 account.CurrentBalance = account.StartingBalance;
 
-                db.Accounts.Add(account);
-                db.SaveChanges();
+                context.Accounts.Add(account);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AccountTypeId = new SelectList(db.AccountTypes, "AccountTypeId", "Name", account.AccountTypeId);
-            ViewBag.BudgetId = new SelectList(db.Budgets, "BudgetId", "Name", account.BudgetId);
+            SetViewBagValues(account.AccountTypeId);
             return View(account);
         }
 
@@ -75,13 +74,15 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = db.Accounts.Include(a => a.InsertUser).Include(a => a.UpdateUser).FirstOrDefault(a => a.AccountId.Equals(id.Value));
+
+            Account account = budgetAccountBusiness.GetAccountById(id.Value, UserId);
+            
             if (account == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AccountTypeId = new SelectList(db.AccountTypes, "AccountTypeId", "Name", account.AccountTypeId);
-            ViewBag.BudgetId = new SelectList(db.Budgets, "BudgetId", "Name", account.BudgetId);
+
+            SetViewBagValues(account.AccountTypeId);
             return View(account);
         }
 
@@ -91,16 +92,23 @@ namespace ExpenseTracker.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                account.UpdateUserId = User.Identity.GetUserId();
+                account.UpdateUserId = UserId;
                 account.UpdateTime = DateTime.Now;
 
-                db.Entry(account).State = EntityState.Modified;
-                db.SaveChanges();
+                context.Entry(account).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AccountTypeId = new SelectList(db.AccountTypes, "AccountTypeId", "Name", account.AccountTypeId);
-            ViewBag.BudgetId = new SelectList(db.Budgets, "BudgetId", "Name", account.BudgetId);
+
+            SetViewBagValues(account.AccountTypeId);
             return View(account);
+        }
+
+        private void SetViewBagValues(int? selectedAccountTypeId)//, int? selectedBudgetId)
+        {
+            AccountTypeBusiness accountTypeBusiness = new AccountTypeBusiness(context);
+
+            ViewBag.AccountTypeId = new SelectList(accountTypeBusiness.GetAccountTypeList(), "AccountTypeId", "Name", selectedAccountTypeId);
         }
 
         public ActionResult Delete(int? id)
@@ -109,7 +117,7 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = db.Accounts.Find(id);
+            Account account = budgetAccountBusiness.GetAccountById(id.Value, UserId);
             if (account == null)
             {
                 return HttpNotFound();
@@ -121,19 +129,19 @@ namespace ExpenseTracker.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Account account = db.Accounts.Find(id);
-            db.Accounts.Remove(account);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            Account account = budgetAccountBusiness.GetAccountById(id, UserId);
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            if(account != null)
             {
-                db.Dispose();
+                account.UpdateUserId = UserId;
+                account.UpdateTime = DateTime.Now;
+                account.IsActive = false;
+
+                context.Entry(account).State = EntityState.Modified;
+                context.SaveChanges();
             }
-            base.Dispose(disposing);
+            
+            return RedirectToAction("Index");
         }
     }
 }
