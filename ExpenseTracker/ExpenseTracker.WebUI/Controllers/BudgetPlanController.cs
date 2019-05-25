@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Business;
+using ExpenseTracker.Common.Helpers;
 using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.WebUI.Models.BudgetRelated;
@@ -11,7 +12,7 @@ namespace ExpenseTracker.WebUI.Controllers
     {
         private readonly BudgetPlanBusiness budgetPlanBusiness;
 
-        public BudgetPlanController(ExpenseTrackerContext context)
+        public BudgetPlanController()
         {
             budgetPlanBusiness = new BudgetPlanBusiness(context);
         }
@@ -24,7 +25,7 @@ namespace ExpenseTracker.WebUI.Controllers
             BudgetPlanUpdateModel model = new BudgetPlanUpdateModel()
             {
                 BudgetPlan = new Models.ContextObjects.BudgetPlan(),
-                Categories = new System.Collections.Generic.List<Models.ContextObjects.BudgetPlanCategory>()
+                PlanCategories = new System.Collections.Generic.List<Models.ContextObjects.BudgetPlanCategory>()
             };
 
             BudgetPlan budgetPlan = null;
@@ -45,7 +46,7 @@ namespace ExpenseTracker.WebUI.Controllers
             }
 
             model.BudgetPlan.Month = budgetPlan.Month;
-            model.BudgetPlan.MonthName = "";
+            model.BudgetPlan.MonthName = DateHelper.GetMonthNameByIndex(budgetPlan.Month);
             model.BudgetPlan.Year = budgetPlan.Year;
 
             return View(model);
