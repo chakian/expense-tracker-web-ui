@@ -88,11 +88,6 @@ namespace ExpenseTracker.Business
 
         private int CreateBudgetPlanForPeriod(int budgetId, int year, int month, string userId)
         {
-            if (context.Budgets.First(q => q.BudgetId.Equals(budgetId)).BudgetUsers.Any(bu => bu.UserId.Equals(userId)) == false)
-            {
-                throw new UnauthorizedForBudgetException();
-            }
-
             BudgetPlan budgetPlan = new BudgetPlan
             {
                 InsertUserId = userId,
