@@ -53,7 +53,8 @@ namespace ExpenseTracker.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                transactionBusiness.InsertTransaction(UserId, model.CategoryId, model.AccountId, model.Amount, model.Description, model.Date);
+                decimal amount = (model.IsIncome == true ? 1 : -1) * model.Amount;
+                transactionBusiness.InsertTransaction(UserId, model.CategoryId, model.AccountId, amount, model.Description, model.Date);
                 return RedirectToAction("Create");
             }
 

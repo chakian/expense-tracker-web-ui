@@ -43,8 +43,6 @@ namespace ExpenseTracker.Business
             }
             context.SaveChanges();
         }
-
-        public List<Category> GetCategoriesByBudgetId(int activeBudgetId, string userId) => throw new NotImplementedException();
     }
 
     public class CategoryBusiness : BaseBusiness

@@ -23,6 +23,9 @@ namespace ExpenseTracker.WebUI.Models.Transaction
         public int CategoryId { get; set; }
         public SelectList CategoryList { get; set; }
 
+        [Display(Name = "Gelir Mi?")]
+        public bool IsIncome { get; set; }
+
         //public List<QuickAddProperties> QuickAddList { get; set; }
 
         //public class QuickAddProperties
