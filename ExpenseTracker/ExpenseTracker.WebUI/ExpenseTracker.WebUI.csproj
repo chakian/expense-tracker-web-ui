@@ -189,6 +189,8 @@
     <Compile Include="Models\ContextObjects\BudgetPlan.cs" />
     <Compile Include="Models\ContextObjects\BudgetPlanCategory.cs" />
     <Compile Include="Models\Transaction\AddModel.cs" />
+    <Compile Include="Models\Transaction\DeleteModel.cs" />
+    <Compile Include="Models\Transaction\EditModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -253,6 +255,9 @@
     <Content Include="Views\BudgetPlan\Update.cshtml" />
     <Content Include="Views\Transaction\Add.cshtml" />
     <Content Include="Views\Transaction\_List.cshtml" />
+    <Content Include="Views\Transaction\List.cshtml" />
+    <Content Include="Views\Transaction\Edit.cshtml" />
+    <Content Include="Views\Transaction\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

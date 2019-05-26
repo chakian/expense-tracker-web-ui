@@ -1,0 +1,6 @@
+﻿@model ExpenseTracker.WebUI.Models.BaseTransactionModel
+@{
+    ViewBag.Title = "İşlem Listesi";
+}
+
+@Html.Partial("_List", Model.TransactionSummaries)
