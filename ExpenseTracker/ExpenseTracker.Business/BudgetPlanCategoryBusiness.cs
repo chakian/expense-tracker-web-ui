@@ -43,5 +43,18 @@ namespace ExpenseTracker.Business
             }
             context.SaveChanges();
         }
+
+        public List<Category> GetCategoriesByBudgetId(int activeBudgetId, string userId) => throw new NotImplementedException();
+    }
+
+    public class CategoryBusiness : BaseBusiness
+    {
+        public CategoryBusiness(ExpenseTrackerContext context) : base(context) { }
+
+        public List<Category> GetCategoriesByBudgetId(int budgetId, string userId)
+        {
+            var categories = context.Categories.Where(q => q.IsActive && q.BudgetId.Equals(budgetId) && q.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId))).ToList();
+            return categories;
+        }
     }
 }
