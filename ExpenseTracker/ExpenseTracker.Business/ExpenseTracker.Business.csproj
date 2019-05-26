@@ -64,6 +64,7 @@
     <Compile Include="BudgetBusiness\BudgetBusiness.cs" />
     <Compile Include="BudgetBusiness\BudgetCategoryBusiness.cs" />
     <Compile Include="BudgetBusiness\BudgetPlanBusiness.cs" />
+    <Compile Include="BudgetBusiness\BudgetPlanCategoryBusiness.cs" />
     <Compile Include="BudgetBusiness\BudgetUserBusiness.cs" />
     <Compile Include="LookupBusiness\AccountTypeBusiness.cs" />
     <Compile Include="LookupBusiness\CurrencyBusiness.cs" />

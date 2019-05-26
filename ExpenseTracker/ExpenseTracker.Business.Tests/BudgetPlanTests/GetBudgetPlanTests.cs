@@ -8,17 +8,7 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
     [TestClass]
     public class GetBudgetPlanTests : BaseBudgetPlanTest
     {
-        private int CreateBudgetPlan(int budgetId, int year, int month, string userId)
-        {
-            BudgetPlan currentDatePlan = CreateNewAuthorizedEntity<BudgetPlan>();
-            currentDatePlan.BudgetId = budgetId;
-            currentDatePlan.Year = year;
-            currentDatePlan.Month = month;
-            context.BudgetPlans.Add(currentDatePlan);
-            context.SaveChanges();
-
-            return currentDatePlan.BudgetPlanId;
-        }
+        private readonly string UNAUTHORIZED_USER = "notauthorized";
 
         [TestMethod]
         public void GetBudgetPlanById_Fail_Null()
@@ -133,6 +123,26 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
             string userId = DefaultTestUserId;
+
+            DateTime currentDate = DateTime.Now;
+            CreateBudgetPlan(budgetId, currentDate.Year, currentDate.Month, userId);
+
+            DateTime notAdjacentDate = currentDate.AddMonths(2);
+
+            // ACT
+            var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, notAdjacentDate.Year, notAdjacentDate.Month, userId);
+
+            //ASSERT
+            Assert.IsNull(budgetPlan);
+        }
+
+        [TestMethod]
+        public void GetBudgetPlanForDate_Fail_UserIsNotAuthorizedForBudget()
+        {
+            // ARRANGE
+            var business = new BudgetPlanBusiness(context);
+            int budgetId = DefaultTestBudgetId;
+            string userId = UNAUTHORIZED_USER;
 
             DateTime currentDate = DateTime.Now;
             CreateBudgetPlan(budgetId, currentDate.Year, currentDate.Month, userId);

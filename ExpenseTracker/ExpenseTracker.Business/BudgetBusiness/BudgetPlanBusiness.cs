@@ -1,7 +1,7 @@
-﻿using ExpenseTracker.Common.Exceptions;
-using ExpenseTracker.Persistence.Context;
+﻿using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ExpenseTracker.Business
@@ -21,8 +21,10 @@ namespace ExpenseTracker.Business
                 return null;
             }
 
-            budgetPlan.InsertUser = context.Users.Find(budgetPlan.InsertUserId);
-            budgetPlan.UpdateUser = context.Users.Find(budgetPlan.UpdateUserId);
+            budgetPlan.BudgetPlanCategories = new BudgetPlanCategoryBusiness(context).GetBudgetPlanCategoriesByPlanId(budgetPlan.BudgetPlanId, userId);
+
+            //budgetPlan.InsertUser = context.Users.Find(budgetPlan.InsertUserId);
+            //budgetPlan.UpdateUser = context.Users.Find(budgetPlan.UpdateUserId);
 
             return budgetPlan;
         }
@@ -44,8 +46,10 @@ namespace ExpenseTracker.Business
                 }
             }
 
-            budgetPlan.InsertUser = context.Users.Find(budgetPlan.InsertUserId);
-            budgetPlan.UpdateUser = context.Users.Find(budgetPlan.UpdateUserId);
+            budgetPlan.BudgetPlanCategories = new BudgetPlanCategoryBusiness(context).GetBudgetPlanCategoriesByPlanId(budgetPlan.BudgetPlanId, userId);
+
+            //budgetPlan.InsertUser = context.Users.Find(budgetPlan.InsertUserId);
+            //budgetPlan.UpdateUser = context.Users.Find(budgetPlan.UpdateUserId);
 
             return budgetPlan;
         }
@@ -59,8 +63,10 @@ namespace ExpenseTracker.Business
                 return null;
             }
 
-            budgetPlan.InsertUser = context.Users.Find(budgetPlan.InsertUserId);
-            budgetPlan.UpdateUser = context.Users.Find(budgetPlan.UpdateUserId);
+            budgetPlan.BudgetPlanCategories = new BudgetPlanCategoryBusiness(context).GetBudgetPlanCategoriesByPlanId(budgetPlan.BudgetPlanId, userId);
+
+            //budgetPlan.InsertUser = context.Users.Find(budgetPlan.InsertUserId);
+            //budgetPlan.UpdateUser = context.Users.Find(budgetPlan.UpdateUserId);
 
             return budgetPlan;
         }
@@ -88,11 +94,6 @@ namespace ExpenseTracker.Business
 
         private int CreateBudgetPlanForPeriod(int budgetId, int year, int month, string userId)
         {
-            if (context.Budgets.First(q => q.BudgetId.Equals(budgetId)).BudgetUsers.Any(bu => bu.UserId.Equals(userId)) == false)
-            {
-                throw new UnauthorizedForBudgetException();
-            }
-
             BudgetPlan budgetPlan = new BudgetPlan
             {
                 InsertUserId = userId,
@@ -110,6 +111,20 @@ namespace ExpenseTracker.Business
             context.SaveChanges();
 
             return budgetPlan.BudgetPlanId;
+        }
+
+        public void UpdatePlan(List<BudgetPlanCategory> budgetPlanCategories, string userId)
+        {
+            foreach (var category in budgetPlanCategories)
+            {
+                BudgetPlanCategory budgetPlanCategory = context.BudgetPlanCategories.Find(category.BudgetPlanCategoryId);
+                budgetPlanCategory.PlannedAmount = category.PlannedAmount;
+
+                budgetPlanCategory.UpdateTime = DateTime.Now;
+                budgetPlanCategory.UpdateUserId = userId;
+
+                context.SaveChanges();
+            }
         }
     }
 }

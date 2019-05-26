@@ -7,6 +7,6 @@ namespace ExpenseTracker.WebUI.Models.BudgetRelated
     {
         public BudgetPlan BudgetPlan { get; set; }
 
-        public List<BudgetPlanCategory> Categories { get; set; }
+        public List<BudgetPlanCategory> PlanCategories { get; set; }
     }
 }

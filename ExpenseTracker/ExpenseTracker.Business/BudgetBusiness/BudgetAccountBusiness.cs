@@ -26,8 +26,8 @@ namespace ExpenseTracker.Business
                 return null;
             }
 
-            account.InsertUser = context.Users.Find(account.InsertUserId);
-            account.UpdateUser = context.Users.Find(account.UpdateUserId);
+            //account.InsertUser = context.Users.Find(account.InsertUserId);
+            //account.UpdateUser = context.Users.Find(account.UpdateUserId);
 
             return account;
         }
