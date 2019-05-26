@@ -5,7 +5,7 @@
 
 <h2>Bütçe Planlama - @Model.BudgetPlan.MonthName @Model.BudgetPlan.Year.ToString()</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Update", "BudgetPlan", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -14,20 +14,22 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @foreach (var category in Model.Categories)
+        @for (int i = 0; i < Model.PlanCategories.Count; i++)
         {
+            var category = Model.PlanCategories[i];
+            @Html.HiddenFor(m => m.PlanCategories[i].BudgetPlanCategoryId)
             <div class="form-group">
-                @Html.LabelFor(m => category.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(m => m.PlanCategories[i].PlannedAmount, category.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => category.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => category.CategoryName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(m => m.PlanCategories[i].PlannedAmount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => category.PlannedAmount, "", new { @class = "text-danger" })
                 </div>
             </div>
         }
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Oluştur" class="btn btn-default" />
+                <input type="submit" value="Kaydet" class="btn btn-default" />
             </div>
         </div>
     </div>

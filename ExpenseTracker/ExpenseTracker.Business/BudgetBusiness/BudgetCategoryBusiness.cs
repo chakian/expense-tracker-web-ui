@@ -27,8 +27,8 @@ namespace ExpenseTracker.Business
                 return null;
             }
 
-            category.InsertUser = context.Users.Find(category.InsertUserId);
-            category.UpdateUser = context.Users.Find(category.UpdateUserId);
+            //category.InsertUser = context.Users.Find(category.InsertUserId);
+            //category.UpdateUser = context.Users.Find(category.UpdateUserId);
 
             return category;
         }

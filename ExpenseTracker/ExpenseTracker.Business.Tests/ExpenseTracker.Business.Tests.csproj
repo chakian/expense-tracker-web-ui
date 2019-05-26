@@ -85,6 +85,7 @@
     <Compile Include="Base\BaseBudgetPlanTest.cs" />
     <Compile Include="Base\BaseBudgetTest.cs" />
     <Compile Include="Base\BaseQueryTest.cs" />
+    <Compile Include="BudgetPlanTests\GetBudgetPlanCategoriesTests.cs" />
     <Compile Include="BudgetPlanTests\GetBudgetPlanTests.cs" />
     <Compile Include="BudgetTests\ListBudgetsOfUserTests.cs" />
     <Compile Include="BudgetTests\GetBudgetDetailTests.cs" />

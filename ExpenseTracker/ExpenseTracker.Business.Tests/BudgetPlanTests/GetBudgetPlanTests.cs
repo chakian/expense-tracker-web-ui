@@ -10,18 +10,6 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
     {
         private readonly string UNAUTHORIZED_USER = "notauthorized";
 
-        private int CreateBudgetPlan(int budgetId, int year, int month, string userId)
-        {
-            BudgetPlan currentDatePlan = CreateNewAuthorizedEntity<BudgetPlan>();
-            currentDatePlan.BudgetId = budgetId;
-            currentDatePlan.Year = year;
-            currentDatePlan.Month = month;
-            context.BudgetPlans.Add(currentDatePlan);
-            context.SaveChanges();
-
-            return currentDatePlan.BudgetPlanId;
-        }
-
         [TestMethod]
         public void GetBudgetPlanById_Fail_Null()
         {
