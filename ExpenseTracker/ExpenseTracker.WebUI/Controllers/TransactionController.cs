@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Business;
+using ExpenseTracker.WebUI.Models;
 using ExpenseTracker.WebUI.Models.Transaction;
 using System.Linq;
 using System.Web.Mvc;
@@ -19,17 +20,18 @@ namespace ExpenseTracker.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Add()
         {
             AddModel model = new AddModel();
 
             SetAccountListForModel(model);
             SetCategoryListForModel(model);
+            SetTransactionSummaryListForModel(model);
 
             return View(model);
         }
 
-        private void SetCategoryListForModel(AddModel model)
+        private void SetCategoryListForModel(BaseTransactionModel model)
         {
             var categories = categoryBusiness.GetCategoriesByBudgetId(ActiveBudgetId, UserId);
             if (categories != null)
@@ -38,7 +40,7 @@ namespace ExpenseTracker.WebUI.Controllers
             }
         }
 
-        private void SetAccountListForModel(AddModel model)
+        private void SetAccountListForModel(BaseTransactionModel model)
         {
             var accounts = budgetAccountBusiness.GetAccountsOfUser(UserId, ActiveBudgetId);
             if (accounts != null)
@@ -47,20 +49,43 @@ namespace ExpenseTracker.WebUI.Controllers
             }
         }
 
+        private void SetTransactionSummaryListForModel(BaseTransactionModel model)
+        {
+            model.TransactionSummaries = new System.Collections.Generic.List<BaseTransactionModel.TransactionSummary>();
+
+            var transactions = transactionBusiness.GetTransactionsForCurrentPeriod(UserId, ActiveBudgetId).OrderByDescending(q => q.Date).ToList();
+            if (transactions != null)
+            {
+                transactions.ForEach(t =>
+                {
+                    model.TransactionSummaries.Add(new BaseTransactionModel.TransactionSummary
+                    {
+                        TransactionId = t.TransactionId,
+                        Date = t.Date,
+                        Amount = t.Amount,
+                        Account = t.SourceAccount.Name,
+                        Category = t.Category.Name,
+                        Description = t.Description
+                    });
+                });
+            }
+        }
+
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Create(AddModel model)
+        public ActionResult Add(AddModel model)
         {
             if (ModelState.IsValid)
             {
                 decimal amount = (model.IsIncome == true ? 1 : -1) * model.Amount;
                 transactionBusiness.InsertTransaction(UserId, model.CategoryId, model.AccountId, amount, model.Description, model.Date);
-                return RedirectToAction("Create");
+                return RedirectToAction("Add");
             }
 
             SetAccountListForModel(model);
             SetCategoryListForModel(model);
-            
+            SetTransactionSummaryListForModel(model);
+
             return View(model);
         }
     }

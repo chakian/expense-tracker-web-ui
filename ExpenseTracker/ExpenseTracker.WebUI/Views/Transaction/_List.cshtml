@@ -1,0 +1,19 @@
+﻿@model List<ExpenseTracker.WebUI.Models.BaseTransactionModel.TransactionSummary>
+
+<div class="row">
+    <div class="col-lg-2" style="font-weight:bold;">Tarih</div>
+    <div class="col-lg-2" style="font-weight:bold;">Tutar</div>
+    <div class="col-lg-3" style="font-weight:bold;">Kategori</div>
+    <div class="col-lg-3" style="font-weight:bold;">Açıklama</div>
+    <div class="col-lg-2" style="font-weight:bold;">Hesap</div>
+</div>
+@foreach (var transaction in Model)
+{
+    <div class="row">
+        <div class="col-lg-2">@transaction.Date.ToLongDateString()</div>
+        <div class="col-lg-2">@transaction.Amount</div>
+        <div class="col-lg-3">@transaction.Category</div>
+        <div class="col-lg-3">@transaction.Description</div>
+        <div class="col-lg-2">@transaction.Account</div>
+    </div>
+}

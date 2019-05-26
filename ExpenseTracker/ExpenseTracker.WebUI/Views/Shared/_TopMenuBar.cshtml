@@ -13,8 +13,8 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     string budgetName = ViewBag.ActiveBudgetName;
-                    <li>@Html.ActionLink("Harcama Girişi", "Add", "Expense")</li>
-                    <li>@Html.ActionLink("Harcamalar", "List", "Expense")</li>
+                    <li>@Html.ActionLink("Harcama Girişi", "Add", "Transaction")</li>
+                    <li>@Html.ActionLink("Harcamalar", "List", "Transaction")</li>
                     <li>@Html.ActionLink("Rapor", "Index", "Report")</li>
                     if (string.IsNullOrEmpty(budgetName))
                     {

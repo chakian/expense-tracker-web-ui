@@ -181,6 +181,7 @@
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Models\Base\BaseModel.cs" />
+    <Compile Include="Models\Base\BaseTransactionModel.cs" />
     <Compile Include="Models\BudgetRelated\BudgetCreateModel.cs" />
     <Compile Include="Models\BudgetRelated\BudgetDetailModel.cs" />
     <Compile Include="Models\BudgetRelated\BudgetListModel.cs" />
@@ -250,7 +251,8 @@
     <Content Include="Views\Budget\SelectActiveBudget.cshtml" />
     <Content Include="Views\Budget\Manage.cshtml" />
     <Content Include="Views\BudgetPlan\Update.cshtml" />
-    <Content Include="Views\Transaction\Create.cshtml" />
+    <Content Include="Views\Transaction\Add.cshtml" />
+    <Content Include="Views\Transaction\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
