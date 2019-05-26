@@ -4,6 +4,8 @@
 }
 
 <h2>Bütçe Planlama - @Model.BudgetPlan.MonthName @Model.BudgetPlan.Year.ToString()</h2>
+<h4>@Html.ActionLink("Bir Önceki Ay", "Update", new { month = Model.BudgetPlan.PreviousMonth, year = Model.BudgetPlan.PreviousYear })</h4>
+<h4>@Html.ActionLink("Bir Sonraki Ay", "Update", new { month = Model.BudgetPlan.NextMonth, year = Model.BudgetPlan.NextYear })</h4>
 
 @using (Html.BeginForm("Update", "BudgetPlan", FormMethod.Post))
 {

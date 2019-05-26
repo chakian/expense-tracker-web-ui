@@ -1,11 +1,9 @@
 ﻿using ExpenseTracker.Business;
 using ExpenseTracker.Common.Helpers;
-using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.WebUI.Models.BudgetRelated;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace ExpenseTracker.WebUI.Controllers
@@ -28,7 +26,7 @@ namespace ExpenseTracker.WebUI.Controllers
             BudgetPlanUpdateModel model = new BudgetPlanUpdateModel()
             {
                 BudgetPlan = new Models.ContextObjects.BudgetPlan(),
-                PlanCategories = new System.Collections.Generic.List<Models.ContextObjects.BudgetPlanCategory>()
+                PlanCategories = new List<Models.ContextObjects.BudgetPlanCategory>()
             };
 
             BudgetPlan budgetPlan = null;
@@ -56,6 +54,14 @@ namespace ExpenseTracker.WebUI.Controllers
                 model.BudgetPlan.MonthName = DateHelper.GetMonthNameByIndex(budgetPlan.Month);
                 model.BudgetPlan.Year = budgetPlan.Year;
 
+                DateTime currentDateTime = new DateTime(budgetPlan.Year, budgetPlan.Month, 1);
+                DateTime previousDateTime = currentDateTime.AddMonths(-1);
+                DateTime nextDateTime = currentDateTime.AddMonths(1);
+                model.BudgetPlan.PreviousMonth = previousDateTime.Month;
+                model.BudgetPlan.PreviousYear = previousDateTime.Year;
+                model.BudgetPlan.NextMonth = nextDateTime.Month;
+                model.BudgetPlan.NextYear = nextDateTime.Year;
+
                 foreach (var bpCategory in budgetPlan.BudgetPlanCategories)
                 {
                     model.PlanCategories.Add(new Models.ContextObjects.BudgetPlanCategory()
@@ -66,9 +72,11 @@ namespace ExpenseTracker.WebUI.Controllers
                         PlannedAmount = bpCategory.PlannedAmount
                     });
                 }
+
+                return View(model);
             }
 
-            return View(model);
+            return RedirectToAction("Update");
         }
 
         [HttpPost]
