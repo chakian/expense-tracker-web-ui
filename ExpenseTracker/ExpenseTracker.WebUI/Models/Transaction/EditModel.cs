@@ -1,6 +1,6 @@
 ﻿namespace ExpenseTracker.WebUI.Models.Transaction
 {
-    public class EditModel : BaseTransactionModel
+    public class EditModel : BaseEditableTransactionModel
     {
         public int TransactionId { get; set; }
     }

@@ -31,7 +31,7 @@ namespace ExpenseTracker.WebUI.Controllers
             return View(model);
         }
 
-        private void SetCategoryListForModel(BaseTransactionModel model)
+        private void SetCategoryListForModel(BaseEditableTransactionModel model)
         {
             var categories = categoryBusiness.GetCategoriesByBudgetId(ActiveBudgetId, UserId);
             if (categories != null)
@@ -40,7 +40,7 @@ namespace ExpenseTracker.WebUI.Controllers
             }
         }
 
-        private void SetAccountListForModel(BaseTransactionModel model)
+        private void SetAccountListForModel(BaseEditableTransactionModel model)
         {
             var accounts = budgetAccountBusiness.GetAccountsOfUser(UserId, ActiveBudgetId);
             if (accounts != null)
@@ -151,7 +151,7 @@ namespace ExpenseTracker.WebUI.Controllers
         [HttpGet]
         public ActionResult List()
         {
-            BaseTransactionModel model = new BaseTransactionModel();
+            ListModel model = new ListModel();
 
             SetTransactionSummaryListForModel(model);
 
