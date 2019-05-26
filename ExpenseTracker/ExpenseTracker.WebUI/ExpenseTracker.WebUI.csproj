@@ -173,7 +173,7 @@
     <Compile Include="Controllers\BudgetPlanController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Entities\UserEntity.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -181,14 +181,17 @@
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Models\Base\BaseModel.cs" />
+    <Compile Include="Models\Base\BaseTransactionModel.cs" />
     <Compile Include="Models\BudgetRelated\BudgetCreateModel.cs" />
     <Compile Include="Models\BudgetRelated\BudgetDetailModel.cs" />
     <Compile Include="Models\BudgetRelated\BudgetListModel.cs" />
     <Compile Include="Models\BudgetRelated\BudgetPlanUpdateModel.cs" />
     <Compile Include="Models\ContextObjects\BudgetPlan.cs" />
     <Compile Include="Models\ContextObjects\BudgetPlanCategory.cs" />
-    <Compile Include="Models\ContextObjects\Expense.cs" />
-    <Compile Include="Models\Expense\AddModel.cs" />
+    <Compile Include="Models\Transaction\AddModel.cs" />
+    <Compile Include="Models\Transaction\DeleteModel.cs" />
+    <Compile Include="Models\Transaction\EditModel.cs" />
+    <Compile Include="Models\Transaction\ListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -251,6 +254,11 @@
     <Content Include="Views\Budget\SelectActiveBudget.cshtml" />
     <Content Include="Views\Budget\Manage.cshtml" />
     <Content Include="Views\BudgetPlan\Update.cshtml" />
+    <Content Include="Views\Transaction\Add.cshtml" />
+    <Content Include="Views\Transaction\_List.cshtml" />
+    <Content Include="Views\Transaction\List.cshtml" />
+    <Content Include="Views\Transaction\Edit.cshtml" />
+    <Content Include="Views\Transaction\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

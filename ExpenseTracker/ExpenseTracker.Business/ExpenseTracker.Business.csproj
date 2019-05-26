@@ -60,14 +60,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseBusiness.cs" />
-    <Compile Include="BudgetBusiness\BudgetAccountBusiness.cs" />
-    <Compile Include="BudgetBusiness\BudgetBusiness.cs" />
-    <Compile Include="BudgetBusiness\BudgetCategoryBusiness.cs" />
-    <Compile Include="BudgetBusiness\BudgetPlanBusiness.cs" />
-    <Compile Include="BudgetBusiness\BudgetPlanCategoryBusiness.cs" />
-    <Compile Include="BudgetBusiness\BudgetUserBusiness.cs" />
-    <Compile Include="LookupBusiness\AccountTypeBusiness.cs" />
-    <Compile Include="LookupBusiness\CurrencyBusiness.cs" />
+    <Compile Include="BudgetAccountBusiness.cs" />
+    <Compile Include="BudgetBusiness.cs" />
+    <Compile Include="BudgetCategoryBusiness.cs" />
+    <Compile Include="BudgetPlanBusiness.cs" />
+    <Compile Include="BudgetPlanCategoryBusiness.cs" />
+    <Compile Include="BudgetUserBusiness.cs" />
+    <Compile Include="TransactionBusiness.cs" />
+    <Compile Include="AccountTypeBusiness.cs" />
+    <Compile Include="CurrencyBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,9 +77,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="User\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ExpenseTracker.Common\ExpenseTracker.Common.csproj">
       <Project>{65C9F7E5-739A-401A-A9FE-76EC2B583067}</Project>

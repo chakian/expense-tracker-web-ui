@@ -39,17 +39,17 @@ namespace ExpenseTracker.WebUI.Controllers
         {
             base.OnActionExecuting(filterContext);
 
-            setActiveBudgetProperties();
+            SetActiveBudgetProperties();
         }
 
-        private void setActiveBudgetProperties()
+        private void SetActiveBudgetProperties()
         {
             Budget budget = null;
 
             int? activeBudgetId = (int?)Session["ActiveBudgetId"];
             if (!activeBudgetId.HasValue)
             {
-                budget = getBudgetFromDb();
+                budget = GetBudgetFromDb();
                 if (budget != null)
                 {
                     activeBudgetId = budget.BudgetId;
@@ -71,19 +71,19 @@ namespace ExpenseTracker.WebUI.Controllers
             ViewBag.ActiveBudgetName = activeBudgetName;
         }
 
-        private Budget getBudgetFromDb()
+        private Budget GetBudgetFromDb()
         {
-            Budget budget = getActiveButgetFromUserPreferences();
+            Budget budget = GetActiveButgetFromUserPreferences();
 
             if (budget == null)
             {
-                budget = getUsersFirstBudget();
+                budget = GetUsersFirstBudget();
             }
 
             return budget;
         }
 
-        private Budget getActiveButgetFromUserPreferences()
+        private Budget GetActiveButgetFromUserPreferences()
         {
             var user = context.Users.Find(UserId);
             if(user != null && user.ActiveBudgetId.HasValue)
@@ -93,7 +93,7 @@ namespace ExpenseTracker.WebUI.Controllers
             return null;
         }
 
-        private Budget getUsersFirstBudget()
+        private Budget GetUsersFirstBudget()
         {
             Budget budget = new BudgetBusiness(context).GetBudgetsOfUser(UserId).FirstOrDefault();
             if (budget != null)
