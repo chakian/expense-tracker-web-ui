@@ -7,6 +7,18 @@ before_build:
 build:
   project: ExpenseTracker/ExpenseTracker.sln
   publish_ftp: true
+artifacts:
+  - path: '**\*.dll'
+    name: DLLs
+    
+  - path: '**\*.cshtml'
+    name: HTMLs
+    
+  - path: '**\*.js'
+    name: JSs
+    
+  - path: '**\*.css'
+    name: CSSs
 deploy:
  provider: Environment
  name: Harcama-Test
