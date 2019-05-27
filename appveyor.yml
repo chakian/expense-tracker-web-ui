@@ -1,0 +1,15 @@
+nuget:
+  account_feed: true
+  project_feed: true
+before_build:
+- cmd: >-
+    nuget restore ExpenseTracker/ExpenseTracker.sln
+
+    choco install opencover.portable
+
+    choco install codecov
+build:
+  project: ExpenseTracker/ExpenseTracker.sln
+  verbosity: minimal
+  publish_nuget: true
+  
