@@ -6,7 +6,6 @@ before_build:
     nuget restore ExpenseTracker/ExpenseTracker.sln
 build:
   project: ExpenseTracker/ExpenseTracker.sln
-  publish_ftp: true
 artifacts:
   - path: '**\*.dll'
     name: DLLs
