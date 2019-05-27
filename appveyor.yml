@@ -6,3 +6,9 @@ before_build:
     nuget restore ExpenseTracker/ExpenseTracker.sln
 build:
   project: ExpenseTracker/ExpenseTracker.sln
+  publish_wap: true
+deploy:
+ provider: Environment
+ name: Harcama-Test
+ on:
+   branch: develop
