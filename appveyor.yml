@@ -8,6 +8,7 @@ before_build:
 
 build:
   project: ExpenseTracker/ExpenseTracker.sln
+  verbosity: minimal
 
 artifacts:
   - path: ExpenseTracker\ExpenseTracker.WebUI\**\*.dll
