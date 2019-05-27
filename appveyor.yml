@@ -7,19 +7,22 @@ before_build:
 build:
   project: ExpenseTracker/ExpenseTracker.sln
 artifacts:
-  - path: '**\*.dll'
+  - path: ExpenseTracker\ExpenseTracker.WebUI\**\*.dll
     name: DLLs
     
-  - path: '**\*.cshtml'
+  - path: ExpenseTracker\ExpenseTracker.WebUI\**\*.config
+    name: configs
+    
+  - path: ExpenseTracker\ExpenseTracker.WebUI\**\*.cshtml
     name: HTMLs
     
-  - path: '**\*.js'
+  - path: ExpenseTracker\ExpenseTracker.WebUI\**\*.js
     name: JSs
     
-  - path: '**\*.css'
+  - path: ExpenseTracker\ExpenseTracker.WebUI\**\*.css
     name: CSSs
 deploy:
  provider: Environment
  name: Harcama-Test
  on:
-   branch: develop
+   branch: develop-no
