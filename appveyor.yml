@@ -1,4 +1,4 @@
-configuration: Debug
+configuration: Release
 cache:
   - packages -> **\packages.config
 before_build:
@@ -6,4 +6,3 @@ before_build:
     nuget restore ExpenseTracker/ExpenseTracker.sln
 build:
   project: ExpenseTracker/ExpenseTracker.sln
-  publish_wap: true
