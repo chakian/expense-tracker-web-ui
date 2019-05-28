@@ -22,7 +22,12 @@ after_build:
   - ps: Push-AppveyorArtifact ExpenseTracker\ExpenseTracker.WebUI\favicon.ico -FileName favicon.ico -DeploymentName to-publish
 
 deploy:
- provider: Environment
- name: Harcama-Test
- on:
-   branch: develop-no
+ - provider: Environment
+   name: Harcama-Test
+   on:
+     branch: develop
+
+ - provider: Environment
+   name: Harcama-Live
+   on:
+     branch: master
