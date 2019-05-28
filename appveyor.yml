@@ -11,8 +11,15 @@ build:
   verbosity: minimal
 
 after_build:
-  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-  - ps: Get-Childitem –Path C:\ -Include SelectActiveBudget.cshtml -Exclude *.JPG,*.MP3,*.TMP -File -Recurse -ErrorAction SilentlyContinue
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\bin', '*.dll', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\bin', '*.config', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\Content', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\fonts', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\Scripts', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\tsScripts', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\Views', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: Push-AppveyorArtifact ExpenseTracker\ExpenseTracker.WebUI\global.asax -FileName global.asax -DeploymentName to-publish
+  - ps: Push-AppveyorArtifact ExpenseTracker\ExpenseTracker.WebUI\favicon.ico -FileName favicon.ico -DeploymentName to-publish
 
 deploy:
  provider: Environment
