@@ -12,8 +12,8 @@ build:
 
 after_build:
   ps: >-
-    $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-    Get-ChildItem -Path c:\projects\expense-tracker-web-ui-test
+    - $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+    - Get-ChildItem -Path c:\projects\expense-tracker-web-ui-test
 
 
 deploy:
