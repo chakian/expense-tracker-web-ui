@@ -10,28 +10,24 @@ build:
   project: ExpenseTracker/ExpenseTracker.sln
   verbosity: minimal
 
-artifacts:
-  - path: ExpenseTracker\ExpenseTracker.WebUI\**\*.dll
-    name: DLLs
-
-  - path: ExpenseTracker\ExpenseTracker.WebUI\Views\**\*.config
-    name: view configs
-    
-  - path: ExpenseTracker\ExpenseTracker.WebUI\bin\**\*.config
-    name: bin configs
-    
-  - path: ExpenseTracker\ExpenseTracker.WebUI\**\*.cshtml
-    
-  - path: ExpenseTracker\ExpenseTracker.WebUI\**\*.js
-    
-  - path: ExpenseTracker\ExpenseTracker.WebUI\**\*.css
-    
-  - path: ExpenseTracker\ExpenseTracker.WebUI\global.asax
-    
-  - path: ExpenseTracker\ExpenseTracker.WebUI\favicon.ico
+after_build:
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\bin', '*.dll', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\bin', '*.config', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\Content', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\fonts', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\Scripts', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\tsScripts', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\Views', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: Push-AppveyorArtifact ExpenseTracker\ExpenseTracker.WebUI\global.asax -FileName global.asax -DeploymentName to-publish
+  - ps: Push-AppveyorArtifact ExpenseTracker\ExpenseTracker.WebUI\favicon.ico -FileName favicon.ico -DeploymentName to-publish
 
 deploy:
- provider: Environment
- name: Harcama-Test
- on:
-   branch: develop-no
+ - provider: Environment
+   name: Harcama-Test
+   on:
+     branch: develop
+
+ - provider: Environment
+   name: Harcama-Live
+   on:
+     branch: master
