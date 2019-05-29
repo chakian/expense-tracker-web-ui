@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Business;
 using ExpenseTracker.WebUI.Models;
 using ExpenseTracker.WebUI.Models.Transaction;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -27,6 +28,8 @@ namespace ExpenseTracker.WebUI.Controllers
             SetAccountListForModel(model);
             SetCategoryListForModel(model);
             SetTransactionSummaryListForModel(model);
+
+            model.Date = DateTime.Now;
 
             return View(model);
         }
