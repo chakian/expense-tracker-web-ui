@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Harcama Takibi</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/theme/chimpcss")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @Html.Partial("_TopMenuBar")
+    <div class="site-wrap">
+        @Html.Partial("_TopMenuBar")
+    </div>
     <div class="container body-content">
         <div id="main-body">
             @RenderBody()
@@ -21,6 +24,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/theme/chimpjs")
     @RenderSection("scripts", required: false)
 </body>
 </html>
