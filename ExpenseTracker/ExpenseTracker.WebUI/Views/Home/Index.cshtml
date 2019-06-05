@@ -2,29 +2,28 @@
     ViewBag.Title = "Harcama";
 }
 
-<div class="jumbotron">
-    <h1>Harcama Takibi</h1>
-</div>
-
 @if (!User.Identity.IsAuthenticated)
 {
-<div class="row">
-    <div class="col-md-4">
-        <h2>Giriş Yapın</h2>
-        <p>
-            Giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz
-        </p>
-        <p><a class="btn btn-default" href="@Url.Action("Login", "Account")">Giriş &raquo;</a></p>
+    <div class="row tm-content-row">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block">
+                <h2 class="tm-block-title">
+                    <a class="btn btn-primary btn-block text-uppercase" href="@Url.Action("Login", "Account")">Giriş &raquo;</a>
+                </h2>
+                <p class="text-center text-white mb-0 px-4">
+                    Giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block">
+                <h2 class="tm-block-title">
+                    <a class="btn btn-primary btn-block text-uppercase" href="@Url.Action("Register", "Account")">Kayıt &raquo;</a>
+                </h2>
+                <p class="text-center text-white mb-0 px-4">
+                    Önce kayıt yaparsanız; giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz
+                </p>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Kayıt Olun</h2>
-        <p>Önce kayıt yaparsanız; giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz</p>
-        <p><a class="btn btn-default" href="@Url.Action("Register", "Account")">Kayıt Ol &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Bana Ulaşın</h2>
-        <p>Web veya blog sitem aracılığıyla bana kolayca ulaşabilirsiniz. Adımı biliyorsanız, bunlar dışında birçok yerden de bana ulaşabilirsiniz.</p>
-        <p><a class="btn btn-default" href="@Url.Action("Index", "Home")">Bana Ulaşın (?) &raquo;</a></p>
-    </div>
-</div>
 }

@@ -35,7 +35,6 @@ namespace ExpenseTracker.WebUI
                       ));
 
             bundles.Add(new StyleBundle("~/Content/theme/prodadmcss").Include(
-                      "~/Content/theme/prod_adm/css/bootstrap.min.css",
                       "~/Content/theme/prod_adm/css/fontawesome.min.css",
                       "~/Content/theme/prod_adm/css/templatemo-style.css"
                       ));

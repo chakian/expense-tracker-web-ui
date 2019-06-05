@@ -1,47 +1,105 @@
-﻿<header class="site-navbar py-4 bg-white" role="banner">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-11 col-xl-2">
-                <h1 class="mb-0 site-logo">@Html.ActionLink("HT", "Index", "Home", new { area = "" }, new { @class = "text-black h2 mb-0" })</h1>
-            </div>
-            <div class="col-12 col-md-10 d-none d-xl-block">
-                <nav class="site-navigation position-relative text-right" role="navigation">
-                    <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            string budgetName = ViewBag.ActiveBudgetName;
+﻿@*<header class="site-navbar py-4 bg-white" role="banner">*@
+<nav class="navbar navbar-expand-xl">
+    <div class="container h-100">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+            <h1 class="tm-site-title mb-0">HarTak</h1>
+        </a>
+        <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars tm-nav-icon"></i>
+        </button>
 
-                            <li class="active">@Html.ActionLink("Harcama Girişi", "Add", "Transaction")</li>
-                            <li>@Html.ActionLink("Harcamalar", "List", "Transaction")</li>
-                            <li class="has-children">
-                                @Html.ActionLink("Rapor", "Index", "Report")
-                                <ul class="dropdown">
-                                    <li><a href="services.html">Web Applications</a></li>
-                                    <li><a href="services.html">WordPress Dev</a></li>
-                                    <li><a href="services.html">Mobile Applications</a></li>
-                                    <li><a href="services.html">eCommerce</a></li>
-                                </ul>
-                            </li>
-                            if (string.IsNullOrEmpty(budgetName))
-                            {
-                                <li>@Html.ActionLink("Aktif Bütçe Belirle", "SelectActiveBudget", "Budget")</li>
-                            }
-                            else
-                            {
-                                <li>@Html.ActionLink("Aktif Bütçe: '" + budgetName + "'", "Manage", "Budget")</li>
-                            }
-                            @*<li>@Html.ActionLink("Bildirim Ayarları", "Notifications", "User")</li>*@
-                            <li>@Html.ActionLink("Çıkış", "Logout", "Account")</li>
-                        }
-                        else
-                        {
-                            <li>@Html.ActionLink("Giriş", "Login", "Account")</li>
-                            <li>@Html.ActionLink("Kayıt", "Register", "Account")</li>
-                        }
-                    </ul>
-                </nav>
-            </div>
-            <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            @if (User.Identity.IsAuthenticated)
+            {
+                string budgetName = ViewBag.ActiveBudgetName;
+
+                <ul class="navbar-nav mx-auto h-100">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="@Url.Action("Index", "Home")">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Özet
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Add", "Transaction")">
+                            <i class="fas fa-shopping-cart"></i>
+                            Harcama Girişi
+                        </a>
+                    </li>
+
+                    @*<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Reports <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Daily Report</a>
+                                <a class="dropdown-item" href="#">Weekly Report</a>
+                                <a class="dropdown-item" href="#">Yearly Report</a>
+                            </div>
+                        </li>*@
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("List", "Transaction")">
+                            <i class="fas fa-shopping-cart"></i>
+                            Harcamalar
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Report")">
+                            <i class="far fa-user"></i>
+                            Raporlar
+                        </a>
+                    </li>
+
+                    @if (string.IsNullOrEmpty(budgetName))
+                    {
+                        <li>@Html.ActionLink("Aktif Bütçe Belirle", "SelectActiveBudget", "Budget")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Aktif Bütçe: '" + budgetName + "'", "Manage", "Budget")</li>
+                    }
+
+                    @*<li>@Html.ActionLink("Bildirim Ayarları", "Notifications", "User")</li>*@
+
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link d-block" href="@Url.Action("Logout", "Account")">
+                            <i class="far fa-user"></i>
+                            Çıkış
+                        </a>
+                    </li>
+                </ul>
+            }
+            else
+            {
+                <ul class="navbar-nav mx-auto h-100">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Login", "Account")">
+                            <i class="far fa-user"></i>
+                            Giriş
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Register", "Account")">
+                            <i class="far fa-user"></i>
+                            Kayıt
+                        </a>
+                    </li>
+                </ul>
+            }
         </div>
     </div>
-</header>
+
+</nav>
+@*</header>*@
