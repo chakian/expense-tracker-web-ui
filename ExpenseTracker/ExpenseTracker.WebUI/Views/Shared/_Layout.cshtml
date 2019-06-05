@@ -4,8 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Harcama Takibi</title>
+    @Styles.Render("~/Content/bootstrapcss")
+    @Styles.Render("~/Content/theme/prodadmcss")
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/theme/chimpcss")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -24,7 +25,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/theme/chimpjs")
+    @Scripts.Render("~/bundles/theme/prodadmjs")
     @RenderSection("scripts", required: false)
 </body>
 </html>
