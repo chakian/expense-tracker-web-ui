@@ -164,6 +164,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\BundleScriptConfig.cs" />
+    <Compile Include="App_Start\BundleStyleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -207,8 +209,6 @@
     <Content Include="Content\theme\prod_adm\css\templatemo-style.css" />
     <Content Include="Content\theme\prod_adm\img\arrow-down.png" />
     <Content Include="Content\theme\prod_adm\img\check-mark.png" />
-    <Content Include="Content\theme\prod_adm\jquery-ui-datepicker\AUTHORS.txt" />
-    <Content Include="Content\theme\prod_adm\jquery-ui-datepicker\external\jquery\jquery.js" />
     <Content Include="Content\theme\prod_adm\jquery-ui-datepicker\images\ui-bg_glass_75_d0e5f5_1x400.png" />
     <Content Include="Content\theme\prod_adm\jquery-ui-datepicker\images\ui-bg_glass_85_dfeffc_1x400.png" />
     <Content Include="Content\theme\prod_adm\jquery-ui-datepicker\images\ui-bg_glass_95_fef1ec_1x400.png" />
@@ -232,9 +232,7 @@
     <Content Include="Content\theme\prod_adm\jquery-ui-datepicker\jquery-ui.theme.css" />
     <Content Include="Content\theme\prod_adm\jquery-ui-datepicker\jquery-ui.theme.min.css" />
     <Content Include="Content\theme\prod_adm\jquery-ui-datepicker\LICENSE.txt" />
-    <Content Include="Content\theme\prod_adm\js\bootstrap.min.js" />
     <Content Include="Content\theme\prod_adm\js\Chart.min.js" />
-    <Content Include="Content\theme\prod_adm\js\jquery-3.3.1.min.js" />
     <Content Include="Content\theme\prod_adm\js\moment.min.js" />
     <Content Include="Content\theme\prod_adm\js\tooplate-scripts.js" />
     <Content Include="Content\theme\prod_adm\webfonts\fa-brands-400.svg" />

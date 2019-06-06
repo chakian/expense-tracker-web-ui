@@ -3,6 +3,8 @@
     ViewBag.Title = "Yeni İşlem Girişi";
 }
 
+@Styles.Render("~/bundles/datepickercss")
+
 <h2>Yeni İşlem Girişi</h2>
 
 @using (Html.BeginForm())
@@ -71,3 +73,5 @@
 <hr />
 
 @Html.Partial("_List", Model.TransactionSummaries)
+
+@Scripts.Render("~/bundles/datepickerjs")
