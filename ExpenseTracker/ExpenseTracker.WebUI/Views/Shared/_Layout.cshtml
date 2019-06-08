@@ -1,26 +1,50 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141716985-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-141716985-1');
+    </script>
+
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>@ViewBag.Title - Harcama Takibi</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
+    @Styles.Render("~/Content/bootstrapcss")
+    @Styles.Render("~/Content/theme/prodadmcss")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @Html.Partial("_TopMenuBar")
-    <div class="container body-content">
-        <div id="main-body">
-            @RenderBody()
-        </div>
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Harcama Takibi</p>
-        </footer>
+    <div class="site-wrap">
+        @Html.Partial("_TopMenuBar")
     </div>
+    <div class="container tm-mt-big tm-mb-big" id="main-body">
+        <div class="tm-content-row">
+            <div class="col-12 mx-auto">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <footer class="tm-footer row tm-mt-small">
+        <div class="col-12 font-weight-light">
+            <p class="text-center text-white mb-0 px-4 small">
+                Copyright &copy; @DateTime.Now.Year - Harcama Takibi. Version Alpha 0.1
+
+                Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template Mo</a>
+            </p>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/theme/prodadmjs")
     @RenderSection("scripts", required: false)
 </body>
 </html>

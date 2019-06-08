@@ -6,6 +6,8 @@
 
 # Expense Tracker
 
+## Version Alpha [0.1]
+
 This repo will track every alive intellectual's expenses and budgets one day. Or maybe not. It will track mine for sure.
 
 [![HitCount](http://hits.dwyl.io/chakian/expense-tracker-web-ui.svg)](http://hits.dwyl.io/chakian/expense-tracker-web-ui)

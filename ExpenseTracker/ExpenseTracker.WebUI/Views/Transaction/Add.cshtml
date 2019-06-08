@@ -3,71 +3,87 @@
     ViewBag.Title = "Yeni İşlem Girişi";
 }
 
-<h2>Yeni İşlem Girişi</h2>
+@Styles.Render("~/bundles/datepickercss")
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsIncome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.CheckBoxFor(m => m.IsIncome, new { htmlAttributes = new { @class = "form-control" } })
+<div class="row">
+    <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="tm-block-title d-inline-block">Yeni İşlem</h2>
+                </div>
             </div>
-        </div>
+            @using (Html.BeginForm("Add", "Transaction", FormMethod.Post, new { @class = "tm-edit-product-form" }))
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="row">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group mb-3">
+                        @Html.CheckBoxFor(m => m.IsIncome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.LabelFor(model => model.IsIncome)
+                    </div>
+                </div>
+                <div class="row tm-edit-product-row">
+                    <div class="col-xl-6 col-lg-6 col-md-12">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CategoryId, Model.CategoryList, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.CategoryId)
+                            @Html.DropDownListFor(model => model.CategoryId, Model.CategoryList, htmlAttributes: new { @class = "custom-select tm-select-accounts" })
+                            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="row">
+                            <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                @Html.LabelFor(model => model.Amount)
+                                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control validate" } })
+                                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                @Html.LabelFor(model => model.Date)
+                                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control validate" } })
+                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.AccountId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.AccountId, Model.AccountList, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Description)
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Kaydet" class="btn btn-default" />
-            </div>
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.AccountId)
+                            @Html.DropDownListFor(model => model.AccountId, Model.AccountList, htmlAttributes: new { @class = "custom-select tm-select-accounts" })
+                            @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block text-uppercase">İşlemi Kaydet</button>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-}
+</div>
 
 <hr />
 
 @Html.Partial("_List", Model.TransactionSummaries)
+
+@section scripts {
+    @Scripts.Render("~/bundles/datepickerjs")
+
+    <script>
+        $(function () {
+            $("#Date").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+            $('#Date').datepicker('setDate', new Date());
+        });
+    </script>
+}
