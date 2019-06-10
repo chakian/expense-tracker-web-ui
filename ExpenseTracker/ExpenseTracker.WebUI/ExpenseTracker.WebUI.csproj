@@ -204,7 +204,6 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\theme\prod_adm\css\bootstrap.min.css" />
     <Content Include="Content\theme\prod_adm\css\fontawesome.min.css" />
     <Content Include="Content\theme\prod_adm\css\templatemo-style.css" />
     <Content Include="Content\theme\prod_adm\img\arrow-down.png" />
@@ -299,7 +298,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <None Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
