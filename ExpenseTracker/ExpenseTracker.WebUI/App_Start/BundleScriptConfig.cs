@@ -23,16 +23,6 @@ namespace ExpenseTracker.WebUI
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"
                       ));
-
-            bundles.Add(new ScriptBundle("~/bundles/theme/prodadmjs").Include(
-                      "~/Content/theme/prod_adm/js/Chart.min.js",
-                      "~/Content/theme/prod_adm/js/moment.min.js",
-                      "~/Content/theme/prod_adm/js/tooplate-scripts.js"
-                      ));
-
-            bundles.Add(new ScriptBundle("~/bundles/datepickerjs").Include(
-                      "~/Content/theme/prod_adm/jquery-ui-datepicker/jquery-ui.min.js"
-                      ));
         }
     }
 }

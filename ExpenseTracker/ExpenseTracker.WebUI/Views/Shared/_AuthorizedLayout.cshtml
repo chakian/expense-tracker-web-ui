@@ -1,0 +1,19 @@
+﻿@{ 
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@Html.Partial("_TopMenuBar")
+
+<div class="container-fluid" id="main-body">
+    @RenderBody()
+</div>
+
+@section scripts{
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+}
