@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
 
@@ -16,4 +16,8 @@
             $("#wrapper").toggleClass("toggled");
         });
     </script>
+}
+
+@section basescripts{
+    @RenderSection("scripts", required: false)
 }

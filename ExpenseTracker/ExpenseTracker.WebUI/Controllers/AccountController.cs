@@ -144,7 +144,7 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Add", "Transaction");
         }
 
         private IAuthenticationManager AuthenticationManager
