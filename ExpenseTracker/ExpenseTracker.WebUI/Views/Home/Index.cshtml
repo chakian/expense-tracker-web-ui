@@ -1,29 +1,32 @@
 ﻿@{
+    Layout = "~/Views/Shared/_UnauthorizedLayout.cshtml";
     ViewBag.Title = "Harcama";
 }
 
 @if (!User.Identity.IsAuthenticated)
 {
-    <div class="row tm-content-row">
-        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-            <div class="tm-bg-primary-dark tm-block">
-                <h2 class="tm-block-title">
-                    <a class="btn btn-primary btn-block text-uppercase" href="@Url.Action("Login", "Account")">Giriş &raquo;</a>
-                </h2>
-                <p class="text-center text-white mb-0 px-4">
-                    Giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz
-                </p>
-            </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <h2 class="mt-4">
+                <a class="btn btn-primary btn-block text-uppercase" href="@Url.Action("Login", "Account")">Giriş &raquo;</a>
+            </h2>
+            <p class="text-center">
+                Giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz
+            </p>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-            <div class="tm-bg-primary-dark tm-block">
-                <h2 class="tm-block-title">
-                    <a class="btn btn-primary btn-block text-uppercase" href="@Url.Action("Register", "Account")">Kayıt &raquo;</a>
-                </h2>
-                <p class="text-center text-white mb-0 px-4">
-                    Önce kayıt yaparsanız; giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz
-                </p>
-            </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <h2 class="mt-4">
+                <a class="btn btn-primary btn-block text-uppercase" href="@Url.Action("Register", "Account")">Kayıt &raquo;</a>
+            </h2>
+            <p class="text-center">
+                Önce kayıt yaparsanız; giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz
+            </p>
         </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        Welcome Back @User.Identity.Name!
     </div>
 }

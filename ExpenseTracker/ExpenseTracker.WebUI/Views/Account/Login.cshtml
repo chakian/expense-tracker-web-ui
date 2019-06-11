@@ -1,60 +1,57 @@
 ﻿@model ExpenseTracker.WebUI.Models.Account.LoginViewModel
 @{
+    Layout = "~/Views/Shared/_UnauthorizedLayout.cshtml";
     ViewBag.Title = "Giriş";
 }
 
-<div class="row">
-    <div class="col-12 text-center">
-        <h2 class="tm-block-title mb-4">Harcama Takibi - Giriş</h2>
-    </div>
-</div>
+<link href="../../Content/startbs/login-form.css" rel="stylesheet" />
 
-<div class="row">
-    <div class="col-12 mx-auto tm-login-col">
-        <div class="row mt-2">
-            <div class="col-12">
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "tm-login-form", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "tm-login-form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email)
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control validate" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password)
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control validate" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        @Html.CheckBoxFor(m => m.RememberMe)
-                        @Html.LabelFor(m => m.RememberMe)
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block text-uppercase">
-                            Giriş
-                        </button>
-                    </div>
-                    @*@Html.ActionLink("Forgot your password?", "ForgotPassword")
-                        <button class="mt-5 btn btn-primary btn-block text-uppercase">
-                            Forgot your password?
-                        </button>*@
-                    <a class="mt-5 btn btn-primary btn-block text-uppercase" href="@Url.Action("Register", "Account")">
-                        Yeni bir hesap oluşturun
-                    </a>
-                }
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Giriş</h5>
+                    <form class="form-signin">
+
+                        <div class="form-label-group">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus", placeholder = "Email adresi" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.Email)
+                        </div>
+
+                        <div class="form-label-group">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", autofocus = "autofocus", placeholder = "Şifre" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.Password)
+                        </div>
+
+                        <div class="custom-control custom-checkbox mb-3">
+                            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "custom-control-input" })
+                            @Html.LabelFor(m => m.RememberMe, new { @class = "custom-control-label" })
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Giriş</button>
+
+                        <a class="btn btn-lg btn-secondary btn-block text-uppercase" href="@Url.Action("Register", "Account")">
+                            Yeni Hesap
+                        </a>
+
+                        <hr class="my-4" />
+
+                        <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
+                        <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+                    </form>
+                </div>
             </div>
-            @*<div class="col-md-4">
-                    <section id="socialLoginForm">
-                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                    </section>
-                </div>*@
         </div>
     </div>
-</div>
+}
 
-@section Scripts {
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

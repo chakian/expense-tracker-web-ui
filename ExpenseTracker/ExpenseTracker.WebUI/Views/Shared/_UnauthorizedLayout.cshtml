@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.Partial("_TopMenuBar")
+}
+else
+{
+    @Html.Partial("_UnauthorizedTopMenuBar")
+}
+
+<div class="container-fluid" id="main-body">
+    @RenderBody()
+</div>
+
+@section basescripts{
+    @RenderSection("scripts", required: false)
+}

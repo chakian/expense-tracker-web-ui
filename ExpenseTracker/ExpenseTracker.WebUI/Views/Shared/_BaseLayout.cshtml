@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141716985-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-141716985-1');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Harcama Takibi">
+    <meta name="author" content="Çağdaş Korkut">
+    <title>@ViewBag.Title - Harcama Takibi</title>
+
+    @Styles.Render("~/Content/bootstrapcss")
+    @Styles.Render("~/Content/theme/startbootstrap")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <div id="page-content-wrapper">
+            @RenderBody()
+
+            <footer class="py-4 bg-dark text-white-50">
+                <div class="container text-center">
+                    <small>Copyright &copy; @DateTime.Now.Year - Harcama Takibi. Version Alpha 0.1</small>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://kit.fontawesome.com/aa49e8fa9a.js"></script>
+    @RenderSection("basescripts", required: false)
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
