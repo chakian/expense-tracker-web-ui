@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ExpenseTracker.WebUI.Controllers
 {
-    public class TransactionController : BaseController
+    public class TransactionController : BaseAuthenticatedController
     {
         readonly BudgetAccountBusiness budgetAccountBusiness;
         readonly CategoryBusiness categoryBusiness;
