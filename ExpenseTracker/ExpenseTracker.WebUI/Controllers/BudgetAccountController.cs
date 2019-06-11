@@ -7,8 +7,7 @@ using ExpenseTracker.Persistence.Context.DbModels;
 
 namespace ExpenseTracker.WebUI.Controllers
 {
-    [Authorize]
-    public class BudgetAccountController : BaseController
+    public class BudgetAccountController : BaseAuthenticatedController
     {
         private readonly BudgetAccountBusiness budgetAccountBusiness;
 

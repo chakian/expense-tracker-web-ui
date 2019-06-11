@@ -8,8 +8,7 @@ using ExpenseTracker.WebUI.Models.BudgetRelated;
 
 namespace ExpenseTracker.WebUI.Controllers
 {
-    [Authorize]
-    public class BudgetController : BaseController
+    public class BudgetController : BaseAuthenticatedController
     {
         private const string UNAUTHORIZED_MESSAGE = "Bu bütçe üzerinde yetkiniz bulunmamaktadır";
 

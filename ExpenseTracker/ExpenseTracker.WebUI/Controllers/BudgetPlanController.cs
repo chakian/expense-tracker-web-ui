@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace ExpenseTracker.WebUI.Controllers
 {
-    public class BudgetPlanController : BaseController
+    public class BudgetPlanController : BaseAuthenticatedController
     {
         private readonly BudgetPlanBusiness budgetPlanBusiness;
 
