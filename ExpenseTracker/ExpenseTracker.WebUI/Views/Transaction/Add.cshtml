@@ -4,7 +4,7 @@
     ViewBag.Title = "Yeni İşlem Girişi";
 }
 
-@Styles.Render("~/bundles/datepickercss")
+@Styles.Render("~/Content/pickadatejs")
 
 <style>
     #radioBtn .notActive {
@@ -79,23 +79,29 @@
 @Html.Partial("_List", Model.TransactionSummaries)
 
 @section scripts {
-    @Scripts.Render("~/bundles/datepickerjs")
+    @Scripts.Render("~/bundles/pickadate_dateonly")
+    @*<script src="~/tpComponents/pickadatejs/translations/tr_TR.js"></script>*@
 
     <script>
         $(function () {
-            $("#Date").datepicker({
-                dateFormat: 'yy-mm-dd'
+            //https://amsul.ca/pickadate.js/date/
+            $("#Date").pickadate({
+                format: 'd mmmm, yyyy',
+                formatSubmit: 'yyyy-MM-dd',
+                onStart: function () {
+                    var date = new Date();
+                    this.set('select', [date.getFullYear(), date.getMonth(), date.getDate()]);
+                },
             });
-            $('#Date').datepicker('setDate', new Date());
+
+            $('#radioBtn a').on('click', function () {
+                var sel = $(this).data('title');
+                var tog = $(this).data('toggle');
+                $('#' + tog).prop('value', sel);
+
+                $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+                $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+            });
         });
-
-        $('#radioBtn a').on('click', function () {
-            var sel = $(this).data('title');
-            var tog = $(this).data('toggle');
-            $('#' + tog).prop('value', sel);
-
-            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
-            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
-        })
     </script>
 }

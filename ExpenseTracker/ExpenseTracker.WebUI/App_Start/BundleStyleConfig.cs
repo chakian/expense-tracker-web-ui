@@ -17,6 +17,11 @@ namespace ExpenseTracker.WebUI
             bundles.Add(new StyleBundle("~/Content/theme/startbootstrap").Include(
                       "~/Content/startbs/simple-sidebar.css"
                       ));
+
+            bundles.Add(new StyleBundle("~/Content/pickadatejs").Include(
+                      "~/tpComponents/pickadatejs/themes/classic.css",
+                      "~/tpComponents/pickadatejs/themes/classic.date.css"
+                      ));
         }
     }
 }
