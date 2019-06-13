@@ -23,6 +23,11 @@ namespace ExpenseTracker.WebUI
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"
                       ));
+
+            bundles.Add(new ScriptBundle("~/bundles/pickadate_dateonly").Include(
+                      "~/tpComponents/pickadatejs/picker.js",
+                      "~/tpComponents/pickadatejs/picker.date.js"
+                      ));
         }
     }
 }
