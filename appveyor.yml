@@ -23,11 +23,6 @@ after_build:
 
 deploy:
  - provider: Environment
-   name: Harcama-Test
-   on:
-     branch: develop
-
- - provider: Environment
    name: Harcama-Live
    on:
      branch: master
