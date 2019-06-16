@@ -1,0 +1,10 @@
+deploy:
+ - provider: Environment
+   name: Expense Tracker - Test
+   on:
+     branch: develop
+
+ - provider: Environment
+   name: Expense Tracker - LIVE
+   on:
+     branch: master
