@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Business;
+using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.WebUI.Models;
 using ExpenseTracker.WebUI.Models.Transaction;
 using System;
@@ -93,33 +94,40 @@ namespace ExpenseTracker.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int TransactionId)
+        public ActionResult Edit(int? TransactionId)
         {
             EditModel model = new EditModel();
 
-            model.TransactionId = TransactionId;
-
-            var transaction = transactionBusiness.GetTransactionById(TransactionId, UserId);
-            if(transaction.Amount < 0)
+            if (!TransactionId.HasValue)
             {
-                model.Amount = transaction.Amount * -1;
-                model.IsIncome = false;
+                return RedirectToAction("List");
             }
             else
             {
-                model.Amount = transaction.Amount;
-                model.IsIncome = true;
+                model.TransactionId = TransactionId.Value;
+
+                var transaction = transactionBusiness.GetTransactionById(TransactionId.Value, UserId);
+                if (transaction.Amount < 0)
+                {
+                    model.Amount = transaction.Amount * -1;
+                    model.IsIncome = false;
+                }
+                else
+                {
+                    model.Amount = transaction.Amount;
+                    model.IsIncome = true;
+                }
+                model.Date = transaction.Date;
+                model.Description = transaction.Description;
+                model.CategoryId = transaction.CategoryId;
+                model.AccountId = transaction.SourceAccountId;
+
+                SetAccountListForModel(model);
+                SetCategoryListForModel(model);
+                SetTransactionSummaryListForModel(model);
+
+                return View(model);
             }
-            model.Date = transaction.Date;
-            model.Description = transaction.Description;
-            model.CategoryId = transaction.CategoryId;
-            model.AccountId = transaction.SourceAccountId;
-
-            SetAccountListForModel(model);
-            SetCategoryListForModel(model);
-            SetTransactionSummaryListForModel(model);
-
-            return View(model);
         }
 
         [ValidateAntiForgeryToken]
@@ -199,7 +207,7 @@ namespace ExpenseTracker.WebUI.Controllers
             model.CategoryName = transaction.Category.Name;
             model.AccountName = transaction.SourceAccount.Name;
 
-            
+
             return View(model);
         }
     }
