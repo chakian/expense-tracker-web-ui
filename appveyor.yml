@@ -1,3 +1,5 @@
+configuration: Release
+
 deploy:
  - provider: Environment
    name: Expense Tracker - Test
