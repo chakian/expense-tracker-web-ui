@@ -1,33 +1,36 @@
+image: Visual Studio 2019
 configuration: Release
-cache:
-  - packages -> **\packages.config
+platform: Any CPU
 
 before_build:
-- cmd: >-
-    nuget restore ExpenseTracker/ExpenseTracker.sln
+- cmd: nuget restore ExpenseTracker/ExpenseTracker.sln
 
 build:
   project: ExpenseTracker/ExpenseTracker.sln
+  publish_wap: true
   verbosity: minimal
 
 after_build:
-  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\bin', '*.dll', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\bin', '*.config', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\Content', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\Scripts', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\tsScripts', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\tpComponents', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-  - ps: $root = Resolve-Path .\ExpenseTracker\ExpenseTracker.WebUI; [IO.Directory]::GetFiles($root.Path + '\Views', '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-  - ps: Push-AppveyorArtifact ExpenseTracker\ExpenseTracker.WebUI\global.asax -FileName global.asax -DeploymentName to-publish
-  - ps: Push-AppveyorArtifact ExpenseTracker\ExpenseTracker.WebUI\favicon.ico -FileName favicon.ico -DeploymentName to-publish
+- cmd: >-
+    choco install opencover.portable
+    
+    choco install codecov
+
+test_script:
+- cmd: >-
+    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console" "C:\Projects\expense-tracker-web-ui\ExpenseTracker\ExpenseTracker.Business.Tests\bin\Release\ExpenseTracker.Business.Tests.dll"
+
+    OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\MSTest.exe" -targetargs:"/testcontainer:"".\ExpenseTracker\ExpenseTracker.Business.Tests\bin\Debug\ExpenseTracker.Business.Tests.dll" -filter:"+[ExpenseTracker.Business*]* -[ExpenseTracker.Business.Tests*]*" -output:".\ExpenseTracker_coverage.xml"
+
+    codecov -f "ExpenseTracker_coverage.xml
 
 deploy:
  - provider: Environment
-   name: Harcama-Test
+   name: Expense Tracker - Test
    on:
      branch: develop
 
  - provider: Environment
-   name: Harcama-Live
+   name: Expense Tracker - LIVE
    on:
      branch: master
