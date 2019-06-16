@@ -2,7 +2,3 @@ configuration: Release
 before_build:
 - cmd: >-
     nuget restore ExpenseTracker/ExpenseTracker.sln
-
-build:
-  project: ExpenseTracker/ExpenseTracker.sln
-  verbosity: minimal
