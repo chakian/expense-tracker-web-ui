@@ -16,6 +16,14 @@ after_build:
     
     choco install codecov
 
+test_script:
+- cmd: >-
+    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console" "C:\Projects\expense-tracker-web-ui\ExpenseTracker\ExpenseTracker.Business.Tests\bin\Release\ExpenseTracker.Business.Tests.dll"
+
+    OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\MSTest.exe" -targetargs:"/testcontainer:"".\ExpenseTracker\ExpenseTracker.Business.Tests\bin\Debug\ExpenseTracker.Business.Tests.dll" -filter:"+[ExpenseTracker.Business*]* -[ExpenseTracker.Business.Tests*]*" -output:".\ExpenseTracker_coverage.xml"
+
+    codecov -f "ExpenseTracker_coverage.xml
+
 deploy:
  - provider: Environment
    name: Expense Tracker - Test
