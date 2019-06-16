@@ -1,0 +1,26 @@
+configuration: Release
+platform: Any CPU
+
+before_build:
+- cmd: nuget restore ExpenseTracker/ExpenseTracker.sln
+
+build:
+  project: ExpenseTracker/ExpenseTracker.sln
+  publish_wap: true
+  verbosity: minimal
+
+after_build:
+- cmd: >-
+    choco install opencover.portable
+    choco install codecov
+
+deploy:
+ - provider: Environment
+   name: Expense Tracker - Test
+   on:
+     branch: develop
+
+ - provider: Environment
+   name: Expense Tracker - LIVE
+   on:
+     branch: master
