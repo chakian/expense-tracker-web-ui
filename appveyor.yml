@@ -12,6 +12,7 @@ build:
 after_build:
 - cmd: >-
     choco install opencover.portable
+    
     choco install codecov
 
 deploy:
