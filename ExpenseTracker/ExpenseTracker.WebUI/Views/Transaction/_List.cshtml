@@ -1,21 +1,29 @@
 ﻿@model List<ExpenseTracker.WebUI.Models.BaseTransactionModel.TransactionSummary>
 
-<div class="row">
-    <div class="col-lg-2" style="font-weight:bold;">Tarih</div>
-    <div class="col-lg-2" style="font-weight:bold;">Tutar</div>
-    <div class="col-lg-2" style="font-weight:bold;">Kategori</div>
-    <div class="col-lg-3" style="font-weight:bold;">Açıklama</div>
-    <div class="col-lg-1" style="font-weight:bold;">Hesap</div>
-    <div class="col-lg-2" style="font-weight:bold;">&nbsp;</div>
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-sm">
+        <thead class="thead">
+            <tr class="table-primary">
+                <th scope="col">Tarih</th>
+                <th scope="col">Tutar</th>
+                <th scope="col">Kategori</th>
+                <th scope="col">Açıklama</th>
+                <th scope="col">Hesap</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model)
+            {
+                <tr>
+                    <th scope="row">@transaction.Date.ToLongDateString()</th>
+                    <td>@transaction.Amount</td>
+                    <td>@transaction.Category</td>
+                    <td>@transaction.Description</td>
+                    <td>@transaction.Account</td>
+                    <td>@Html.ActionLink("Düzenle", "Edit", new { transaction.TransactionId }) | @Html.ActionLink("Sil", "Delete", new { transaction.TransactionId })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
-@foreach (var transaction in Model)
-{
-    <div class="row">
-        <div class="col-lg-2">@transaction.Date.ToLongDateString()</div>
-        <div class="col-lg-2">@transaction.Amount</div>
-        <div class="col-lg-2">@transaction.Category</div>
-        <div class="col-lg-3">@transaction.Description</div>
-        <div class="col-lg-1">@transaction.Account</div>
-        <div class="col-lg-2">@Html.ActionLink("Düzenle", "Edit", new { transaction.TransactionId }) | @Html.ActionLink("Sil", "Delete", new { transaction.TransactionId })</div>
-    </div>
-}
