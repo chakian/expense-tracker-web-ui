@@ -1,9 +1,11 @@
-﻿using ExpenseTracker.Persistence.Identity;
+﻿using ExpenseTracker.Business;
+using ExpenseTracker.Persistence.Identity;
 using ExpenseTracker.WebUI.Models.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -79,6 +81,17 @@ namespace ExpenseTracker.WebUI.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    BudgetBusiness budgetBusiness = new BudgetBusiness(context);
+                    var budget = budgetBusiness.CreateBudget("My Budget", 1, user.Id);
+
+                    Session["ActiveBudgetId"] = budget.BudgetId;
+                    Session["ActiveBudgetName"] = budget.Name;
+
+                    var userToUpdate = context.Users.Find(user.Id);
+                    userToUpdate.ActiveBudgetId = budget.BudgetId;
+                    context.Entry(userToUpdate).State = EntityState.Modified;
+                    context.SaveChanges();
 
                     return RedirectToAction("Index", "Home");
                 }
