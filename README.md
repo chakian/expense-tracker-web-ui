@@ -6,7 +6,7 @@
 
 # Expense Tracker
 
-## Version Alpha [0.1]
+## Version Alpha [0.1.1]
 
 This repo will track every alive intellectual's expenses and budgets one day. Or maybe not. It will track mine for sure.
 
