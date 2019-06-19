@@ -22,6 +22,10 @@ namespace ExpenseTracker.WebUI
                       "~/tpComponents/pickadatejs/themes/classic.css",
                       "~/tpComponents/pickadatejs/themes/classic.date.css"
                       ));
+
+            bundles.Add(new StyleBundle("~/Content/bootgrid").Include(
+                      "~/Content/jquery.bootgrid.min.css"
+                      ));
         }
     }
 }

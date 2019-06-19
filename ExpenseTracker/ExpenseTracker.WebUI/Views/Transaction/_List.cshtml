@@ -1,27 +1,36 @@
 ﻿@model List<ExpenseTracker.WebUI.Models.BaseTransactionModel.TransactionSummary>
 
+@Styles.Render("~/Content/bootgrid")
+
+@*
+    Check out the examples
+    http://www.jquery-bootgrid.com/Examples
+*@
+
 <div class="table-responsive">
-    <table class="table table-striped table-hover table-sm">
+    <table id="transaction-list-grid" class="table table-striped table-hover table-sm">
         <thead class="thead">
             <tr class="table-primary">
-                <th scope="col">Tarih</th>
-                <th scope="col">Tutar</th>
-                <th scope="col">Kategori</th>
-                <th scope="col">Açıklama</th>
-                <th scope="col">Hesap</th>
-                <th scope="col">&nbsp;</th>
+                <th scope="col" data-column-id="id">ID</th>
+                <th scope="col" data-column-id="date">Tarih</th>
+                <th scope="col" data-column-id="amount">Tutar</th>
+                <th scope="col" data-column-id="category">Kategori</th>
+                <th scope="col" data-column-id="description">Açıklama</th>
+                <th scope="col" data-column-id="account">Hesap</th>
+                <th scope="col" data-column-id="commands" data-formatter="commands" data-sortable="false">&nbsp;</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var transaction in Model)
             {
                 <tr>
-                    <th scope="row">@transaction.Date.ToLongDateString()</th>
+                    <th scope="row">@transaction.TransactionId</th>
+                    <td>@transaction.Date.ToLongDateString()</td>
                     <td>@transaction.Amount</td>
                     <td>@transaction.Category</td>
                     <td>@transaction.Description</td>
                     <td>@transaction.Account</td>
-                    <td>@Html.ActionLink("Düzenle", "Edit", new { transaction.TransactionId }) | @Html.ActionLink("Sil", "Delete", new { transaction.TransactionId })</td>
+                    <td></td>
                 </tr>
             }
         </tbody>
