@@ -16,8 +16,8 @@ namespace ExpenseTracker.WebUI
         
         protected void Application_BeginRequest() {
             //var cookie = Context.Request.Cookies["culture"];
-            var cookie = "en-US";
-            if (cookie != null && !string.IsNullOrEmpty(cookie.Value)) {
+            string cookie = "en-US";
+            if (cookie != null && !string.IsNullOrEmpty(cookie)) {
                 //var culture = new CultureInfo(cookie.Value);
                 var culture = new CultureInfo(cookie);
                 Thread.CurrentThread.CurrentCulture = culture;
