@@ -170,21 +170,28 @@ namespace ExpenseTracker.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Delete(int TransactionId)
+        public ActionResult Delete(int? TransactionId)
         {
-            DeleteModel model = new DeleteModel();
+            if (!TransactionId.HasValue)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                DeleteModel model = new DeleteModel();
 
-            model.TransactionId = TransactionId;
+                model.TransactionId = TransactionId.Value;
 
-            var transaction = transactionBusiness.GetTransactionById(TransactionId, UserId);
+                var transaction = transactionBusiness.GetTransactionById(TransactionId.Value, UserId);
 
-            model.Amount = transaction.Amount;
-            model.Date = transaction.Date;
-            model.Description = transaction.Description;
-            model.CategoryName = transaction.Category.Name;
-            model.AccountName = transaction.SourceAccount.Name;
+                model.Amount = transaction.Amount;
+                model.Date = transaction.Date;
+                model.Description = transaction.Description;
+                model.CategoryName = transaction.Category.Name;
+                model.AccountName = transaction.SourceAccount.Name;
 
-            return View(model);
+                return View(model);
+            }
         }
 
         [ValidateAntiForgeryToken]

@@ -28,6 +28,10 @@ namespace ExpenseTracker.WebUI
                       "~/tpComponents/pickadatejs/picker.js",
                       "~/tpComponents/pickadatejs/picker.date.js"
                       ));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootgrid").Include(
+                        "~/Scripts/jquery.bootgrid.js"
+                        ));
         }
     }
 }

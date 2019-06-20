@@ -30,11 +30,13 @@ namespace ExpenseTracker.Business
             return budget;
         }
 
-        public void CreateBudget(string name, int currencyId, string userId)
+        public Budget CreateBudget(string name, int currencyId, string userId)
         {
             Budget budget = CreateBudget_NoCommit(name, currencyId, userId);
             new BudgetUserBusiness(context).CreateBudgetUser_NoCommit(budget.BudgetId, userId, userId);
             context.SaveChanges();
+
+            return budget;
         }
 
         private Budget CreateBudget_NoCommit(string name, int currencyId, string userId)

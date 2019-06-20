@@ -30,7 +30,7 @@
 
             <footer class="py-4 bg-dark text-white-50">
                 <div class="container text-center">
-                    <small>Copyright &copy; @DateTime.Now.Year - Harcama Takibi. Version Alpha 0.1</small>
+                    <small>Copyright &copy; @DateTime.Now.Year - Harcama Takibi. Version Alpha 0.1.1</small>
                 </div>
             </footer>
         </div>
@@ -39,8 +39,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="https://kit.fontawesome.com/aa49e8fa9a.js"></script>
-    @RenderSection("basescripts", required: false)
-    @RenderSection("scripts", required: false)
+
+    @RenderSection("basescripts", required: true)
 
 </body>
 </html>
