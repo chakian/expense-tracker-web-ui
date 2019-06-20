@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+using System.Globalization;
+using System.Threading;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
@@ -12,6 +14,17 @@ namespace ExpenseTracker.WebUI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+        
+        protected void Application_BeginRequest() {
+            //var cookie = Context.Request.Cookies["culture"];
+            string cookie = "en-US";
+            if (cookie != null && !string.IsNullOrEmpty(cookie)) {
+                //var culture = new CultureInfo(cookie.Value);
+                var culture = new CultureInfo(cookie);
+                Thread.CurrentThread.CurrentCulture = culture;
+                Thread.CurrentThread.CurrentUICulture = culture;
+            }
         }
     }
 }
