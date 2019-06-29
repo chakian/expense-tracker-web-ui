@@ -20,7 +20,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link @(controller.ToLowerInvariant().Equals("transaction") && action.ToLowerInvariant().Equals("list") ? "active" : "")" href="@Url.Action("List", "Transaction")">Raporlar</a>
+                <a class="nav-link @(controller.ToLowerInvariant().Equals("report"))" href="@Url.Action("Index", "Report")">Raporlar</a>
             </li>
 
             <li class="nav-item dropdown">

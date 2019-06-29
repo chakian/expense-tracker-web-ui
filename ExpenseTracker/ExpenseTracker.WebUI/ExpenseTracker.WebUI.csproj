@@ -176,6 +176,7 @@
     <Compile Include="Controllers\BudgetPlanController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -191,6 +192,7 @@
     <Compile Include="Models\BudgetRelated\BudgetPlanUpdateModel.cs" />
     <Compile Include="Models\ContextObjects\BudgetPlan.cs" />
     <Compile Include="Models\ContextObjects\BudgetPlanCategory.cs" />
+    <Compile Include="Models\Report\BudgetPlanReportModel.cs" />
     <Compile Include="Models\Transaction\AddModel.cs" />
     <Compile Include="Models\Transaction\DeleteModel.cs" />
     <Compile Include="Models\Transaction\EditModel.cs" />
@@ -323,6 +325,7 @@
     <Content Include="Views\Shared\_UnauthorizedLayout.cshtml" />
     <Content Include="Views\Shared\_BaseLayout.cshtml" />
     <Content Include="Views\Shared\_UnauthorizedTopMenuBar.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
     <None Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
