@@ -30,20 +30,39 @@ namespace ExpenseTracker.Business
             context.SaveChanges();
         }
 
-        public List<Transaction> GetTransactionsForCurrentPeriod(string userId, int activeBudgetId)
+        public List<Transaction> GetTransactionsForGivenRange(DateTime startDate, DateTime endDate, string userId, int activeBudgetId)
         {
-            DateTime today = DateTime.Now;
-            DateTime startOfMonth = new DateTime(today.Year, today.Month, 1, 0, 0, 0);
-            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59).AddSeconds(59);
+            if (startDate > endDate)
+            {
+                throw new Exception("End Date must be a later date than Start Date!");
+            }
+
+            startDate = new DateTime(startDate.Year, startDate.Month, startDate.Day, 0, 0, 0);
+            endDate = new DateTime(endDate.Year, endDate.Month, endDate.Day, 23, 59, 59);
 
             var transactions = context.Transactions.Where(trx =>
                 trx.IsActive &&
                 trx.SourceAccount.BudgetId.Equals(activeBudgetId) &&
                 trx.SourceAccount.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)) &&
-                trx.Date >= startOfMonth &&
-                trx.Date <= endOfMonth).ToList();
+                trx.Date >= startDate &&
+                trx.Date <= endDate).ToList();
 
             return transactions;
+        }
+
+        public List<Transaction> GetTransactionsForPeriodByGivenDate(DateTime inputDate, string userId, int activeBudgetId)
+        {
+            DateTime startOfMonth = new DateTime(inputDate.Year, inputDate.Month, 1, 0, 0, 0);
+            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59).AddSeconds(59);
+
+            return GetTransactionsForGivenRange(startOfMonth, endOfMonth, userId, activeBudgetId);
+        }
+
+        public List<Transaction> GetTransactionsForCurrentPeriod(string userId, int activeBudgetId)
+        {
+            DateTime today = DateTime.Now;
+            
+            return GetTransactionsForPeriodByGivenDate(today, userId, activeBudgetId);
         }
 
         public Transaction GetTransactionById(int transactionId, string userId)
