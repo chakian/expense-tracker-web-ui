@@ -4,8 +4,6 @@
     ViewBag.Title = "İşlem Düzenle";
 }
 
-@Styles.Render("~/Content/pickadatejs")
-
 <style>
     #radioBtn .notActive {
         color: #3276b1;
@@ -81,21 +79,8 @@
 @Html.Partial("_List", Model.TransactionSummaries)
 
 @section scripts {
-    @Scripts.Render("~/bundles/pickadate_dateonly")
-    @*<script src="~/tpComponents/pickadatejs/translations/tr_TR.js"></script>*@
-
     <script>
         $(function () {
-            //https://amsul.ca/pickadate.js/date/
-            $("#Date").pickadate({
-                format: 'd mmmm, yyyy',
-                formatSubmit: 'yyyy-MM-dd',
-                onStart: function () {
-                    var date = new Date('@Model.Date.ToString("yyyy-MM-dd HH:mm")');
-                    this.set('select', [date.getFullYear(), date.getMonth(), date.getDate()]);
-                },
-            });
-
             $('#radioBtn a').on('click', function () {
                 var sel = $(this).data('title');
                 var tog = $(this).data('toggle');
@@ -105,20 +90,5 @@
                 $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
             });
         });
-    </script>
-    
-    @Scripts.Render("~/bundles/bootgrid")
-
-    <script>
-        $("#transaction-list-grid").bootgrid(
-            {
-                formatters: {
-                    "commands": function (column, row) {
-                        return "<a href=\"/Transaction/Edit/" + row.id + "\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\"></span></a> " +
-                            "<a href=\"/Transaction/Delete/" + row.id + "\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-trash-o\"></span></a>";
-                    }
-                }
-            }
-        );
     </script>
 }
