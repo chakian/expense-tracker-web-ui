@@ -1,5 +1,13 @@
-﻿
-@{
+﻿@{
+    if (User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_UnauthorizedLayout.cshtml";
+    }
+    
     ViewBag.Title = "Contact";
 }
 

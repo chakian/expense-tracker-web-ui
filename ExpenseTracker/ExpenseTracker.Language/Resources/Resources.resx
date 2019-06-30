@@ -159,6 +159,18 @@
   <data name="Nav_Register" xml:space="preserve">
     <value>Kayıt</value>
   </data>
+  <data name="Register_AlreadyAMember" xml:space="preserve">
+    <value>Zaten üyeyim. Giriş yap</value>
+  </data>
+  <data name="Register_Button_Register" xml:space="preserve">
+    <value>Kayıt Ol</value>
+  </data>
+  <data name="Register_Placeholder_PasswordRepeat" xml:space="preserve">
+    <value>Şifre (tekrar)</value>
+  </data>
+  <data name="Register_RegisterNewMembership" xml:space="preserve">
+    <value>Üye olun</value>
+  </data>
   <data name="Version" xml:space="preserve">
     <value>Versiyon</value>
   </data>

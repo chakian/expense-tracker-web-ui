@@ -187,6 +187,42 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zaten üyeyim. Giriş yap.
+        /// </summary>
+        public static string Register_AlreadyAMember {
+            get {
+                return ResourceManager.GetString("Register_AlreadyAMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kayıt Ol.
+        /// </summary>
+        public static string Register_Button_Register {
+            get {
+                return ResourceManager.GetString("Register_Button_Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Şifre (tekrar).
+        /// </summary>
+        public static string Register_Placeholder_PasswordRepeat {
+            get {
+                return ResourceManager.GetString("Register_Placeholder_PasswordRepeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Üye olun.
+        /// </summary>
+        public static string Register_RegisterNewMembership {
+            get {
+                return ResourceManager.GetString("Register_RegisterNewMembership", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Versiyon.
         /// </summary>
         public static string Version {
