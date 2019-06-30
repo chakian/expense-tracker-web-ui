@@ -14,17 +14,9 @@ namespace ExpenseTracker.WebUI
                       "~/Content/site.css"
                       ));
 
-            bundles.Add(new StyleBundle("~/Content/theme/startbootstrap").Include(
-                      "~/Content/startbs/simple-sidebar.css"
-                      ));
-
-            bundles.Add(new StyleBundle("~/Content/pickadatejs").Include(
-                      "~/tpComponents/pickadatejs/themes/classic.css",
-                      "~/tpComponents/pickadatejs/themes/classic.date.css"
-                      ));
-
-            bundles.Add(new StyleBundle("~/Content/bootgrid").Include(
-                      "~/Content/jquery.bootgrid.min.css"
+            bundles.Add(new StyleBundle("~/Content/adminlte").Include(
+                      "~/Content/adminlte/dist/css/adminlte.min.css",
+                      "~/Content/adminlte/plugins/fontawesome-free/css/all.min.css"
                       ));
         }
     }
