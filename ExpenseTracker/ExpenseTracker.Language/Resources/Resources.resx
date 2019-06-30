@@ -126,6 +126,12 @@
   <data name="Nav_Home" xml:space="preserve">
     <value>Anasayfa</value>
   </data>
+  <data name="Nav_Login" xml:space="preserve">
+    <value>Giriş</value>
+  </data>
+  <data name="Nav_Register" xml:space="preserve">
+    <value>Kayıt</value>
+  </data>
   <data name="Version" xml:space="preserve">
     <value>Versiyon</value>
   </data>

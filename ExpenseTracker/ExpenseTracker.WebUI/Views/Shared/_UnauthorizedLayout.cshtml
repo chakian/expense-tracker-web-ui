@@ -2,18 +2,34 @@
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
 
-@if (User.Identity.IsAuthenticated)
-{
-    @Html.Partial("_TopMenuBar")
-}
-else
-{
-    @Html.Partial("_UnauthorizedTopMenuBar")
+@section sidebar_menu{
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a href="@Url.Action("Login", "Account")" class="nav-link">
+                    <i class="nav-icon fas fa-sign-in-alt"></i>
+                    <p>@Resources.Nav_Login</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Register", "Account")" class="nav-link">
+                    <i class="nav-icon fas fa-user-plus"></i>
+                    <p>@Resources.Nav_Register</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
 }
 
-<div class="container" id="main-body">
-    @RenderBody()
-</div>
+@section content_header{
+    <div class="col-sm-12">
+        <h1 class="m-0 text-dark">@Resources.ExpenseTracker</h1>
+    </div>
+}
+
+@RenderBody()
 
 @section basescripts{
     @RenderSection("scripts", required: false)

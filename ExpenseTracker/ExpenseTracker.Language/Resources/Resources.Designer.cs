@@ -88,6 +88,24 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Giriş.
+        /// </summary>
+        public static string Nav_Login {
+            get {
+                return ResourceManager.GetString("Nav_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kayıt.
+        /// </summary>
+        public static string Nav_Register {
+            get {
+                return ResourceManager.GetString("Nav_Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Versiyon.
         /// </summary>
         public static string Version {
