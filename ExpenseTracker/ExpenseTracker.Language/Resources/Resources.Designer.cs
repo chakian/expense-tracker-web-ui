@@ -70,6 +70,33 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz.
+        /// </summary>
+        public static string Home_LoginDescription {
+            get {
+                return ResourceManager.GetString("Home_LoginDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Önce kayıt yaparsanız; giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz.
+        /// </summary>
+        public static string Home_RegisterDescription {
+            get {
+                return ResourceManager.GetString("Home_RegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expense Tracker bir harcama takibi uygulamasıdır. Bu uygulama ile harcamalarınızı kontrol altında tutabilir, hesaplarınızı yöneterek elinizdeki paranızı daha iyi değerlendirmeye başlayabilirsiniz..
+        /// </summary>
+        public static string Home_Unauthorized_Description {
+            get {
+                return ResourceManager.GetString("Home_Unauthorized_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to İletişim.
         /// </summary>
         public static string Nav_Contact {

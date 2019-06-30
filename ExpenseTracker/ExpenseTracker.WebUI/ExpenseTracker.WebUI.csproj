@@ -1511,8 +1511,8 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Views\Shared\_UnauthorizedLayout.cshtml" />
     <Content Include="Views\Shared\_BaseLayout.cshtml" />
-    <Content Include="Views\Shared\_UnauthorizedTopMenuBar.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
     <None Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
