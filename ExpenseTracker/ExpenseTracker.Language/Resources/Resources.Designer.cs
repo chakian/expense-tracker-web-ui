@@ -97,6 +97,60 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email adresi.
+        /// </summary>
+        public static string Input_Placeholder_Email {
+            get {
+                return ResourceManager.GetString("Input_Placeholder_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Şifre.
+        /// </summary>
+        public static string Input_Placeholder_Password {
+            get {
+                return ResourceManager.GetString("Input_Placeholder_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Giriş.
+        /// </summary>
+        public static string Login_ButtonLogin {
+            get {
+                return ResourceManager.GetString("Login_ButtonLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sisteme giriş yapın.
+        /// </summary>
+        public static string Login_LoginToStart {
+            get {
+                return ResourceManager.GetString("Login_LoginToStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeni bir hesap oluşturun.
+        /// </summary>
+        public static string Login_NewMembershipLink {
+            get {
+                return ResourceManager.GetString("Login_NewMembershipLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beni Hatırla.
+        /// </summary>
+        public static string Login_RememberMe {
+            get {
+                return ResourceManager.GetString("Login_RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to İletişim.
         /// </summary>
         public static string Nav_Contact {

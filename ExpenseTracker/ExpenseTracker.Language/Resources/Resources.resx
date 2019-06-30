@@ -129,6 +129,24 @@
   <data name="Home_Unauthorized_Description" xml:space="preserve">
     <value>Expense Tracker bir harcama takibi uygulamasıdır. Bu uygulama ile harcamalarınızı kontrol altında tutabilir, hesaplarınızı yöneterek elinizdeki paranızı daha iyi değerlendirmeye başlayabilirsiniz.</value>
   </data>
+  <data name="Input_Placeholder_Email" xml:space="preserve">
+    <value>Email adresi</value>
+  </data>
+  <data name="Input_Placeholder_Password" xml:space="preserve">
+    <value>Şifre</value>
+  </data>
+  <data name="Login_ButtonLogin" xml:space="preserve">
+    <value>Giriş</value>
+  </data>
+  <data name="Login_LoginToStart" xml:space="preserve">
+    <value>Sisteme giriş yapın</value>
+  </data>
+  <data name="Login_NewMembershipLink" xml:space="preserve">
+    <value>Yeni bir hesap oluşturun</value>
+  </data>
+  <data name="Login_RememberMe" xml:space="preserve">
+    <value>Beni Hatırla</value>
+  </data>
   <data name="Nav_Contact" xml:space="preserve">
     <value>İletişim</value>
   </data>
