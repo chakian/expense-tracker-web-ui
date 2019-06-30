@@ -1,10 +1,10 @@
-﻿#main-body {
+﻿/*#main-body {
     padding-bottom: 50px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
+/*.dl-horizontal dt {
     white-space: normal;
-}
+}*/
