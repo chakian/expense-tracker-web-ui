@@ -189,8 +189,14 @@
   <data name="Menu_MembershipManagement" xml:space="preserve">
     <value>Üyelik</value>
   </data>
+  <data name="Menu_NewTransaction" xml:space="preserve">
+    <value>Yeni İşlem</value>
+  </data>
   <data name="Menu_Settings" xml:space="preserve">
     <value>Ayarlar</value>
+  </data>
+  <data name="Menu_TransactionList" xml:space="preserve">
+    <value>Tüm İşlemler</value>
   </data>
   <data name="Nav_Contact" xml:space="preserve">
     <value>İletişim</value>
@@ -224,6 +230,36 @@
   </data>
   <data name="Title_Register" xml:space="preserve">
     <value>Yeni Üyelik</value>
+  </data>
+  <data name="Transaction_Edit_Label_Account" xml:space="preserve">
+    <value>Hesap</value>
+  </data>
+  <data name="Transaction_Edit_Label_Amount" xml:space="preserve">
+    <value>Tutar</value>
+  </data>
+  <data name="Transaction_Edit_Label_Category" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="Transaction_Edit_Label_Date" xml:space="preserve">
+    <value>Tarih</value>
+  </data>
+  <data name="Transaction_Edit_Label_Description" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="Transaction_Edit_Label_Expense" xml:space="preserve">
+    <value>Gider</value>
+  </data>
+  <data name="Transaction_Edit_Label_Income" xml:space="preserve">
+    <value>Gelir</value>
+  </data>
+  <data name="Transaction_Edit_Label_Save" xml:space="preserve">
+    <value>İşlemi Kaydet</value>
+  </data>
+  <data name="Transaction_Link_Delete" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="Transaction_Link_Edit" xml:space="preserve">
+    <value>Düzenle</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versiyon</value>

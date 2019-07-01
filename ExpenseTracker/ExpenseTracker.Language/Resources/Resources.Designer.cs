@@ -277,11 +277,29 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yeni İşlem.
+        /// </summary>
+        public static string Menu_NewTransaction {
+            get {
+                return ResourceManager.GetString("Menu_NewTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ayarlar.
         /// </summary>
         public static string Menu_Settings {
             get {
                 return ResourceManager.GetString("Menu_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tüm İşlemler.
+        /// </summary>
+        public static string Menu_TransactionList {
+            get {
+                return ResourceManager.GetString("Menu_TransactionList", resourceCulture);
             }
         }
         
@@ -381,6 +399,96 @@ namespace ExpenseTracker.Language {
         public static string Title_Register {
             get {
                 return ResourceManager.GetString("Title_Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hesap.
+        /// </summary>
+        public static string Transaction_Edit_Label_Account {
+            get {
+                return ResourceManager.GetString("Transaction_Edit_Label_Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tutar.
+        /// </summary>
+        public static string Transaction_Edit_Label_Amount {
+            get {
+                return ResourceManager.GetString("Transaction_Edit_Label_Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategori.
+        /// </summary>
+        public static string Transaction_Edit_Label_Category {
+            get {
+                return ResourceManager.GetString("Transaction_Edit_Label_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tarih.
+        /// </summary>
+        public static string Transaction_Edit_Label_Date {
+            get {
+                return ResourceManager.GetString("Transaction_Edit_Label_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Açıklama.
+        /// </summary>
+        public static string Transaction_Edit_Label_Description {
+            get {
+                return ResourceManager.GetString("Transaction_Edit_Label_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gider.
+        /// </summary>
+        public static string Transaction_Edit_Label_Expense {
+            get {
+                return ResourceManager.GetString("Transaction_Edit_Label_Expense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gelir.
+        /// </summary>
+        public static string Transaction_Edit_Label_Income {
+            get {
+                return ResourceManager.GetString("Transaction_Edit_Label_Income", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to İşlemi Kaydet.
+        /// </summary>
+        public static string Transaction_Edit_Label_Save {
+            get {
+                return ResourceManager.GetString("Transaction_Edit_Label_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sil.
+        /// </summary>
+        public static string Transaction_Link_Delete {
+            get {
+                return ResourceManager.GetString("Transaction_Link_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Düzenle.
+        /// </summary>
+        public static string Transaction_Link_Edit {
+            get {
+                return ResourceManager.GetString("Transaction_Link_Edit", resourceCulture);
             }
         }
         

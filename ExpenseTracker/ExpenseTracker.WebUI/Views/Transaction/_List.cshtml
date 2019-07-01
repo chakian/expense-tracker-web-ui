@@ -4,26 +4,24 @@
     <table id="transaction-list-grid" class="table table-striped table-hover table-sm">
         <thead class="thead">
             <tr class="table-primary">
-                <th scope="col" data-column-id="id">ID</th>
-                <th scope="col" data-column-id="date">Tarih</th>
-                <th scope="col" data-column-id="amount">Tutar</th>
-                <th scope="col" data-column-id="category">Kategori</th>
-                <th scope="col" data-column-id="description">Açıklama</th>
-                <th scope="col" data-column-id="account">Hesap</th>
-                <th scope="col" data-column-id="commands" data-formatter="commands" data-sortable="false">&nbsp;</th>
+                <th scope="col">Tarih</th>
+                <th scope="col">Tutar</th>
+                <th scope="col">Kategori</th>
+                <th scope="col">Açıklama</th>
+                <th scope="col">Hesap</th>
+                <th scope="col">&nbsp;</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var transaction in Model)
             {
                 <tr>
-                    <th scope="row">@transaction.TransactionId</th>
-                    <td>@transaction.Date.ToLongDateString()</td>
+                    <th scope="row">@transaction.Date.ToLongDateString()</th>
                     <td>@transaction.Amount</td>
                     <td>@transaction.Category</td>
                     <td>@transaction.Description</td>
                     <td>@transaction.Account</td>
-                    <td></td>
+                    <td>@Html.ActionLink(Resources.Transaction_Link_Edit, "Edit", new { transaction.TransactionId }) | @Html.ActionLink(Resources.Transaction_Link_Delete, "Delete", new { transaction.TransactionId })</td>
                 </tr>
             }
         </tbody>

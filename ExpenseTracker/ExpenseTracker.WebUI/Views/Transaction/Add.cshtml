@@ -16,58 +16,80 @@
     }
 </style>
 
+@section content_header{
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">@Resources.Menu_NewTransaction</h1>
+    </div><!-- /.col -->
+    @*<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard v1</li>
+            </ol>
+        </div>*@
+    <!-- /.col -->
+}
+
 <div class="row">
-    <div class="col-md-8 mx-auto">
-        <h4 class="mb-3">Yeni İşlem</h4>
+    <div class="col-md-12 mx-auto">
         @using (Html.BeginForm("Add", "Transaction", FormMethod.Post, new { @class = "needs-validation" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="row">
-                <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
                     <div class="input-group">
                         <div id="radioBtn" class="btn-group">
-                            <a class="btn btn-primary btn-sm active cusradiobtn" data-toggle="IsIncome" data-title="false">Gider</a>
-                            <a class="btn btn-primary btn-sm notActive cusradiobtn" data-toggle="IsIncome" data-title="true">Gelir</a>
+                            <a class="btn btn-primary btn-sm active cusradiobtn" data-toggle="IsIncome" data-title="false">&nbsp; @Resources.Transaction_Edit_Label_Expense &nbsp;</a>
+                            <a class="btn btn-primary btn-sm notActive cusradiobtn" data-toggle="IsIncome" data-title="true">&nbsp; @Resources.Transaction_Edit_Label_Income &nbsp;</a>
                         </div>
                         @Html.HiddenFor(m => m.IsIncome)
                     </div>
                 </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Amount, Resources.Transaction_Edit_Label_Amount)
+                            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.01", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.CategoryId, Resources.Transaction_Edit_Label_Category)
+                            @Html.DropDownListFor(model => model.CategoryId, Model.CategoryList, htmlAttributes: new { @class = "custom-select d-block w-100" })
+                            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Date, Resources.Transaction_Edit_Label_Date)
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @type = "text", @class = "form-control float-right" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.AccountId, Resources.Transaction_Edit_Label_Account)
+                            @Html.DropDownListFor(model => model.AccountId, Model.AccountList, htmlAttributes: new { @class = "custom-select d-block w-100" })
+                            @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Description, Resources.Transaction_Edit_Label_Description)
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button class="btn btn-primary" type="submit">@Resources.Transaction_Edit_Label_Save</button>
+                </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    @Html.LabelFor(model => model.Amount)
-                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.01", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-md-6 mb-3">
-                    @Html.LabelFor(model => model.CategoryId)
-                    @Html.DropDownListFor(model => model.CategoryId, Model.CategoryList, htmlAttributes: new { @class = "custom-select d-block w-100" })
-                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-md-3 mb-3">
-                    @Html.LabelFor(model => model.Date)
-                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    @Html.LabelFor(model => model.AccountId)
-                    @Html.DropDownListFor(model => model.AccountId, Model.AccountList, htmlAttributes: new { @class = "custom-select d-block w-100" })
-                    @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-md-6 mb-3">
-                    @Html.LabelFor(model => model.Description)
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <button class="btn btn-primary btn-lg btn-block" type="submit">İşlemi Kaydet</button>
+            <!-- /.card -->
         }
     </div>
 </div>
@@ -77,7 +99,6 @@
 @Html.Partial("_List", Model.TransactionSummaries)
 
 @section scripts {
-
     <script>
         $(function () {
             $('#radioBtn a').on('click', function () {
@@ -88,6 +109,13 @@
                 $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
                 $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
             });
+
+            //$('#Date').daterangepicker({
+            //    "singleDatePicker": true,
+            //    "linkedCalendars": false,
+            //    "showCustomRangeLabel": false,
+            //    "opens": "center"
+            //});
         });
     </script>
 }

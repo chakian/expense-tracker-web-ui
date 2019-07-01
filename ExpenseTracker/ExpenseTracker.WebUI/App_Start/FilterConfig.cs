@@ -12,7 +12,7 @@ namespace ExpenseTracker.WebUI
 
             //filters.Add(new ErrorHandler.AiHandleErrorAttribute());
             //filters.Add(new HandleErrorAttribute());
-            filters.Add(new LocalizationAttribute("tr-TR"), 0);
+            //filters.Add(new LocalizationAttribute("tr-TR"), 0);
         }
     }
 }
