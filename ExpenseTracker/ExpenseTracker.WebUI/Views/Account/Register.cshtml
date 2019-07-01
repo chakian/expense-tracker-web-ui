@@ -1,47 +1,84 @@
 ﻿@model ExpenseTracker.WebUI.Models.Account.RegisterViewModel
 @{
     Layout = "~/Views/Shared/_UnauthorizedLayout.cshtml";
-    ViewBag.Title = "Kayıt";
+    ViewBag.Title = Resources.Title_Register;
 }
-
-<link href="../../Content/startbs/login-form.css" rel="stylesheet" />
 
 @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "tm-login-form", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Giriş</h5>
-                    <form class="form-signin">
-
-                        <div class="form-label-group">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus", placeholder = "Email adresi" })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                            @Html.LabelFor(m => m.Email)
-                        </div>
-
-                        <div class="form-label-group">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", autofocus = "autofocus", placeholder = "Şifre" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                            @Html.LabelFor(m => m.Password)
-                        </div>
-
-                        <div class="form-label-group">
-                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autofocus = "autofocus", placeholder = "Şifre (tekrar)" })
-                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-                            @Html.LabelFor(m => m.ConfirmPassword)
-                        </div>
-
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Kayıt</button>
-                    </form>
-                </div>
-            </div>
+    <div class="register-box">
+        <div class="register-logo">
+            <a href="@Url.Action("Index", "Home")"><b>Expense</b>Tracker</a>
         </div>
+
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">@Resources.Register_RegisterNewMembership</p>
+
+                @*<div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Full name">
+                        <div class="input-group-append input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>*@
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus", type = "email", placeholder = Resources.Input_Placeholder_Email })
+                    <div class="input-group-append input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="input-group mb-3">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", autofocus = "autofocus", type = "password", placeholder = Resources.Input_Placeholder_Password })
+                    <div class="input-group-append input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="input-group mb-3">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autofocus = "autofocus", type = "password", placeholder = Resources.Register_Placeholder_PasswordRepeat })
+                    <div class="input-group-append input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        @*<div class="icheck-primary">
+                            <div class="custom-control custom-checkbox mb-3">
+                                @Html.CheckBoxFor(m => m.AgreeTerms, new { @class = "custom-control-input" })
+                                @Html.LabelFor(m => m.AgreeTerms, Resources.Register_AgreeTerms, new { @class = "custom-control-label" })
+                            </div>
+                        </div>*@
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">@Resources.Register_Button_Register</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                @*<div class="social-auth-links text-center">
+                        <p>- OR -</p>
+                        <a href="#" class="btn btn-block btn-primary">
+                            <i class="fab fa-facebook mr-2"></i>
+                            Sign up using Facebook
+                        </a>
+                        <a href="#" class="btn btn-block btn-danger">
+                            <i class="fab fa-google-plus mr-2"></i>
+                            Sign up using Google+
+                        </a>
+                    </div>*@
+
+                <a href="@Url.Action("Login", "Account")" class="text-center">@Resources.Register_AlreadyAMember</a>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
     </div>
+    <!-- /.register-box -->
 }
 
 @section Scripts {

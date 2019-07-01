@@ -21,17 +21,12 @@ namespace ExpenseTracker.WebUI
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"
+                      "~/Scripts/bootstrap.bundle.min.js"
                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/pickadate_dateonly").Include(
-                      "~/tpComponents/pickadatejs/picker.js",
-                      "~/tpComponents/pickadatejs/picker.date.js"
+            bundles.Add(new ScriptBundle("~/bundles/adminlte").Include(
+                      "~/Content/adminlte/dist/js/adminlte.min.js"
                       ));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootgrid").Include(
-                        "~/Scripts/jquery.bootgrid.js"
-                        ));
         }
     }
 }

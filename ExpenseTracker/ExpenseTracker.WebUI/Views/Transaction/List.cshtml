@@ -7,18 +7,4 @@
 @Html.Partial("_List", Model.TransactionSummaries)
 
 @section scripts{
-    @Scripts.Render("~/bundles/bootgrid")
-
-    <script>
-        $("#transaction-list-grid").bootgrid(
-            {
-                formatters: {
-                    "commands": function (column, row) {
-                        return "<a href=\"/Transaction/Edit/" + row.id + "\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\"></span></a> " +
-                            "<a href=\"/Transaction/Delete/" + row.id + "\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-trash-o\"></span></a>";
-                    }
-                }
-            }
-        );
-    </script>
 }

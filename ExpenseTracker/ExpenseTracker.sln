@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Persistence"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Common", "ExpenseTracker.Common\ExpenseTracker.Common.csproj", "{65C9F7E5-739A-401A-A9FE-76EC2B583067}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Language", "ExpenseTracker.Language\ExpenseTracker.Language.csproj", "{38C7FED0-BA12-4159-9FE4-26C474AB136D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{65C9F7E5-739A-401A-A9FE-76EC2B583067}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65C9F7E5-739A-401A-A9FE-76EC2B583067}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65C9F7E5-739A-401A-A9FE-76EC2B583067}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38C7FED0-BA12-4159-9FE4-26C474AB136D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38C7FED0-BA12-4159-9FE4-26C474AB136D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38C7FED0-BA12-4159-9FE4-26C474AB136D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38C7FED0-BA12-4159-9FE4-26C474AB136D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{7154BA1F-9A4A-4A09-A28C-4B1CFDD1C0C2} = {76464A15-5511-486E-A595-A59F70ACF551}
 		{EACAE983-5259-49A9-A7B5-FA5A4C14C2DB} = {A118025B-92C9-46C8-80AA-9C8C8399F2E5}
 		{65C9F7E5-739A-401A-A9FE-76EC2B583067} = {76464A15-5511-486E-A595-A59F70ACF551}
+		{38C7FED0-BA12-4159-9FE4-26C474AB136D} = {76464A15-5511-486E-A595-A59F70ACF551}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B708F8F-5946-4B4D-A462-B6FFCF01BCDC}
