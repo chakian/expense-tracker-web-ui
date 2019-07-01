@@ -10,7 +10,7 @@ namespace ExpenseTracker.WebUI.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Add", "Transaction");
+                return RedirectToAction("Index", "Dashboard");
             }
             else
             {

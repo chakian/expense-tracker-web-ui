@@ -151,6 +151,141 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hesaplar.
+        /// </summary>
+        public static string Menu_Accounts {
+            get {
+                return ResourceManager.GetString("Menu_Accounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeni Hesap.
+        /// </summary>
+        public static string Menu_Accounts_Add {
+            get {
+                return ResourceManager.GetString("Menu_Accounts_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tüm Hesaplar.
+        /// </summary>
+        public static string Menu_Accounts_List {
+            get {
+                return ResourceManager.GetString("Menu_Accounts_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bütçe Yönetimi.
+        /// </summary>
+        public static string Menu_BudgetManagement {
+            get {
+                return ResourceManager.GetString("Menu_BudgetManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bütçe Planı.
+        /// </summary>
+        public static string Menu_BudgetPlan {
+            get {
+                return ResourceManager.GetString("Menu_BudgetPlan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bütçeler.
+        /// </summary>
+        public static string Menu_Budgets {
+            get {
+                return ResourceManager.GetString("Menu_Budgets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeni Bütçe Oluştur.
+        /// </summary>
+        public static string Menu_Budgets_Add {
+            get {
+                return ResourceManager.GetString("Menu_Budgets_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aktif Bütçeyi Değiştir.
+        /// </summary>
+        public static string Menu_Budgets_ChangeActiveBudget {
+            get {
+                return ResourceManager.GetString("Menu_Budgets_ChangeActiveBudget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tüm Bütçeler.
+        /// </summary>
+        public static string Menu_Budgets_List {
+            get {
+                return ResourceManager.GetString("Menu_Budgets_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategoriler.
+        /// </summary>
+        public static string Menu_Categories {
+            get {
+                return ResourceManager.GetString("Menu_Categories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeni Kategori.
+        /// </summary>
+        public static string Menu_Category_Add {
+            get {
+                return ResourceManager.GetString("Menu_Category_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tüm Kategoriler.
+        /// </summary>
+        public static string Menu_Category_List {
+            get {
+                return ResourceManager.GetString("Menu_Category_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Çıkış.
+        /// </summary>
+        public static string Menu_Logout {
+            get {
+                return ResourceManager.GetString("Menu_Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Üyelik.
+        /// </summary>
+        public static string Menu_MembershipManagement {
+            get {
+                return ResourceManager.GetString("Menu_MembershipManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ayarlar.
+        /// </summary>
+        public static string Menu_Settings {
+            get {
+                return ResourceManager.GetString("Menu_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to İletişim.
         /// </summary>
         public static string Nav_Contact {
@@ -219,6 +354,33 @@ namespace ExpenseTracker.Language {
         public static string Register_RegisterNewMembership {
             get {
                 return ResourceManager.GetString("Register_RegisterNewMembership", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Özet.
+        /// </summary>
+        public static string Title_Dashboard_Index {
+            get {
+                return ResourceManager.GetString("Title_Dashboard_Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Giriş.
+        /// </summary>
+        public static string Title_Login {
+            get {
+                return ResourceManager.GetString("Title_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeni Üyelik.
+        /// </summary>
+        public static string Title_Register {
+            get {
+                return ResourceManager.GetString("Title_Register", resourceCulture);
             }
         }
         

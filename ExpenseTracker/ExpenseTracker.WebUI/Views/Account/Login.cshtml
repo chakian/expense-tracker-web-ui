@@ -1,7 +1,7 @@
 ﻿@model ExpenseTracker.WebUI.Models.Account.LoginViewModel
 @{
     Layout = "~/Views/Shared/_UnauthorizedLayout.cshtml";
-    ViewBag.Title = "Giriş";
+    ViewBag.Title = Resources.Title_Login;
 }
 
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "tm-login-form", role = "form" }))

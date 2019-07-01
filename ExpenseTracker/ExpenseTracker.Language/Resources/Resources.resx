@@ -147,6 +147,51 @@
   <data name="Login_RememberMe" xml:space="preserve">
     <value>Beni Hatırla</value>
   </data>
+  <data name="Menu_Accounts" xml:space="preserve">
+    <value>Hesaplar</value>
+  </data>
+  <data name="Menu_Accounts_Add" xml:space="preserve">
+    <value>Yeni Hesap</value>
+  </data>
+  <data name="Menu_Accounts_List" xml:space="preserve">
+    <value>Tüm Hesaplar</value>
+  </data>
+  <data name="Menu_BudgetManagement" xml:space="preserve">
+    <value>Bütçe Yönetimi</value>
+  </data>
+  <data name="Menu_BudgetPlan" xml:space="preserve">
+    <value>Bütçe Planı</value>
+  </data>
+  <data name="Menu_Budgets" xml:space="preserve">
+    <value>Bütçeler</value>
+  </data>
+  <data name="Menu_Budgets_Add" xml:space="preserve">
+    <value>Yeni Bütçe Oluştur</value>
+  </data>
+  <data name="Menu_Budgets_ChangeActiveBudget" xml:space="preserve">
+    <value>Aktif Bütçeyi Değiştir</value>
+  </data>
+  <data name="Menu_Budgets_List" xml:space="preserve">
+    <value>Tüm Bütçeler</value>
+  </data>
+  <data name="Menu_Categories" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
+  <data name="Menu_Category_Add" xml:space="preserve">
+    <value>Yeni Kategori</value>
+  </data>
+  <data name="Menu_Category_List" xml:space="preserve">
+    <value>Tüm Kategoriler</value>
+  </data>
+  <data name="Menu_Logout" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
+  <data name="Menu_MembershipManagement" xml:space="preserve">
+    <value>Üyelik</value>
+  </data>
+  <data name="Menu_Settings" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
   <data name="Nav_Contact" xml:space="preserve">
     <value>İletişim</value>
   </data>
@@ -170,6 +215,15 @@
   </data>
   <data name="Register_RegisterNewMembership" xml:space="preserve">
     <value>Üye olun</value>
+  </data>
+  <data name="Title_Dashboard_Index" xml:space="preserve">
+    <value>Özet</value>
+  </data>
+  <data name="Title_Login" xml:space="preserve">
+    <value>Giriş</value>
+  </data>
+  <data name="Title_Register" xml:space="preserve">
+    <value>Yeni Üyelik</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versiyon</value>
