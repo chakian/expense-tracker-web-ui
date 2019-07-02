@@ -15,8 +15,8 @@ namespace ExpenseTracker.WebUI
                       ));
 
             bundles.Add(new StyleBundle("~/Content/adminlte").Include(
-                      "~/Content/adminlte/dist/css/adminlte.min.css",
-                      "~/Content/adminlte/plugins/fontawesome-free/css/all.min.css"
+                      "~/Content/adminlte/dist/css/adminlte.css",
+                      "~/Content/adminlte/plugins/fontawesome-free/css/all.css"
                       ));
         }
     }
