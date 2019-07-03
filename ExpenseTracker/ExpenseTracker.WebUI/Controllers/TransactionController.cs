@@ -28,7 +28,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
             SetAccountListForModel(model);
             SetCategoryListForModel(model);
-            SetTransactionSummaryListForModel(model);
+            SetTransactionSummaryListForModel(model, DateTime.Now);
 
             model.Date = DateTime.Now;
 
@@ -53,11 +53,11 @@ namespace ExpenseTracker.WebUI.Controllers
             }
         }
 
-        private void SetTransactionSummaryListForModel(BaseTransactionModel model)
+        private void SetTransactionSummaryListForModel(BaseTransactionModel model, DateTime periodDate)
         {
             model.TransactionSummaries = new System.Collections.Generic.List<BaseTransactionModel.TransactionSummary>();
 
-            var transactions = transactionBusiness.GetTransactionsForCurrentPeriod(UserId, ActiveBudgetId).OrderByDescending(q => q.Date).ToList();
+            var transactions = transactionBusiness.GetTransactionsForPeriodByGivenDate(periodDate, UserId, ActiveBudgetId).OrderByDescending(q => q.Date).ToList();
             if (transactions != null)
             {
                 transactions.ForEach(t =>
@@ -88,7 +88,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
             SetAccountListForModel(model);
             SetCategoryListForModel(model);
-            SetTransactionSummaryListForModel(model);
+            SetTransactionSummaryListForModel(model, DateTime.Now);
 
             return View(model);
         }
@@ -124,7 +124,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
                 SetAccountListForModel(model);
                 SetCategoryListForModel(model);
-                SetTransactionSummaryListForModel(model);
+                SetTransactionSummaryListForModel(model, DateTime.Now);
 
                 return View(model);
             }
@@ -154,68 +154,49 @@ namespace ExpenseTracker.WebUI.Controllers
 
             SetAccountListForModel(model);
             SetCategoryListForModel(model);
-            SetTransactionSummaryListForModel(model);
+            SetTransactionSummaryListForModel(model, DateTime.Now);
 
             return View(model);
         }
 
         [HttpGet]
-        public ActionResult List()
+        [Route("TransactionList", Name = "CurrentMonthList", Order = 0)]
+        [Route("TransactionList/{year:int}/{month:int}", Name = "ListByYearAndMonth", Order = 1)]
+        public ActionResult List(int? year, int? month)
         {
+            if (!year.HasValue || !month.HasValue)
+            {
+                year = DateTime.Now.Year;
+                month = DateTime.Now.Month;
+            }
+
+            DateTime currentDateTime = new DateTime(year.Value, month.Value, 1);
+            DateTime previousDateTime = currentDateTime.AddMonths(-1);
+            DateTime nextDateTime = currentDateTime.AddMonths(1);
+
             ListModel model = new ListModel();
+            model.PreviousMonth = previousDateTime.Month;
+            model.PreviousYear = previousDateTime.Year;
+            model.NextMonth = nextDateTime.Month;
+            model.NextYear = nextDateTime.Year;
 
-            SetTransactionSummaryListForModel(model);
+            SetTransactionSummaryListForModel(model, currentDateTime);
 
             return View(model);
-        }
-
-        [HttpGet]
-        public ActionResult Delete(int? TransactionId)
-        {
-            if (!TransactionId.HasValue)
-            {
-                return RedirectToAction("List");
-            }
-            else
-            {
-                DeleteModel model = new DeleteModel();
-
-                model.TransactionId = TransactionId.Value;
-
-                var transaction = transactionBusiness.GetTransactionById(TransactionId.Value, UserId);
-
-                model.Amount = transaction.Amount;
-                model.Date = transaction.Date;
-                model.Description = transaction.Description;
-                model.CategoryName = transaction.Category.Name;
-                model.AccountName = transaction.SourceAccount.Name;
-
-                return View(model);
-            }
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Delete(DeleteModel model)
+        public ActionResult Delete(int TransactionId)
         {
             if (ModelState.IsValid)
             {
-                transactionBusiness.DeleteTransaction(model.TransactionId, UserId);
+                transactionBusiness.DeleteTransaction(TransactionId, UserId);
                 return RedirectToAction("List");
             }
 
-            model.TransactionId = model.TransactionId;
-
-            var transaction = transactionBusiness.GetTransactionById(model.TransactionId, UserId);
-
-            model.Amount = transaction.Amount;
-            model.Date = transaction.Date;
-            model.Description = transaction.Description;
-            model.CategoryName = transaction.Category.Name;
-            model.AccountName = transaction.SourceAccount.Name;
-
-
-            return View(model);
+            //TODO: Return with an error message
+            return RedirectToAction("List");
         }
     }
 }

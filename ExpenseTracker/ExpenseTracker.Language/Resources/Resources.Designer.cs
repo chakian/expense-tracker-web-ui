@@ -421,6 +421,15 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to İşlem Listesi.
+        /// </summary>
+        public static string Title_Transaction_List {
+            get {
+                return ResourceManager.GetString("Title_Transaction_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hesap.
         /// </summary>
         public static string Transaction_Edit_Label_Account {
@@ -507,6 +516,78 @@ namespace ExpenseTracker.Language {
         public static string Transaction_Link_Edit {
             get {
                 return ResourceManager.GetString("Transaction_Link_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hesap.
+        /// </summary>
+        public static string Transaction_List_Label_Account {
+            get {
+                return ResourceManager.GetString("Transaction_List_Label_Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Transaction_List_Label_Actions {
+            get {
+                return ResourceManager.GetString("Transaction_List_Label_Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tutar.
+        /// </summary>
+        public static string Transaction_List_Label_Amount {
+            get {
+                return ResourceManager.GetString("Transaction_List_Label_Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategori.
+        /// </summary>
+        public static string Transaction_List_Label_Category {
+            get {
+                return ResourceManager.GetString("Transaction_List_Label_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tarih.
+        /// </summary>
+        public static string Transaction_List_Label_Date {
+            get {
+                return ResourceManager.GetString("Transaction_List_Label_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Açıklama.
+        /// </summary>
+        public static string Transaction_List_Label_Description {
+            get {
+                return ResourceManager.GetString("Transaction_List_Label_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonraki Ay.
+        /// </summary>
+        public static string Transaction_List_Label_NextMonth {
+            get {
+                return ResourceManager.GetString("Transaction_List_Label_NextMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Önceki Ay.
+        /// </summary>
+        public static string Transaction_List_Label_PreviousMonth {
+            get {
+                return ResourceManager.GetString("Transaction_List_Label_PreviousMonth", resourceCulture);
             }
         }
         
