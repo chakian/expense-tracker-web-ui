@@ -231,6 +231,12 @@
   <data name="Title_Register" xml:space="preserve">
     <value>Yeni Üyelik</value>
   </data>
+  <data name="Title_Transaction_Add" xml:space="preserve">
+    <value>Yeni İşlem Girişi</value>
+  </data>
+  <data name="Title_Transaction_Edit" xml:space="preserve">
+    <value>İşlem Düzenle</value>
+  </data>
   <data name="Transaction_Edit_Label_Account" xml:space="preserve">
     <value>Hesap</value>
   </data>

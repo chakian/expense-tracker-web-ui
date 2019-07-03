@@ -403,6 +403,24 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yeni İşlem Girişi.
+        /// </summary>
+        public static string Title_Transaction_Add {
+            get {
+                return ResourceManager.GetString("Title_Transaction_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to İşlem Düzenle.
+        /// </summary>
+        public static string Title_Transaction_Edit {
+            get {
+                return ResourceManager.GetString("Title_Transaction_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hesap.
         /// </summary>
         public static string Transaction_Edit_Label_Account {
