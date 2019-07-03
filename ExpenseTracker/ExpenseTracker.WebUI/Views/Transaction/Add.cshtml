@@ -126,5 +126,10 @@
             //    "opens": "center"
             //});
         });
+
+        $(document).on("click", ".delete-transaction-button", function () {
+            var transactionId = $(this).data('id');
+            $(".modal-footer #TransactionId").val(transactionId);
+        });
     </script>
 }

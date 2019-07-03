@@ -24,13 +24,45 @@
                     <td>
                         @using (Html.BeginForm("Delete", "Transaction", FormMethod.Post))
                         {
+                            @Html.AntiForgeryToken()
                             <a href="@Url.Action("Edit", "Transaction", new { transaction.TransactionId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
                             Html.Hidden("TransactionId", transaction.TransactionId);
-                            <button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+                            @*<button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>*@
                         }
+                        @*<a href="@Url.Action("Edit", "Transaction", new { transaction.TransactionId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+                            <button type="button" class="delete-transaction-button btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete" data-id="@transaction.TransactionId">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>*@
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+@*<div class="modal fade" id="modal-delete">
+        <div class="modal-dialog">
+            <div class="modal-content bg-danger">
+                <div class="modal-header">
+                    <h4 class="modal-title">@Resources.Transaction_Delete_Modal_Header</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="@Resources.Transaction_Delete_Modal_Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>@Resources.Transaction_Delete_Modal_Text</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <form method="post" action="@Url.Action("Delete", "Transaction")">
+                        @Html.AntiForgeryToken();
+                        <input type="hidden" id="TransactionId" />
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">@Resources.Transaction_Delete_Modal_No</button>
+                        <button type="submit" class="btn btn-outline-light">@Resources.Transaction_Delete_Modal_Yes</button>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->*@

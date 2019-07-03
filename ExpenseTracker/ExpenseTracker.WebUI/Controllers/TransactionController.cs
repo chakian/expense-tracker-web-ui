@@ -187,11 +187,11 @@ namespace ExpenseTracker.WebUI.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Delete(int TransactionId)
+        public ActionResult Delete(EditModel model)
         {
             if (ModelState.IsValid)
             {
-                transactionBusiness.DeleteTransaction(TransactionId, UserId);
+                transactionBusiness.DeleteTransaction(model.TransactionId, UserId);
                 return RedirectToAction("List");
             }
 

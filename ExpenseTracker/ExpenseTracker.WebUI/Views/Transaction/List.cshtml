@@ -13,7 +13,13 @@
     </div>
 </div>
 
-@Html.Partial("_List", Model.TransactionSummaries)
+@{Html.RenderPartial("_List", Model.TransactionSummaries);}
 
 @section scripts{
+    <script>
+        $(document).on("click", ".delete-transaction-button", function () {
+            var transactionId = $(this).data('id');
+            $(".modal-footer #TransactionId").val(transactionId);
+        });
+    </script>
 }

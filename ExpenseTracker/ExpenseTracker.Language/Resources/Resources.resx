@@ -240,6 +240,21 @@
   <data name="Title_Transaction_List" xml:space="preserve">
     <value>İşlem Listesi</value>
   </data>
+  <data name="Transaction_Delete_Modal_Close" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="Transaction_Delete_Modal_Header" xml:space="preserve">
+    <value>İşlem Silinecek</value>
+  </data>
+  <data name="Transaction_Delete_Modal_No" xml:space="preserve">
+    <value>Hayır</value>
+  </data>
+  <data name="Transaction_Delete_Modal_Text" xml:space="preserve">
+    <value>Bu işlemi silmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Transaction_Delete_Modal_Yes" xml:space="preserve">
+    <value>Evet</value>
+  </data>
   <data name="Transaction_Edit_Label_Account" xml:space="preserve">
     <value>Hesap</value>
   </data>

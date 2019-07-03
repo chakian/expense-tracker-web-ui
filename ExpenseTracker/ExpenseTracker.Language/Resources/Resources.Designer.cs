@@ -430,6 +430,51 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kapat.
+        /// </summary>
+        public static string Transaction_Delete_Modal_Close {
+            get {
+                return ResourceManager.GetString("Transaction_Delete_Modal_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to İşlem Silinecek.
+        /// </summary>
+        public static string Transaction_Delete_Modal_Header {
+            get {
+                return ResourceManager.GetString("Transaction_Delete_Modal_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hayır.
+        /// </summary>
+        public static string Transaction_Delete_Modal_No {
+            get {
+                return ResourceManager.GetString("Transaction_Delete_Modal_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bu işlemi silmek istediğinizden emin misiniz?.
+        /// </summary>
+        public static string Transaction_Delete_Modal_Text {
+            get {
+                return ResourceManager.GetString("Transaction_Delete_Modal_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Evet.
+        /// </summary>
+        public static string Transaction_Delete_Modal_Yes {
+            get {
+                return ResourceManager.GetString("Transaction_Delete_Modal_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hesap.
         /// </summary>
         public static string Transaction_Edit_Label_Account {
