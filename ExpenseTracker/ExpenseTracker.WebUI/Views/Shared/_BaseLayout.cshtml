@@ -25,9 +25,14 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+    @*TODO: Remove the line below when possible... Move it to where it is needed.*@
+    <link rel="stylesheet" href="~/Content/adminlte/plugins/select2/css/select2.min.css">
+
     @Styles.Render("~/Content/adminltetemplate")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @RenderSection("customstyles", true)
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper" id="expense-tracker-site">

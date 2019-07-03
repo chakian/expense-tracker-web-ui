@@ -2,6 +2,10 @@
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
 
+@section customstyles{
+    @RenderSection("customstyles", false)
+}
+
 @section sidebar_menu{
     <!-- Sidebar Menu -->
     <nav class="mt-2">

@@ -4,28 +4,52 @@
     ViewBag.Title = "Yeni İşlem Girişi";
 }
 
-<style>
-    #radioBtn .notActive {
-        color: #3276b1;
-        background-color: #fff;
-    }
+@section customstyles{
+    <style>
+        #radioBtn .notActive {
+            color: #3276b1;
+            background-color: #fff;
+        }
 
-    .cusradiobtn {
-        cursor: pointer;
-        width: 50%;
-    }
-</style>
+        .cusradiobtn {
+            cursor: pointer;
+        }
+    </style>
+
+    @*TODO: try to include this stylesheet right here on the row below. Right now it is moved to alllllll the way to the top "BaseLayout"*@
+    @*<link rel="stylesheet" href="~/Content/adminlte/plugins/select2/css/select2.min.css">*@
+
+    @*<style>
+        /*.select2,
+        .select2-search__field,
+        .select2-results__option {
+            font-size: 1.3em !important;
+        }*/
+
+        /*.select2-selection__rendered {
+            line-height: 2em !important;
+        }*/
+
+        .select2-container .select2-selection--single {
+            height: 1.8em;
+        }
+
+        .select2-selection__arrow {
+            height: 2em;
+        }
+    </style>*@
+}
 
 @section content_header{
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">@Resources.Menu_NewTransaction</h1>
     </div><!-- /.col -->
-    @*<div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v1</li>
-            </ol>
-        </div>*@
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@Resources.Nav_Home</a></li>
+            <li class="breadcrumb-item active">@Resources.Menu_NewTransaction</li>
+        </ol>
+    </div>
     <!-- /.col -->
 }
 
@@ -50,12 +74,12 @@
                     <div class="row">
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Amount, Resources.Transaction_Edit_Label_Amount)
-                            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.01", @class = "form-control" } })
+                            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.01", @class = "form-control", style = "width:100%" } })
                             @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.CategoryId, Resources.Transaction_Edit_Label_Category)
-                            @Html.DropDownListFor(model => model.CategoryId, Model.CategoryList, htmlAttributes: new { @class = "custom-select d-block w-100" })
+                            @Html.DropDownListFor(model => model.CategoryId, Model.CategoryList, htmlAttributes: new { @class = "form-control select2" })
                             @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-3">
@@ -74,7 +98,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.AccountId, Resources.Transaction_Edit_Label_Account)
-                            @Html.DropDownListFor(model => model.AccountId, Model.AccountList, htmlAttributes: new { @class = "custom-select d-block w-100" })
+                            @Html.DropDownListFor(model => model.AccountId, Model.AccountList, htmlAttributes: new { @class = "form-control select2" })
                             @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-6">
@@ -99,6 +123,10 @@
 @Html.Partial("_List", Model.TransactionSummaries)
 
 @section scripts {
+    <!-- Select2 -->
+
+    <script src="~/Content/adminlte/plugins/select2/js/select2.full.min.js"></script>
+
     <script>
         $(function () {
             $('#radioBtn a').on('click', function () {
@@ -109,6 +137,8 @@
                 $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
                 $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
             });
+
+            $('.select2').select2();
 
             //$('#Date').daterangepicker({
             //    "singleDatePicker": true,
