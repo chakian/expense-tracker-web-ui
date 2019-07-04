@@ -135,6 +135,12 @@
   <data name="BudgetAccount_Link_CreateNewAccount" xml:space="preserve">
     <value>Yeni Hesap Oluştur</value>
   </data>
+  <data name="Categories_Delete_Modal_Header" xml:space="preserve">
+    <value>Kategori Silinecek</value>
+  </data>
+  <data name="Categories_Delete_Modal_Text" xml:space="preserve">
+    <value>Bu kategoriyi silmek istediğinizden emin misiniz?</value>
+  </data>
   <data name="Categories_Label_Name" xml:space="preserve">
     <value>Kategori</value>
   </data>
@@ -147,8 +153,17 @@
   <data name="ExpenseTracker" xml:space="preserve">
     <value>Expense Tracker</value>
   </data>
+  <data name="Generic_Close" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="Generic_No" xml:space="preserve">
+    <value>Hayır</value>
+  </data>
   <data name="Generic_Save_Button" xml:space="preserve">
     <value>Kaydet</value>
+  </data>
+  <data name="Generic_Yes" xml:space="preserve">
+    <value>Evet</value>
   </data>
   <data name="Home_LoginDescription" xml:space="preserve">
     <value>Giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz</value>
@@ -288,20 +303,11 @@
   <data name="Title_Transaction_List" xml:space="preserve">
     <value>İşlem Listesi</value>
   </data>
-  <data name="Transaction_Delete_Modal_Close" xml:space="preserve">
-    <value>Kapat</value>
-  </data>
   <data name="Transaction_Delete_Modal_Header" xml:space="preserve">
     <value>İşlem Silinecek</value>
   </data>
-  <data name="Transaction_Delete_Modal_No" xml:space="preserve">
-    <value>Hayır</value>
-  </data>
   <data name="Transaction_Delete_Modal_Text" xml:space="preserve">
     <value>Bu işlemi silmek istediğinizden emin misiniz?</value>
-  </data>
-  <data name="Transaction_Delete_Modal_Yes" xml:space="preserve">
-    <value>Evet</value>
   </data>
   <data name="Transaction_Edit_Label_Account" xml:space="preserve">
     <value>Hesap</value>

@@ -38,7 +38,7 @@
         <div class="modal-content bg-danger">
             <div class="modal-header">
                 <h4 class="modal-title">@Resources.Transaction_Delete_Modal_Header</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="@Resources.Transaction_Delete_Modal_Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="@Resources.Generic_Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -50,8 +50,8 @@
                 {
                     @Html.AntiForgeryToken();
                     @Html.Hidden("TransactionId")
-                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">@Resources.Transaction_Delete_Modal_No</button>
-                    <button type="submit" class="btn btn-outline-light">@Resources.Transaction_Delete_Modal_Yes</button>
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">@Resources.Generic_No</button>
+                    <button type="submit" class="btn btn-outline-light">@Resources.Generic_Yes</button>
                 }
             </div>
         </div>

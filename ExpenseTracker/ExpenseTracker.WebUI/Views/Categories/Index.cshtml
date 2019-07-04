@@ -23,13 +23,10 @@
                 <tr>
                     <th scope="row">@category.Name</th>
                     <td>
-                        @using (Html.BeginForm("Delete", "Categories", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            <a href="@Url.Action("Edit", "Categories", new { id = category.CategoryId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
-                            Html.Hidden("AccountId", category.CategoryId);
-                            @*<button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>*@
-                        }
+                        <a href="@Url.Action("Edit", "Categories", new { id = category.CategoryId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+                        <button type="button" class="delete-category-button btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete" data-id="@category.CategoryId">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </td>
                 </tr>
             }
@@ -37,6 +34,39 @@
     </table>
 </div>
 
-@*@Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
-    @Html.ActionLink("Details", "Details", new { id = item.CategoryId }) |
-    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })*@
+<div class="modal fade" id="modal-delete">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">@Resources.Categories_Delete_Modal_Header</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="@Resources.Generic_Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>@Resources.Categories_Delete_Modal_Text</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                @using (Html.BeginForm("Delete", "Categories", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.Hidden("CategoryId")
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">@Resources.Generic_No</button>
+                    <button type="submit" class="btn btn-outline-light">@Resources.Generic_Yes</button>
+                }
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+@section scripts{
+    <script>
+        $(document).on("click", ".delete-category-button", function () {
+            var categoryId = $(this).data('id');
+            $(".modal-footer #CategoryId").val(categoryId);
+        });
+    </script>
+}

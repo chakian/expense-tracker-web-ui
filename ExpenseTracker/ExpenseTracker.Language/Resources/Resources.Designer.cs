@@ -115,6 +115,24 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kategori Silinecek.
+        /// </summary>
+        public static string Categories_Delete_Modal_Header {
+            get {
+                return ResourceManager.GetString("Categories_Delete_Modal_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bu kategoriyi silmek istediğinizden emin misiniz?.
+        /// </summary>
+        public static string Categories_Delete_Modal_Text {
+            get {
+                return ResourceManager.GetString("Categories_Delete_Modal_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kategori.
         /// </summary>
         public static string Categories_Label_Name {
@@ -151,11 +169,38 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kapat.
+        /// </summary>
+        public static string Generic_Close {
+            get {
+                return ResourceManager.GetString("Generic_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hayır.
+        /// </summary>
+        public static string Generic_No {
+            get {
+                return ResourceManager.GetString("Generic_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kaydet.
         /// </summary>
         public static string Generic_Save_Button {
             get {
                 return ResourceManager.GetString("Generic_Save_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Evet.
+        /// </summary>
+        public static string Generic_Yes {
+            get {
+                return ResourceManager.GetString("Generic_Yes", resourceCulture);
             }
         }
         
@@ -574,15 +619,6 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kapat.
-        /// </summary>
-        public static string Transaction_Delete_Modal_Close {
-            get {
-                return ResourceManager.GetString("Transaction_Delete_Modal_Close", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to İşlem Silinecek.
         /// </summary>
         public static string Transaction_Delete_Modal_Header {
@@ -592,29 +628,11 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hayır.
-        /// </summary>
-        public static string Transaction_Delete_Modal_No {
-            get {
-                return ResourceManager.GetString("Transaction_Delete_Modal_No", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Bu işlemi silmek istediğinizden emin misiniz?.
         /// </summary>
         public static string Transaction_Delete_Modal_Text {
             get {
                 return ResourceManager.GetString("Transaction_Delete_Modal_Text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Evet.
-        /// </summary>
-        public static string Transaction_Delete_Modal_Yes {
-            get {
-                return ResourceManager.GetString("Transaction_Delete_Modal_Yes", resourceCulture);
             }
         }
         
