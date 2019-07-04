@@ -1536,8 +1536,6 @@
     <Content Include="Views\Budget\Edit.cshtml" />
     <Content Include="Views\Budget\Index.cshtml" />
     <Content Include="Views\BudgetAccount\Create.cshtml" />
-    <Content Include="Views\BudgetAccount\Delete.cshtml" />
-    <Content Include="Views\BudgetAccount\Details.cshtml" />
     <Content Include="Views\BudgetAccount\Edit.cshtml" />
     <Content Include="Views\BudgetAccount\Index.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
