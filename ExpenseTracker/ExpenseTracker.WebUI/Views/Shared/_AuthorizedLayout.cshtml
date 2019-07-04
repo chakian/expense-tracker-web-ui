@@ -2,6 +2,10 @@
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
 
+@section customstyles{
+    @RenderSection("customstyles", false)
+}
+
 @section right_navbar_links{
     <!-- Right navbar links -->
     @*<ul class="navbar-nav ml-auto">
@@ -118,14 +122,14 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            @*<li class="nav-item">
-                    <a href="@Url.Action("Index", "Dashboard")" class="nav-link@(controller.ToLowerInvariant().Equals("dashboard") && action.ToLowerInvariant().Equals("index") ? " active" : "")">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            @Resources.Title_Dashboard_Index
-                        </p>
-                    </a>
-                </li>*@
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Dashboard")" class="nav-link@(controller.ToLowerInvariant().Equals("dashboard") && action.ToLowerInvariant().Equals("index") ? " active" : "")">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                        @Resources.Title_Dashboard_Index
+                    </p>
+                </a>
+            </li>
             @*<li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>

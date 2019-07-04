@@ -23,20 +23,6 @@ namespace ExpenseTracker.WebUI.Controllers
             return View(categories);
         }
 
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = budgetCategoryBusiness.GetCategoryById(id.Value, UserId);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
-        }
-
         public ActionResult Create()
         {
             return View();
@@ -96,25 +82,11 @@ namespace ExpenseTracker.WebUI.Controllers
             return View(category);
         }
 
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = budgetCategoryBusiness.GetCategoryById(id.Value, UserId);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
-        }
-
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int CategoryId)
         {
-            Category category = context.Categories.Find(id);
+            Category category = context.Categories.Find(CategoryId);
             category.UpdateUserId = User.Identity.GetUserId();
             category.UpdateTime = DateTime.Now;
             category.IsActive = false;

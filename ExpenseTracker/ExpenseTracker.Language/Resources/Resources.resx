@@ -117,8 +117,59 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BudgetAccounts_Delete_Modal_Header" xml:space="preserve">
+    <value>Hesap Silinecek</value>
+  </data>
+  <data name="BudgetAccounts_Delete_Modal_Text" xml:space="preserve">
+    <value>Bu hesabı silmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="BudgetAccount_Label_AccountName" xml:space="preserve">
+    <value>Hesap Adı</value>
+  </data>
+  <data name="BudgetAccount_Label_AccountType" xml:space="preserve">
+    <value>Hesap Tipi</value>
+  </data>
+  <data name="BudgetAccount_Label_CurrentBalance" xml:space="preserve">
+    <value>Mevcut Bakiye</value>
+  </data>
+  <data name="BudgetAccount_Label_GridActions" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="BudgetAccount_Link_BackToList" xml:space="preserve">
+    <value>Listeye Geri Dön</value>
+  </data>
+  <data name="BudgetAccount_Link_CreateNewAccount" xml:space="preserve">
+    <value>Yeni Hesap Oluştur</value>
+  </data>
+  <data name="Categories_Delete_Modal_Header" xml:space="preserve">
+    <value>Kategori Silinecek</value>
+  </data>
+  <data name="Categories_Delete_Modal_Text" xml:space="preserve">
+    <value>Bu kategoriyi silmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Categories_Label_Name" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="Categories_Link_BackToList" xml:space="preserve">
+    <value>Listeye Geri Dön</value>
+  </data>
+  <data name="Categories_Link_CreateNewCategory" xml:space="preserve">
+    <value>Yeni Kategori Ekle</value>
+  </data>
   <data name="ExpenseTracker" xml:space="preserve">
     <value>Expense Tracker</value>
+  </data>
+  <data name="Generic_Close" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="Generic_No" xml:space="preserve">
+    <value>Hayır</value>
+  </data>
+  <data name="Generic_Save_Button" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="Generic_Yes" xml:space="preserve">
+    <value>Evet</value>
   </data>
   <data name="Home_LoginDescription" xml:space="preserve">
     <value>Giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz</value>
@@ -210,6 +261,24 @@
   <data name="Nav_Register" xml:space="preserve">
     <value>Kayıt</value>
   </data>
+  <data name="Page_Title_BudgetAccount_Create" xml:space="preserve">
+    <value>Yeni Hesap</value>
+  </data>
+  <data name="Page_Title_BudgetAccount_Edit" xml:space="preserve">
+    <value>Hesap Düzenle</value>
+  </data>
+  <data name="Page_Title_BudgetAccount_Index" xml:space="preserve">
+    <value>Hesaplar</value>
+  </data>
+  <data name="Page_Title_Categories_Create" xml:space="preserve">
+    <value>Yeni Kategori</value>
+  </data>
+  <data name="Page_Title_Categories_Edit" xml:space="preserve">
+    <value>Kategori Düzenle</value>
+  </data>
+  <data name="Page_Title_Categories_Index" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
   <data name="Register_AlreadyAMember" xml:space="preserve">
     <value>Zaten üyeyim. Giriş yap</value>
   </data>
@@ -230,6 +299,21 @@
   </data>
   <data name="Title_Register" xml:space="preserve">
     <value>Yeni Üyelik</value>
+  </data>
+  <data name="Title_Transaction_Add" xml:space="preserve">
+    <value>Yeni İşlem Girişi</value>
+  </data>
+  <data name="Title_Transaction_Edit" xml:space="preserve">
+    <value>İşlem Düzenle</value>
+  </data>
+  <data name="Title_Transaction_List" xml:space="preserve">
+    <value>İşlem Listesi</value>
+  </data>
+  <data name="Transaction_Delete_Modal_Header" xml:space="preserve">
+    <value>İşlem Silinecek</value>
+  </data>
+  <data name="Transaction_Delete_Modal_Text" xml:space="preserve">
+    <value>Bu işlemi silmek istediğinizden emin misiniz?</value>
   </data>
   <data name="Transaction_Edit_Label_Account" xml:space="preserve">
     <value>Hesap</value>
@@ -252,14 +336,35 @@
   <data name="Transaction_Edit_Label_Income" xml:space="preserve">
     <value>Gelir</value>
   </data>
-  <data name="Transaction_Edit_Label_Save" xml:space="preserve">
-    <value>İşlemi Kaydet</value>
-  </data>
   <data name="Transaction_Link_Delete" xml:space="preserve">
     <value>Sil</value>
   </data>
   <data name="Transaction_Link_Edit" xml:space="preserve">
     <value>Düzenle</value>
+  </data>
+  <data name="Transaction_List_Label_Account" xml:space="preserve">
+    <value>Hesap</value>
+  </data>
+  <data name="Transaction_List_Label_Amount" xml:space="preserve">
+    <value>Tutar</value>
+  </data>
+  <data name="Transaction_List_Label_Category" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="Transaction_List_Label_Date" xml:space="preserve">
+    <value>Tarih</value>
+  </data>
+  <data name="Transaction_List_Label_Description" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="Transaction_List_Label_Grid_Actions" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="Transaction_List_Label_NextMonth" xml:space="preserve">
+    <value>Sonraki Ay</value>
+  </data>
+  <data name="Transaction_List_Label_PreviousMonth" xml:space="preserve">
+    <value>Önceki Ay</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versiyon</value>

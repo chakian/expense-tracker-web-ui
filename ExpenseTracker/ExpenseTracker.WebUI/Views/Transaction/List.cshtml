@@ -1,10 +1,25 @@
-﻿@model ExpenseTracker.WebUI.Models.BaseTransactionModel
+﻿@model ExpenseTracker.WebUI.Models.Transaction.ListModel
 @{
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
-    ViewBag.Title = "İşlem Listesi";
+    ViewBag.Title = Resources.Title_Transaction_List;
 }
 
-@Html.Partial("_List", Model.TransactionSummaries)
+<div class="row">
+    <div class="col-md-6" style="text-align: left">
+        @Html.ActionLink(Resources.Transaction_List_Label_PreviousMonth, "List", new { year = Model.PreviousYear, month = Model.PreviousMonth })
+    </div>
+    <div class="col-md-6" style="text-align: right">
+        @Html.ActionLink(Resources.Transaction_List_Label_NextMonth, "List", new { year = Model.NextYear, month = Model.NextMonth })
+    </div>
+</div>
+
+@{Html.RenderPartial("_List", Model.TransactionSummaries);}
 
 @section scripts{
+    <script>
+        $(document).on("click", ".delete-transaction-button", function () {
+            var transactionId = $(this).data('id');
+            $(".modal-footer #TransactionId").val(transactionId);
+        });
+    </script>
 }

@@ -22,20 +22,6 @@ namespace ExpenseTracker.WebUI.Controllers
             return View(accounts);
         }
 
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Account account = budgetAccountBusiness.GetAccountById(id.Value, UserId);
-            if (account == null)
-            {
-                return HttpNotFound();
-            }
-            return View(account);
-        }
-
         public ActionResult Create()
         {
             SetViewBagValues(null);
@@ -110,25 +96,11 @@ namespace ExpenseTracker.WebUI.Controllers
             ViewBag.AccountTypeId = new SelectList(accountTypeBusiness.GetAccountTypeList(), "AccountTypeId", "Name", selectedAccountTypeId);
         }
 
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Account account = budgetAccountBusiness.GetAccountById(id.Value, UserId);
-            if (account == null)
-            {
-                return HttpNotFound();
-            }
-            return View(account);
-        }
-
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int AccountId)
         {
-            Account account = budgetAccountBusiness.GetAccountById(id, UserId);
+            Account account = budgetAccountBusiness.GetAccountById(AccountId, UserId);
 
             if(account != null)
             {

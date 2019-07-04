@@ -197,7 +197,6 @@
     <Compile Include="Models\ContextObjects\BudgetPlanCategory.cs" />
     <Compile Include="Models\Report\BudgetPlanReportModel.cs" />
     <Compile Include="Models\Transaction\AddModel.cs" />
-    <Compile Include="Models\Transaction\DeleteModel.cs" />
     <Compile Include="Models\Transaction\EditModel.cs" />
     <Compile Include="Models\Transaction\ListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1537,13 +1536,9 @@
     <Content Include="Views\Budget\Edit.cshtml" />
     <Content Include="Views\Budget\Index.cshtml" />
     <Content Include="Views\BudgetAccount\Create.cshtml" />
-    <Content Include="Views\BudgetAccount\Delete.cshtml" />
-    <Content Include="Views\BudgetAccount\Details.cshtml" />
     <Content Include="Views\BudgetAccount\Edit.cshtml" />
     <Content Include="Views\BudgetAccount\Index.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
-    <Content Include="Views\Categories\Delete.cshtml" />
-    <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Budget\SelectActiveBudget.cshtml" />
@@ -1553,7 +1548,6 @@
     <Content Include="Views\Transaction\_List.cshtml" />
     <Content Include="Views\Transaction\List.cshtml" />
     <Content Include="Views\Transaction\Edit.cshtml" />
-    <Content Include="Views\Transaction\Delete.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
