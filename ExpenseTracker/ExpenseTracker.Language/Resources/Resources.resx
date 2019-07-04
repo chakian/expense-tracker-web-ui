@@ -135,8 +135,20 @@
   <data name="BudgetAccount_Link_CreateNewAccount" xml:space="preserve">
     <value>Yeni Hesap Oluştur</value>
   </data>
+  <data name="Categories_Label_Name" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="Categories_Link_BackToList" xml:space="preserve">
+    <value>Listeye Geri Dön</value>
+  </data>
+  <data name="Categories_Link_CreateNewCategory" xml:space="preserve">
+    <value>Yeni Kategori Ekle</value>
+  </data>
   <data name="ExpenseTracker" xml:space="preserve">
     <value>Expense Tracker</value>
+  </data>
+  <data name="Generic_Save_Button" xml:space="preserve">
+    <value>Kaydet</value>
   </data>
   <data name="Home_LoginDescription" xml:space="preserve">
     <value>Giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz</value>
@@ -237,6 +249,15 @@
   <data name="Page_Title_BudgetAccount_Index" xml:space="preserve">
     <value>Hesaplar</value>
   </data>
+  <data name="Page_Title_Categories_Create" xml:space="preserve">
+    <value>Yeni Kategori</value>
+  </data>
+  <data name="Page_Title_Categories_Edit" xml:space="preserve">
+    <value>Kategori Düzenle</value>
+  </data>
+  <data name="Page_Title_Categories_Index" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
   <data name="Register_AlreadyAMember" xml:space="preserve">
     <value>Zaten üyeyim. Giriş yap</value>
   </data>
@@ -302,9 +323,6 @@
   </data>
   <data name="Transaction_Edit_Label_Income" xml:space="preserve">
     <value>Gelir</value>
-  </data>
-  <data name="Transaction_Edit_Label_Save" xml:space="preserve">
-    <value>İşlemi Kaydet</value>
   </data>
   <data name="Transaction_Link_Delete" xml:space="preserve">
     <value>Sil</value>

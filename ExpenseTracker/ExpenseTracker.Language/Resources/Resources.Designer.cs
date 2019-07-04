@@ -115,11 +115,47 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kategori.
+        /// </summary>
+        public static string Categories_Label_Name {
+            get {
+                return ResourceManager.GetString("Categories_Label_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Listeye Geri Dön.
+        /// </summary>
+        public static string Categories_Link_BackToList {
+            get {
+                return ResourceManager.GetString("Categories_Link_BackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeni Kategori Ekle.
+        /// </summary>
+        public static string Categories_Link_CreateNewCategory {
+            get {
+                return ResourceManager.GetString("Categories_Link_CreateNewCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expense Tracker.
         /// </summary>
         public static string ExpenseTracker {
             get {
                 return ResourceManager.GetString("ExpenseTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kaydet.
+        /// </summary>
+        public static string Generic_Save_Button {
+            get {
+                return ResourceManager.GetString("Generic_Save_Button", resourceCulture);
             }
         }
         
@@ -421,6 +457,33 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yeni Kategori.
+        /// </summary>
+        public static string Page_Title_Categories_Create {
+            get {
+                return ResourceManager.GetString("Page_Title_Categories_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategori Düzenle.
+        /// </summary>
+        public static string Page_Title_Categories_Edit {
+            get {
+                return ResourceManager.GetString("Page_Title_Categories_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategoriler.
+        /// </summary>
+        public static string Page_Title_Categories_Index {
+            get {
+                return ResourceManager.GetString("Page_Title_Categories_Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zaten üyeyim. Giriş yap.
         /// </summary>
         public static string Register_AlreadyAMember {
@@ -615,15 +678,6 @@ namespace ExpenseTracker.Language {
         public static string Transaction_Edit_Label_Income {
             get {
                 return ResourceManager.GetString("Transaction_Edit_Label_Income", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to İşlemi Kaydet.
-        /// </summary>
-        public static string Transaction_Edit_Label_Save {
-            get {
-                return ResourceManager.GetString("Transaction_Edit_Label_Save", resourceCulture);
             }
         }
         
