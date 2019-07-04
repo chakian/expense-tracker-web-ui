@@ -61,6 +61,60 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hesap Adı.
+        /// </summary>
+        public static string BudgetAccount_Label_AccountName {
+            get {
+                return ResourceManager.GetString("BudgetAccount_Label_AccountName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hesap Tipi.
+        /// </summary>
+        public static string BudgetAccount_Label_AccountType {
+            get {
+                return ResourceManager.GetString("BudgetAccount_Label_AccountType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mevcut Bakiye.
+        /// </summary>
+        public static string BudgetAccount_Label_CurrentBalance {
+            get {
+                return ResourceManager.GetString("BudgetAccount_Label_CurrentBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  .
+        /// </summary>
+        public static string BudgetAccount_Label_GridActions {
+            get {
+                return ResourceManager.GetString("BudgetAccount_Label_GridActions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Listeye Geri Dön.
+        /// </summary>
+        public static string BudgetAccount_Link_BackToList {
+            get {
+                return ResourceManager.GetString("BudgetAccount_Link_BackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeni Hesap Oluştur.
+        /// </summary>
+        public static string BudgetAccount_Link_CreateNewAccount {
+            get {
+                return ResourceManager.GetString("BudgetAccount_Link_CreateNewAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expense Tracker.
         /// </summary>
         public static string ExpenseTracker {
@@ -340,6 +394,33 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yeni Hesap.
+        /// </summary>
+        public static string Page_Title_BudgetAccount_Create {
+            get {
+                return ResourceManager.GetString("Page_Title_BudgetAccount_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hesap Düzenle.
+        /// </summary>
+        public static string Page_Title_BudgetAccount_Edit {
+            get {
+                return ResourceManager.GetString("Page_Title_BudgetAccount_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hesaplar.
+        /// </summary>
+        public static string Page_Title_BudgetAccount_Index {
+            get {
+                return ResourceManager.GetString("Page_Title_BudgetAccount_Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zaten üyeyim. Giriş yap.
         /// </summary>
         public static string Register_AlreadyAMember {
@@ -574,15 +655,6 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string Transaction_List_Label_Actions {
-            get {
-                return ResourceManager.GetString("Transaction_List_Label_Actions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Tutar.
         /// </summary>
         public static string Transaction_List_Label_Amount {
@@ -615,6 +687,15 @@ namespace ExpenseTracker.Language {
         public static string Transaction_List_Label_Description {
             get {
                 return ResourceManager.GetString("Transaction_List_Label_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  .
+        /// </summary>
+        public static string Transaction_List_Label_Grid_Actions {
+            get {
+                return ResourceManager.GetString("Transaction_List_Label_Grid_Actions", resourceCulture);
             }
         }
         

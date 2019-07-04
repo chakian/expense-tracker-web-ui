@@ -2,58 +2,59 @@
 
 @{
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
-    ViewBag.Title = "Create";
+    ViewBag.Title = Resources.Page_Title_BudgetAccount_Create;
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Account</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartingBalance, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartingBalance, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartingBalance, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AccountTypeId, "AccountTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("AccountTypeId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AccountTypeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Bütçe", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.Label((string)ViewBag.ActiveBudgetName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+@section content_header{
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">@Resources.Page_Title_BudgetAccount_Create</h1>
+    </div><!-- /.col -->
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@Resources.Nav_Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "BudgetAccount")">@Resources.Page_Title_BudgetAccount_Index</a></li>
+            <li class="breadcrumb-item active">@Resources.Page_Title_BudgetAccount_Create</li>
+        </ol>
     </div>
+    <!-- /.col -->
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        @using (Html.BeginForm("Create", "BudgetAccount", FormMethod.Post, new { @class = "needs-validation" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Name, Resources.BudgetAccount_Label_AccountName)
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.AccountTypeId, Resources.BudgetAccount_Label_AccountType)
+                            @Html.DropDownListFor(model => model.AccountTypeId, null, htmlAttributes: new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.AccountTypeId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.StartingBalance, Resources.BudgetAccount_Label_CurrentBalance)
+                            @Html.EditorFor(model => model.StartingBalance, new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.01", @class = "form-control", style = "width:100%" } })
+                            @Html.ValidationMessageFor(model => model.StartingBalance, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button class="btn btn-primary" type="submit">@Resources.Transaction_Edit_Label_Save</button>
+                    @Html.ActionLink(Resources.BudgetAccount_Link_BackToList, "Index")
+                </div>
+            </div>
+            <!-- /.card -->
+        }
+    </div>
 </div>
