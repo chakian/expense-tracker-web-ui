@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BudgetAccounts_Delete_Modal_Header" xml:space="preserve">
+    <value>Hesap Silinecek</value>
+  </data>
+  <data name="BudgetAccounts_Delete_Modal_Text" xml:space="preserve">
+    <value>Bu hesabı silmek istediğinizden emin misiniz?</value>
+  </data>
   <data name="BudgetAccount_Label_AccountName" xml:space="preserve">
     <value>Hesap Adı</value>
   </data>

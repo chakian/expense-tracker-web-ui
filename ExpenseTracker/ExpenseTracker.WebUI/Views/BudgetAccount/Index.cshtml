@@ -27,17 +27,10 @@
                     <td>@account.AccountType.Name</td>
                     <td>@account.CurrentBalance</td>
                     <td>
-                        @using (Html.BeginForm("Delete", "BudgetAccount", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            <a href="@Url.Action("Edit", "BudgetAccount", new { id = account.AccountId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
-                            Html.Hidden("AccountId", account.AccountId);
-                            @*<button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>*@
-                        }
-                        @*<a href="@Url.Action("Edit", "Transaction", new { transaction.TransactionId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
-                            <button type="button" class="delete-transaction-button btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete" data-id="@transaction.TransactionId">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>*@
+                        <a href="@Url.Action("Edit", "BudgetAccount", new { id = account.AccountId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+                        <button type="button" class="delete-account-button btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete" data-id="@account.AccountId">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </td>
                 </tr>
             }
@@ -45,6 +38,39 @@
     </table>
 </div>
 
-@*@Html.ActionLink("Edit", "Edit", new { id = item.AccountId }) |
-    @Html.ActionLink("Details", "Details", new { id = item.AccountId }) |
-    @Html.ActionLink("Delete", "Delete", new { id = item.AccountId })*@
+<div class="modal fade" id="modal-delete">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">@Resources.BudgetAccounts_Delete_Modal_Header</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="@Resources.Generic_Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>@Resources.BudgetAccounts_Delete_Modal_Text</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                @using (Html.BeginForm("Delete", "BudgetAccount", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.Hidden("AccountId")
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">@Resources.Generic_No</button>
+                    <button type="submit" class="btn btn-outline-light">@Resources.Generic_Yes</button>
+                }
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+@section scripts{
+    <script>
+        $(document).on("click", ".delete-account-button", function () {
+            var accountId = $(this).data('id');
+            $(".modal-footer #AccountId").val(accountId);
+        });
+    </script>
+}

@@ -115,6 +115,24 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hesap Silinecek.
+        /// </summary>
+        public static string BudgetAccounts_Delete_Modal_Header {
+            get {
+                return ResourceManager.GetString("BudgetAccounts_Delete_Modal_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bu hesabı silmek istediğinizden emin misiniz?.
+        /// </summary>
+        public static string BudgetAccounts_Delete_Modal_Text {
+            get {
+                return ResourceManager.GetString("BudgetAccounts_Delete_Modal_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kategori Silinecek.
         /// </summary>
         public static string Categories_Delete_Modal_Header {
