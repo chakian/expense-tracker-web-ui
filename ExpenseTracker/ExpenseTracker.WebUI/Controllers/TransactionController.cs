@@ -1,5 +1,4 @@
 ﻿using ExpenseTracker.Business;
-using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.WebUI.Models;
 using ExpenseTracker.WebUI.Models.Transaction;
 using System;
