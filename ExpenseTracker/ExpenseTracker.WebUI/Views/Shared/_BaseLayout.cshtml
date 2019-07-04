@@ -28,7 +28,11 @@
     @*TODO: Remove the line below when possible... Move it to where it is needed.*@
     <link rel="stylesheet" href="~/Content/adminlte/plugins/select2/css/select2.min.css">
 
-    @Styles.Render("~/Content/adminltetemplate")
+    @*TODO: Until #96 (Bundle minimizing) is fixed, we will use direct embedding*@
+    <link rel="stylesheet" href="~/Content/adminlte/dist/css/adminlte.css">
+    <link rel="stylesheet" href="~/Content/adminlte/plugins/fontawesome-free/css/all.css">
+    @*@Styles.Render("~/Content/adminltetemplate")*@
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
