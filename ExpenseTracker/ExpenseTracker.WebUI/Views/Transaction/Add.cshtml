@@ -18,6 +18,8 @@
 
     @*TODO: try to include this stylesheet right here on the row below. Right now it is moved to alllllll the way to the top "BaseLayout"*@
     @*<link rel="stylesheet" href="~/Content/adminlte/plugins/select2/css/select2.min.css">*@
+
+    <link rel="stylesheet" href="~/Content/bootstrap-datepicker.min.css">
 }
 
 @section content_header{
@@ -106,6 +108,10 @@
     <!-- Select2 -->
     <script src="~/Content/adminlte/plugins/select2/js/select2.full.min.js"></script>
 
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.tr.min.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.en-GB.min.js"></script>
+
     <script>
         $(function () {
             $('#radioBtn a').on('click', function () {
@@ -119,6 +125,14 @@
 
             $('.select2').select2();
 
+            $('#Date').datepicker({
+                autoclose: true,
+                format: 'd M yyyy',
+                todayHighlight: true,
+                todayBtn: 'linked',
+                weekStart: 1,
+                language: 'tr-TR'
+            });
             //$('#Date').daterangepicker({
             //    "singleDatePicker": true,
             //    "linkedCalendars": false,
