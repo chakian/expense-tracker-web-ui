@@ -1,15 +1,16 @@
 ﻿using ExpenseTracker.Persistence.Context.DbModels;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using Xunit;
 
 namespace ExpenseTracker.Business.Tests.BudgetTests
 {
-    [TestClass]
     public class ListBudgetsOfUserTests : BaseBudgetTest
     {
-        [TestMethod]
+        [Fact]
         public void ListBudgetsOfUser_Success()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetBusiness(context);
             string userId = DefaultTestUserId;
@@ -18,13 +19,15 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             var budgets = business.GetBudgetsOfUser(userId);
 
             //ASSERT
-            Assert.AreEqual(1, budgets.Count);
-            Assert.AreEqual("Budget_1", budgets[0].Name);
+            Assert.Equal(1, budgets.Count);
+            Assert.Equal("Budget_1", budgets[0].Name);
         }
 
-        [TestMethod]
+        [Fact]
         public void ListBudgetsOfUser_InactiveBudgetDoesntReturn()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetBusiness(context);
             string userId = "test";
@@ -46,8 +49,8 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             var budgets = business.GetBudgetsOfUser(userId);
 
             //ASSERT
-            Assert.AreEqual(1, budgets.Count);
-            Assert.IsNull(budgets.FirstOrDefault(b => b.Name.Equals(nonExistingBudgetName)));
+            Assert.Equal(1, budgets.Count);
+            Assert.Null(budgets.FirstOrDefault(b => b.Name.Equals(nonExistingBudgetName)));
         }
     }
 }

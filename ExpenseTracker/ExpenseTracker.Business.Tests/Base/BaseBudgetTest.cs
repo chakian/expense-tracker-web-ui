@@ -1,6 +1,5 @@
 ﻿using ExpenseTracker.Persistence.Context;
 using Dbo = ExpenseTracker.Persistence.Context.DbModels;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace ExpenseTracker.Business.Tests
@@ -10,7 +9,7 @@ namespace ExpenseTracker.Business.Tests
         protected int DefaultTestBudgetId = -1;
         protected const string DefaultTestUserId = "test";
 
-        [TestInitialize()]
+        //TODO: [TestInitialize()]
         public void BaseTestInitialize()
         {
             if (context == null)

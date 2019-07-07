@@ -1,11 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ExpenseTracker.Persistence.Context.DbModels;
+﻿using ExpenseTracker.Persistence.Context.DbModels;
 
 namespace ExpenseTracker.Business.Tests.Base
 {
     public class BaseBudgetPlanTest : BaseBudgetTest
     {
-        [TestInitialize()]
+        //TODO: [TestInitialize()]
         public new void BaseTestInitialize()
         {
             base.BaseTestInitialize();
