@@ -1,40 +1,72 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Threading;
 
 namespace ExpenseTracker.WebUI.Helpers
 {
-    public class AvailableLanguages
+    public class Language
     {
-        public const string TR = "tr-TR";
-        public const string TR_Short = "tr";
-        public const string EN = "en-GB";
-        public const string EN_Short = "en";
+        public Language(LanguageName name, LanguageCode code, string defaultLongCode)
+        {
+            Name = name;
+            Code = code;
+            DefaultLongCode = defaultLongCode;
+        }
+
+        public LanguageName Name { get; private set; }
+        public LanguageCode Code { get; private set; }
+        public string DefaultLongCode { get; private set; }
+
+        public enum LanguageName
+        {
+            Turkish,
+            English
+        }
+
+        public enum LanguageCode
+        {
+            tr,
+            en
+        }
     }
 
     public class LanguageHelper
     {
-        //fixed number and date format for now, this can be improved.
-        public static void SetLanguage(string language)
+        private const string DEFAULT_CULTURE = "tr-TR";
+
+        public static List<Language> AvailableLanguages = new List<Language>()
+        {
+            new Language(Language.LanguageName.Turkish, Language.LanguageCode.tr, "tr-TR"),
+            new Language(Language.LanguageName.English, Language.LanguageCode.en, "en-GB")
+        };
+
+        public static void SetLanguage(string cultureCode)
         {
             string cultureString;
 
-            switch (language)
+            if (!string.IsNullOrEmpty(cultureCode) && AvailableLanguages.Any(q => cultureCode.StartsWith(q.Code.ToString())))
             {
-                case AvailableLanguages.EN:
-                case AvailableLanguages.EN_Short:
-                    cultureString = "en-GB";
-                    break;
-                case AvailableLanguages.TR:
-                case AvailableLanguages.TR_Short:
-                default:
-                    cultureString = "tr-TR";
-                    break;
+                var foundLanguage = AvailableLanguages.SingleOrDefault(q => cultureCode.Equals(q.Code.ToString(), System.StringComparison.InvariantCultureIgnoreCase));
+
+                if (foundLanguage != null)
+                {
+                    cultureString = foundLanguage.DefaultLongCode;
+                }
+                else
+                {
+                    cultureString = cultureCode;
+                }
+            }
+            else
+            {
+                cultureString = DEFAULT_CULTURE;
             }
 
             CultureInfo cultureInfo = new CultureInfo(cultureString);
 
-            Thread.CurrentThread.CurrentUICulture = cultureInfo;
             Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
         }
     }
 }
