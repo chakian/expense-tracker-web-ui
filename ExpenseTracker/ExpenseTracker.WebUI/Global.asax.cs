@@ -1,3 +1,4 @@
+using ExpenseTracker.WebUI.Helpers;
 using System.Globalization;
 using System.Threading;
 using System.Web.Mvc;
@@ -15,16 +16,20 @@ namespace ExpenseTracker.WebUI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
-        
-        protected void Application_BeginRequest() {
-            //var cookie = Context.Request.Cookies["culture"];
-            string cookie = "en-US";
-            if (cookie != null && !string.IsNullOrEmpty(cookie)) {
-                //var culture = new CultureInfo(cookie.Value);
-                var culture = new CultureInfo(cookie);
-                Thread.CurrentThread.CurrentCulture = culture;
-                Thread.CurrentThread.CurrentUICulture = culture;
+
+        protected void Application_BeginRequest()
+        {
+            //TODO: how do we get the route data here
+            //string lang = (string)filterContext.RouteData.Values["lang"];
+            
+            string cultureCode = string.Empty;
+            var cookie = Context.Request.Cookies["culture"];
+            if (cookie == null)
+            {
             }
+
+            //var culture = new CultureInfo(cookie.Value);
+            LanguageHelper.SetLanguage(cultureCode);
         }
     }
 }

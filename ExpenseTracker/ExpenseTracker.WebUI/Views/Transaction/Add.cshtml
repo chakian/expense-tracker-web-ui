@@ -18,6 +18,8 @@
 
     @*TODO: try to include this stylesheet right here on the row below. Right now it is moved to alllllll the way to the top "BaseLayout"*@
     @*<link rel="stylesheet" href="~/Content/adminlte/plugins/select2/css/select2.min.css">*@
+
+    @*<link rel="stylesheet" href="~/Content/bootstrap-datepicker.min.css">*@
 }
 
 @section content_header{
@@ -54,7 +56,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Amount, Resources.Transaction_Edit_Label_Amount)
-                            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.01", @class = "form-control", style = "width:100%" } })
+                            @Html.EditorFor(model => model.Amount, "{0}", new { htmlAttributes = new { @class = "form-control", style = "width:100%" } })
                             @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-6">
@@ -64,13 +66,19 @@
                         </div>
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Date, Resources.Transaction_Edit_Label_Date)
-                            <div class="input-group">
+                            @*<div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="far fa-calendar-alt"></i>
                                     </span>
                                 </div>
                                 @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @type = "text", @class = "form-control float-right" } })
+                            </div>*@
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.Date, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                                </div>
                             </div>
                             @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                         </div>
@@ -106,7 +114,19 @@
     <!-- Select2 -->
     <script src="~/Content/adminlte/plugins/select2/js/select2.full.min.js"></script>
 
+    @*<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.tr.min.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.en-GB.min.js"></script>*@
+
     <script>
+        //$.fn.reformatDate = function (settings) {
+        //    return this.each(function () {
+        //        $this = $(this);
+        //        if (!$this.data('datepicker')) return
+        //        $this.datepicker('setDate', $this.datepicker("getDate"))
+        //    });
+        //};
+
         $(function () {
             $('#radioBtn a').on('click', function () {
                 var sel = $(this).data('title');
@@ -119,12 +139,15 @@
 
             $('.select2').select2();
 
-            //$('#Date').daterangepicker({
-            //    "singleDatePicker": true,
-            //    "linkedCalendars": false,
-            //    "showCustomRangeLabel": false,
-            //    "opens": "center"
-            //});
+            @*$('#Date').datepicker({
+                autoclose: true,
+                format: '@System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern',
+                todayHighlight: true,
+                todayBtn: 'linked',
+                weekStart: 1,
+                language: 'tr-TR'
+            });
+            $('#Date').reformatDate();*@
         });
 
         $(document).on("click", ".delete-transaction-button", function () {

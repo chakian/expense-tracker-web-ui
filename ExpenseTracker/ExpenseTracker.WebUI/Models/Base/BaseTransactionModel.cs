@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace ExpenseTracker.WebUI.Models
@@ -21,8 +23,11 @@ namespace ExpenseTracker.WebUI.Models
 
     public class BaseEditableTransactionModel : BaseTransactionModel
     {
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
+        [DataType(DataType.Currency)]
         public decimal Amount { get; set; }
 
         public string Description { get; set; }
