@@ -12,7 +12,7 @@ build:
 
 test_script:
 - ps: >-
-    .\ExpenseTracker\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\MSTest.exe" -targetargs:"/testcontainer:"".\ExpenseTracker\ExpenseTracker.Business.Tests\bin\Debug\ExpenseTracker.Business.Tests.dll" -filter:"+[ExpenseTracker.Business*]* -[ExpenseTracker.Business.Tests*]*" -output:".\ExpenseTracker_coverage.xml"
+    .\ExpenseTracker\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\MSTest.exe" "-targetargs:"".\ExpenseTracker\ExpenseTracker.Business.Tests\bin\$env:CONFIGURATION\ExpenseTracker.Business.Tests.dll"" /noshadow" -filter:"+[ExpenseTracker*]* -[ExpenseTracker.Business.Tests*]*" -output:".\ExpenseTracker_coverage.xml"
     
     $coveralls = (Resolve-Path "ExpenseTracker/packages/coveralls.io.*/tools/coveralls.net.exe").ToString()
     
