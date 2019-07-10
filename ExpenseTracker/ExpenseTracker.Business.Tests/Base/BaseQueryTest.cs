@@ -10,6 +10,12 @@ namespace ExpenseTracker.Business.Tests
     {
         protected ExpenseTrackerContext context;
 
+        public BaseQueryTest()
+        {
+            var connection = Effort.DbConnectionFactory.CreateTransient();
+            context = new ExpenseTrackerContext(connection);
+        }
+
         protected T CreateNewAuthorizedEntity<T>()
             where T : AuditableEntity, new()
         {
