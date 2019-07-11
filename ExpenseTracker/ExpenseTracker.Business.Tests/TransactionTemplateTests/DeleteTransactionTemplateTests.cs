@@ -5,9 +5,9 @@
 //using System.Text;
 //using System.Threading.Tasks;
 
-//namespace ExpenseTracker.Business.Tests.TransactionDraftTests
+//namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
 //{
-//    class EditTransactionDraftTests
+//    class DeleteTransactionTemplateTests
 //    {
 //    }
 //}

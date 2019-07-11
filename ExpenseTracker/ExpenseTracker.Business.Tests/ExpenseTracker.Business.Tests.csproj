@@ -105,10 +105,10 @@
     <Compile Include="BudgetTests\GetBudgetDetailTests.cs" />
     <Compile Include="LookupTests\CurrencyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransactionDraftTests\CreateTransactionDraftTests.cs" />
-    <Compile Include="TransactionDraftTests\DeleteTransactionDraftTests.cs" />
-    <Compile Include="TransactionDraftTests\EditTransactionDraftTests.cs" />
-    <Compile Include="TransactionDraftTests\RetrieveTransactionDraftTests.cs" />
+    <Compile Include="TransactionTemplateTests\CreateTransactionTemplateTests.cs" />
+    <Compile Include="TransactionTemplateTests\DeleteTransactionTemplateTests.cs" />
+    <Compile Include="TransactionTemplateTests\EditTransactionTemplateTests.cs" />
+    <Compile Include="TransactionTemplateTests\RetrieveTransactionTemplateTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
