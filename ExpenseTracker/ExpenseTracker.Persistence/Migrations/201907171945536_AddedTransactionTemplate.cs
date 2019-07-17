@@ -25,24 +25,22 @@ namespace ExpenseTracker.Persistence.Migrations
                         UpdateUserId = c.String(maxLength: 128),
                         UpdateTime = c.DateTime(),
                         IsActive = c.Boolean(nullable: false),
-                        SourceAccount_AccountId = c.Int(),
-                        TargetAccount_AccountId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Budgets", t => t.BudgetId, cascadeDelete: true)
                 .ForeignKey("dbo.Categories", t => t.CategoryId)
                 .ForeignKey("dbo.Users", t => t.InsertUserId)
-                .ForeignKey("dbo.Accounts", t => t.SourceAccount_AccountId)
-                .ForeignKey("dbo.Accounts", t => t.TargetAccount_AccountId)
+                .ForeignKey("dbo.Accounts", t => t.SourceAccountId)
+                .ForeignKey("dbo.Accounts", t => t.TargetAccountId)
                 .ForeignKey("dbo.Users", t => t.UpdateUserId)
                 .ForeignKey("dbo.Users", t => t.UserId)
                 .Index(t => t.CategoryId)
+                .Index(t => t.SourceAccountId)
+                .Index(t => t.TargetAccountId)
                 .Index(t => t.BudgetId)
                 .Index(t => t.UserId)
                 .Index(t => t.InsertUserId)
-                .Index(t => t.UpdateUserId)
-                .Index(t => t.SourceAccount_AccountId)
-                .Index(t => t.TargetAccount_AccountId);
+                .Index(t => t.UpdateUserId);
             
         }
         
@@ -50,17 +48,17 @@ namespace ExpenseTracker.Persistence.Migrations
         {
             DropForeignKey("dbo.TransactionTemplates", "UserId", "dbo.Users");
             DropForeignKey("dbo.TransactionTemplates", "UpdateUserId", "dbo.Users");
-            DropForeignKey("dbo.TransactionTemplates", "TargetAccount_AccountId", "dbo.Accounts");
-            DropForeignKey("dbo.TransactionTemplates", "SourceAccount_AccountId", "dbo.Accounts");
+            DropForeignKey("dbo.TransactionTemplates", "TargetAccountId", "dbo.Accounts");
+            DropForeignKey("dbo.TransactionTemplates", "SourceAccountId", "dbo.Accounts");
             DropForeignKey("dbo.TransactionTemplates", "InsertUserId", "dbo.Users");
             DropForeignKey("dbo.TransactionTemplates", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.TransactionTemplates", "BudgetId", "dbo.Budgets");
-            DropIndex("dbo.TransactionTemplates", new[] { "TargetAccount_AccountId" });
-            DropIndex("dbo.TransactionTemplates", new[] { "SourceAccount_AccountId" });
             DropIndex("dbo.TransactionTemplates", new[] { "UpdateUserId" });
             DropIndex("dbo.TransactionTemplates", new[] { "InsertUserId" });
             DropIndex("dbo.TransactionTemplates", new[] { "UserId" });
             DropIndex("dbo.TransactionTemplates", new[] { "BudgetId" });
+            DropIndex("dbo.TransactionTemplates", new[] { "TargetAccountId" });
+            DropIndex("dbo.TransactionTemplates", new[] { "SourceAccountId" });
             DropIndex("dbo.TransactionTemplates", new[] { "CategoryId" });
             DropTable("dbo.TransactionTemplates");
         }

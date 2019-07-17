@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 
@@ -24,17 +23,6 @@ namespace ExpenseTracker.Business
                 {
                     return false;
                 }
-
-                //TODO: Unnecessary double check here. Foreign Key is doing the necessary field check.
-                //if (categoryId.HasValue && !(new CategoryBusiness(context).GetCategoriesByBudgetId(budgetId, userId).Any(c => c.CategoryId == categoryId.Value)))
-                //{
-                //    return false;
-                //}
-
-                //if (sourceAccountId.HasValue && (new BudgetAccountBusiness(context).GetAccountById(sourceAccountId.Value, userId)) == null)
-                //{
-                //    return false;
-                //}
 
                 TransactionTemplate transactionTemplate = new TransactionTemplate
                 {
