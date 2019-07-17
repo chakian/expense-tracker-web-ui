@@ -57,30 +57,33 @@ namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
         }
 
         [Theory]
-        [InlineData(null, null, null, 1)]
-        [InlineData(null, null, 1, null)]
-        [InlineData(null, null, 1, 1)]
-        [InlineData(null, "sigara", null, null)]
-        [InlineData(null, "sigara", null, 1)]
-        [InlineData(null, "sigara", 1, null)]
-        [InlineData(null, "sigara", 1, 1)]
-        [InlineData(15, null, null, null)]
-        [InlineData(15, null, null, 1)]
-        [InlineData(15, null, 1, null)]
-        [InlineData(15, null, 1, 1)]
-        [InlineData(15, "sigara", null, null)]
-        [InlineData(15, "sigara", null, 1)]
-        [InlineData(15, "sigara", 1, null)]
-        [InlineData(15, "sigara", 1, 1)]
-        public void CreateTransactionTemplate_Success(double? _amount, string description, int? categoryId, int? sourceAccountId)
+        [InlineData(false, false, false, true)]
+        [InlineData(false, false, true, false)]
+        [InlineData(false, false, true, true)]
+        [InlineData(false, true, false, false)]
+        [InlineData(false, true, false, true)]
+        [InlineData(false, true, true, false)]
+        [InlineData(false, true, true, true)]
+        [InlineData(true, false, false, false)]
+        [InlineData(true, false, false, true)]
+        [InlineData(true, false, true, false)]
+        [InlineData(true, false, true, true)]
+        [InlineData(true, true, false, false)]
+        [InlineData(true, true, false, true)]
+        [InlineData(true, true, true, false)]
+        [InlineData(true, true, true, true)]
+        public void CreateTransactionTemplate_Success(bool useAmount, bool useDescription, bool useCategoryId, bool useSourceAccountId)
         {
-            //"decimal?" type was not an option, so I had to use "double?"
-            decimal? amount = (decimal?)_amount;
+            decimal? amount = useAmount ? (decimal?)150 : null;
+            string description = useDescription ? "clear description" : null;
+            int? categoryId = useCategoryId ? (int?)DefaultCategory.CategoryId : null;
+            int? sourceAccountId = useSourceAccountId ? (int?)DefaultAccount.AccountId : null;
+
+            string templateName = "New Template";
+            int? targetAccountId = null;
 
             // Arrange
             var business = new TransactionTemplateBusiness(context);
-            string templateName = "New Template";
-            int? targetAccountId = null;
 
             // Act
             bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
@@ -89,9 +92,49 @@ namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
             Assert.True(actualResult);
         }
 
-        [Fact]
-        public void CreateTransactionTemplate_Fail()
+        [Theory]
+        [InlineData(false, false)]
+        [InlineData(true, false)]
+        [InlineData(false, true)]
+        public void CreateTransactionTemplate_Fail(bool useInvalidCategoryId, bool useInvalidSourceAccountId)
         {
+            decimal? amount = null;
+            string description = null;
+            int? categoryId = useInvalidCategoryId ? (int?)12346 : null;
+            int? sourceAccountId = useInvalidSourceAccountId ? (int?)12347 : null;
+
+            string templateName = "New Template";
+            int? targetAccountId = null;
+
+            // Arrange
+            var business = new TransactionTemplateBusiness(context);
+
+            // Act
+            bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
+
+            // Assert
+            Assert.False(actualResult);
+        }
+
+        [Fact]
+        public void CreateTransactionTemplate_Fail_EmptyTemplateName()
+        {
+            decimal? amount = 1000;
+            string description = "nice template";
+            int? categoryId = null;
+            int? sourceAccountId = null;
+
+            string templateName = "";
+            int? targetAccountId = null;
+
+            // Arrange
+            var business = new TransactionTemplateBusiness(context);
+
+            // Act
+            bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
+
+            // Assert
+            Assert.False(actualResult);
         }
     }
 }

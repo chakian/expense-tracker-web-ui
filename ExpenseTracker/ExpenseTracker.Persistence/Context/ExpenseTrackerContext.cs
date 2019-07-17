@@ -44,6 +44,8 @@ namespace ExpenseTracker.Persistence.Context
             CategoryConfiguration.Configure(modelBuilder);
 
             IdentityConfiguration.Configure(modelBuilder);
+
+            TransactionTemplateConfiguration.Configure(modelBuilder);
         }
 
         public static ExpenseTrackerContext Create() => new ExpenseTrackerContext();
