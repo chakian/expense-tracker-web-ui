@@ -17,7 +17,7 @@ after_test:
 - ps: >-
     Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
     
-    bash codecov.sh -f "ExpenseTracker_coverage.xml" -t "tn7WOcY2FOwoJTPzMvbxZiW/3/zdsYuU74rTOS1GDqYrUnroZqYYe8BAGxc1XfnF"
+    bash codecov.sh -f "ExpenseTracker_coverage.xml" -t $env:CODECOV_TOKEN
 deploy:
  - provider: Environment
    name: Expense Tracker - Test
