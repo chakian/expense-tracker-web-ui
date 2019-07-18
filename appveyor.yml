@@ -14,8 +14,9 @@ test_script:
 - ps: >-
     .\ExpenseTracker\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:user -target:"xunit.console.x86.exe" -targetargs:".\ExpenseTracker\ExpenseTracker.Business.Tests\bin\$env:CONFIGURATION\ExpenseTracker.Business.Tests.dll -noshadow" -filter:"+[ExpenseTracker*]* -[ExpenseTracker.Business.Tests*]*" -output:"ExpenseTracker_coverage.xml"
 after_test:
-  - ps: |
+- ps: >-
     Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+    
     bash codecov.sh -f "ExpenseTracker_coverage.xml" -t "tn7WOcY2FOwoJTPzMvbxZiW/3/zdsYuU74rTOS1GDqYrUnroZqYYe8BAGxc1XfnF"
 deploy:
  - provider: Environment
