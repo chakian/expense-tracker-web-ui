@@ -15,6 +15,10 @@ test_script:
     $mstest = (Resolve-Path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\MSTest.exe").ToString()
 	
     .\ExpenseTracker\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:user -target:"$mstest /testcontainer:.\ExpenseTracker\ExpenseTracker.Business.Tests\bin\$env:CONFIGURATION\ExpenseTracker.Business.Tests.dll" -filter:"+[ExpenseTracker*]* -[ExpenseTracker.Business.Tests*]*" -output:".\ExpenseTracker_coverage.xml"
+    
+    $coveralls = (Resolve-Path "ExpenseTracker/packages/coveralls.io.*/tools/coveralls.net.exe").ToString()
+    
+    $coveralls
 deploy:
  - provider: Environment
    name: Expense Tracker - Test
