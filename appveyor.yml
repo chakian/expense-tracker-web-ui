@@ -14,11 +14,15 @@ test_script:
 - ps: >-
     $mstest = (Resolve-Path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\MSTest.exe").ToString()
     
-    .\ExpenseTracker\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:user -target:"$mstest" -targetargs:"/testcontainer:.\ExpenseTracker\ExpenseTracker.Business.Tests\bin\$env:CONFIGURATION\ExpenseTracker.Business.Tests.dll" -output:"ExpenseTracker_coverage.xml"
+    $mstestargs = "/testcontainer:.\ExpenseTracker\ExpenseTracker.Business.Tests\bin\$env:CONFIGURATION\ExpenseTracker.Business.Tests.dll"
     
-    $coveralls = (Resolve-Path "ExpenseTracker/packages/coveralls.io.*/tools/coveralls.net.exe").ToString()
+    $coveragexml = "ExpenseTracker_coverage.xml"
     
-    & $coveralls --opencover ExpenseTracker_coverage.xml
+    .\ExpenseTracker\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:user -target:"$mstest" -targetargs:"$mstestargs" -output:"$coveragexml"
+    
+    $coveralls = (Resolve-Path "ExpenseTracker/packages/coveralls.io.*/tools/").ToString()
+    
+    iex ($coveralls + '\tools\coveralls.net.exe' + ' --opencover $coveragexml')
 deploy:
  - provider: Environment
    name: Expense Tracker - Test
