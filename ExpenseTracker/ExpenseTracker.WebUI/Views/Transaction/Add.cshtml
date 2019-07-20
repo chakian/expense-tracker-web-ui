@@ -18,6 +18,8 @@
 
     @*TODO: try to include this stylesheet right here on the row below. Right now it is moved to alllllll the way to the top "BaseLayout"*@
     @*<link rel="stylesheet" href="~/Content/adminlte/plugins/select2/css/select2.min.css">*@
+    <!-- Toastr -->
+    @*<link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">*@
 }
 
 @section content_header{
@@ -88,7 +90,16 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button class="btn btn-primary" type="submit">@Resources.Generic_Save_Button</button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-primary" type="submit">@Resources.Generic_Save_Button</button>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.TextBox("TemplateName", "", new { @class = "form-control", placeholder = "!!!Taslak Adı!!!" })
+                            <button class="btn btn-primary" type="button" onclick="saveAsTemplate(this)">@Resources.Transaction_Add_Button_SaveAsTemplate</button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <!-- /.card -->
@@ -103,18 +114,10 @@
 @section scripts {
     <!-- Select2 -->
     <script src="~/Content/adminlte/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Toastr -->
+    <script src="~/Content/adminlte/plugins/toastr/toastr.min.js"></script>
 
     <script>
-        //function openPicker(inputDateElem) {
-        //    var ev = document.createEvent('KeyboardEvent');
-        //    ev.initKeyboardEvent('keydown', true, true, document.defaultView, 'F4', 0);
-        //    inputDateElem.dispatchEvent(ev);
-        //}
-
-        //var cal = document.querySelector('#Date');
-        //cal.focus();
-        //openPicker(cal);
-
         $(function () {
             $('#radioBtn a').on('click', function () {
                 var sel = $(this).data('title');
@@ -132,5 +135,37 @@
             var transactionId = $(this).data('id');
             $(".modal-footer #TransactionId").val(transactionId);
         });
+
+    function saveAsTemplate(e) {
+        var postUrl = '@Url.Action("Create", "TransactionTemplate")';
+        var postData = {
+            TemplateName: $('#TemplateName').val(),
+            Date: $('#Date').val(),
+            Amount: $('#Amount').val(),
+            CategoryId: $('#CategoryId').val(),
+            Description: $('#Description').val(),
+            SourceAccountId: $('#AccountId').val()
+        };
+
+        $.ajax(
+            {
+                type: "POST",
+                url: postUrl,
+                data: JSON.stringify(postData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg == 'success') {
+                        toastr.success('!!!OK!!!');
+                    }
+                    else {
+                        toastr.error('!!!Hata!!!');
+                    }
+                },
+                error: function (msg) {
+                    toastr.error('!!!Hata!!!');
+                }
+            });
+        }
     </script>
 }

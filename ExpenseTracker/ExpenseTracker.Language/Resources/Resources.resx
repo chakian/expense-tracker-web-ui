@@ -369,4 +369,7 @@
   <data name="Version" xml:space="preserve">
     <value>Versiyon</value>
   </data>
+  <data name="Transaction_Add_Button_SaveAsTemplate" xml:space="preserve">
+    <value>Taslak Olarak Kaydet</value>
+  </data>
 </root>

@@ -179,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
+    <Compile Include="Controllers\TransactionTemplateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -196,6 +197,7 @@
     <Compile Include="Models\ContextObjects\BudgetPlan.cs" />
     <Compile Include="Models\ContextObjects\BudgetPlanCategory.cs" />
     <Compile Include="Models\Report\BudgetPlanReportModel.cs" />
+    <Compile Include="Models\TransactionTemplate\CreateModel.cs" />
     <Compile Include="Models\Transaction\AddModel.cs" />
     <Compile Include="Models\Transaction\EditModel.cs" />
     <Compile Include="Models\Transaction\ListModel.cs" />
