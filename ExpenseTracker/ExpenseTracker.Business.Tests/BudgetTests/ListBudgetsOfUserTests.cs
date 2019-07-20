@@ -19,7 +19,8 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             var budgets = business.GetBudgetsOfUser(userId);
 
             //ASSERT
-            Assert.Equal(1, budgets.Count);
+            Assert.NotEmpty(budgets);
+            Assert.Single(budgets);
             Assert.Equal("Budget_1", budgets[0].Name);
         }
 
@@ -49,7 +50,7 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             var budgets = business.GetBudgetsOfUser(userId);
 
             //ASSERT
-            Assert.Equal(1, budgets.Count);
+            Assert.Single(budgets);
             Assert.Null(budgets.FirstOrDefault(b => b.Name.Equals(nonExistingBudgetName)));
         }
     }
