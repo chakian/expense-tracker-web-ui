@@ -95,7 +95,7 @@
                             <button class="btn btn-primary" type="submit">@Resources.Generic_Save_Button</button>
                         </div>
                         <div class="col-md-6">
-                            @Html.TextBox("TemplateName", "", new { @class = "form-control", placeholder = "!!!Taslak Adı!!!" })
+                            @Html.TextBox("TemplateName", "", new { @class = "form-control", placeholder = Resources.Transaction_Template_Template_Name })
                             <button class="btn btn-primary" type="button" onclick="saveAsTemplate(this)">@Resources.Transaction_Add_Button_SaveAsTemplate</button>
                         </div>
                     </div>
@@ -156,14 +156,14 @@
                 dataType: "json",
                 success: function (msg) {
                     if (msg == 'success') {
-                        toastr.success('!!!OK!!!');
+                        toastr.success('@Resources.Transaction_Template_Creation_Successful');
                     }
                     else {
-                        toastr.error('!!!Hata!!!');
+                        toastr.error('@Resources.Transaction_Template_Creation_Error');
                     }
                 },
                 error: function (msg) {
-                    toastr.error('!!!Hata!!!');
+                    toastr.error('@Resources.Transaction_Template_Creation_Error');
                 }
             });
         }

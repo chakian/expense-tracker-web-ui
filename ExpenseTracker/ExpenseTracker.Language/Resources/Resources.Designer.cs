@@ -817,6 +817,33 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Taslak Kaydedilirken Hata Oluştu.
+        /// </summary>
+        public static string Transaction_Template_Creation_Error {
+            get {
+                return ResourceManager.GetString("Transaction_Template_Creation_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taslak Kaydedildi.
+        /// </summary>
+        public static string Transaction_Template_Creation_Successful {
+            get {
+                return ResourceManager.GetString("Transaction_Template_Creation_Successful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taslak Adı.
+        /// </summary>
+        public static string Transaction_Template_Template_Name {
+            get {
+                return ResourceManager.GetString("Transaction_Template_Template_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Versiyon.
         /// </summary>
         public static string Version {

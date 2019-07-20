@@ -372,4 +372,13 @@
   <data name="Transaction_Add_Button_SaveAsTemplate" xml:space="preserve">
     <value>Taslak Olarak Kaydet</value>
   </data>
+  <data name="Transaction_Template_Creation_Error" xml:space="preserve">
+    <value>Taslak Kaydedilirken Hata Oluştu</value>
+  </data>
+  <data name="Transaction_Template_Creation_Successful" xml:space="preserve">
+    <value>Taslak Kaydedildi</value>
+  </data>
+  <data name="Transaction_Template_Template_Name" xml:space="preserve">
+    <value>Taslak Adı</value>
+  </data>
 </root>
