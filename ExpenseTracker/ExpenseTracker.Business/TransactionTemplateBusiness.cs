@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 
@@ -19,7 +21,7 @@ namespace ExpenseTracker.Business
                 {
                     return false;
                 }
-                if(!amount.HasValue && string.IsNullOrEmpty(description) && !categoryId.HasValue && !sourceAccountId.HasValue && !targetAccountId.HasValue)
+                if (!amount.HasValue && string.IsNullOrEmpty(description) && !categoryId.HasValue && !sourceAccountId.HasValue && !targetAccountId.HasValue)
                 {
                     return false;
                 }
@@ -50,6 +52,12 @@ namespace ExpenseTracker.Business
             {
                 return false;
             }
+        }
+
+        public List<TransactionTemplate> GetTransactionTemplates(int budgetId, string userId)
+        {
+            var list = context.TransactionTemplates.Where(tt => tt.BudgetId.Equals(budgetId) && tt.UserId.Equals(userId)).ToList();
+            return list;
         }
     }
 }
