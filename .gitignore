@@ -258,4 +258,7 @@ paket-files/
 #We are using typescript, so ignore js files in tsScripts folder
 **/tsScripts/*.js
 **/tsScripts/*.js.map
+
+#Coverage report stuff
 ExpenseTracker/ExpenseTracker_opencover.xml
+ExpenseTracker/CodeCoverageReport
