@@ -97,20 +97,20 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bütçe Adı.
+        ///   Looks up a localized string similar to Aktif.
         /// </summary>
-        public static string Budget_List_Label_BudgetName {
+        public static string Budget_Label_ActiveBudget {
             get {
-                return ResourceManager.GetString("Budget_List_Label_BudgetName", resourceCulture);
+                return ResourceManager.GetString("Budget_Label_ActiveBudget", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Para Birimi.
+        ///   Looks up a localized string similar to Aktifleştir.
         /// </summary>
-        public static string Budget_List_Label_Currency {
+        public static string Budget_Label_MakeActiveBudget {
             get {
-                return ResourceManager.GetString("Budget_List_Label_Currency", resourceCulture);
+                return ResourceManager.GetString("Budget_Label_MakeActiveBudget", resourceCulture);
             }
         }
         
@@ -138,15 +138,6 @@ namespace ExpenseTracker.Language {
         public static string BudgetAccount_Label_CurrentBalance {
             get {
                 return ResourceManager.GetString("BudgetAccount_Label_CurrentBalance", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Listeye Geri Dön.
-        /// </summary>
-        public static string BudgetAccount_Link_BackToList {
-            get {
-                return ResourceManager.GetString("BudgetAccount_Link_BackToList", resourceCulture);
             }
         }
         
@@ -241,15 +232,6 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Listeye Geri Dön.
-        /// </summary>
-        public static string Categories_Link_BackToList {
-            get {
-                return ResourceManager.GetString("Categories_Link_BackToList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Yeni Kategori Ekle.
         /// </summary>
         public static string Categories_Link_CreateNewCategory {
@@ -268,11 +250,38 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Geri Dön.
+        /// </summary>
+        public static string Generic_Back {
+            get {
+                return ResourceManager.GetString("Generic_Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bütçe Adı.
+        /// </summary>
+        public static string Generic_BudgetName {
+            get {
+                return ResourceManager.GetString("Generic_BudgetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kapat.
         /// </summary>
         public static string Generic_Close {
             get {
                 return ResourceManager.GetString("Generic_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Para Birimi.
+        /// </summary>
+        public static string Generic_Currency {
+            get {
+                return ResourceManager.GetString("Generic_Currency", resourceCulture);
             }
         }
         
@@ -691,6 +700,24 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yeni Bütçe.
+        /// </summary>
+        public static string Title_Budget_Create {
+            get {
+                return ResourceManager.GetString("Title_Budget_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bütçe Düzenleme.
+        /// </summary>
+        public static string Title_Budget_Edit {
+            get {
+                return ResourceManager.GetString("Title_Budget_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bütçelerim.
         /// </summary>
         public static string Title_Budget_List {
@@ -705,6 +732,15 @@ namespace ExpenseTracker.Language {
         public static string Title_Budget_Plan {
             get {
                 return ResourceManager.GetString("Title_Budget_Plan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aktif Bütçe Belirleme.
+        /// </summary>
+        public static string Title_Budget_SelectActiveBudget {
+            get {
+                return ResourceManager.GetString("Title_Budget_SelectActiveBudget", resourceCulture);
             }
         }
         

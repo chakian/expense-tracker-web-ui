@@ -130,22 +130,6 @@ namespace ExpenseTracker.WebUI.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult SelectActiveBudget()
-        {
-            BudgetListModel model = new BudgetListModel
-            {
-                BudgetList = new List<BasicBudgetInfo>()
-            };
-
-            List<Budget> budgets = budgetBusiness.GetBudgetsOfUser(UserId);
-            budgets.ForEach(b =>
-            {
-                model.BudgetList.Add(new BasicBudgetInfo { Id = b.BudgetId, Name = b.Name, CurrencyDisplayName = b.Currency.DisplayName });
-            });
-
-            return View(model);
-        }
-
         public ActionResult SetActive(int budgetId)
         {
             Session["ActiveBudgetId"] = budgetId;
@@ -156,7 +140,7 @@ namespace ExpenseTracker.WebUI.Controllers
             context.Entry(user).State = EntityState.Modified;
             context.SaveChanges();
 
-            return RedirectToAction("SelectActiveBudget");
+            return RedirectToAction("Index");
         }
     }
 }

@@ -16,7 +16,7 @@
     <RootNamespace>ExpenseTracker.WebUI</RootNamespace>
     <AssemblyName>ExpenseTracker.WebUI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
+    <MvcBuildViews>true</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44387</IISExpressSSLPort>
@@ -152,6 +152,9 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -471,7 +474,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Budget\Create.cshtml" />
-    <Content Include="Views\Budget\Delete.cshtml" />
     <Content Include="Views\Budget\Edit.cshtml" />
     <Content Include="Views\Budget\Index.cshtml" />
     <Content Include="Views\BudgetAccount\Create.cshtml" />
@@ -480,7 +482,6 @@
     <Content Include="Views\Categories\Create.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
-    <Content Include="Views\Budget\SelectActiveBudget.cshtml" />
     <Content Include="Views\BudgetPlan\Update.cshtml" />
     <Content Include="Views\Transaction\Add.cshtml" />
     <Content Include="Views\Transaction\_List.cshtml" />
