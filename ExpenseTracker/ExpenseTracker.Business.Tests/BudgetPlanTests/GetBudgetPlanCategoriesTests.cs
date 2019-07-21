@@ -1,12 +1,11 @@
 ﻿using ExpenseTracker.Business.Tests.Base;
 using ExpenseTracker.Persistence.Context.DbModels;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
+using Xunit;
 
 namespace ExpenseTracker.Business.Tests.BudgetPlanTests
 {
-    [TestClass]
     public class GetBudgetPlanCategoriesTests : BaseBudgetPlanTest
     {
         private Category CreateCategory(string name, int budgetId)
@@ -29,9 +28,11 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             context.SaveChanges();
         }
 
-        [TestMethod]
+        [Fact]
         public void GetBudgetPlanCategories_Success_NoRecordedPlan()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanCategoryBusiness(context);
             string userId = DefaultTestUserId;
@@ -49,13 +50,15 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             var budgetPlanCategories = business.GetBudgetPlanCategoriesByPlanId(budgetPlanId, userId);
 
             //ASSERT
-            Assert.IsNotNull(budgetPlanCategories);
-            Assert.AreEqual(categoryNames.Count, budgetPlanCategories.Select(q => q.Category.Name).ToList().Count);
+            Assert.NotNull(budgetPlanCategories);
+            Assert.Equal(categoryNames.Count, budgetPlanCategories.Select(q => q.Category.Name).ToList().Count);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetBudgetPlanCategories_Success_SomeRecordedPlan()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanCategoryBusiness(context);
             string userId = DefaultTestUserId;
@@ -78,13 +81,13 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             var budgetPlanCategories = business.GetBudgetPlanCategoriesByPlanId(budgetPlanId, userId);
 
             //ASSERT
-            Assert.IsNotNull(budgetPlanCategories);
-            Assert.AreEqual(categoryNames.Count, budgetPlanCategories.Select(q => q.Category.Name).ToList().Count);
-            Assert.AreEqual(10, budgetPlanCategories.Single(q => q.Category.Name.Equals("category0")).PlannedAmount);
-            Assert.AreEqual(0, budgetPlanCategories.Single(q => q.Category.Name.Equals("category1")).PlannedAmount);
-            Assert.AreEqual(30, budgetPlanCategories.Single(q => q.Category.Name.Equals("category2")).PlannedAmount);
-            Assert.AreEqual(0, budgetPlanCategories.Single(q => q.Category.Name.Equals("category3")).PlannedAmount);
-            Assert.AreEqual(50, budgetPlanCategories.Single(q => q.Category.Name.Equals("category4")).PlannedAmount);
+            Assert.NotNull(budgetPlanCategories);
+            Assert.Equal(categoryNames.Count, budgetPlanCategories.Select(q => q.Category.Name).ToList().Count);
+            Assert.Equal(10, budgetPlanCategories.Single(q => q.Category.Name.Equals("category0")).PlannedAmount);
+            Assert.Equal(0, budgetPlanCategories.Single(q => q.Category.Name.Equals("category1")).PlannedAmount);
+            Assert.Equal(30, budgetPlanCategories.Single(q => q.Category.Name.Equals("category2")).PlannedAmount);
+            Assert.Equal(0, budgetPlanCategories.Single(q => q.Category.Name.Equals("category3")).PlannedAmount);
+            Assert.Equal(50, budgetPlanCategories.Single(q => q.Category.Name.Equals("category4")).PlannedAmount);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Threading;
 using System.Web.Mvc;
 
 namespace ExpenseTracker.WebUI.Models
@@ -39,15 +38,5 @@ namespace ExpenseTracker.WebUI.Models
         public SelectList CategoryList { get; set; }
 
         public bool IsIncome { get; set; }
-
-        //public List<QuickAddProperties> QuickAddList { get; set; }
-
-        //public class QuickAddProperties
-        //{
-        //    public decimal Amount { get; set; }
-        //    public string Description { get; set; }
-        //    public int AccountId { get; set; }
-        //    public int CategoryId { get; set; }
-        //}
     }
 }

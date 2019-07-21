@@ -27,6 +27,7 @@ namespace ExpenseTracker.Persistence.Context
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<TransactionTemplate> TransactionTemplates { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -43,6 +44,8 @@ namespace ExpenseTracker.Persistence.Context
             CategoryConfiguration.Configure(modelBuilder);
 
             IdentityConfiguration.Configure(modelBuilder);
+
+            TransactionTemplateConfiguration.Configure(modelBuilder);
         }
 
         public static ExpenseTrackerContext Create() => new ExpenseTrackerContext();

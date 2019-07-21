@@ -14,6 +14,7 @@ namespace ExpenseTracker.Persistence.Context.FluentConfiguration
             Configure<BudgetUser>(modelBuilder);
             Configure<Category>(modelBuilder);
             Configure<Transaction>(modelBuilder);
+            Configure<TransactionTemplate>(modelBuilder);
         }
 
         private static void Configure<T>(DbModelBuilder modelBuilder)

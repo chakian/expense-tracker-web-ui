@@ -1,13 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 
 namespace ExpenseTracker.Business.Tests.BudgetTests
 {
-    [TestClass]
     public class GetBudgetDetailTests : BaseBudgetTest
     {
-        [TestMethod]
+        [Fact]
         public void GetBudgetDetails_Success()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetBusiness(context);
             int budgetId = 1;
@@ -17,15 +18,17 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             var budget = business.GetBudgetDetails(budgetId, userId);
 
             //ASSERT
-            Assert.IsNotNull(budget);
-            Assert.AreEqual(budgetId, budget.BudgetId);
-            Assert.AreEqual("Budget_1", budget.Name);
-            Assert.AreEqual("a", budget.InsertUser.Id);
+            Assert.NotNull(budget);
+            Assert.Equal(budgetId, budget.BudgetId);
+            Assert.Equal("Budget_1", budget.Name);
+            Assert.Equal("a", budget.InsertUser.Id);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetBudgetDetails_NotAuthorized()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetBusiness(context);
             int budgetId = 5;
@@ -35,7 +38,7 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             var budget = business.GetBudgetDetails(budgetId, userId);
 
             //ASSERT
-            Assert.IsNull(budget);
+            Assert.Null(budget);
         }
     }
 }

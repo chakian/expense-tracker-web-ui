@@ -18,8 +18,8 @@
 
     @*TODO: try to include this stylesheet right here on the row below. Right now it is moved to alllllll the way to the top "BaseLayout"*@
     @*<link rel="stylesheet" href="~/Content/adminlte/plugins/select2/css/select2.min.css">*@
-
-    @*<link rel="stylesheet" href="~/Content/bootstrap-datepicker.min.css">*@
+    <!-- Toastr -->
+    @*<link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">*@
 }
 
 @section content_header{
@@ -37,6 +37,12 @@
 
 <div class="row">
     <div class="col-md-12 mx-auto">
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.DropDownListFor(model => model.TemplateId, Model.TemplateListForView, Resources.Transaction_Add_Label_SelectTemplate, htmlAttributes: new { @class = "form-control select2" })
+            </div>
+        </div>
+
         @using (Html.BeginForm("Add", "Transaction", FormMethod.Post, new { @class = "needs-validation" }))
         {
             @Html.AntiForgeryToken()
@@ -66,19 +72,11 @@
                         </div>
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Date, Resources.Transaction_Edit_Label_Date)
-                            @*<div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt"></i>
-                                    </span>
-                                </div>
-                                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @type = "text", @class = "form-control float-right" } })
-                            </div>*@
                             <div class="input-group">
-                                @Html.EditorFor(model => model.Date, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control" } })
                                 <div class="input-group-append">
                                     <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                                 </div>
+                                @Html.EditorFor(model => model.Date, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                             @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                         </div>
@@ -98,7 +96,15 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button class="btn btn-primary" type="submit">@Resources.Generic_Save_Button</button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-primary" type="submit">@Resources.Generic_Save_Button</button>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.TextBox("TemplateName", "", new { @class = "form-control", placeholder = Resources.Transaction_Template_Template_Name })
+                            <button class="btn btn-primary" type="button" onclick="saveAsTemplate(this)">@Resources.Transaction_Add_Button_SaveAsTemplate</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.card -->
@@ -113,19 +119,11 @@
 @section scripts {
     <!-- Select2 -->
     <script src="~/Content/adminlte/plugins/select2/js/select2.full.min.js"></script>
-
-    @*<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
-    <script src="~/Scripts/locales/bootstrap-datepicker.tr.min.js"></script>
-    <script src="~/Scripts/locales/bootstrap-datepicker.en-GB.min.js"></script>*@
+    <!-- Toastr -->
+    <script src="~/Content/adminlte/plugins/toastr/toastr.min.js"></script>
 
     <script>
-        //$.fn.reformatDate = function (settings) {
-        //    return this.each(function () {
-        //        $this = $(this);
-        //        if (!$this.data('datepicker')) return
-        //        $this.datepicker('setDate', $this.datepicker("getDate"))
-        //    });
-        //};
+    var templateList;
 
         $(function () {
             $('#radioBtn a').on('click', function () {
@@ -139,20 +137,71 @@
 
             $('.select2').select2();
 
-            @*$('#Date').datepicker({
-                autoclose: true,
-                format: '@System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern',
-                todayHighlight: true,
-                todayBtn: 'linked',
-                weekStart: 1,
-                language: 'tr-TR'
+            var model = @Html.Raw(Json.Encode(Model));
+            templateList = model.TemplateList;
+
+            $('#TemplateId').on('change', function () {
+                var templateId = $('#TemplateId').val();
+                if (templateId == undefined || templateId == null || templateId == '') {
+                    $('#Amount').val(0);
+                    $('#CategoryId').val('').trigger('change');
+                    $('#Description').val('');
+                    $('#AccountId').val('').trigger('change');
+                }
+                else {
+                    for (i = 0; i < templateList.length; i++) {
+                        if (templateList[i].TemplateId == templateId) {
+                            $('#Amount').val(templateList[i].Amount);
+                            $('#Description').val(templateList[i].Description);
+                            $('#AccountId').val(templateList[i].AccountId).trigger('change');
+                            $('#CategoryId').val(templateList[i].CategoryId).trigger('change');
+                            
+                            break;
+                        }
+                    }
+                }
             });
-            $('#Date').reformatDate();*@
         });
 
         $(document).on("click", ".delete-transaction-button", function () {
             var transactionId = $(this).data('id');
             $(".modal-footer #TransactionId").val(transactionId);
         });
+
+    function saveAsTemplate(e) {
+        if ($('#TemplateName').val() == undefined || $('#TemplateName').val() == null || $('#TemplateName').val() == '') {
+            toastr.error('@Resources.Transaction_Template_Error_NameIsEmpty');
+            return;
+        }
+
+        var postUrl = '@Url.Action("Create", "TransactionTemplate")';
+        var postData = {
+            TemplateName: $('#TemplateName').val(),
+            Amount: $('#Amount').val(),
+            CategoryId: $('#CategoryId').val(),
+            Description: $('#Description').val(),
+            SourceAccountId: $('#AccountId').val()
+        };
+
+        $.ajax(
+            {
+                type: "POST",
+                url: postUrl,
+                data: JSON.stringify(postData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg == 'success') {
+                        toastr.success('@Resources.Transaction_Template_Creation_Successful');
+                    }
+                    else {
+                        toastr.error('@Resources.Transaction_Template_Creation_Error');
+                    }
+                },
+                error: function (msg) {
+                    toastr.error('@Resources.Transaction_Template_Creation_Error');
+                }
+            });
+        }
     </script>
 }

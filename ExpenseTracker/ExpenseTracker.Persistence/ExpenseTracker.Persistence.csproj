@@ -86,6 +86,7 @@
     <Compile Include="Context\DbModels\Category.cs" />
     <Compile Include="Context\DbModels\Currency.cs" />
     <Compile Include="Context\DbModels\Transaction.cs" />
+    <Compile Include="Context\DbModels\TransactionTemplate.cs" />
     <Compile Include="Context\ExpenseTrackerContext.cs" />
     <Compile Include="Context\FluentConfiguration\AccountConfiguration.cs" />
     <Compile Include="Context\FluentConfiguration\AuditableEntityConfiguration.cs" />
@@ -93,12 +94,17 @@
     <Compile Include="Context\FluentConfiguration\BudgetUserConfiguration.cs" />
     <Compile Include="Context\FluentConfiguration\CategoryConfiguration.cs" />
     <Compile Include="Context\FluentConfiguration\IdentityConfiguration.cs" />
+    <Compile Include="Context\FluentConfiguration\TransactionTemplateConfiguration.cs" />
     <Compile Include="Identity\ExpenseSignInManager.cs" />
     <Compile Include="Identity\ExpenseUserManager.cs" />
     <Compile Include="Identity\User.cs" />
     <Compile Include="Migrations\201905202050246_InitialCreate.cs" />
     <Compile Include="Migrations\201905202050246_InitialCreate.Designer.cs">
       <DependentUpon>201905202050246_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907210919295_AddedTransactionTemplate.cs" />
+    <Compile Include="Migrations\201907210919295_AddedTransactionTemplate.Designer.cs">
+      <DependentUpon>201907210919295_AddedTransactionTemplate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,6 +122,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905202050246_InitialCreate.resx">
       <DependentUpon>201905202050246_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907210919295_AddedTransactionTemplate.resx">
+      <DependentUpon>201907210919295_AddedTransactionTemplate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,18 +1,18 @@
 ﻿using ExpenseTracker.Business.Tests.Base;
-using ExpenseTracker.Persistence.Context.DbModels;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Xunit;
 
 namespace ExpenseTracker.Business.Tests.BudgetPlanTests
 {
-    [TestClass]
     public class GetBudgetPlanTests : BaseBudgetPlanTest
     {
         private readonly string UNAUTHORIZED_USER = "notauthorized";
 
-        [TestMethod]
+        [Fact]
         public void GetBudgetPlanById_Fail_Null()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             string userId = DefaultTestUserId;
@@ -22,12 +22,14 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             var budgetPlan = business.GetBudgetPlanById(budgetPlanId, userId);
 
             //ASSERT
-            Assert.IsNull(budgetPlan);
+            Assert.Null(budgetPlan);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetBudgetPlanById_Success()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             string userId = DefaultTestUserId;
@@ -37,12 +39,14 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             var budgetPlan = business.GetBudgetPlanById(budgetPlanId, userId);
 
             //ASSERT
-            Assert.IsNotNull(budgetPlan);
+            Assert.NotNull(budgetPlan);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetBudgetPlanForCurrentDate_Success_CurrentDatePlanDoesntExist()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
@@ -54,12 +58,14 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, year, month, userId);
 
             //ASSERT
-            Assert.IsNotNull(budgetPlan);
+            Assert.NotNull(budgetPlan);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetBudgetPlanForCurrentDate_Success_CurrentDatePlanExists()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
@@ -73,12 +79,14 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, year, month, userId);
 
             //ASSERT
-            Assert.IsNotNull(budgetPlan);
+            Assert.NotNull(budgetPlan);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetBudgetPlanForDate_Success_DateIsNextMonth()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
@@ -93,12 +101,14 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, adjacentDate.Year, adjacentDate.Month, userId);
 
             //ASSERT
-            Assert.IsNotNull(budgetPlan);
+            Assert.NotNull(budgetPlan);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetBudgetPlanForDate_Success_DateIsPreviousMonth()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
@@ -113,12 +123,14 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, adjacentDate.Year, adjacentDate.Month, userId);
 
             //ASSERT
-            Assert.IsNotNull(budgetPlan);
+            Assert.NotNull(budgetPlan);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetBudgetPlanForDate_Fail_DateIsNotAdjacent()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
@@ -133,12 +145,14 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, notAdjacentDate.Year, notAdjacentDate.Month, userId);
 
             //ASSERT
-            Assert.IsNull(budgetPlan);
+            Assert.Null(budgetPlan);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetBudgetPlanForDate_Fail_UserIsNotAuthorizedForBudget()
         {
+            //TODO: Delete this and do it on initialize step if possible
+            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
@@ -153,7 +167,7 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, notAdjacentDate.Year, notAdjacentDate.Month, userId);
 
             //ASSERT
-            Assert.IsNull(budgetPlan);
+            Assert.Null(budgetPlan);
         }
     }
 }

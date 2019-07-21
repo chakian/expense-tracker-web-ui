@@ -637,6 +637,24 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Taslak Olarak Kaydet.
+        /// </summary>
+        public static string Transaction_Add_Button_SaveAsTemplate {
+            get {
+                return ResourceManager.GetString("Transaction_Add_Button_SaveAsTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taslaklar.
+        /// </summary>
+        public static string Transaction_Add_Label_SelectTemplate {
+            get {
+                return ResourceManager.GetString("Transaction_Add_Label_SelectTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to İşlem Silinecek.
         /// </summary>
         public static string Transaction_Delete_Modal_Header {
@@ -804,6 +822,42 @@ namespace ExpenseTracker.Language {
         public static string Transaction_List_Label_PreviousMonth {
             get {
                 return ResourceManager.GetString("Transaction_List_Label_PreviousMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taslak Kaydedilirken Hata Oluştu.
+        /// </summary>
+        public static string Transaction_Template_Creation_Error {
+            get {
+                return ResourceManager.GetString("Transaction_Template_Creation_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taslak Kaydedildi.
+        /// </summary>
+        public static string Transaction_Template_Creation_Successful {
+            get {
+                return ResourceManager.GetString("Transaction_Template_Creation_Successful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taslak Adı Boş Olamaz!.
+        /// </summary>
+        public static string Transaction_Template_Error_NameIsEmpty {
+            get {
+                return ResourceManager.GetString("Transaction_Template_Error_NameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taslak Adı.
+        /// </summary>
+        public static string Transaction_Template_Template_Name {
+            get {
+                return ResourceManager.GetString("Transaction_Template_Template_Name", resourceCulture);
             }
         }
         

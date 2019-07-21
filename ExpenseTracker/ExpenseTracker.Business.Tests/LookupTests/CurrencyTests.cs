@@ -1,13 +1,12 @@
 ﻿using ExpenseTracker.Persistence.Context;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace ExpenseTracker.Business.Tests.LookupTests
 {
-    [TestClass]
     public class CurrencyTests : BaseQueryTest
     {
-        [TestInitialize()]
-        public void CurrencyTestInitialize()
+        //[TestInitialize()]
+        private void CurrencyTestInitialize()
         {
             var connection = Effort.DbConnectionFactory.CreateTransient();
             context = new ExpenseTrackerContext(connection);
@@ -15,9 +14,10 @@ namespace ExpenseTracker.Business.Tests.LookupTests
             CreateDefaultCurrencies();
         }
 
-        [TestMethod]
+        [Fact]
         public void GetCurrencyList_Success()
         {
+            CurrencyTestInitialize();
             // ARRANGE
             var business = new CurrencyBusiness(context);
 
@@ -25,8 +25,8 @@ namespace ExpenseTracker.Business.Tests.LookupTests
             var currencyList = business.GetCurrencyList();
 
             //ASSERT
-            Assert.IsNotNull(currencyList);
-            Assert.AreEqual(3, currencyList.Count);
+            Assert.NotNull(currencyList);
+            Assert.Equal(3, currencyList.Count);
         }
     }
 }

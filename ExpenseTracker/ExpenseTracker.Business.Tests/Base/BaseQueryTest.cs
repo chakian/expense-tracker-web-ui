@@ -10,11 +10,24 @@ namespace ExpenseTracker.Business.Tests
     {
         protected ExpenseTrackerContext context;
 
+        public BaseQueryTest()
+        {
+            var connection = Effort.DbConnectionFactory.CreateTransient();
+            context = new ExpenseTrackerContext(connection);
+        }
+
+        //TODO: Changed for backwards compatibility. Delete it when refactoring.
         protected T CreateNewAuthorizedEntity<T>()
             where T : AuditableEntity, new()
         {
+            T obj = CreateNewAuthorizedEntity<T>("a");
+            return obj;
+        }
+        protected T CreateNewAuthorizedEntity<T>(string userId)
+            where T : AuditableEntity, new()
+        {
             T obj = new T();
-            obj.InsertUserId = "a";
+            obj.InsertUserId = userId;
             obj.InsertTime = DateTime.Now;
             obj.IsActive = true;
             return obj;
