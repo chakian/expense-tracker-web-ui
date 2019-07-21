@@ -6,9 +6,9 @@ namespace ExpenseTracker.WebUI
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/Content/bootstrapcss").Include(
-                      "~/Content/bootstrap.css"
-                      ));
+            //bundles.Add(new StyleBundle("~/Content/bootstrapcss").Include(
+            //          "~/Content/bootstrap.css"
+            //          ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css"

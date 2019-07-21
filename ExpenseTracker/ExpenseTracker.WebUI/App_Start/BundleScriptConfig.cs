@@ -21,7 +21,7 @@ namespace ExpenseTracker.WebUI
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.bundle.js"
+                      "~/Content/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/adminlte").Include(

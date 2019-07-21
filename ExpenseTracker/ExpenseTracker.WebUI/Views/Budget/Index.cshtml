@@ -2,40 +2,84 @@
 
 @{
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
-    ViewBag.Title = "Bütçelerim";
+    ViewBag.Title = Resources.Title_Budget_List;
 }
-
-<h2>Bütçelerim</h2>
-<p>@Html.ActionLink("Aktif bütçeyi değiştir", "SelectActiveBudget")</p>
 
 <p>
-    @Html.ActionLink("Yeni Oluştur", "Create")
+    @Html.ActionLink(Resources.Budget_Button_CreateNew, "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Bütçe Adı
-        </th>
-        <th>
-            Para Birimi
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model.BudgetList) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CurrencyDisplayName)
-    </td>
-    <td>
-        @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Detay", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Sil", "Delete", new { id = item.Id })
-    </td>
-</tr>
+<div class="table-responsive">
+    <table id="budget-list-grid" class="table table-striped table-hover table-sm">
+        <thead class="thead">
+            <tr class="table-primary">
+                <th scope="col">@Resources.Generic_BudgetName</th>
+                <th scope="col">@Resources.Generic_Currency</th>
+                <th scope="col" width="200px">@Resources.Generic_OneSpace</th>
+                <th scope="col" width="100px">@Resources.Generic_OneSpace</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var budget in Model.BudgetList)
+            {
+                <tr>
+                    <th scope="row">@Html.DisplayFor(modelItem => budget.Name)</th>
+                    <td>@Html.DisplayFor(modelItem => budget.CurrencyDisplayName)</td>
+                    <td>
+                        @if (ViewBag.ActiveBudgetId != budget.Id)
+                        {
+                            @Html.ActionLink(Resources.Budget_Label_MakeActiveBudget, "SetActive", new { budgetId = budget.Id });
+                        }
+                        else
+                        {
+                            <text>@Resources.Budget_Label_ActiveBudget</text>
+                        }
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Budget", new { id = budget.Id })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+                        <button type="button" class="delete-category-button btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete" data-id="@budget.Id">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="modal-delete">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">@Resources.Budget_Delete_Modal_Header</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="@Resources.Generic_Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>@Resources.Budget_Delete_Modal_Text</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                @using (Html.BeginForm("Delete", "Budget", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.Hidden("id")
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">@Resources.Generic_No</button>
+                    <button type="submit" class="btn btn-outline-light">@Resources.Generic_Yes</button>
+                }
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+@section scripts{
+    <script>
+        $(document).on("click", ".delete-category-button", function () {
+            var categoryId = $(this).data('id');
+            $(".modal-footer #id").val(categoryId);
+        });
+    </script>
 }
-
-</table>
