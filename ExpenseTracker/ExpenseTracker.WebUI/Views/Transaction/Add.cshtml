@@ -37,6 +37,12 @@
 
 <div class="row">
     <div class="col-md-12 mx-auto">
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.DropDownListFor(model => model.TemplateId, Model.TemplateListForView, Resources.Transaction_Add_Label_SelectTemplate, htmlAttributes: new { @class = "form-control select2" })
+            </div>
+        </div>
+
         @using (Html.BeginForm("Add", "Transaction", FormMethod.Post, new { @class = "needs-validation" }))
         {
             @Html.AntiForgeryToken()
@@ -99,7 +105,6 @@
                             <button class="btn btn-primary" type="button" onclick="saveAsTemplate(this)">@Resources.Transaction_Add_Button_SaveAsTemplate</button>
                         </div>
                     </div>
-                    
                 </div>
             </div>
             <!-- /.card -->
@@ -118,6 +123,8 @@
     <script src="~/Content/adminlte/plugins/toastr/toastr.min.js"></script>
 
     <script>
+    var templateList;
+
         $(function () {
             $('#radioBtn a').on('click', function () {
                 var sel = $(this).data('title');
@@ -129,6 +136,31 @@
             });
 
             $('.select2').select2();
+
+            var model = @Html.Raw(Json.Encode(Model));
+            templateList = model.TemplateList;
+
+            $('#TemplateId').on('change', function () {
+                var templateId = $('#TemplateId').val();
+                if (templateId == undefined || templateId == null || templateId == '') {
+                    $('#Amount').val(0);
+                    $('#CategoryId').val('').trigger('change');
+                    $('#Description').val('');
+                    $('#AccountId').val('').trigger('change');
+                }
+                else {
+                    for (i = 0; i < templateList.length; i++) {
+                        if (templateList[i].TemplateId == templateId) {
+                            $('#Amount').val(templateList[i].Amount);
+                            $('#Description').val(templateList[i].Description);
+                            $('#AccountId').val(templateList[i].AccountId).trigger('change');
+                            $('#CategoryId').val(templateList[i].CategoryId).trigger('change');
+                            
+                            break;
+                        }
+                    }
+                }
+            });
         });
 
         $(document).on("click", ".delete-transaction-button", function () {
@@ -137,10 +169,14 @@
         });
 
     function saveAsTemplate(e) {
+        if ($('#TemplateName').val() == undefined || $('#TemplateName').val() == null || $('#TemplateName').val() == '') {
+            toastr.error('@Resources.Transaction_Template_Error_NameIsEmpty');
+            return;
+        }
+
         var postUrl = '@Url.Action("Create", "TransactionTemplate")';
         var postData = {
             TemplateName: $('#TemplateName').val(),
-            Date: $('#Date').val(),
             Amount: $('#Amount').val(),
             CategoryId: $('#CategoryId').val(),
             Description: $('#Description').val(),

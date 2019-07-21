@@ -646,6 +646,15 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Taslaklar.
+        /// </summary>
+        public static string Transaction_Add_Label_SelectTemplate {
+            get {
+                return ResourceManager.GetString("Transaction_Add_Label_SelectTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to İşlem Silinecek.
         /// </summary>
         public static string Transaction_Delete_Modal_Header {
@@ -831,6 +840,15 @@ namespace ExpenseTracker.Language {
         public static string Transaction_Template_Creation_Successful {
             get {
                 return ResourceManager.GetString("Transaction_Template_Creation_Successful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taslak Adı Boş Olamaz!.
+        /// </summary>
+        public static string Transaction_Template_Error_NameIsEmpty {
+            get {
+                return ResourceManager.GetString("Transaction_Template_Error_NameIsEmpty", resourceCulture);
             }
         }
         

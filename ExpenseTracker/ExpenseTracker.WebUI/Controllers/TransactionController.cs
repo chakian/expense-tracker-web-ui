@@ -2,6 +2,7 @@
 using ExpenseTracker.WebUI.Models;
 using ExpenseTracker.WebUI.Models.Transaction;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -12,12 +13,14 @@ namespace ExpenseTracker.WebUI.Controllers
         readonly BudgetAccountBusiness budgetAccountBusiness;
         readonly CategoryBusiness categoryBusiness;
         readonly TransactionBusiness transactionBusiness;
+        readonly TransactionTemplateBusiness transactionTemplateBusiness;
 
         public TransactionController()
         {
             budgetAccountBusiness = new BudgetAccountBusiness(context);
             categoryBusiness = new CategoryBusiness(context);
             transactionBusiness = new TransactionBusiness(context);
+            transactionTemplateBusiness = new TransactionTemplateBusiness(context);
         }
 
         [HttpGet]
@@ -28,10 +31,34 @@ namespace ExpenseTracker.WebUI.Controllers
             SetAccountListForModel(model);
             SetCategoryListForModel(model);
             SetTransactionSummaryListForModel(model, DateTime.Now);
+            SetTemplateListForModel(model);
 
             model.Date = DateTime.Now;
 
             return View(model);
+        }
+
+        private void SetTemplateListForModel(AddModel model)
+        {
+            var templates = transactionTemplateBusiness.GetTransactionTemplates(ActiveBudgetId, UserId);
+            if (templates != null)
+            {
+                model.TemplateListForView = new SelectList(templates.OrderBy(q => q.Name), "Id", "Name");
+
+                model.TemplateList = new List<AddModel.TemplateProperties>();
+                templates.ForEach(t =>
+                {
+                    model.TemplateList.Add(new AddModel.TemplateProperties()
+                    {
+                        TemplateId = t.Id,
+                        TemplateName = t.Name,
+                        Amount = t.Amount ?? 0,
+                        Description = t.Description,
+                        CategoryId = t.CategoryId ?? 0,
+                        AccountId = t.SourceAccountId ?? 0
+                    });
+                });
+            }
         }
 
         private void SetCategoryListForModel(BaseEditableTransactionModel model)
