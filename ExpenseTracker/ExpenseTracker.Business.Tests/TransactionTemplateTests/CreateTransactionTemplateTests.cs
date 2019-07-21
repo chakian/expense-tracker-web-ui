@@ -119,16 +119,37 @@ namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
         [Fact]
         public void CreateTransactionTemplate_Fail_EmptyTemplateName()
         {
+            // Arrange
             decimal? amount = 1000;
             string description = "nice template";
             int? categoryId = null;
             int? sourceAccountId = null;
-
             string templateName = "";
             int? targetAccountId = null;
 
-            // Arrange
             var business = new TransactionTemplateBusiness(context);
+
+            // Act
+            bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
+
+            // Assert
+            Assert.False(actualResult);
+        }
+
+        [Fact]
+        public void CreateTransactionTemplate_Fail_TemplateNameExistsForThisUserAndThisBudget()
+        {
+            // Arrange
+            decimal? amount = 1000;
+            string description = "nice template";
+            int? categoryId = null;
+            int? sourceAccountId = null;
+            string templateName = "New Template 1";
+            int? targetAccountId = null;
+
+            var business = new TransactionTemplateBusiness(context);
+            business.CreateTransactionTemplate(templateName, 150, "Test Expense 1", categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
+            business.CreateTransactionTemplate("New Template 2", 350, "Test Expense 2", categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
 
             // Act
             bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);

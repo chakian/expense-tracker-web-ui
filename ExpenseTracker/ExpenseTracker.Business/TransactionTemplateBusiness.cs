@@ -25,6 +25,10 @@ namespace ExpenseTracker.Business
                 {
                     return false;
                 }
+                if (context.TransactionTemplates.Any(tt=>tt.UserId.Equals(userId) && tt.BudgetId.Equals(budgetId) && tt.Name.Equals(templateName)))
+                {
+                    return false;
+                }
 
                 TransactionTemplate transactionTemplate = new TransactionTemplate
                 {
@@ -56,7 +60,7 @@ namespace ExpenseTracker.Business
 
         public List<TransactionTemplate> GetTransactionTemplates(int budgetId, string userId)
         {
-            var list = context.TransactionTemplates.Where(tt => tt.BudgetId.Equals(budgetId) && tt.UserId.Equals(userId)).ToList();
+            var list = context.TransactionTemplates.Where(tt => tt.IsActive && tt.BudgetId.Equals(budgetId) && tt.UserId.Equals(userId)).ToList();
             return list;
         }
     }
