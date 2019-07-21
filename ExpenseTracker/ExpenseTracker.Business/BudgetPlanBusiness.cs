@@ -15,6 +15,7 @@ namespace ExpenseTracker.Business
         public BudgetPlan GetBudgetPlanById(int budgetPlanId, string userId)
         {
             BudgetPlan budgetPlan = context.BudgetPlans.Find(budgetPlanId);
+            budgetPlan.Budget = context.Budgets.Find(budgetPlan.BudgetId);
 
             if (budgetPlan == null || !budgetPlan.Budget.BudgetUsers.Any(bp => bp.UserId.Equals(userId)))
             {
