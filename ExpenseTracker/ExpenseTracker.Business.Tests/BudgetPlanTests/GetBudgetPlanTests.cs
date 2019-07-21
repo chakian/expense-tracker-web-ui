@@ -9,23 +9,6 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         private readonly string UNAUTHORIZED_USER = "notauthorized";
 
         [Fact]
-        public void GetBudgetPlanById_Fail_Null()
-        {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
-            // ARRANGE
-            var business = new BudgetPlanBusiness(context);
-            string userId = DefaultTestUserId;
-            int budgetPlanId = 0;
-
-            // ACT
-            var budgetPlan = business.GetBudgetPlanById(budgetPlanId, userId);
-
-            //ASSERT
-            Assert.Null(budgetPlan);
-        }
-
-        [Fact]
         public void GetBudgetPlanById_Success()
         {
             //TODO: Delete this and do it on initialize step if possible

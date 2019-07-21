@@ -15,6 +15,7 @@ namespace ExpenseTracker.Business
         public BudgetPlan GetBudgetPlanById(int budgetPlanId, string userId)
         {
             BudgetPlan budgetPlan = context.BudgetPlans.Find(budgetPlanId);
+            budgetPlan.Budget = context.Budgets.Find(budgetPlan.BudgetId);
 
             if (budgetPlan == null || !budgetPlan.Budget.BudgetUsers.Any(bp => bp.UserId.Equals(userId)))
             {
@@ -71,10 +72,7 @@ namespace ExpenseTracker.Business
             return budgetPlan;
         }
 
-        private bool IsRequestedDateEqualToCurrentDate(int year, int month)
-        {
-            return DateTime.Now.Year.Equals(year) && DateTime.Now.Month.Equals(month);
-        }
+        private bool IsRequestedDateEqualToCurrentDate(int year, int month) => DateTime.Now.Year.Equals(year) && DateTime.Now.Month.Equals(month);
 
         private bool IsRequestedDateAdjacentToAnExistingBudgetPlanPeriod(int budgetId, int year, int month, string userId)
         {

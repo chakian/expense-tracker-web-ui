@@ -62,7 +62,15 @@
                     <div class="row">
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Amount, Resources.Transaction_Edit_Label_Amount)
-                            @Html.EditorFor(model => model.Amount, "{0}", new { htmlAttributes = new { @class = "form-control", style = "width:100%" } })
+                            <div class="input-group mb-3">
+                                @Html.EditorFor(model => model.Amount, "{0}", new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="CurrentlySpentAmount">
+                                        <span class="badge bg-info">
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
                             @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-6">
@@ -124,6 +132,7 @@
 
     <script>
     var templateList;
+    var categoryStatusList;
 
         $(function () {
             $('#radioBtn a').on('click', function () {
@@ -139,6 +148,7 @@
 
             var model = @Html.Raw(Json.Encode(Model));
             templateList = model.TemplateList;
+            categoryStatusList = model.CategoryStatusList;
 
             $('#TemplateId').on('change', function () {
                 var templateId = $('#TemplateId').val();
@@ -155,12 +165,36 @@
                             $('#Description').val(templateList[i].Description);
                             $('#AccountId').val(templateList[i].AccountId).trigger('change');
                             $('#CategoryId').val(templateList[i].CategoryId).trigger('change');
-                            
                             break;
                         }
                     }
                 }
             });
+
+            $('#CategoryId').on('change', function () {
+                var spentText = '@(Resources.Transaction_Add_Label_AlreadySpent)<br/>';
+
+                var categoryId = $('#CategoryId').val();
+                if (categoryId != undefined && categoryId != null & categoryId != '') {
+                    var found = false;
+                    for (i = 0; i < categoryStatusList.length; i++) {
+                        if (categoryStatusList[i].CategoryId == categoryId) {
+                            var spentAmt = categoryStatusList[i].SpentAmount;
+                            spentText = spentText + spentAmt;
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        spentText = spentText + '0';
+                    }
+                }
+
+                $('#CurrentlySpentAmount>.badge').html(spentText);
+            });
+
+            $('#CategoryId').change();
         });
 
         $(document).on("click", ".delete-transaction-button", function () {

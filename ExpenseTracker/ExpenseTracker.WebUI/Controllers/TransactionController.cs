@@ -33,6 +33,17 @@ namespace ExpenseTracker.WebUI.Controllers
             SetTransactionSummaryListForModel(model, DateTime.Now);
             SetTemplateListForModel(model);
 
+            var currentPeriodTransactionsGroupedList = transactionBusiness.GetTransactionsForPeriodByGivenDate_GroupedByCategory(DateTime.Now, UserId, ActiveBudgetId);
+            model.CategoryStatusList = new List<AddModel.CategoryStatus>();
+            currentPeriodTransactionsGroupedList.ForEach(g =>
+            {
+                model.CategoryStatusList.Add(new AddModel.CategoryStatus()
+                {
+                    CategoryId = g.CategoryId,
+                    SpentAmount = g.Amount * -1
+                });
+            });
+
             model.Date = DateTime.Now;
 
             return View(model);
@@ -200,11 +211,13 @@ namespace ExpenseTracker.WebUI.Controllers
             DateTime previousDateTime = currentDateTime.AddMonths(-1);
             DateTime nextDateTime = currentDateTime.AddMonths(1);
 
-            ListModel model = new ListModel();
-            model.PreviousMonth = previousDateTime.Month;
-            model.PreviousYear = previousDateTime.Year;
-            model.NextMonth = nextDateTime.Month;
-            model.NextYear = nextDateTime.Year;
+            ListModel model = new ListModel
+            {
+                PreviousMonth = previousDateTime.Month,
+                PreviousYear = previousDateTime.Year,
+                NextMonth = nextDateTime.Month,
+                NextYear = nextDateTime.Year
+            };
 
             SetTransactionSummaryListForModel(model, currentDateTime);
 

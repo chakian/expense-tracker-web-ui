@@ -132,11 +132,11 @@
   <data name="BudgetAccount_Label_CurrentBalance" xml:space="preserve">
     <value>Mevcut Bakiye</value>
   </data>
-  <data name="BudgetAccount_Label_GridActions" xml:space="preserve">
+  <data name="Generic_OneSpace" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="BudgetAccount_Link_BackToList" xml:space="preserve">
-    <value>Listeye Geri Dön</value>
+  <data name="Generic_Back" xml:space="preserve">
+    <value>Geri Dön</value>
   </data>
   <data name="BudgetAccount_Link_CreateNewAccount" xml:space="preserve">
     <value>Yeni Hesap Oluştur</value>
@@ -149,9 +149,6 @@
   </data>
   <data name="Categories_Label_Name" xml:space="preserve">
     <value>Kategori</value>
-  </data>
-  <data name="Categories_Link_BackToList" xml:space="preserve">
-    <value>Listeye Geri Dön</value>
   </data>
   <data name="Categories_Link_CreateNewCategory" xml:space="preserve">
     <value>Yeni Kategori Ekle</value>
@@ -357,9 +354,6 @@
   <data name="Transaction_List_Label_Description" xml:space="preserve">
     <value>Açıklama</value>
   </data>
-  <data name="Transaction_List_Label_Grid_Actions" xml:space="preserve">
-    <value> </value>
-  </data>
   <data name="Generic_NextMonth" xml:space="preserve">
     <value>Sonraki Ay</value>
   </data>
@@ -399,7 +393,46 @@
   <data name="BudgetPlan_Label_SpentAmount" xml:space="preserve">
     <value>Harcanmış Tutar</value>
   </data>
+  <data name="Budget_Button_ChangeActiveBudget" xml:space="preserve">
+    <value>Aktif bütçeyi değiştir</value>
+  </data>
+  <data name="Budget_Button_CreateNew" xml:space="preserve">
+    <value>Yeni Bütçe</value>
+  </data>
+  <data name="Budget_Delete_Modal_Header" xml:space="preserve">
+    <value>Bütçe Silinecek!</value>
+  </data>
+  <data name="Budget_Delete_Modal_Text" xml:space="preserve">
+    <value>Bu bütçeyi silmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Budget_Label_ActiveBudget" xml:space="preserve">
+    <value>Aktif</value>
+  </data>
+  <data name="Budget_Label_MakeActiveBudget" xml:space="preserve">
+    <value>Aktifleştir</value>
+  </data>
+  <data name="Generic_BudgetName" xml:space="preserve">
+    <value>Bütçe Adı</value>
+  </data>
+  <data name="Generic_Currency" xml:space="preserve">
+    <value>Para Birimi</value>
+  </data>
+  <data name="Title_Budget_Create" xml:space="preserve">
+    <value>Yeni Bütçe</value>
+  </data>
+  <data name="Title_Budget_Edit" xml:space="preserve">
+    <value>Bütçe Düzenleme</value>
+  </data>
+  <data name="Title_Budget_List" xml:space="preserve">
+    <value>Bütçelerim</value>
+  </data>
   <data name="Title_Budget_Plan" xml:space="preserve">
     <value>Bütçe Planı</value>
+  </data>
+  <data name="Title_Budget_SelectActiveBudget" xml:space="preserve">
+    <value>Aktif Bütçe Belirleme</value>
+  </data>
+  <data name="Transaction_Add_Label_AlreadySpent" xml:space="preserve">
+    <value>Harcanan</value>
   </data>
 </root>

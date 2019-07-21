@@ -23,10 +23,7 @@ namespace ExpenseTracker.WebUI.Controllers
             return View(categories);
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
+        public ActionResult Create() => View();
 
         [HttpPost]
         [ValidateAntiForgeryToken]

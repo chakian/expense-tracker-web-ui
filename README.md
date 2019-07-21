@@ -1,6 +1,6 @@
 # Expense Tracker
 
-## Version 0.2
+## Version 0.4
 
 [![HitCount](http://hits.dwyl.io/chakian/expense-tracker-web-ui.svg)](http://hits.dwyl.io/chakian/expense-tracker-web-ui) 
 [OpenHub Report](https://www.openhub.net/p/756697)
