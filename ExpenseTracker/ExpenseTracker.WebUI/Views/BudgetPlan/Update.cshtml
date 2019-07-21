@@ -1,39 +1,126 @@
 ﻿@model ExpenseTracker.WebUI.Models.BudgetRelated.BudgetPlanUpdateModel
 @{
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
-    ViewBag.Title = "Bütçe Planlama";
+    ViewBag.Title = Resources.Title_Budget_Plan;
 }
 
-<h2>Bütçe Planlama - @Model.BudgetPlan.MonthName @Model.BudgetPlan.Year.ToString()</h2>
-<h4>@Html.ActionLink("Bir Önceki Ay", "Update", new { month = Model.BudgetPlan.PreviousMonth, year = Model.BudgetPlan.PreviousYear })</h4>
-<h4>@Html.ActionLink("Bir Sonraki Ay", "Update", new { month = Model.BudgetPlan.NextMonth, year = Model.BudgetPlan.NextYear })</h4>
-
-@using (Html.BeginForm("Update", "BudgetPlan", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    @Html.HiddenFor(m => m.BudgetPlan.BudgetPlanId)
-
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        @for (int i = 0; i < Model.PlanCategories.Count; i++)
-        {
-            var category = Model.PlanCategories[i];
-            @Html.HiddenFor(m => m.PlanCategories[i].BudgetPlanCategoryId)
-            <div class="form-group">
-                @Html.LabelFor(m => m.PlanCategories[i].PlannedAmount, category.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(m => m.PlanCategories[i].PlannedAmount, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => category.PlannedAmount, "", new { @class = "text-danger" })
-                </div>
+<div class="row">
+    <div class="col-md-12 mx-auto">
+        <div class="row">
+            <div class="col-md-4" style="text-align: left">
+                @Html.ActionLink(Resources.Generic_PreviousMonth, "Update", new { year = Model.BudgetPlan.PreviousYear, month = Model.BudgetPlan.PreviousMonth })
             </div>
-        }
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Kaydet" class="btn btn-default" />
+            <div class="col-md-4" style="text-align: center">
+                @Resources.Title_Budget_Plan - @Model.BudgetPlan.MonthName @Model.BudgetPlan.Year.ToString()
+            </div>
+            <div class="col-md-4" style="text-align: right">
+                @Html.ActionLink(Resources.Generic_NextMonth, "Update", new { year = Model.BudgetPlan.NextYear, month = Model.BudgetPlan.NextMonth })
             </div>
         </div>
+
+        @using (Html.BeginForm("Update", "BudgetPlan", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(m => m.BudgetPlan.BudgetPlanId)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="table-responsive">
+                <table id="budget-plan-grid" class="table table-striped table-hover table-sm">
+                    <thead class="thead">
+                        <tr class="table-primary">
+                            <th scope="col" style="width: 250px">@Resources.BudgetPlan_Label_Category</th>
+                            <th scope="col" style="width: 150px">@Resources.BudgetPlan_Label_BudgetedAmount</th>
+                            <th scope="col">@Resources.BudgetPlan_Label_SpentAmount</th>
+                            <th scope="col" style="width: 200px">@Resources.BudgetPlan_Label_RemainingAmount</th>
+                            <th scope="col" style="display:none"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.PlanCategories.Count; i++)
+                        {
+                            var category = Model.PlanCategories[i];
+
+                            decimal plannedAmount = category.PlannedAmount;
+                            decimal spentAmount = category.SpentAmount;
+                            decimal remainingAmount = category.RemainingAmount;
+
+                            int danger_threshold = 95;
+                            int warning_threshold = 70;
+
+                            decimal spentPercentage;
+                            if(plannedAmount == 0)
+                            {
+                                if(spentAmount == 0)
+                                {
+                                    spentPercentage = 0;
+                                }
+                                else
+                                {
+                                    spentPercentage = 100;
+                                }
+                            }
+                            else
+                            {
+                                spentPercentage = Math.Ceiling((spentAmount * 100) / plannedAmount);
+                            }
+
+                            //bool isDanger = false, isWarning = false, isOk = false;
+                            string progressBarClass = "";
+                            string badgeClass = "";
+                            if (spentPercentage >= danger_threshold)
+                            {
+                                //isDanger = true;
+                                progressBarClass = " bg-danger";
+                                badgeClass = " bg-danger";
+                            }
+                            else if(spentPercentage >= warning_threshold)
+                            {
+                                //isWarning = true;
+                                progressBarClass = " bg-warning";
+                                badgeClass = " bg-warning";
+                            }
+                            else
+                            {
+                                //isOk = true;
+                                progressBarClass = " bg-success";
+                                badgeClass = " bg-success";
+                            }
+
+                            <tr>
+                                <th scope="row">
+                                    @Html.LabelFor(m => m.PlanCategories[i].PlannedAmount, category.CategoryName, htmlAttributes: new { @class = "control-label col-md-12" })
+                                </th>
+                                <td>
+                                    @Html.EditorFor(m => m.PlanCategories[i].PlannedAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => category.PlannedAmount, "", new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    @Model.PlanCategories[i].SpentAmount
+                                    <br />
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar@(progressBarClass)" style="width: @(spentPercentage >= 100 ? "100" : spentPercentage <= 0 ? "0" : spentPercentage.ToString())%"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge@(badgeClass)">
+                                        @Model.PlanCategories[i].RemainingAmount
+                                    </span>
+                                </td>
+                                <td style="display:none">@Html.HiddenFor(m => m.PlanCategories[i].BudgetPlanCategoryId)</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td scope="row">
+                                <input type="submit" value="Kaydet" class="btn btn-primary" />
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        }
     </div>
-}
+</div>

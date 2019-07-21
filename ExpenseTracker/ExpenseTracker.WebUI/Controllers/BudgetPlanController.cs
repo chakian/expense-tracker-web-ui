@@ -4,6 +4,7 @@ using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.WebUI.Models.BudgetRelated;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ExpenseTracker.WebUI.Controllers
@@ -11,10 +12,12 @@ namespace ExpenseTracker.WebUI.Controllers
     public class BudgetPlanController : BaseAuthenticatedController
     {
         private readonly BudgetPlanBusiness budgetPlanBusiness;
+        private readonly TransactionBusiness transactionBusiness;
 
         public BudgetPlanController()
         {
             budgetPlanBusiness = new BudgetPlanBusiness(context);
+            transactionBusiness = new TransactionBusiness(context);
         }
 
         [HttpGet]
@@ -62,15 +65,22 @@ namespace ExpenseTracker.WebUI.Controllers
                 model.BudgetPlan.NextMonth = nextDateTime.Month;
                 model.BudgetPlan.NextYear = nextDateTime.Year;
 
+                var currentPeriodTransactionsGroupedList = transactionBusiness.GetTransactionsForPeriodByGivenDate_GroupedByCategory(currentDateTime, UserId, ActiveBudgetId);
+
                 foreach (var bpCategory in budgetPlan.BudgetPlanCategories)
                 {
-                    model.PlanCategories.Add(new Models.ContextObjects.BudgetPlanCategory()
+                    var transactionForCategory = currentPeriodTransactionsGroupedList.SingleOrDefault(t=>t.CategoryId.Equals(bpCategory.CategoryId));
+                    var category = new Models.ContextObjects.BudgetPlanCategory()
                     {
                         BudgetPlanCategoryId = bpCategory.BudgetPlanCategoryId,
                         CategoryId = bpCategory.CategoryId,
                         CategoryName = bpCategory.Category.Name,
-                        PlannedAmount = bpCategory.PlannedAmount
-                    });
+                        PlannedAmount = bpCategory.PlannedAmount,
+                        SpentAmount = (transactionForCategory?.Amount ?? 0) * (-1)
+                    };
+                    category.RemainingAmount = category.PlannedAmount - category.SpentAmount;
+
+                    model.PlanCategories.Add(category);
                 }
 
                 return View(model);

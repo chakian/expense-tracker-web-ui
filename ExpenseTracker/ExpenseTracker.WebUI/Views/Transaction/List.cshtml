@@ -6,10 +6,10 @@
 
 <div class="row">
     <div class="col-md-6" style="text-align: left">
-        @Html.ActionLink(Resources.Transaction_List_Label_PreviousMonth, "List", new { year = Model.PreviousYear, month = Model.PreviousMonth })
+        @Html.ActionLink(Resources.Generic_PreviousMonth, "List", new { year = Model.PreviousYear, month = Model.PreviousMonth })
     </div>
     <div class="col-md-6" style="text-align: right">
-        @Html.ActionLink(Resources.Transaction_List_Label_NextMonth, "List", new { year = Model.NextYear, month = Model.NextMonth })
+        @Html.ActionLink(Resources.Generic_NextMonth, "List", new { year = Model.NextYear, month = Model.NextMonth })
     </div>
 </div>
 
