@@ -133,6 +133,42 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ayrılan Bütçe.
+        /// </summary>
+        public static string BudgetPlan_Label_BudgetedAmount {
+            get {
+                return ResourceManager.GetString("BudgetPlan_Label_BudgetedAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategori.
+        /// </summary>
+        public static string BudgetPlan_Label_Category {
+            get {
+                return ResourceManager.GetString("BudgetPlan_Label_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bütçeden Kalan.
+        /// </summary>
+        public static string BudgetPlan_Label_RemainingAmount {
+            get {
+                return ResourceManager.GetString("BudgetPlan_Label_RemainingAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Harcanmış Tutar.
+        /// </summary>
+        public static string BudgetPlan_Label_SpentAmount {
+            get {
+                return ResourceManager.GetString("BudgetPlan_Label_SpentAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kategori Silinecek.
         /// </summary>
         public static string Categories_Delete_Modal_Header {
@@ -196,11 +232,29 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sonraki Ay.
+        /// </summary>
+        public static string Generic_NextMonth {
+            get {
+                return ResourceManager.GetString("Generic_NextMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hayır.
         /// </summary>
         public static string Generic_No {
             get {
                 return ResourceManager.GetString("Generic_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Önceki Ay.
+        /// </summary>
+        public static string Generic_PreviousMonth {
+            get {
+                return ResourceManager.GetString("Generic_PreviousMonth", resourceCulture);
             }
         }
         
@@ -583,6 +637,15 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bütçe Planı.
+        /// </summary>
+        public static string Title_Budget_Plan {
+            get {
+                return ResourceManager.GetString("Title_Budget_Plan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Özet.
         /// </summary>
         public static string Title_Dashboard_Index {
@@ -804,24 +867,6 @@ namespace ExpenseTracker.Language {
         public static string Transaction_List_Label_Grid_Actions {
             get {
                 return ResourceManager.GetString("Transaction_List_Label_Grid_Actions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sonraki Ay.
-        /// </summary>
-        public static string Transaction_List_Label_NextMonth {
-            get {
-                return ResourceManager.GetString("Transaction_List_Label_NextMonth", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Önceki Ay.
-        /// </summary>
-        public static string Transaction_List_Label_PreviousMonth {
-            get {
-                return ResourceManager.GetString("Transaction_List_Label_PreviousMonth", resourceCulture);
             }
         }
         

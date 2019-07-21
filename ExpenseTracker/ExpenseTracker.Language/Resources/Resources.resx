@@ -360,10 +360,10 @@
   <data name="Transaction_List_Label_Grid_Actions" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="Transaction_List_Label_NextMonth" xml:space="preserve">
+  <data name="Generic_NextMonth" xml:space="preserve">
     <value>Sonraki Ay</value>
   </data>
-  <data name="Transaction_List_Label_PreviousMonth" xml:space="preserve">
+  <data name="Generic_PreviousMonth" xml:space="preserve">
     <value>Önceki Ay</value>
   </data>
   <data name="Version" xml:space="preserve">
@@ -386,5 +386,20 @@
   </data>
   <data name="Transaction_Template_Template_Name" xml:space="preserve">
     <value>Taslak Adı</value>
+  </data>
+  <data name="BudgetPlan_Label_BudgetedAmount" xml:space="preserve">
+    <value>Ayrılan Bütçe</value>
+  </data>
+  <data name="BudgetPlan_Label_Category" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="BudgetPlan_Label_RemainingAmount" xml:space="preserve">
+    <value>Bütçeden Kalan</value>
+  </data>
+  <data name="BudgetPlan_Label_SpentAmount" xml:space="preserve">
+    <value>Harcanmış Tutar</value>
+  </data>
+  <data name="Title_Budget_Plan" xml:space="preserve">
+    <value>Bütçe Planı</value>
   </data>
 </root>
