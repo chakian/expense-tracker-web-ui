@@ -72,10 +72,7 @@ namespace ExpenseTracker.Business
             return budgetPlan;
         }
 
-        private bool IsRequestedDateEqualToCurrentDate(int year, int month)
-        {
-            return DateTime.Now.Year.Equals(year) && DateTime.Now.Month.Equals(month);
-        }
+        private bool IsRequestedDateEqualToCurrentDate(int year, int month) => DateTime.Now.Year.Equals(year) && DateTime.Now.Month.Equals(month);
 
         private bool IsRequestedDateAdjacentToAnExistingBudgetPlanPeriod(int budgetId, int year, int month, string userId)
         {

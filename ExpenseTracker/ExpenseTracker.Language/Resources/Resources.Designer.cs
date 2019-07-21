@@ -808,6 +808,15 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Harcanan.
+        /// </summary>
+        public static string Transaction_Add_Label_AlreadySpent {
+            get {
+                return ResourceManager.GetString("Transaction_Add_Label_AlreadySpent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Taslaklar.
         /// </summary>
         public static string Transaction_Add_Label_SelectTemplate {

@@ -9,6 +9,8 @@ namespace ExpenseTracker.WebUI.Models.Transaction
         public List<TemplateProperties> TemplateList { get; set; }
         public int TemplateId { get; set; }
 
+        public List<CategoryStatus> CategoryStatusList { get; set; }
+
         public class TemplateProperties
         {
             public int TemplateId { get; set; }
@@ -17,6 +19,12 @@ namespace ExpenseTracker.WebUI.Models.Transaction
             public string Description { get; set; }
             public int AccountId { get; set; }
             public int CategoryId { get; set; }
+        }
+
+        public class CategoryStatus
+        {
+            public int CategoryId { get; set; }
+            public decimal SpentAmount { get; set; }
         }
     }
 }

@@ -432,4 +432,7 @@
   <data name="Title_Budget_SelectActiveBudget" xml:space="preserve">
     <value>Aktif Bütçe Belirleme</value>
   </data>
+  <data name="Transaction_Add_Label_AlreadySpent" xml:space="preserve">
+    <value>Harcanan</value>
+  </data>
 </root>
