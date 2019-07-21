@@ -27,6 +27,8 @@ This is the code that is running on the [test environment](https://harcatest.cag
 
 ## Frequently Used Snippets
 
+### Code Coverage
+
 #### Generate OpenCover report
 
 packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.4.1\tools\net472\xunit.console.x86.exe" -targetargs:"ExpenseTracker.Business.Tests\bin\Debug\ExpenseTracker.Business.Tests.dll -noshadow" -filter:"+[ExpenseTracker*]* -[ExpenseTracker.Business.Tests*]*" -output:"ExpenseTracker_opencover.xml"
@@ -34,3 +36,19 @@ packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:user -target:"p
 #### Report Generator
 
 packages\ReportGenerator.4.2.10\tools\net47\ReportGenerator.exe -reports:"ExpenseTracker_opencover.xml" -targetdir:"CodeCoverageReport"
+
+-----
+
+### EF Code First Migrations
+
+#### Create Migration
+
+Add-Migration <NameOfMigration>
+
+#### Update database up to the latest migration
+
+Update-Database [–Verbose] [–TargetMigration: <NameOfMigration>] [–TargetMigration: $InitialDatabase]
+
+#### Get update database script from-to specific migrations
+
+Update-Database -Script -SourceMigration: $InitialDatabase -TargetMigration: <NameOfMigration>
