@@ -132,7 +132,7 @@
   <data name="BudgetAccount_Label_CurrentBalance" xml:space="preserve">
     <value>Mevcut Bakiye</value>
   </data>
-  <data name="BudgetAccount_Label_GridActions" xml:space="preserve">
+  <data name="Generic_OneSpace" xml:space="preserve">
     <value> </value>
   </data>
   <data name="BudgetAccount_Link_BackToList" xml:space="preserve">
@@ -398,6 +398,27 @@
   </data>
   <data name="BudgetPlan_Label_SpentAmount" xml:space="preserve">
     <value>Harcanmış Tutar</value>
+  </data>
+  <data name="Budget_Button_ChangeActiveBudget" xml:space="preserve">
+    <value>Aktif bütçeyi değiştir</value>
+  </data>
+  <data name="Budget_Button_CreateNew" xml:space="preserve">
+    <value>Yeni Bütçe</value>
+  </data>
+  <data name="Budget_Delete_Modal_Header" xml:space="preserve">
+    <value>Bütçe Silinecek!</value>
+  </data>
+  <data name="Budget_Delete_Modal_Text" xml:space="preserve">
+    <value>Bu bütçeyi silmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Budget_List_Label_BudgetName" xml:space="preserve">
+    <value>Bütçe Adı</value>
+  </data>
+  <data name="Budget_List_Label_Currency" xml:space="preserve">
+    <value>Para Birimi</value>
+  </data>
+  <data name="Title_Budget_List" xml:space="preserve">
+    <value>Bütçelerim</value>
   </data>
   <data name="Title_Budget_Plan" xml:space="preserve">
     <value>Bütçe Planı</value>

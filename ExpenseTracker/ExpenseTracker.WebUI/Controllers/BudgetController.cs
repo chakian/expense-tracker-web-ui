@@ -36,32 +36,6 @@ namespace ExpenseTracker.WebUI.Controllers
             return View(model);
         }
 
-        // GET: Budget/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Budget budget = budgetBusiness.GetBudgetDetails(id.Value, UserId);
-
-            if (budget == null)
-            {
-                //TODO: return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
-                return HttpNotFound();
-            }
-
-            BudgetDetailModel model = new BudgetDetailModel
-            {
-                Id = budget.BudgetId,
-                Name = budget.Name,
-                CurrencyLongName = budget.Currency.LongName
-            };
-
-            return View(model);
-        }
-
         // GET: Budget/Create
         public ActionResult Create()
         {
@@ -142,36 +116,9 @@ namespace ExpenseTracker.WebUI.Controllers
             return View(model);
         }
 
-        // GET: Budget/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Budget budget = budgetBusiness.GetBudgetDetails(id.Value, UserId);
-
-            if (budget == null)
-            {
-                //TODO: return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
-                return HttpNotFound();
-            }
-
-            BudgetDetailModel model = new BudgetDetailModel
-            {
-                Id = budget.BudgetId,
-                CurrencyLongName = budget.Currency.LongName,
-                Name = budget.Name
-            };
-
-            return View(model);
-        }
-
-        // POST: Budget/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
             bool success = budgetBusiness.DeleteBudget(id, UserId);
             if(!success)

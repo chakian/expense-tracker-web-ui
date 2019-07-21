@@ -472,7 +472,6 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Budget\Create.cshtml" />
     <Content Include="Views\Budget\Delete.cshtml" />
-    <Content Include="Views\Budget\Details.cshtml" />
     <Content Include="Views\Budget\Edit.cshtml" />
     <Content Include="Views\Budget\Index.cshtml" />
     <Content Include="Views\BudgetAccount\Create.cshtml" />
