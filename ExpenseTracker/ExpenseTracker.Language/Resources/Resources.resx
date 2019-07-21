@@ -357,9 +357,6 @@
   <data name="Transaction_List_Label_Description" xml:space="preserve">
     <value>Açıklama</value>
   </data>
-  <data name="Transaction_List_Label_Grid_Actions" xml:space="preserve">
-    <value> </value>
-  </data>
   <data name="Generic_NextMonth" xml:space="preserve">
     <value>Sonraki Ay</value>
   </data>

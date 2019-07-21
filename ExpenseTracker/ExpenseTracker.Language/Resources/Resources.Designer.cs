@@ -925,15 +925,6 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  .
-        /// </summary>
-        public static string Transaction_List_Label_Grid_Actions {
-            get {
-                return ResourceManager.GetString("Transaction_List_Label_Grid_Actions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Taslak Kaydedilirken Hata Oluştu.
         /// </summary>
         public static string Transaction_Template_Creation_Error {
