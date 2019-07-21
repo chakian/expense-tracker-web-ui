@@ -58,10 +58,30 @@ namespace ExpenseTracker.Business
             return GetTransactionsForGivenRange(startOfMonth, endOfMonth, userId, activeBudgetId);
         }
 
+        public List<Transaction> GetTransactionsForPeriodByGivenDate_GroupedByCategory(DateTime inputDate, string userId, int activeBudgetId)
+        {
+            var rawList = GetTransactionsForPeriodByGivenDate(inputDate, userId, activeBudgetId);
+            List<Transaction> groupedList = new List<Transaction>();
+            rawList.GroupBy(t => t.CategoryId).Select(t => new
+            {
+                Amount = t.Sum(q => q.Amount),
+                CategoryId = t.First().CategoryId
+            }).ToList().ForEach(g =>
+            {
+                groupedList.Add(new Transaction()
+                {
+                    CategoryId = g.CategoryId,
+                    Amount = g.Amount
+                });
+            });
+
+            return groupedList;
+        }
+
         public List<Transaction> GetTransactionsForCurrentPeriod(string userId, int activeBudgetId)
         {
             DateTime today = DateTime.Now;
-            
+
             return GetTransactionsForPeriodByGivenDate(today, userId, activeBudgetId);
         }
 

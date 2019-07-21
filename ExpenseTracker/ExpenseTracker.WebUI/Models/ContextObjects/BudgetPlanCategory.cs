@@ -8,6 +8,8 @@
 
         public decimal SpentAmount { get; set; }
 
+        public decimal RemainingAmount { get; set; }
+
         public int CategoryId { get; set; }
 
         public string CategoryName { get; set; }
