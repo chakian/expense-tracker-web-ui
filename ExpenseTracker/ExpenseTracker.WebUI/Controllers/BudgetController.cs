@@ -211,7 +211,5 @@ namespace ExpenseTracker.WebUI.Controllers
 
             return RedirectToAction("SelectActiveBudget");
         }
-
-        public ActionResult Manage() => View();
     }
 }
