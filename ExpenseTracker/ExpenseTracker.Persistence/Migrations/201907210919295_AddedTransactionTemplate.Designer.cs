@@ -13,7 +13,7 @@ namespace ExpenseTracker.Persistence.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201907171945536_AddedTransactionTemplate"; }
+            get { return "201907210919295_AddedTransactionTemplate"; }
         }
         
         string IMigrationMetadata.Source

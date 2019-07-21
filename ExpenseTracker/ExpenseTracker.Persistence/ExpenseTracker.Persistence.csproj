@@ -102,9 +102,9 @@
     <Compile Include="Migrations\201905202050246_InitialCreate.Designer.cs">
       <DependentUpon>201905202050246_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907171945536_AddedTransactionTemplate.cs" />
-    <Compile Include="Migrations\201907171945536_AddedTransactionTemplate.Designer.cs">
-      <DependentUpon>201907171945536_AddedTransactionTemplate.cs</DependentUpon>
+    <Compile Include="Migrations\201907210919295_AddedTransactionTemplate.cs" />
+    <Compile Include="Migrations\201907210919295_AddedTransactionTemplate.Designer.cs">
+      <DependentUpon>201907210919295_AddedTransactionTemplate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,8 +123,8 @@
     <EmbeddedResource Include="Migrations\201905202050246_InitialCreate.resx">
       <DependentUpon>201905202050246_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907171945536_AddedTransactionTemplate.resx">
-      <DependentUpon>201907171945536_AddedTransactionTemplate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907210919295_AddedTransactionTemplate.resx">
+      <DependentUpon>201907210919295_AddedTransactionTemplate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

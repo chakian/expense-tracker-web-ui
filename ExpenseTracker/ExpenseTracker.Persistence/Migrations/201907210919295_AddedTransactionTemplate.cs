@@ -12,7 +12,7 @@ namespace ExpenseTracker.Persistence.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(maxLength: 250, unicode: false),
                         Amount = c.Decimal(precision: 18, scale: 2),
                         Description = c.String(),
                         CategoryId = c.Int(),
@@ -34,11 +34,10 @@ namespace ExpenseTracker.Persistence.Migrations
                 .ForeignKey("dbo.Accounts", t => t.TargetAccountId)
                 .ForeignKey("dbo.Users", t => t.UpdateUserId)
                 .ForeignKey("dbo.Users", t => t.UserId)
+                .Index(t => new { t.Name, t.BudgetId, t.UserId }, unique: true, name: "IX_TemplateName_User_Budget")
                 .Index(t => t.CategoryId)
                 .Index(t => t.SourceAccountId)
                 .Index(t => t.TargetAccountId)
-                .Index(t => t.BudgetId)
-                .Index(t => t.UserId)
                 .Index(t => t.InsertUserId)
                 .Index(t => t.UpdateUserId);
             
@@ -55,11 +54,10 @@ namespace ExpenseTracker.Persistence.Migrations
             DropForeignKey("dbo.TransactionTemplates", "BudgetId", "dbo.Budgets");
             DropIndex("dbo.TransactionTemplates", new[] { "UpdateUserId" });
             DropIndex("dbo.TransactionTemplates", new[] { "InsertUserId" });
-            DropIndex("dbo.TransactionTemplates", new[] { "UserId" });
-            DropIndex("dbo.TransactionTemplates", new[] { "BudgetId" });
             DropIndex("dbo.TransactionTemplates", new[] { "TargetAccountId" });
             DropIndex("dbo.TransactionTemplates", new[] { "SourceAccountId" });
             DropIndex("dbo.TransactionTemplates", new[] { "CategoryId" });
+            DropIndex("dbo.TransactionTemplates", "IX_TemplateName_User_Budget");
             DropTable("dbo.TransactionTemplates");
         }
     }
