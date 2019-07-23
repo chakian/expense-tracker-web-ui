@@ -9,11 +9,9 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
         [Fact]
         public void ListBudgetsOfUser_Success()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetBusiness(context);
-            string userId = DefaultTestUserId;
+            string userId = DefaultUserId;
 
             // ACT
             var budgets = business.GetBudgetsOfUser(userId);
@@ -27,11 +25,9 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
         [Fact]
         public void ListBudgetsOfUser_InactiveBudgetDoesntReturn()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetBusiness(context);
-            string userId = "test";
+            string userId = DefaultUserId;
 
             string nonExistingBudgetName = "Budget_99";
 
@@ -42,7 +38,7 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             context.Budgets.Add(budget);
             var budgetUser = CreateNewAuthorizedEntity<BudgetUser>();
             budgetUser.BudgetId = 11;
-            budgetUser.UserId = DefaultTestUserId;
+            budgetUser.UserId = DefaultUserId;
             context.BudgetUsers.Add(budgetUser);
             context.SaveChanges();
 

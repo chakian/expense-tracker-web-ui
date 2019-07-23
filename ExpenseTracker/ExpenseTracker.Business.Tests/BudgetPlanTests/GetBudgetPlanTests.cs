@@ -11,11 +11,9 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         [Fact]
         public void GetBudgetPlanById_Success()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
-            string userId = DefaultTestUserId;
+            string userId = DefaultUserId;
             int budgetPlanId = CreateBudgetPlan(DefaultTestBudgetId, 2019, 05, userId);
 
             // ACT
@@ -28,12 +26,10 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         [Fact]
         public void GetBudgetPlanForCurrentDate_Success_CurrentDatePlanDoesntExist()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
-            string userId = DefaultTestUserId;
+            string userId = DefaultUserId;
             int year = DateTime.Now.Year;
             int month = DateTime.Now.Month;
 
@@ -47,12 +43,10 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         [Fact]
         public void GetBudgetPlanForCurrentDate_Success_CurrentDatePlanExists()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
-            string userId = DefaultTestUserId;
+            string userId = DefaultUserId;
             int year = DateTime.Now.Year;
             int month = DateTime.Now.Month;
 
@@ -68,12 +62,10 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         [Fact]
         public void GetBudgetPlanForDate_Success_DateIsNextMonth()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
-            string userId = DefaultTestUserId;
+            string userId = DefaultUserId;
 
             DateTime currentDate = DateTime.Now;
             CreateBudgetPlan(budgetId, currentDate.Year, currentDate.Month, userId);
@@ -90,12 +82,10 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         [Fact]
         public void GetBudgetPlanForDate_Success_DateIsPreviousMonth()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
-            string userId = DefaultTestUserId;
+            string userId = DefaultUserId;
 
             DateTime currentDate = DateTime.Now;
             CreateBudgetPlan(budgetId, currentDate.Year, currentDate.Month, userId);
@@ -112,12 +102,10 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         [Fact]
         public void GetBudgetPlanForDate_Fail_DateIsNotAdjacent()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
-            string userId = DefaultTestUserId;
+            string userId = DefaultUserId;
 
             DateTime currentDate = DateTime.Now;
             CreateBudgetPlan(budgetId, currentDate.Year, currentDate.Month, userId);
@@ -134,20 +122,18 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         [Fact]
         public void GetBudgetPlanForDate_Fail_UserIsNotAuthorizedForBudget()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanBusiness(context);
             int budgetId = DefaultTestBudgetId;
-            string userId = UNAUTHORIZED_USER;
+            string unauthorizedUserId = UNAUTHORIZED_USER;
 
             DateTime currentDate = DateTime.Now;
-            CreateBudgetPlan(budgetId, currentDate.Year, currentDate.Month, userId);
+            CreateBudgetPlan(budgetId, currentDate.Year, currentDate.Month, DefaultUserId);
 
             DateTime notAdjacentDate = currentDate.AddMonths(2);
 
             // ACT
-            var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, notAdjacentDate.Year, notAdjacentDate.Month, userId);
+            var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, notAdjacentDate.Year, notAdjacentDate.Month, unauthorizedUserId);
 
             //ASSERT
             Assert.Null(budgetPlan);

@@ -7,12 +7,10 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
         [Fact]
         public void GetBudgetDetails_Success()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetBusiness(context);
             int budgetId = 1;
-            string userId = "test";
+            string userId = DefaultUserId;
 
             // ACT
             var budget = business.GetBudgetDetails(budgetId, userId);
@@ -21,14 +19,12 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             Assert.NotNull(budget);
             Assert.Equal(budgetId, budget.BudgetId);
             Assert.Equal("Budget_1", budget.Name);
-            Assert.Equal("a", budget.InsertUser.Id);
+            Assert.Equal(DefaultUserId, budget.InsertUser.Id);
         }
 
         [Fact]
         public void GetBudgetDetails_NotAuthorized()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetBusiness(context);
             int budgetId = 5;

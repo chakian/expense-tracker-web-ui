@@ -7,19 +7,14 @@ namespace ExpenseTracker.Business.Tests
     public class BaseBudgetTest : BaseQueryTest
     {
         protected int DefaultTestBudgetId = -1;
-        protected const string DefaultTestUserId = "test";
 
-        //TODO: [TestInitialize()]
-        public void BaseTestInitialize()
+        public BaseBudgetTest()
         {
             if (context == null)
             {
                 var connection = Effort.DbConnectionFactory.CreateTransient();
                 context = new ExpenseTrackerContext(connection);
             }
-
-            CreateDefaultCurrencies();
-            CreateDefaultUsers(DefaultTestUserId);
 
             CreateDefaultBudgetsAndAssignUsers();
         }
@@ -35,7 +30,7 @@ namespace ExpenseTracker.Business.Tests
             var budgetUserData = new List<Dbo.BudgetUser>();
             var budgetUser = CreateNewAuthorizedEntity<Dbo.BudgetUser>();
             budgetUser.BudgetId = DefaultTestBudgetId;
-            budgetUser.UserId = DefaultTestUserId;
+            budgetUser.UserId = DefaultUserId;
             budgetUserData.Add(budgetUser);
 
             context.BudgetUsers.AddRange(budgetUserData);

@@ -1,13 +1,10 @@
 ﻿using ExpenseTracker.Persistence.Context.DbModels;
-using ExpenseTracker.Persistence.Identity;
 using Xunit;
 
 namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
 {
     public class CreateTransactionTemplateTests : BaseQueryTest
     {
-        private readonly Currency DefaultCurrency;
-        private readonly User DefaultUser;
         private readonly Budget DefaultBudget;
         private readonly AccountType DefaultAccountType;
         private readonly Account DefaultAccount;
@@ -15,20 +12,8 @@ namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
 
         public CreateTransactionTemplateTests()
         {
-            // Create currency
-            var currency = new Currency { IsActive = true, CurrencyId = 1, CurrencyCode = "TRY", DisplayName = "TL", LongName = "Türk Lirası" };
-            context.Currencies.Add(currency);
-            context.SaveChanges();
-            DefaultCurrency = currency;
-
-            // Create user
-            var user = new User { IsActive = true, UserName = "testUser", Id = "123", Email = "test@Defa.ult" };
-            context.Users.Add(user);
-            context.SaveChanges();
-            DefaultUser = user;
-
             // Create budget for user
-            var budget = new BudgetBusiness(context).CreateBudget("testBudget", DefaultCurrency.CurrencyId, DefaultUser.Id);
+            var budget = new BudgetBusiness(context).CreateBudget("testBudget", DefaultCurrency.CurrencyId, DefaultUserId);
             DefaultBudget = budget;
 
             // Create an account type
@@ -38,7 +23,7 @@ namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
             DefaultAccountType = accountType;
 
             // Create account for user and budget
-            var account = CreateNewAuthorizedEntity<Account>(DefaultUser.Id);
+            var account = CreateNewAuthorizedEntity<Account>(DefaultUserId);
             account.BudgetId = DefaultBudget.BudgetId;
             account.CurrentBalance = account.StartingBalance = 5000;
             account.Name = "testAccount";
@@ -48,7 +33,7 @@ namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
             DefaultAccount = account;
 
             // Create a category
-            var category = CreateNewAuthorizedEntity<Category>(DefaultUser.Id);
+            var category = CreateNewAuthorizedEntity<Category>(DefaultUserId);
             category.BudgetId = DefaultBudget.BudgetId;
             category.Name = "testCategory";
             context.Categories.Add(category);
@@ -86,7 +71,7 @@ namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
             var business = new TransactionTemplateBusiness(context);
 
             // Act
-            bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
+            bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUserId);
 
             // Assert
             Assert.True(actualResult);
@@ -110,7 +95,7 @@ namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
             var business = new TransactionTemplateBusiness(context);
 
             // Act
-            bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
+            bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUserId);
 
             // Assert
             Assert.False(actualResult);
@@ -130,7 +115,7 @@ namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
             var business = new TransactionTemplateBusiness(context);
 
             // Act
-            bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
+            bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUserId);
 
             // Assert
             Assert.False(actualResult);
@@ -148,11 +133,11 @@ namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
             int? targetAccountId = null;
 
             var business = new TransactionTemplateBusiness(context);
-            business.CreateTransactionTemplate(templateName, 150, "Test Expense 1", categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
-            business.CreateTransactionTemplate("New Template 2", 350, "Test Expense 2", categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
+            business.CreateTransactionTemplate(templateName, 150, "Test Expense 1", categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUserId);
+            business.CreateTransactionTemplate("New Template 2", 350, "Test Expense 2", categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUserId);
 
             // Act
-            bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUser.Id);
+            bool actualResult = business.CreateTransactionTemplate(templateName, amount, description, categoryId, sourceAccountId, targetAccountId, DefaultBudget.BudgetId, DefaultUserId);
 
             // Assert
             Assert.False(actualResult);

@@ -10,30 +10,36 @@ namespace ExpenseTracker.Business.Tests
     {
         protected ExpenseTrackerContext context;
 
-        public BaseQueryTest()
+        private readonly User DefaultUser;
+        protected readonly Currency DefaultCurrency;
+
+        protected string DefaultUserId { get { return DefaultUser?.Id; } }
+
+        public BaseQueryTest(string defaultTestUserId = "defaultTestUserId")
         {
             var connection = Effort.DbConnectionFactory.CreateTransient();
             context = new ExpenseTrackerContext(connection);
+
+            var currencies = CreateDefaultCurrencies();
+            DefaultCurrency = currencies[0];
+            DefaultUser = CreateDefaultUser(defaultTestUserId);
         }
 
-        //TODO: Changed for backwards compatibility. Delete it when refactoring.
-        protected T CreateNewAuthorizedEntity<T>()
+        protected T CreateNewAuthorizedEntity<T>(string userId = null)
             where T : AuditableEntity, new()
         {
-            T obj = CreateNewAuthorizedEntity<T>("a");
-            return obj;
-        }
-        protected T CreateNewAuthorizedEntity<T>(string userId)
-            where T : AuditableEntity, new()
-        {
-            T obj = new T();
-            obj.InsertUserId = userId;
-            obj.InsertTime = DateTime.Now;
-            obj.IsActive = true;
+            if (string.IsNullOrEmpty(userId)) userId = DefaultUser.Id;
+
+            T obj = new T
+            {
+                InsertUserId = userId,
+                InsertTime = DateTime.Now,
+                IsActive = true
+            };
             return obj;
         }
 
-        protected void CreateDefaultCurrencies()
+        private List<Currency> CreateDefaultCurrencies()
         {
             var currencyList = new List<Currency>();
             var currency = new Currency { IsActive = true, CurrencyId = 1, CurrencyCode = "TRY", DisplayName = "TL", LongName = "Türk Lirası" };
@@ -47,20 +53,18 @@ namespace ExpenseTracker.Business.Tests
 
             context.Currencies.AddRange(currencyList);
             context.SaveChanges();
+
+            return currencyList;
         }
 
-        protected void CreateDefaultUsers(string defaultTestUserId)
+        private User CreateDefaultUser(string defaultTestUserId)
         {
-            var user = new User { IsActive = true, UserName = "A", Id = "a", Email = "a@a.a" };
-            context.Users.Add(user);
-
-            user = new User { IsActive = true, UserName = "B", Id = "b", Email = "b@b.b" };
-            context.Users.Add(user);
-
-            user = new User { IsActive = true, UserName = "TEST", Id = defaultTestUserId, Email = "test@test.test" };
+            var user = new User { IsActive = true, UserName = "TEST", Id = defaultTestUserId, Email = "test@test.test" };
             context.Users.Add(user);
 
             context.SaveChanges();
+
+            return user;
         }
     }
 }

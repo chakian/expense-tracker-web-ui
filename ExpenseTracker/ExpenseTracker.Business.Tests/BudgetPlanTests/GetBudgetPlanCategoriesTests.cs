@@ -31,11 +31,9 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         [Fact]
         public void GetBudgetPlanCategories_Success_NoRecordedPlan()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanCategoryBusiness(context);
-            string userId = DefaultTestUserId;
+            string userId = DefaultUserId;
             int budgetPlanId = CreateBudgetPlan(DefaultTestBudgetId, 2019, 05, userId);
 
             List<string> categoryNames = new List<string>();
@@ -57,11 +55,9 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         [Fact]
         public void GetBudgetPlanCategories_Success_SomeRecordedPlan()
         {
-            //TODO: Delete this and do it on initialize step if possible
-            BaseTestInitialize();
             // ARRANGE
             var business = new BudgetPlanCategoryBusiness(context);
-            string userId = DefaultTestUserId;
+            string userId = DefaultUserId;
             int budgetPlanId = CreateBudgetPlan(DefaultTestBudgetId, 2019, 05, userId);
 
             List<string> categoryNames = new List<string>();
