@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using ExpenseTracker.Business.Tests.Base;
+using Xunit;
 
 namespace ExpenseTracker.Business.Tests.BudgetTests
 {

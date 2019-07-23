@@ -1,10 +1,10 @@
-﻿using ExpenseTracker.Persistence.Context.DbModels;
-using ExpenseTracker.Persistence.Identity;
+﻿using ExpenseTracker.Business.Tests.Base;
+using ExpenseTracker.Persistence.Context.DbModels;
 using Xunit;
 
 namespace ExpenseTracker.Business.Tests.TransactionTemplateTests
 {
-    public class GetTransactionTemplateTests : BaseQueryTest
+    public class GetTransactionTemplateTests : BaseTest
     {
         private readonly Budget DefaultBudget;
         private readonly AccountType DefaultAccountType;

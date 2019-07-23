@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Persistence.Context.DbModels;
+﻿using ExpenseTracker.Business.Tests.Base;
+using ExpenseTracker.Persistence.Context.DbModels;
 using System.Linq;
 using Xunit;
 

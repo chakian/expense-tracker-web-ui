@@ -100,7 +100,7 @@
   <ItemGroup>
     <Compile Include="Base\BaseBudgetPlanTest.cs" />
     <Compile Include="Base\BaseBudgetTest.cs" />
-    <Compile Include="Base\BaseQueryTest.cs" />
+    <Compile Include="Base\BaseTest.cs" />
     <Compile Include="BudgetPlanTests\GetBudgetPlanCategoriesTests.cs" />
     <Compile Include="BudgetPlanTests\GetBudgetPlanTests.cs" />
     <Compile Include="BudgetTests\ListBudgetsOfUserTests.cs" />
@@ -129,6 +129,7 @@
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

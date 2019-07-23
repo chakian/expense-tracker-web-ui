@@ -29,7 +29,7 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         }
 
         [Fact]
-        public void GetBudgetPlanCategories_Success_NoRecordedPlan()
+        public void Success_NoRecordedPlan()
         {
             // ARRANGE
             var business = new BudgetPlanCategoryBusiness(context);
@@ -53,7 +53,7 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
         }
 
         [Fact]
-        public void GetBudgetPlanCategories_Success_SomeRecordedPlan()
+        public void Success_SomeRecordedPlan()
         {
             // ARRANGE
             var business = new BudgetPlanCategoryBusiness(context);

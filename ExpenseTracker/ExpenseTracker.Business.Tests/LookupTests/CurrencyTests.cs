@@ -1,9 +1,10 @@
-﻿using ExpenseTracker.Persistence.Context;
+﻿using ExpenseTracker.Business.Tests.Base;
+using ExpenseTracker.Persistence.Context;
 using Xunit;
 
 namespace ExpenseTracker.Business.Tests.LookupTests
 {
-    public class CurrencyTests : BaseQueryTest
+    public class CurrencyTests : BaseTest
     {
         [Fact]
         public void GetCurrencyList_Success()

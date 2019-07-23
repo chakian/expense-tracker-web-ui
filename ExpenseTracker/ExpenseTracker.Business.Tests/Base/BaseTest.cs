@@ -4,9 +4,9 @@ using ExpenseTracker.Persistence.Identity;
 using System;
 using System.Collections.Generic;
 
-namespace ExpenseTracker.Business.Tests
+namespace ExpenseTracker.Business.Tests.Base
 {
-    public class BaseQueryTest
+    public class BaseTest
     {
         protected ExpenseTrackerContext context;
 
@@ -15,7 +15,7 @@ namespace ExpenseTracker.Business.Tests
 
         protected string DefaultUserId { get { return DefaultUser?.Id; } }
 
-        public BaseQueryTest(string defaultTestUserId = "defaultTestUserId")
+        public BaseTest(string defaultTestUserId = "defaultTestUserId")
         {
             var connection = Effort.DbConnectionFactory.CreateTransient();
             context = new ExpenseTrackerContext(connection);
