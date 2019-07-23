@@ -106,6 +106,10 @@
     <Compile Include="Migrations\201907210919295_AddedTransactionTemplate.Designer.cs">
       <DependentUpon>201907210919295_AddedTransactionTemplate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907221842046_Category_IsIncome.cs" />
+    <Compile Include="Migrations\201907221842046_Category_IsIncome.Designer.cs">
+      <DependentUpon>201907221842046_Category_IsIncome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -125,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907210919295_AddedTransactionTemplate.resx">
       <DependentUpon>201907210919295_AddedTransactionTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907221842046_Category_IsIncome.resx">
+      <DependentUpon>201907221842046_Category_IsIncome.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

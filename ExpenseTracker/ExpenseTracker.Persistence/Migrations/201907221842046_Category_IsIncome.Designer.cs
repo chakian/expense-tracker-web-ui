@@ -2,17 +2,18 @@
 namespace ExpenseTracker.Persistence.Migrations
 {
     using System.CodeDom.Compiler;
+    using System.Data.Entity.Migrations;
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class Category_IsIncome : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Category_IsIncome));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905202050246_InitialCreate"; }
+            get { return "201907221842046_Category_IsIncome"; }
         }
         
         string IMigrationMetadata.Source
