@@ -3,7 +3,7 @@ using System;
 
 namespace ExpenseTracker.Persistence.Context.DbModels
 {
-    public class AuditableEntity : BaseEntity
+    public class AuditableDbo : BaseDbo
     {
         public string InsertUserId { get; set; }
         public User InsertUser { get; set; }

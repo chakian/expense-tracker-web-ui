@@ -26,7 +26,7 @@ namespace ExpenseTracker.Business.Tests.Base
         }
 
         protected T CreateNewAuthorizedEntity<T>(string userId = null)
-            where T : AuditableEntity, new()
+            where T : AuditableDbo, new()
         {
             if (string.IsNullOrEmpty(userId)) userId = DefaultUser.Id;
 

@@ -44,6 +44,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
                 account.CurrentBalance = account.StartingBalance;
 
+                //TODO: Do not use context in Web project. Use the business methods instead!
                 context.Accounts.Add(account);
                 context.SaveChanges();
                 return RedirectToAction("Index");
@@ -80,6 +81,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 account.UpdateUserId = UserId;
                 account.UpdateTime = DateTime.Now;
 
+                //TODO: Do not use context in Web project. Use the business methods instead!
                 context.Entry(account).State = EntityState.Modified;
                 context.SaveChanges();
                 return RedirectToAction("Index");
@@ -108,6 +110,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 account.UpdateTime = DateTime.Now;
                 account.IsActive = false;
 
+                //TODO: Do not use context in Web project. Use the business methods instead!
                 context.Entry(account).State = EntityState.Modified;
                 context.SaveChanges();
             }

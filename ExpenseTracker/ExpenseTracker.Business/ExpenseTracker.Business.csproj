@@ -43,8 +43,8 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -66,6 +66,7 @@
     <Compile Include="BudgetPlanBusiness.cs" />
     <Compile Include="BudgetPlanCategoryBusiness.cs" />
     <Compile Include="BudgetUserBusiness.cs" />
+    <Compile Include="CategoryBusiness.cs" />
     <Compile Include="TransactionBusiness.cs" />
     <Compile Include="AccountTypeBusiness.cs" />
     <Compile Include="CurrencyBusiness.cs" />
@@ -84,6 +85,10 @@
     <ProjectReference Include="..\ExpenseTracker.Common\ExpenseTracker.Common.csproj">
       <Project>{65C9F7E5-739A-401A-A9FE-76EC2B583067}</Project>
       <Name>ExpenseTracker.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExpenseTracker.Entities\ExpenseTracker.Entities.csproj">
+      <Project>{0A2B7B32-2DA7-4FC2-8BCE-06D1D97F649F}</Project>
+      <Name>ExpenseTracker.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExpenseTracker.Persistence\ExpenseTracker.Persistence.csproj">
       <Project>{EACAE983-5259-49A9-A7B5-FA5A4C14C2DB}</Project>

@@ -18,7 +18,7 @@ namespace ExpenseTracker.Persistence.Context.FluentConfiguration
         }
 
         private static void Configure<T>(DbModelBuilder modelBuilder)
-            where T : AuditableEntity
+            where T : AuditableDbo
         {
             modelBuilder.Entity<T>()
                 .HasRequired(s => s.InsertUser)

@@ -2,7 +2,7 @@
 
 namespace ExpenseTracker.Persistence.Context.DbModels
 {
-    public class BudgetPlanCategory : AuditableEntity
+    public class BudgetPlanCategory : AuditableDbo
     {
         public int BudgetPlanCategoryId { get; set; }
 

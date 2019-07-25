@@ -1,5 +1,4 @@
-﻿using ExpenseTracker.Persistence.Context;
-using Dbo = ExpenseTracker.Persistence.Context.DbModels;
+﻿using Dbo = ExpenseTracker.Persistence.Context.DbModels;
 using System.Collections.Generic;
 
 namespace ExpenseTracker.Business.Tests.Base
@@ -10,12 +9,6 @@ namespace ExpenseTracker.Business.Tests.Base
 
         public BaseBudgetTest()
         {
-            if (context == null)
-            {
-                var connection = Effort.DbConnectionFactory.CreateTransient();
-                context = new ExpenseTrackerContext(connection);
-            }
-
             CreateDefaultBudgetsAndAssignUsers();
         }
 

@@ -1,5 +1,6 @@
 ﻿using ExpenseTracker.Business;
 using ExpenseTracker.Common.Helpers;
+//TODO: Do not use context in Web project. Use the Entities instead!
 using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.WebUI.Models.BudgetRelated;
 using System;

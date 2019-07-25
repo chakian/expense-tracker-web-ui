@@ -95,6 +95,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
         private Budget GetUsersFirstBudget()
         {
+            //TODO: Do not use context in Web project. Use the business methods instead!
             Budget budget = new BudgetBusiness(context).GetBudgetsOfUser(UserId).FirstOrDefault();
             if (budget != null)
             {

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpenseTracker.Persistence.Context.DbModels
 {
-    public class BudgetUser : AuditableEntity
+    public class BudgetUser : AuditableDbo
     {
         public int BudgetUserId { get; set; }
 

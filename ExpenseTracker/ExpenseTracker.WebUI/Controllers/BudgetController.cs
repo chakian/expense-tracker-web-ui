@@ -135,6 +135,7 @@ namespace ExpenseTracker.WebUI.Controllers
             Session["ActiveBudgetId"] = budgetId;
             Session["ActiveBudgetName"] = budgetBusiness.GetBudgetDetails(budgetId, UserId).Name;
 
+            //TODO: Do not use context in Web project. Use the business methods instead!
             var user = context.Users.Find(UserId);
             user.ActiveBudgetId = budgetId;
             context.Entry(user).State = EntityState.Modified;

@@ -39,6 +39,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 category.UpdateTime = DateTime.Now;
                 category.IsActive = true;
 
+                //TODO: Do not use context in Web project. Use the business methods instead!
                 context.Categories.Add(category);
                 context.SaveChanges();
                 return RedirectToAction("Index");
@@ -71,6 +72,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 category.UpdateUserId = User.Identity.GetUserId();
                 category.UpdateTime = DateTime.Now;
 
+                //TODO: Do not use context in Web project. Use the business methods instead!
                 context.Entry(category).State = EntityState.Modified;
                 context.SaveChanges();
                 return RedirectToAction("Index");
@@ -88,6 +90,7 @@ namespace ExpenseTracker.WebUI.Controllers
             category.UpdateTime = DateTime.Now;
             category.IsActive = false;
 
+            //TODO: Do not use context in Web project. Use the business methods instead!
             context.Entry(category).State = EntityState.Modified;
             context.SaveChanges();
             return RedirectToAction("Index");

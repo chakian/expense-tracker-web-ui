@@ -7,13 +7,13 @@ namespace ExpenseTracker.Persistence.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Category_IsIncome : IMigrationMetadata
+    public sealed partial class Category_IsIncome_ParentId_Order : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Category_IsIncome));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Category_IsIncome_ParentId_Order));
         
         string IMigrationMetadata.Id
         {
-            get { return "201907221842046_Category_IsIncome"; }
+            get { return "201907251831232_Category_IsIncome_ParentId_Order"; }
         }
         
         string IMigrationMetadata.Source

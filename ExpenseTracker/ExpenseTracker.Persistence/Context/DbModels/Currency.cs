@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpenseTracker.Persistence.Context.DbModels
 {
-    public class Currency : BaseEntity
+    public class Currency : BaseDbo
     {
         public Currency()
         {
