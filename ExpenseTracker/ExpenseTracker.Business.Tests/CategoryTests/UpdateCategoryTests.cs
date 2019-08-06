@@ -55,5 +55,61 @@ namespace ExpenseTracker.Business.Tests.CategoryTests
             Assert.Equal(expectedCategoryName, actual.Name);
             Assert.True(actual.IsIncomeCategory);
         }
+
+        [Fact]
+        public void UpdateCategoryToHaveParent_Success()
+        {
+            // ARRANGE
+            CategoryBusiness categoryBusiness = new CategoryBusiness(context);
+
+            CategoryEntity categoryEntity = new CategoryEntity()
+            {
+                BudgetId = DefaultTestBudgetId,
+                IsIncomeCategory = false,
+                Name = "soon to have parent"
+            };
+            var initialInsert = categoryBusiness.CreateCategory(categoryEntity, DefaultUserId);
+            Assert.NotNull(initialInsert);
+
+            categoryEntity = new CategoryEntity()
+            {
+                BudgetId = DefaultTestBudgetId,
+                IsIncomeCategory = false,
+                Name = "This is parent"
+            };
+            CategoryEntity parent = categoryBusiness.CreateCategory(categoryEntity, DefaultUserId);
+            Assert.NotNull(parent);
+
+            // ACT
+            initialInsert.ParentId = parent.CategoryId;
+            CategoryEntity actual = categoryBusiness.UpdateCategory(initialInsert, DefaultUserId);
+
+            // ASSERT
+            Assert.Equal(initialInsert.CategoryId, actual.CategoryId);
+            Assert.Equal(parent.CategoryId, actual.ParentId);
+        }
+
+        [Fact]
+        public void UpdateCategoryToHaveParent_Fail_ParentDoesntExist()
+        {
+            // ARRANGE
+            CategoryBusiness categoryBusiness = new CategoryBusiness(context);
+
+            CategoryEntity categoryEntity = new CategoryEntity()
+            {
+                BudgetId = DefaultTestBudgetId,
+                IsIncomeCategory = false,
+                Name = "soon to have parent"
+            };
+            var initialInsert = categoryBusiness.CreateCategory(categoryEntity, DefaultUserId);
+            Assert.NotNull(initialInsert);
+
+            // ACT
+            initialInsert.ParentId = -1;
+            CategoryEntity actual = categoryBusiness.UpdateCategory(initialInsert, DefaultUserId);
+
+            // ASSERT
+            Assert.Null(actual);
+        }
     }
 }

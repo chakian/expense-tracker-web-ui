@@ -68,12 +68,18 @@ namespace ExpenseTracker.Business
             {
                 return null;
             }
+            if (categoryEntity.ParentId.HasValue && !GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.CategoryId.Equals(categoryEntity.ParentId)))
+            {
+                return null;
+            }
 
+            //TODO: Empty name should be validated above
             if (!string.IsNullOrEmpty(categoryEntity.Name))
             {
                 category.Name = categoryEntity.Name;
             }
             category.IsIncomeCategory = categoryEntity.IsIncomeCategory;
+            category.ParentCategoryId = categoryEntity.ParentId;
 
             context.SaveChanges();
 
