@@ -18,6 +18,7 @@ namespace ExpenseTracker.Business
             category.Name = entity.Name;
             category.BudgetId = entity.BudgetId;
             category.IsIncomeCategory = entity.IsIncomeCategory;
+            category.ParentCategoryId = entity.ParentId;
             return category;
         }
 
@@ -28,6 +29,7 @@ namespace ExpenseTracker.Business
             category.Name = dbo.Name;
             category.BudgetId = dbo.BudgetId;
             category.IsIncomeCategory = dbo.IsIncomeCategory;
+            category.ParentId = dbo.ParentCategoryId;
             return category;
         }
 
@@ -41,6 +43,10 @@ namespace ExpenseTracker.Business
         {
             //TODO: Validations!!!
             if(GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.Name.Equals(categoryEntity.Name)))
+            {
+                return null;
+            }
+            if(categoryEntity.ParentId.HasValue && !GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.CategoryId.Equals(categoryEntity.ParentId)))
             {
                 return null;
             }
