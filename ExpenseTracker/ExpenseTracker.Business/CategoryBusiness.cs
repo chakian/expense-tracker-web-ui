@@ -94,6 +94,10 @@ namespace ExpenseTracker.Business
             {
                 return false;
             }
+            if(GetCategoriesByBudgetId(category.BudgetId, userId).Any(q => q.ParentCategoryId.Equals(categoryId)))
+            {
+                return false;
+            }
 
             category.IsActive = false;
             context.SaveChanges();

@@ -31,5 +31,36 @@ namespace ExpenseTracker.Business.Tests.CategoryTests
             // ASSERT
             Assert.Null(actual);
         }
+
+        [Fact]
+        public void DeleteCategory_Fail_HasChildCategories()
+        {
+            // ARRANGE
+            CategoryBusiness categoryBusiness = new CategoryBusiness(context);
+
+            CategoryEntity categoryEntity = new CategoryEntity()
+            {
+                BudgetId = DefaultTestBudgetId,
+                IsIncomeCategory = false,
+                Name = "This is parent"
+            };
+            CategoryEntity parent = categoryBusiness.CreateCategory(categoryEntity, DefaultUserId);
+            Assert.NotNull(parent);
+
+            categoryEntity = new CategoryEntity()
+            {
+                BudgetId = DefaultTestBudgetId,
+                Name = "child",
+                ParentId = parent.CategoryId
+            };
+            var child = categoryBusiness.CreateCategory(categoryEntity, DefaultUserId);
+            Assert.NotNull(child);
+
+            // ACT
+            bool isDeleted = categoryBusiness.DeleteCategory(parent.CategoryId, DefaultUserId);
+
+            // ASSERT
+            Assert.False(isDeleted);
+        }
     }
 }
