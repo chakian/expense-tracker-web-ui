@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Entities;
 using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -30,6 +31,12 @@ namespace ExpenseTracker.Business
             return category;
         }
 
+        private Category GetCategoryById(int categoryId, string userId)
+        {
+            var category = context.Categories.SingleOrDefault(q => q.IsActive && q.CategoryId.Equals(categoryId) && q.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)));
+            return category;
+        }
+
         public CategoryEntity CreateCategory(CategoryEntity categoryEntity, string userId)
         {
             //TODO: Validations!!!
@@ -49,7 +56,7 @@ namespace ExpenseTracker.Business
 
         public CategoryEntity UpdateCategory(CategoryEntity categoryEntity, string userId)
         {
-            var category = GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).SingleOrDefault(q => q.Name.Equals(categoryEntity.Name));
+            var category = GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).SingleOrDefault(q => q.CategoryId.Equals(categoryEntity.CategoryId));
             //TODO: Validations!!!
             if (category == null)
             {
@@ -66,6 +73,20 @@ namespace ExpenseTracker.Business
 
             categoryEntity = ConvertDboToEntity(category);
             return categoryEntity;
+        }
+
+        public bool DeleteCategory(int categoryId, string userId)
+        {
+            var category = GetCategoryById(categoryId, userId);
+            if(category == null)
+            {
+                return false;
+            }
+
+            category.IsActive = false;
+            context.SaveChanges();
+
+            return true;
         }
 
         //TODO: Use Entities!

@@ -108,6 +108,7 @@
     <Compile Include="BudgetTests\ListBudgetsOfUserTests.cs" />
     <Compile Include="BudgetTests\GetBudgetDetailTests.cs" />
     <Compile Include="CategoryTests\CreateCategoryTests.cs" />
+    <Compile Include="CategoryTests\DeleteCategoryTests.cs" />
     <Compile Include="CategoryTests\UpdateCategoryTests.cs" />
     <Compile Include="LookupTests\CurrencyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
