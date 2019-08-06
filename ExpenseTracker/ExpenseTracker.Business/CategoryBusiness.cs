@@ -2,6 +2,7 @@
 using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 
 namespace ExpenseTracker.Business
@@ -40,6 +41,27 @@ namespace ExpenseTracker.Business
             Category category = ConvertEntityToDbo(categoryEntity, userId);
             
             context.Categories.Add(category);
+            context.SaveChanges();
+
+            categoryEntity = ConvertDboToEntity(category);
+            return categoryEntity;
+        }
+
+        public CategoryEntity UpdateCategory(CategoryEntity categoryEntity, string userId)
+        {
+            var category = GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).SingleOrDefault(q => q.Name.Equals(categoryEntity.Name));
+            //TODO: Validations!!!
+            if (category == null)
+            {
+                return null;
+            }
+
+            if (!string.IsNullOrEmpty(categoryEntity.Name))
+            {
+                category.Name = categoryEntity.Name;
+            }
+            category.IsIncomeCategory = categoryEntity.IsIncomeCategory;
+
             context.SaveChanges();
 
             categoryEntity = ConvertDboToEntity(category);
