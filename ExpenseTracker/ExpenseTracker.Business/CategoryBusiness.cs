@@ -42,17 +42,17 @@ namespace ExpenseTracker.Business
         public CategoryEntity CreateCategory(CategoryEntity categoryEntity, string userId)
         {
             //TODO: Validations!!!
-            if(GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.Name.Equals(categoryEntity.Name)))
+            if (GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.Name.Equals(categoryEntity.Name)))
             {
                 return null;
             }
-            if(categoryEntity.ParentId.HasValue && !GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.CategoryId.Equals(categoryEntity.ParentId)))
+            if (categoryEntity.ParentId.HasValue && !GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.CategoryId.Equals(categoryEntity.ParentId)))
             {
                 return null;
             }
 
             Category category = ConvertEntityToDbo(categoryEntity, userId);
-            
+
             context.Categories.Add(category);
             context.SaveChanges();
 
@@ -62,7 +62,7 @@ namespace ExpenseTracker.Business
 
         public CategoryEntity UpdateCategory(CategoryEntity categoryEntity, string userId)
         {
-            var category = GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).SingleOrDefault(q => q.CategoryId.Equals(categoryEntity.CategoryId));
+            Category category = GetCategoriesByBudgetIdInternal(categoryEntity.BudgetId, userId).SingleOrDefault(q => q.CategoryId.Equals(categoryEntity.CategoryId));
             //TODO: Validations!!!
             if (category == null)
             {
@@ -90,11 +90,11 @@ namespace ExpenseTracker.Business
         public bool DeleteCategory(int categoryId, string userId)
         {
             var category = GetCategoryById(categoryId, userId);
-            if(category == null)
+            if (category == null)
             {
                 return false;
             }
-            if(GetCategoriesByBudgetId(category.BudgetId, userId).Any(q => q.ParentCategoryId.Equals(categoryId)))
+            if (GetCategoriesByBudgetIdInternal(category.BudgetId, userId).Any(q => q.ParentCategoryId.Equals(categoryId)))
             {
                 return false;
             }
@@ -105,11 +105,27 @@ namespace ExpenseTracker.Business
             return true;
         }
 
-        //TODO: Use Entities!
-        public List<Category> GetCategoriesByBudgetId(int budgetId, string userId)
+        private List<Category> GetCategoriesByBudgetIdInternal(int budgetId, string userId)
         {
             var categories = context.Categories.Where(q => q.IsActive && q.BudgetId.Equals(budgetId) && q.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId))).ToList();
             return categories;
+        }
+
+        public List<CategoryEntity> GetCategoriesByBudgetId(int budgetId, string userId)
+        {
+            var categories = context.Categories.Where(q => q.IsActive && q.BudgetId.Equals(budgetId) && q.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId))).ToList();
+            var entityList = new List<CategoryEntity>();
+
+            categories.ForEach(c =>
+            {
+                entityList.Add(new CategoryEntity
+                {
+                    CategoryId = c.CategoryId,
+                    Name = c.Name
+                });
+            });
+
+            return entityList;
         }
     }
 }

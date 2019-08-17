@@ -54,12 +54,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountEntity.cs" />
     <Compile Include="Base\AuditableEntity.cs" />
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="BudgetEntity.cs" />
     <Compile Include="CategoryEntity.cs" />
     <Compile Include="CurrencyEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransactionEntity.cs" />
+    <Compile Include="TransactionTemplateEntity.cs" />
     <Compile Include="TransferObjects\ExpenseTrackerRequest.cs" />
     <Compile Include="TransferObjects\ExpenseTrackerResponse.cs" />
     <Compile Include="UserEntity.cs" />

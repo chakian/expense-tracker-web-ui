@@ -132,9 +132,6 @@ namespace ExpenseTracker.WebUI.Controllers
             }
         }
 
-        // POST: /User/Logout
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

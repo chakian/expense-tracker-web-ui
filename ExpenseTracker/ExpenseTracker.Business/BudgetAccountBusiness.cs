@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using ExpenseTracker.Entities;
 using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 
@@ -12,13 +13,26 @@ namespace ExpenseTracker.Business
 
         public BudgetAccountBusiness(ExpenseTrackerContext context) : base(context) { }
 
-        //        public List<AccountEntity> GetAccountsOfUser(string userId, int budgetId)
-        //        {
-        //            context.Accounts.Where(a => a.IsActive && a.BudgetId == budgetId && a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
-        //.Include(a => a.AccountType)
-        //.Include(a => a.Budget)
-        //.ToList();
-        //        }
+        public List<AccountEntity> GetAccountsOfUser(string userId, int budgetId)
+        {
+            var list = context.Accounts.Where(a => a.IsActive && a.BudgetId == budgetId && a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
+                .Include(a => a.AccountType)
+                .Include(a => a.Budget)
+                .ToList();
+
+            List<AccountEntity> accountEntities = new List<AccountEntity>();
+
+            list.ForEach(a =>
+            {
+                accountEntities.Add(new AccountEntity()
+                {
+                    AccountId = a.AccountId,
+                    Name = a.Name
+                });
+            });
+
+            return accountEntities;
+        }
 
         public Account GetAccountById(int accountId, string userId)
         {
