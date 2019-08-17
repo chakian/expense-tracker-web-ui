@@ -90,14 +90,7 @@ namespace ExpenseTracker.Business
                 return null;
             }
 
-            //budget.InsertUser = context.Users.Find(budget.InsertUserId);
-            //budget.UpdateUser = context.Users.Find(budget.UpdateUserId);
-
-            return new BudgetEntity
-            {
-                BudgetId = budget.BudgetId,
-                Name = budget.Name
-            };
+            return mapper.Map<BudgetEntity>(budget);
         }
 
         public BudgetEntity CreateBudget(string name, int currencyId, string userId)

@@ -3,6 +3,7 @@ using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.Persistence.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 
 namespace ExpenseTracker.Business.Tests.Base
 {
@@ -17,10 +18,10 @@ namespace ExpenseTracker.Business.Tests.Base
 
         public BaseTest(string defaultTestUserId = "defaultTestUserId")
         {
-            var connection = Effort.DbConnectionFactory.CreateTransient();
+            DbConnection connection = Effort.DbConnectionFactory.CreateTransient();
             context = new ExpenseTrackerContext(connection);
 
-            var currencies = CreateDefaultCurrencies();
+            List<Currency> currencies = CreateDefaultCurrencies();
             DefaultCurrency = currencies[0];
             DefaultUser = CreateDefaultUser(defaultTestUserId);
         }
@@ -41,8 +42,8 @@ namespace ExpenseTracker.Business.Tests.Base
 
         private List<Currency> CreateDefaultCurrencies()
         {
-            var currencyList = new List<Currency>();
-            var currency = new Currency { IsActive = true, CurrencyId = 1, CurrencyCode = "TRY", DisplayName = "TL", LongName = "Türk Lirası" };
+            List<Currency> currencyList = new List<Currency>();
+            Currency currency = new Currency { IsActive = true, CurrencyId = 1, CurrencyCode = "TRY", DisplayName = "TL", LongName = "Türk Lirası" };
             currencyList.Add(currency);
 
             currency = new Currency { IsActive = true, CurrencyId = 2, CurrencyCode = "USD", DisplayName = "USD", LongName = "Dolar" };
@@ -59,7 +60,7 @@ namespace ExpenseTracker.Business.Tests.Base
 
         private User CreateDefaultUser(string defaultTestUserId)
         {
-            var user = new User { IsActive = true, UserName = "TEST", Id = defaultTestUserId, Email = "test@test.test" };
+            User user = new User { IsActive = true, UserName = "TEST", Id = defaultTestUserId, Email = "test@test.test" };
             context.Users.Add(user);
 
             context.SaveChanges();

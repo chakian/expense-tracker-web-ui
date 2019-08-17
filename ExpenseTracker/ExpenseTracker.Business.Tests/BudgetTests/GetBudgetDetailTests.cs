@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Business.Tests.Base;
+using ExpenseTracker.Entities;
 using Xunit;
 
 namespace ExpenseTracker.Business.Tests.BudgetTests
@@ -14,7 +15,7 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             string userId = DefaultUserId;
 
             // ACT
-            var budget = business.GetBudgetDetails(budgetId, userId);
+            BudgetEntity budget = business.GetBudgetDetails(budgetId, userId);
 
             //ASSERT
             Assert.NotNull(budget);

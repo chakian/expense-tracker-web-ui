@@ -20,8 +20,8 @@ namespace ExpenseTracker.Business.Tests.Base
 
         protected void AssignDefaultUserToDefaultBudget()
         {
-            var budgetUserData = new List<Dbo.BudgetUser>();
-            var budgetUser = CreateNewAuthorizedEntity<Dbo.BudgetUser>();
+            List<Dbo.BudgetUser> budgetUserData = new List<Dbo.BudgetUser>();
+            Dbo.BudgetUser budgetUser = CreateNewAuthorizedEntity<Dbo.BudgetUser>();
             budgetUser.BudgetId = DefaultTestBudgetId;
             budgetUser.UserId = DefaultUserId;
             budgetUserData.Add(budgetUser);
@@ -32,7 +32,7 @@ namespace ExpenseTracker.Business.Tests.Base
 
         protected void CreateDefaultBudgets()
         {
-            var budgetData = new List<Dbo.Budget>();
+            List<Dbo.Budget> budgetData = new List<Dbo.Budget>();
             for (int i = 1; i <= 10; i++)
             {
                 Dbo.Budget budget = CreateNewAuthorizedEntity<Dbo.Budget>();
