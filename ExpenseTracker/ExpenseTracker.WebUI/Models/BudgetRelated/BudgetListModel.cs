@@ -1,5 +1,4 @@
-﻿using ExpenseTracker.Persistence.Context.DbModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ExpenseTracker.WebUI.Models.BudgetRelated
 {

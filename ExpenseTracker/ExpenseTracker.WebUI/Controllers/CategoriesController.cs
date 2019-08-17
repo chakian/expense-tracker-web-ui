@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Net;
 using System.Web.Mvc;
 using ExpenseTracker.Business;
-using ExpenseTracker.Persistence.Context.DbModels;
+using ExpenseTracker.Entities;
 using Microsoft.AspNet.Identity;
 
 namespace ExpenseTracker.WebUI.Controllers
@@ -11,10 +11,12 @@ namespace ExpenseTracker.WebUI.Controllers
     public class CategoriesController : BaseAuthenticatedController
     {
         private readonly BudgetCategoryBusiness budgetCategoryBusiness;
+        private readonly CategoryBusiness categoryBusiness;
 
         public CategoriesController()
         {
-            budgetCategoryBusiness = new BudgetCategoryBusiness(context);
+            budgetCategoryBusiness = new BudgetCategoryBusiness();
+            categoryBusiness = new CategoryBusiness();
         }
 
         public ActionResult Index()
@@ -25,28 +27,24 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public ActionResult Create() => View();
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryId,Name,BudgetId")] Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                category.BudgetId = ActiveBudgetId;
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "CategoryId,Name,BudgetId")] Category category)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        categoryBusiness.CreateCategory(new CategoryEntity()
+        //        {
+        //            Name = category.Name,
+        //            BudgetId = ActiveBudgetId,
+        //            ParentId = category.ParentCategoryId
+        //        }, UserId);
 
-                category.InsertUserId = User.Identity.GetUserId();
-                category.InsertTime = DateTime.Now;
-                category.UpdateUserId = User.Identity.GetUserId();
-                category.UpdateTime = DateTime.Now;
-                category.IsActive = true;
+        //        return RedirectToAction("Index");
+        //    }
 
-                //TODO: Do not use context in Web project. Use the business methods instead!
-                context.Categories.Add(category);
-                context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(category);
-        }
+        //    return View(category);
+        //}
 
         public ActionResult Edit(int? id)
         {
@@ -54,45 +52,45 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = budgetCategoryBusiness.GetCategoryById(id.Value, UserId);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
+            //Category category = budgetCategoryBusiness.GetCategoryById(id.Value, UserId);
+            //if (category == null)
+            //{
+            //    return HttpNotFound();
+            //}
 
-            return View(category);
+            return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryId,Name,BudgetId,InsertUserId,InsertTime,IsActive")] Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                category.UpdateUserId = User.Identity.GetUserId();
-                category.UpdateTime = DateTime.Now;
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "CategoryId,Name,BudgetId,InsertUserId,InsertTime,IsActive")] Category category)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        category.UpdateUserId = User.Identity.GetUserId();
+        //        category.UpdateTime = DateTime.Now;
 
-                //TODO: Do not use context in Web project. Use the business methods instead!
-                context.Entry(category).State = EntityState.Modified;
-                context.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //        //TODO: Do not use context in Web project. Use the business methods instead!
+        //        //context.Entry(category).State = EntityState.Modified;
+        //        //context.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(category);
-        }
+        //    return View(category);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int CategoryId)
         {
-            Category category = context.Categories.Find(CategoryId);
-            category.UpdateUserId = User.Identity.GetUserId();
-            category.UpdateTime = DateTime.Now;
-            category.IsActive = false;
+            //Category category = context.Categories.Find(CategoryId);
+            //category.UpdateUserId = User.Identity.GetUserId();
+            //category.UpdateTime = DateTime.Now;
+            //category.IsActive = false;
 
-            //TODO: Do not use context in Web project. Use the business methods instead!
-            context.Entry(category).State = EntityState.Modified;
-            context.SaveChanges();
+            ////TODO: Do not use context in Web project. Use the business methods instead!
+            //context.Entry(category).State = EntityState.Modified;
+            //context.SaveChanges();
             return RedirectToAction("Index");
         }
     }

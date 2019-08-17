@@ -8,9 +8,9 @@ namespace ExpenseTracker.Business
 {
     public class BudgetPlanBusiness : BaseBusiness
     {
-        public BudgetPlanBusiness(ExpenseTrackerContext context) : base(context)
-        {
-        }
+        public BudgetPlanBusiness() : base() { }
+
+        public BudgetPlanBusiness(ExpenseTrackerContext context) : base(context) { }
 
         public BudgetPlan GetBudgetPlanById(int budgetPlanId, string userId)
         {

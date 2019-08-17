@@ -375,7 +375,6 @@
     <Content Include="Content\adminlte\plugins\fontawesome-free\webfonts\fa-regular-400.svg" />
     <Content Include="Content\adminlte\plugins\fontawesome-free\webfonts\fa-solid-900.svg" />
     <Content Include="Content\adminlte\plugins\select2\css\select2.min.css" />
-    <Content Include="Content\adminlte\plugins\select2\js\i18n\build.txt" />
     <Content Include="Content\adminlte\plugins\select2\js\i18n\en.js" />
     <Content Include="Content\adminlte\plugins\select2\js\i18n\tr.js" />
     <Content Include="Content\adminlte\plugins\select2\js\select2.full.min.js" />
@@ -519,13 +518,17 @@
       <Project>{65C9F7E5-739A-401A-A9FE-76EC2B583067}</Project>
       <Name>ExpenseTracker.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ExpenseTracker.Entities\ExpenseTracker.Entities.csproj">
+      <Project>{0A2B7B32-2DA7-4FC2-8BCE-06D1D97F649F}</Project>
+      <Name>ExpenseTracker.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExpenseTracker.Interfaces\ExpenseTracker.Interfaces.csproj">
+      <Project>{7154BA1F-9A4A-4A09-A28C-4B1CFDD1C0C2}</Project>
+      <Name>ExpenseTracker.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExpenseTracker.Language\ExpenseTracker.Language.csproj">
       <Project>{38c7fed0-ba12-4159-9fe4-26c474ab136d}</Project>
       <Name>ExpenseTracker.Language</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExpenseTracker.Persistence\ExpenseTracker.Persistence.csproj">
-      <Project>{EACAE983-5259-49A9-A7B5-FA5A4C14C2DB}</Project>
-      <Name>ExpenseTracker.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,15 +1,15 @@
 ﻿using ExpenseTracker.Entities;
 using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity.Validation;
 using System.Linq;
 
 namespace ExpenseTracker.Business
 {
     public class CategoryBusiness : BaseBusiness
     {
+        public CategoryBusiness() : base() { }
+
         public CategoryBusiness(ExpenseTrackerContext context) : base(context) { }
 
         private Category ConvertEntityToDbo(CategoryEntity entity, string userId)

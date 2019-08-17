@@ -7,9 +7,9 @@ namespace ExpenseTracker.Business
 {
     public class AccountTypeBusiness : BaseBusiness
     {
-        public AccountTypeBusiness(ExpenseTrackerContext context) : base(context)
-        {
-        }
+        public AccountTypeBusiness() { }
+
+        public AccountTypeBusiness(ExpenseTrackerContext context) : base(context) { }
 
         public List<AccountType> GetAccountTypeList()
         {

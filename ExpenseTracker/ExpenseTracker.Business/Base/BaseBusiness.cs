@@ -9,6 +9,11 @@ namespace ExpenseTracker.Business
     {
         protected readonly ExpenseTrackerContext context;
 
+        public BaseBusiness()
+        {
+            context = new ExpenseTrackerContext();
+        }
+
         public BaseBusiness(ExpenseTrackerContext context)
         {
             this.context = context;

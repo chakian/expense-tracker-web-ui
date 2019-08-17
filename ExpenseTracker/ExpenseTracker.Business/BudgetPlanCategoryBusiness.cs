@@ -8,6 +8,8 @@ namespace ExpenseTracker.Business
 {
     public class BudgetPlanCategoryBusiness : BaseBusiness
     {
+        public BudgetPlanCategoryBusiness() : base() { }
+
         public BudgetPlanCategoryBusiness(ExpenseTrackerContext context) : base(context) { }
 
         public List<BudgetPlanCategory> GetBudgetPlanCategoriesByPlanId(int budgetPlanId, string userId)
@@ -21,7 +23,7 @@ namespace ExpenseTracker.Business
         {
             var budgetId = context.BudgetPlans.First(q => q.BudgetPlanId.Equals(budgetPlanId)).BudgetId;
             var planCategories = context.BudgetPlanCategories.Where(q => q.IsActive && q.BudgetPlanId.Equals(budgetPlanId)).ToList();
-            var categories = new BudgetCategoryBusiness(context).GetCategoriesOfUser(userId, budgetId);
+            var categories = new BudgetCategoryBusiness().GetCategoriesOfUser(userId, budgetId);
 
             foreach (var category in categories)
             {

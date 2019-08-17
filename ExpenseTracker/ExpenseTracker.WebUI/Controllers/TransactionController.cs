@@ -17,10 +17,10 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public TransactionController()
         {
-            budgetAccountBusiness = new BudgetAccountBusiness(context);
-            categoryBusiness = new CategoryBusiness(context);
-            transactionBusiness = new TransactionBusiness(context);
-            transactionTemplateBusiness = new TransactionTemplateBusiness(context);
+            budgetAccountBusiness = new BudgetAccountBusiness();
+            categoryBusiness = new CategoryBusiness();
+            transactionBusiness = new TransactionBusiness();
+            transactionTemplateBusiness = new TransactionTemplateBusiness();
         }
 
         [HttpGet]
@@ -33,16 +33,16 @@ namespace ExpenseTracker.WebUI.Controllers
             SetTransactionSummaryListForModel(model, DateTime.Now);
             SetTemplateListForModel(model);
 
-            var currentPeriodTransactionsGroupedList = transactionBusiness.GetTransactionsForPeriodByGivenDate_GroupedByCategory(DateTime.Now, UserId, ActiveBudgetId);
+            //var currentPeriodTransactionsGroupedList = transactionBusiness.GetTransactionsForPeriodByGivenDate_GroupedByCategory(DateTime.Now, UserId, ActiveBudgetId);
             model.CategoryStatusList = new List<AddModel.CategoryStatus>();
-            currentPeriodTransactionsGroupedList.ForEach(g =>
-            {
-                model.CategoryStatusList.Add(new AddModel.CategoryStatus()
-                {
-                    CategoryId = g.CategoryId,
-                    SpentAmount = g.Amount * -1
-                });
-            });
+            //currentPeriodTransactionsGroupedList.ForEach(g =>
+            //{
+            //    model.CategoryStatusList.Add(new AddModel.CategoryStatus()
+            //    {
+            //        CategoryId = g.CategoryId,
+            //        SpentAmount = g.Amount * -1
+            //    });
+            //});
 
             model.Date = DateTime.Now;
 
@@ -51,65 +51,65 @@ namespace ExpenseTracker.WebUI.Controllers
 
         private void SetTemplateListForModel(AddModel model)
         {
-            var templates = transactionTemplateBusiness.GetTransactionTemplates(ActiveBudgetId, UserId);
-            if (templates != null)
-            {
-                model.TemplateListForView = new SelectList(templates.OrderBy(q => q.Name), "Id", "Name");
+            //var templates = transactionTemplateBusiness.GetTransactionTemplates(ActiveBudgetId, UserId);
+            //if (templates != null)
+            //{
+            //    //model.TemplateListForView = new SelectList(templates.OrderBy(q => q.Name), "Id", "Name");
 
-                model.TemplateList = new List<AddModel.TemplateProperties>();
-                templates.ForEach(t =>
-                {
-                    model.TemplateList.Add(new AddModel.TemplateProperties()
-                    {
-                        TemplateId = t.Id,
-                        TemplateName = t.Name,
-                        Amount = t.Amount ?? 0,
-                        Description = t.Description,
-                        CategoryId = t.CategoryId ?? 0,
-                        AccountId = t.SourceAccountId ?? 0
-                    });
-                });
-            }
+            //    model.TemplateList = new List<AddModel.TemplateProperties>();
+            //    //templates.ForEach(t =>
+            //    //{
+            //    //    model.TemplateList.Add(new AddModel.TemplateProperties()
+            //    //    {
+            //    //        TemplateId = t.Id,
+            //    //        TemplateName = t.Name,
+            //    //        Amount = t.Amount ?? 0,
+            //    //        Description = t.Description,
+            //    //        CategoryId = t.CategoryId ?? 0,
+            //    //        AccountId = t.SourceAccountId ?? 0
+            //    //    });
+            //    //});
+            //}
         }
 
         private void SetCategoryListForModel(BaseEditableTransactionModel model)
         {
-            var categories = categoryBusiness.GetCategoriesByBudgetId(ActiveBudgetId, UserId);
-            if (categories != null)
-            {
-                model.CategoryList = new SelectList(categories.OrderBy(q => q.Name), "CategoryId", "Name");
-            }
+            //var categories = categoryBusiness.GetCategoriesByBudgetId(ActiveBudgetId, UserId);
+            //if (categories != null)
+            //{
+            //    model.CategoryList = new SelectList(categories.OrderBy(q => q.Name), "CategoryId", "Name");
+            //}
         }
 
         private void SetAccountListForModel(BaseEditableTransactionModel model)
         {
-            var accounts = budgetAccountBusiness.GetAccountsOfUser(UserId, ActiveBudgetId);
-            if (accounts != null)
-            {
-                model.AccountList = new SelectList(accounts, "AccountId", "Name");
-            }
+            //var accounts = budgetAccountBusiness.GetAccountsOfUser(UserId, ActiveBudgetId);
+            //if (accounts != null)
+            //{
+            //    model.AccountList = new SelectList(accounts, "AccountId", "Name");
+            //}
         }
 
         private void SetTransactionSummaryListForModel(BaseTransactionModel model, DateTime periodDate)
         {
-            model.TransactionSummaries = new System.Collections.Generic.List<BaseTransactionModel.TransactionSummary>();
+            //model.TransactionSummaries = new System.Collections.Generic.List<BaseTransactionModel.TransactionSummary>();
 
-            var transactions = transactionBusiness.GetTransactionsForPeriodByGivenDate(periodDate, UserId, ActiveBudgetId).OrderByDescending(q => q.Date).ToList();
-            if (transactions != null)
-            {
-                transactions.ForEach(t =>
-                {
-                    model.TransactionSummaries.Add(new BaseTransactionModel.TransactionSummary
-                    {
-                        TransactionId = t.TransactionId,
-                        Date = t.Date,
-                        Amount = t.Amount,
-                        Account = t.SourceAccount.Name,
-                        Category = t.Category.Name,
-                        Description = t.Description
-                    });
-                });
-            }
+            //var transactions = transactionBusiness.GetTransactionsForPeriodByGivenDate(periodDate, UserId, ActiveBudgetId).OrderByDescending(q => q.Date).ToList();
+            //if (transactions != null)
+            //{
+            //    transactions.ForEach(t =>
+            //    {
+            //        model.TransactionSummaries.Add(new BaseTransactionModel.TransactionSummary
+            //        {
+            //            TransactionId = t.TransactionId,
+            //            Date = t.Date,
+            //            Amount = t.Amount,
+            //            Account = t.SourceAccount.Name,
+            //            Category = t.Category.Name,
+            //            Description = t.Description
+            //        });
+            //    });
+            //}
         }
 
         [ValidateAntiForgeryToken]
@@ -143,21 +143,21 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 model.TransactionId = TransactionId.Value;
 
-                var transaction = transactionBusiness.GetTransactionById(TransactionId.Value, UserId);
-                if (transaction.Amount < 0)
-                {
-                    model.Amount = transaction.Amount * -1;
-                    model.IsIncome = false;
-                }
-                else
-                {
-                    model.Amount = transaction.Amount;
-                    model.IsIncome = true;
-                }
-                model.Date = transaction.Date;
-                model.Description = transaction.Description;
-                model.CategoryId = transaction.CategoryId;
-                model.AccountId = transaction.SourceAccountId;
+                //var transaction = transactionBusiness.GetTransactionById(TransactionId.Value, UserId);
+                //if (transaction.Amount < 0)
+                //{
+                //    model.Amount = transaction.Amount * -1;
+                //    model.IsIncome = false;
+                //}
+                //else
+                //{
+                //    model.Amount = transaction.Amount;
+                //    model.IsIncome = true;
+                //}
+                //model.Date = transaction.Date;
+                //model.Description = transaction.Description;
+                //model.CategoryId = transaction.CategoryId;
+                //model.AccountId = transaction.SourceAccountId;
 
                 SetAccountListForModel(model);
                 SetCategoryListForModel(model);
@@ -178,16 +178,16 @@ namespace ExpenseTracker.WebUI.Controllers
                 return RedirectToAction("List");
             }
 
-            var transaction = transactionBusiness.GetTransactionById(model.TransactionId, UserId);
-            if (transaction.Amount < 0)
-            {
-                model.Amount *= -1;
-                model.IsIncome = false;
-            }
-            else
-            {
-                model.IsIncome = true;
-            }
+            //var transaction = transactionBusiness.GetTransactionById(model.TransactionId, UserId);
+            //if (transaction.Amount < 0)
+            //{
+            //    model.Amount *= -1;
+            //    model.IsIncome = false;
+            //}
+            //else
+            //{
+            //    model.IsIncome = true;
+            //}
 
             SetAccountListForModel(model);
             SetCategoryListForModel(model);

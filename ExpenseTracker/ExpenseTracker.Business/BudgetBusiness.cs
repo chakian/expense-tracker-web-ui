@@ -9,6 +9,8 @@ namespace ExpenseTracker.Business
 {
     public class BudgetBusiness : BaseBusiness
     {
+        public BudgetBusiness() { }
+
         public BudgetBusiness(ExpenseTrackerContext context) : base(context) { }
 
         public List<Budget> GetBudgetsOfUser(string userId) => context.Budgets.Where(b => b.IsActive && b.BudgetUsers.Any(bu => bu.IsActive && bu.UserId.Equals(userId)))

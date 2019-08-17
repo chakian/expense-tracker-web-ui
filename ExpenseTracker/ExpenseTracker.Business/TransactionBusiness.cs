@@ -8,6 +8,8 @@ namespace ExpenseTracker.Business
 {
     public class TransactionBusiness : BaseBusiness
     {
+        public TransactionBusiness() : base() { }
+
         public TransactionBusiness(ExpenseTrackerContext context) : base(context) { }
 
         public void InsertTransaction(string userId, int categoryId, int accountId, decimal amount, string description, DateTime date)

@@ -8,14 +8,17 @@ namespace ExpenseTracker.Business
 {
     public class BudgetAccountBusiness : BaseBusiness
     {
-        public BudgetAccountBusiness(ExpenseTrackerContext context) : base(context)
-        {
-        }
+        public BudgetAccountBusiness() { }
 
-        public List<Account> GetAccountsOfUser(string userId, int budgetId) => context.Accounts.Where(a => a.IsActive && a.BudgetId == budgetId && a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
-                .Include(a => a.AccountType)
-                .Include(a => a.Budget)
-                .ToList();
+        public BudgetAccountBusiness(ExpenseTrackerContext context) : base(context) { }
+
+        //        public List<AccountEntity> GetAccountsOfUser(string userId, int budgetId)
+        //        {
+        //            context.Accounts.Where(a => a.IsActive && a.BudgetId == budgetId && a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
+        //.Include(a => a.AccountType)
+        //.Include(a => a.Budget)
+        //.ToList();
+        //        }
 
         public Account GetAccountById(int accountId, string userId)
         {

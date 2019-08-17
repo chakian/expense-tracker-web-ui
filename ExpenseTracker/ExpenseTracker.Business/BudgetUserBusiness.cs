@@ -6,6 +6,8 @@ namespace ExpenseTracker.Business
 {
     public class BudgetUserBusiness : BaseBusiness
     {
+        public BudgetUserBusiness() : base() { }
+
         public BudgetUserBusiness(ExpenseTrackerContext context) : base(context) { }
 
         internal void CreateBudgetUser_NoCommit(int budgetId, string userId, string insertUserId)

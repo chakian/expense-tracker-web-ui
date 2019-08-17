@@ -7,6 +7,8 @@ namespace ExpenseTracker.Business
 {
     public class CurrencyBusiness : BaseBusiness
     {
+        public CurrencyBusiness() : base() { }
+
         public CurrencyBusiness(ExpenseTrackerContext context) : base(context) { }
 
         public List<Currency> GetCurrencyList()

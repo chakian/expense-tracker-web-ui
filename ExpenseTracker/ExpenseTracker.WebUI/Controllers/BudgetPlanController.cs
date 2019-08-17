@@ -1,7 +1,5 @@
 ﻿using ExpenseTracker.Business;
 using ExpenseTracker.Common.Helpers;
-//TODO: Do not use context in Web project. Use the Entities instead!
-using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.WebUI.Models.BudgetRelated;
 using System;
 using System.Collections.Generic;
@@ -17,8 +15,8 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public BudgetPlanController()
         {
-            budgetPlanBusiness = new BudgetPlanBusiness(context);
-            transactionBusiness = new TransactionBusiness(context);
+            budgetPlanBusiness = new BudgetPlanBusiness();
+            transactionBusiness = new TransactionBusiness();
         }
 
         [HttpGet]
@@ -33,80 +31,80 @@ namespace ExpenseTracker.WebUI.Controllers
                 PlanCategories = new List<Models.ContextObjects.BudgetPlanCategory>()
             };
 
-            BudgetPlan budgetPlan = null;
+            //BudgetPlan budgetPlan = null;
 
-            if (budgetPlanId.HasValue)
-            {
-                budgetPlan = budgetPlanBusiness.GetBudgetPlanById(budgetPlanId.Value, UserId);
-            }
-            else if (!year.HasValue && !month.HasValue)
-            {
-                year = DateTime.Now.Year;
-                month = DateTime.Now.Month;
-            }
+            //if (budgetPlanId.HasValue)
+            //{
+            //    budgetPlan = budgetPlanBusiness.GetBudgetPlanById(budgetPlanId.Value, UserId);
+            //}
+            //else if (!year.HasValue && !month.HasValue)
+            //{
+            //    year = DateTime.Now.Year;
+            //    month = DateTime.Now.Month;
+            //}
 
-            if (budgetPlan == null)
-            {
-                budgetPlan = budgetPlanBusiness.GetBudgetPlanByYearAndMonth(ActiveBudgetId, year.Value, month.Value, UserId);
-            }
+            //if (budgetPlan == null)
+            //{
+            //    budgetPlan = budgetPlanBusiness.GetBudgetPlanByYearAndMonth(ActiveBudgetId, year.Value, month.Value, UserId);
+            //}
 
-            if (budgetPlan != null)
-            {
-                model.BudgetPlan.BudgetPlanId = budgetPlan.BudgetPlanId;
+            //if (budgetPlan != null)
+            //{
+            //    model.BudgetPlan.BudgetPlanId = budgetPlan.BudgetPlanId;
 
-                model.BudgetPlan.Month = budgetPlan.Month;
-                model.BudgetPlan.MonthName = DateHelper.GetMonthNameByIndex(budgetPlan.Month);
-                model.BudgetPlan.Year = budgetPlan.Year;
+            //    model.BudgetPlan.Month = budgetPlan.Month;
+            //    model.BudgetPlan.MonthName = DateHelper.GetMonthNameByIndex(budgetPlan.Month);
+            //    model.BudgetPlan.Year = budgetPlan.Year;
 
-                DateTime currentDateTime = new DateTime(budgetPlan.Year, budgetPlan.Month, 1);
-                DateTime previousDateTime = currentDateTime.AddMonths(-1);
-                DateTime nextDateTime = currentDateTime.AddMonths(1);
-                model.BudgetPlan.PreviousMonth = previousDateTime.Month;
-                model.BudgetPlan.PreviousYear = previousDateTime.Year;
-                model.BudgetPlan.NextMonth = nextDateTime.Month;
-                model.BudgetPlan.NextYear = nextDateTime.Year;
+            //    DateTime currentDateTime = new DateTime(budgetPlan.Year, budgetPlan.Month, 1);
+            //    DateTime previousDateTime = currentDateTime.AddMonths(-1);
+            //    DateTime nextDateTime = currentDateTime.AddMonths(1);
+            //    model.BudgetPlan.PreviousMonth = previousDateTime.Month;
+            //    model.BudgetPlan.PreviousYear = previousDateTime.Year;
+            //    model.BudgetPlan.NextMonth = nextDateTime.Month;
+            //    model.BudgetPlan.NextYear = nextDateTime.Year;
 
-                var currentPeriodTransactionsGroupedList = transactionBusiness.GetTransactionsForPeriodByGivenDate_GroupedByCategory(currentDateTime, UserId, ActiveBudgetId);
+            //    var currentPeriodTransactionsGroupedList = transactionBusiness.GetTransactionsForPeriodByGivenDate_GroupedByCategory(currentDateTime, UserId, ActiveBudgetId);
 
-                foreach (var bpCategory in budgetPlan.BudgetPlanCategories)
-                {
-                    var transactionForCategory = currentPeriodTransactionsGroupedList.SingleOrDefault(t=>t.CategoryId.Equals(bpCategory.CategoryId));
-                    var category = new Models.ContextObjects.BudgetPlanCategory()
-                    {
-                        BudgetPlanCategoryId = bpCategory.BudgetPlanCategoryId,
-                        CategoryId = bpCategory.CategoryId,
-                        CategoryName = bpCategory.Category.Name,
-                        PlannedAmount = bpCategory.PlannedAmount,
-                        SpentAmount = (transactionForCategory?.Amount ?? 0) * (-1)
-                    };
-                    category.RemainingAmount = category.PlannedAmount - category.SpentAmount;
+            //    foreach (var bpCategory in budgetPlan.BudgetPlanCategories)
+            //    {
+            //        var transactionForCategory = currentPeriodTransactionsGroupedList.SingleOrDefault(t=>t.CategoryId.Equals(bpCategory.CategoryId));
+            //        var category = new Models.ContextObjects.BudgetPlanCategory()
+            //        {
+            //            BudgetPlanCategoryId = bpCategory.BudgetPlanCategoryId,
+            //            CategoryId = bpCategory.CategoryId,
+            //            CategoryName = bpCategory.Category.Name,
+            //            PlannedAmount = bpCategory.PlannedAmount,
+            //            SpentAmount = (transactionForCategory?.Amount ?? 0) * (-1)
+            //        };
+            //        category.RemainingAmount = category.PlannedAmount - category.SpentAmount;
 
-                    model.PlanCategories.Add(category);
-                }
+            //        model.PlanCategories.Add(category);
+            //    }
 
-                return View(model);
-            }
+            //    return View(model);
+            //}
 
             return RedirectToAction("Update");
         }
 
-        [HttpPost]
-        [Route("BudgetPlan")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Update(BudgetPlanUpdateModel model)
-        {
-            List<BudgetPlanCategory> budgetPlanCategories = new List<BudgetPlanCategory>();
-            model.PlanCategories.ForEach(category =>
-            {
-                budgetPlanCategories.Add(new BudgetPlanCategory()
-                {
-                    BudgetPlanCategoryId = category.BudgetPlanCategoryId,
-                    PlannedAmount = category.PlannedAmount
-                });
-            });
-            budgetPlanBusiness.UpdatePlan(budgetPlanCategories, UserId);
+        //[HttpPost]
+        //[Route("BudgetPlan")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Update(BudgetPlanUpdateModel model)
+        //{
+        //    List<BudgetPlanCategory> budgetPlanCategories = new List<BudgetPlanCategory>();
+        //    model.PlanCategories.ForEach(category =>
+        //    {
+        //        budgetPlanCategories.Add(new BudgetPlanCategory()
+        //        {
+        //            BudgetPlanCategoryId = category.BudgetPlanCategoryId,
+        //            PlannedAmount = category.PlannedAmount
+        //        });
+        //    });
+        //    budgetPlanBusiness.UpdatePlan(budgetPlanCategories, UserId);
 
-            return RedirectToAction("Update", new { model.BudgetPlan.BudgetPlanId });
-        }
+        //    return RedirectToAction("Update", new { model.BudgetPlan.BudgetPlanId });
+        //}
     }
 }
