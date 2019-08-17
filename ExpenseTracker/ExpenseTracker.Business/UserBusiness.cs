@@ -13,18 +13,12 @@ namespace ExpenseTracker.Business
         {
             var user = context.Users.Find(userId);
 
-            if(user == null)
+            if (user == null)
             {
                 return null;
             }
 
-            UserEntity userEntity = new UserEntity
-            {
-                Id = user.Id,
-                ActiveBudgetId = user.ActiveBudgetId,
-                UserName = user.UserName
-            };
-
+            UserEntity userEntity = mapper.Map<UserEntity>(user);
             return userEntity;
         }
     }

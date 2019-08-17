@@ -1,4 +1,6 @@
-﻿using ExpenseTracker.Entities.Base;
+﻿using AutoMapper;
+using ExpenseTracker.Business.AutoMapper;
+using ExpenseTracker.Entities.Base;
 using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 using System;
@@ -8,15 +10,17 @@ namespace ExpenseTracker.Business
     public class BaseBusiness
     {
         protected readonly ExpenseTrackerContext context;
+        protected IMapper mapper;
 
         public BaseBusiness()
+            : this(new ExpenseTrackerContext())
         {
-            context = new ExpenseTrackerContext();
         }
 
         public BaseBusiness(ExpenseTrackerContext context)
         {
             this.context = context;
+            mapper = AutoMapperBootstrap.Configure();
         }
 
         protected T CreateAuditableContextObject<T>(string userId)
