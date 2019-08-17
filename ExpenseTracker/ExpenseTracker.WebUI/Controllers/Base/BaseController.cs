@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using ExpenseTracker.Business;
+using ExpenseTracker.Entities;
+using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 
 namespace ExpenseTracker.WebUI.Controllers
@@ -36,68 +38,63 @@ namespace ExpenseTracker.WebUI.Controllers
 
         private void SetActiveBudgetProperties()
         {
-            //Budget budget = null;
+            BudgetEntity budget = null;
 
             int? activeBudgetId = (int?)Session["ActiveBudgetId"];
             if (!activeBudgetId.HasValue)
             {
-                //budget = GetBudgetFromDb();
-                //if (budget != null)
-                //{
-                //    activeBudgetId = budget.BudgetId;
-                //    Session["ActiveBudgetId"] = activeBudgetId.Value;
-                //}
-                //else
-                //{
-                //    activeBudgetId = -1;
-                //}
+                budget = GetActiveBudget();
+                if (budget != null)
+                {
+                    activeBudgetId = budget.BudgetId;
+                    Session["ActiveBudgetId"] = activeBudgetId.Value;
+                }
+                else
+                {
+                    /// TODO: We should create a budget and set is as the "active budget" in any case. 
+                    /// Therefore if this block is hit during execution, there has to be a problem somewhere.
+                    activeBudgetId = -1;
+                }
             }
             ViewBag.ActiveBudgetId = activeBudgetId.Value;
 
             string activeBudgetName = (string)Session["ActiveBudgetName"];
-            //if (string.IsNullOrEmpty(activeBudgetName) && budget != null)
-            //{
-            //    activeBudgetName = budget.Name;
-            //    Session["ActiveBudgetName"] = activeBudgetName;
-            //}
+            if (string.IsNullOrEmpty(activeBudgetName) && budget != null)
+            {
+                activeBudgetName = budget.Name;
+                Session["ActiveBudgetName"] = activeBudgetName;
+            }
             ViewBag.ActiveBudgetName = activeBudgetName;
         }
 
-        //private Budget GetBudgetFromDb()
-        //{
-        //    Budget budget = GetActiveButgetFromUserPreferences();
+        private BudgetEntity GetActiveBudget()
+        {
+            BudgetEntity budget = GetActiveButgetFromUserPreferences();
 
-        //    if (budget == null)
-        //    {
-        //        budget = GetUsersFirstBudget();
-        //    }
+            if (budget == null)
+            {
+                budget = GetUsersFirstBudget();
+            }
 
-        //    return budget;
-        //}
+            return budget;
+        }
 
-        //private Budget GetActiveButgetFromUserPreferences()
-        //{
-        //    var user = context.Users.Find(UserId);
-        //    if(user != null && user.ActiveBudgetId.HasValue)
-        //    {
-        //        return new BudgetBusiness(context).GetBudgetDetails(user.ActiveBudgetId.Value, UserId);
-        //    }
-        //    return null;
-        //}
+        private BudgetEntity GetActiveButgetFromUserPreferences()
+        {
+            var user = new UserBusiness().GetUserById(UserId);
+            if (user != null && user.ActiveBudgetId.HasValue)
+            {
+                return new BudgetBusiness().GetBudgetDetails(user.ActiveBudgetId.Value, UserId);
+            }
+            return null;
+        }
 
-        //private Budget GetUsersFirstBudget()
-        //{
-        //    //TODO: Do not use context in Web project. Use the business methods instead!
-        //    Budget budget = new BudgetBusiness(context).GetBudgetsOfUser(UserId).FirstOrDefault();
-        //    if (budget != null)
-        //    {
-        //        var user = context.Users.Find(UserId);
-        //        user.ActiveBudgetId = budget.BudgetId;
-        //        context.Entry(user).State = EntityState.Modified;
-        //        context.SaveChanges();
-        //    }
-        //    return budget;
-        //}
+        private BudgetEntity GetUsersFirstBudget()
+        {
+            BudgetEntity budget = new BudgetBusiness().GetUsersFirstBudgetAndSetAsDefault(UserId);
+            
+            return budget;
+        }
 
         protected ActionResult ReturnUnauthorized(string message = null)
         {

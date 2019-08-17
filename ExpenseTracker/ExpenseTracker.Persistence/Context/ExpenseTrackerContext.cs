@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace ExpenseTracker.Persistence.Context
 {
-    public class ExpenseTrackerContext : IdentityDbContext<User>, IDbContext
+    public class ExpenseTrackerContext : IdentityDbContext<User>
     {
         public ExpenseTrackerContext()
             : base("name=ExpenseTrackerContext")
