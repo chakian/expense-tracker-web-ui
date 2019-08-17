@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ExpenseTracker.Entities;
+using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.Persistence.Identity;
 
 namespace ExpenseTracker.Business.AutoMapper
@@ -10,8 +11,12 @@ namespace ExpenseTracker.Business.AutoMapper
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<User, UserEntity>().IgnoreAllPropertiesWithAnInaccessibleSetter().IgnoreAllSourcePropertiesWithAnInaccessibleSetter();
-                cfg.CreateMap<UserEntity, User>().IgnoreAllPropertiesWithAnInaccessibleSetter().IgnoreAllSourcePropertiesWithAnInaccessibleSetter();
+                cfg.CreateMap<User, UserEntity>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+                cfg.CreateMap<UserEntity, User>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+
+                cfg.CreateMap<Budget, BudgetEntity>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+
+                cfg.CreateMap<Currency, CurrencyEntity>().IgnoreAllPropertiesWithAnInaccessibleSetter();
             });
 
             // only during development, validate your mappings; remove it before release

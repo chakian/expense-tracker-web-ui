@@ -9,9 +9,14 @@ namespace ExpenseTracker.Business
 {
     public class TransactionTemplateBusiness : BaseBusiness
     {
+        #region constructor
         public TransactionTemplateBusiness() : base() { }
 
         public TransactionTemplateBusiness(ExpenseTrackerContext context) : base(context) { }
+        #endregion
+
+        #region Private Methods
+        #endregion
 
         public bool CreateTransactionTemplate(string templateName, decimal? amount, string description, int? categoryId, int? sourceAccountId, int? targetAccountId, int budgetId, string userId)
         {

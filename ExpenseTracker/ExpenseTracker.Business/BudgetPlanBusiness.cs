@@ -8,11 +8,19 @@ namespace ExpenseTracker.Business
 {
     public class BudgetPlanBusiness : BaseBusiness
     {
+        #region constructor
         public BudgetPlanBusiness() : base() { }
 
         public BudgetPlanBusiness(ExpenseTrackerContext context) : base(context) { }
+        #endregion
 
-        public BudgetPlan GetBudgetPlanById(int budgetPlanId, string userId)
+        #region Private Methods
+        #endregion
+
+        #region Internal Methods
+        #endregion
+
+        private BudgetPlan GetBudgetPlanById(int budgetPlanId, string userId)
         {
             BudgetPlan budgetPlan = context.BudgetPlans.Find(budgetPlanId);
             budgetPlan.Budget = context.Budgets.Find(budgetPlan.BudgetId);
@@ -30,7 +38,7 @@ namespace ExpenseTracker.Business
             return budgetPlan;
         }
 
-        public BudgetPlan GetBudgetPlanByYearAndMonth(int budgetId, int year, int month, string userId)
+        private BudgetPlan GetBudgetPlanByYearAndMonth(int budgetId, int year, int month, string userId)
         {
             BudgetPlan budgetPlan = context.BudgetPlans.FirstOrDefault(bp => bp.IsActive && bp.BudgetId.Equals(budgetId) && bp.Year.Equals(year) && bp.Month.Equals(month));
 
@@ -111,7 +119,7 @@ namespace ExpenseTracker.Business
             return budgetPlan.BudgetPlanId;
         }
 
-        public void UpdatePlan(List<BudgetPlanCategory> budgetPlanCategories, string userId)
+        private void UpdatePlan(List<BudgetPlanCategory> budgetPlanCategories, string userId)
         {
             foreach (var category in budgetPlanCategories)
             {

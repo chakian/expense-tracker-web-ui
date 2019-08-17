@@ -8,17 +8,13 @@ namespace ExpenseTracker.Business
 {
     public class BudgetPlanCategoryBusiness : BaseBusiness
     {
+        #region constructor
         public BudgetPlanCategoryBusiness() : base() { }
 
         public BudgetPlanCategoryBusiness(ExpenseTrackerContext context) : base(context) { }
+        #endregion
 
-        public List<BudgetPlanCategory> GetBudgetPlanCategoriesByPlanId(int budgetPlanId, string userId)
-        {
-            InsertMissingCategoriesToBudgetPlan(budgetPlanId, userId);
-            var categories = context.BudgetPlanCategories.Where(q => q.IsActive && q.BudgetPlanId.Equals(budgetPlanId)).ToList();
-            return categories;
-        }
-
+        #region Private Methods
         private void InsertMissingCategoriesToBudgetPlan(int budgetPlanId, string userId)
         {
             var budgetId = context.BudgetPlans.First(q => q.BudgetPlanId.Equals(budgetPlanId)).BudgetId;
@@ -45,5 +41,15 @@ namespace ExpenseTracker.Business
             }
             context.SaveChanges();
         }
+        #endregion
+
+        #region Internal Methods
+        internal List<BudgetPlanCategory> GetBudgetPlanCategoriesByPlanId(int budgetPlanId, string userId)
+        {
+            InsertMissingCategoriesToBudgetPlan(budgetPlanId, userId);
+            var categories = context.BudgetPlanCategories.Where(q => q.IsActive && q.BudgetPlanId.Equals(budgetPlanId)).ToList();
+            return categories;
+        }
+        #endregion
     }
 }

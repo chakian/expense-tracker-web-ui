@@ -7,13 +7,20 @@ namespace ExpenseTracker.Business
 {
     public class AccountTypeBusiness : BaseBusiness
     {
+        #region constructor
         public AccountTypeBusiness() { }
 
         public AccountTypeBusiness(ExpenseTrackerContext context) : base(context) { }
+        #endregion
 
-        public List<AccountType> GetAccountTypeList()
+        #region Private Methods
+        private List<AccountType> GetAccountTypeList()
         {
             return context.AccountTypes.Where(c => c.IsActive).ToList();
         }
+        #endregion
+
+        #region Internal Methods
+        #endregion
     }
 }

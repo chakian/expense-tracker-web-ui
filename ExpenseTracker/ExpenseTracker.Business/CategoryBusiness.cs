@@ -8,10 +8,13 @@ namespace ExpenseTracker.Business
 {
     public class CategoryBusiness : BaseBusiness
     {
+        #region constructor
         public CategoryBusiness() : base() { }
 
         public CategoryBusiness(ExpenseTrackerContext context) : base(context) { }
+        #endregion
 
+        #region Private Methods
         private Category ConvertEntityToDbo(CategoryEntity entity, string userId)
         {
             Category category = CreateAuditableContextObject<Category>(userId);
@@ -38,6 +41,16 @@ namespace ExpenseTracker.Business
             var category = context.Categories.SingleOrDefault(q => q.IsActive && q.CategoryId.Equals(categoryId) && q.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)));
             return category;
         }
+
+        private List<Category> GetCategoriesByBudgetIdInternal(int budgetId, string userId)
+        {
+            var categories = context.Categories.Where(q => q.IsActive && q.BudgetId.Equals(budgetId) && q.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId))).ToList();
+            return categories;
+        }
+        #endregion
+
+        #region Internal Methods
+        #endregion
 
         public CategoryEntity CreateCategory(CategoryEntity categoryEntity, string userId)
         {
@@ -103,12 +116,6 @@ namespace ExpenseTracker.Business
             context.SaveChanges();
 
             return true;
-        }
-
-        private List<Category> GetCategoriesByBudgetIdInternal(int budgetId, string userId)
-        {
-            var categories = context.Categories.Where(q => q.IsActive && q.BudgetId.Equals(budgetId) && q.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId))).ToList();
-            return categories;
         }
 
         public List<CategoryEntity> GetCategoriesByBudgetId(int budgetId, string userId)

@@ -9,9 +9,31 @@ namespace ExpenseTracker.Business
 {
     public class BudgetAccountBusiness : BaseBusiness
     {
+        #region constructor
         public BudgetAccountBusiness() { }
 
         public BudgetAccountBusiness(ExpenseTrackerContext context) : base(context) { }
+        #endregion
+
+        #region Private Methods
+        private Account GetAccountById(int accountId, string userId)
+        {
+            Account account = context.Accounts.Find(accountId);
+
+            if (account == null || !account.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
+            {
+                return null;
+            }
+
+            //account.InsertUser = context.Users.Find(account.InsertUserId);
+            //account.UpdateUser = context.Users.Find(account.UpdateUserId);
+
+            return account;
+        }
+        #endregion
+
+        #region Internal Methods
+        #endregion
 
         public List<AccountEntity> GetAccountsOfUser(string userId, int budgetId)
         {
@@ -32,21 +54,6 @@ namespace ExpenseTracker.Business
             });
 
             return accountEntities;
-        }
-
-        public Account GetAccountById(int accountId, string userId)
-        {
-            Account account = context.Accounts.Find(accountId);
-
-            if (account == null || !account.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
-            {
-                return null;
-            }
-
-            //account.InsertUser = context.Users.Find(account.InsertUserId);
-            //account.UpdateUser = context.Users.Find(account.UpdateUserId);
-
-            return account;
         }
     }
 }
