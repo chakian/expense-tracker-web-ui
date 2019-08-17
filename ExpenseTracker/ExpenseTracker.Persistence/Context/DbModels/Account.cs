@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ExpenseTracker.Persistence.Context.DbModels
 {
-    public class Account : AuditableEntity
+    public class Account : AuditableDbo
     {
         public Account()
         {

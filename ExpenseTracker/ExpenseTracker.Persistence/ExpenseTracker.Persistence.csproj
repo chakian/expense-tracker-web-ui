@@ -77,8 +77,8 @@
   <ItemGroup>
     <Compile Include="Context\DbModels\Account.cs" />
     <Compile Include="Context\DbModels\AccountType.cs" />
-    <Compile Include="Context\DbModels\Base\AuditableEntity.cs" />
-    <Compile Include="Context\DbModels\Base\BaseEntity.cs" />
+    <Compile Include="Context\DbModels\Base\AuditableDbo.cs" />
+    <Compile Include="Context\DbModels\Base\BaseDbo.cs" />
     <Compile Include="Context\DbModels\Budget.cs" />
     <Compile Include="Context\DbModels\BudgetPlan.cs" />
     <Compile Include="Context\DbModels\BudgetPlanCategory.cs" />
@@ -106,6 +106,10 @@
     <Compile Include="Migrations\201907210919295_AddedTransactionTemplate.Designer.cs">
       <DependentUpon>201907210919295_AddedTransactionTemplate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907251831232_Category_IsIncome_ParentId_Order.cs" />
+    <Compile Include="Migrations\201907251831232_Category_IsIncome_ParentId_Order.Designer.cs">
+      <DependentUpon>201907251831232_Category_IsIncome_ParentId_Order.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -125,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907210919295_AddedTransactionTemplate.resx">
       <DependentUpon>201907210919295_AddedTransactionTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907251831232_Category_IsIncome_ParentId_Order.resx">
+      <DependentUpon>201907251831232_Category_IsIncome_ParentId_Order.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

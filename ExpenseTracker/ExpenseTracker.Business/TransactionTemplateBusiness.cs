@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ExpenseTracker.Entities;
 using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 
@@ -8,9 +9,14 @@ namespace ExpenseTracker.Business
 {
     public class TransactionTemplateBusiness : BaseBusiness
     {
-        public TransactionTemplateBusiness(ExpenseTrackerContext context) : base(context)
-        {
-        }
+        #region constructor
+        public TransactionTemplateBusiness() : base() { }
+
+        public TransactionTemplateBusiness(ExpenseTrackerContext context) : base(context) { }
+        #endregion
+
+        #region Private Methods
+        #endregion
 
         public bool CreateTransactionTemplate(string templateName, decimal? amount, string description, int? categoryId, int? sourceAccountId, int? targetAccountId, int budgetId, string userId)
         {
@@ -58,10 +64,25 @@ namespace ExpenseTracker.Business
             }
         }
 
-        public List<TransactionTemplate> GetTransactionTemplates(int budgetId, string userId)
+        public List<TransactionTemplateEntity> GetTransactionTemplates(int budgetId, string userId)
         {
             var list = context.TransactionTemplates.Where(tt => tt.IsActive && tt.BudgetId.Equals(budgetId) && tt.UserId.Equals(userId)).ToList();
-            return list;
+
+            var entityList = new List<TransactionTemplateEntity>();
+            list.ForEach(tt =>
+            {
+                entityList.Add(new TransactionTemplateEntity
+                {
+                    Id = tt.Id,
+                    Name = tt.Name,
+                    Amount = tt.Amount,
+                    Description = tt.Description,
+                    CategoryId = tt.CategoryId,
+                    SourceAccountId = tt.SourceAccountId
+                });
+            });
+
+            return entityList;
         }
     }
 }

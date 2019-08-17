@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExpenseTracker.Persistence.Context.DbModels
 {
-    public class Category : AuditableEntity
+    public class Category : AuditableDbo
     {
         public Category()
         {
@@ -15,6 +16,15 @@ namespace ExpenseTracker.Persistence.Context.DbModels
 
         [Required]
         public string Name { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsIncomeCategory { get; set; }
+
+        [DefaultValue(null)]
+        public int? ParentCategoryId { get; set; }
+        public virtual Category ParentCategory { get; set; }
+
+        public int Order { get; set; }
 
         public int BudgetId { get; set; }
         public virtual Budget Budget { get; set; }

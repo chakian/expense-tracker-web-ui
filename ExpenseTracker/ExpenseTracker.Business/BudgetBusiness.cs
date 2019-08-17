@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Persistence.Context;
+﻿using ExpenseTracker.Entities;
+using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,18 @@ namespace ExpenseTracker.Business
 {
     public class BudgetBusiness : BaseBusiness
     {
-        public BudgetBusiness(ExpenseTrackerContext context) : base(context) { }
+        #region constructor
+        public BudgetBusiness() { }
 
-        public List<Budget> GetBudgetsOfUser(string userId) => context.Budgets.Where(b => b.IsActive && b.BudgetUsers.Any(bu => bu.IsActive && bu.UserId.Equals(userId)))
+        public BudgetBusiness(ExpenseTrackerContext context) : base(context) { }
+        #endregion
+
+        #region Private Methods
+        private List<Budget> GetBudgetsOfUser(string userId) => context.Budgets.Where(b => b.IsActive && b.BudgetUsers.Any(bu => bu.IsActive && bu.UserId.Equals(userId)))
                 .Include(b => b.Currency)
                 .ToList();
 
-        public Budget GetBudgetDetails(int budgetId, string userId)
+        private Budget GetBudgetDetailsInternal(int budgetId, string userId)
         {
             Budget budget = context.Budgets.Find(budgetId);
 
@@ -26,15 +32,6 @@ namespace ExpenseTracker.Business
 
             //budget.InsertUser = context.Users.Find(budget.InsertUserId);
             //budget.UpdateUser = context.Users.Find(budget.UpdateUserId);
-
-            return budget;
-        }
-
-        public Budget CreateBudget(string name, int currencyId, string userId)
-        {
-            Budget budget = CreateBudget_NoCommit(name, currencyId, userId);
-            new BudgetUserBusiness(context).CreateBudgetUser_NoCommit(budget.BudgetId, userId, userId);
-            context.SaveChanges();
 
             return budget;
         }
@@ -57,10 +54,57 @@ namespace ExpenseTracker.Business
 
             return budget;
         }
+        #endregion
+
+        #region Internal Methods
+        #endregion
+
+        public BudgetEntity GetUsersFirstBudgetAndSetAsDefault(string userId, bool setAsActive = true)
+        {
+            var firstBudget = GetBudgetsOfUser(userId).FirstOrDefault();
+            BudgetEntity budgetEntity = null;
+
+            if (firstBudget != null)
+            {
+                if (setAsActive)
+                {
+                    var user = new UserBusiness(context).GetUserById(userId);
+                    user.ActiveBudgetId = firstBudget.BudgetId;
+                    context.Entry(user).State = EntityState.Modified;
+                    context.SaveChanges();
+                }
+
+                budgetEntity.BudgetId = firstBudget.BudgetId;
+                budgetEntity.Name = firstBudget.Name;
+            }
+
+            return budgetEntity;
+        }
+
+        public BudgetEntity GetBudgetDetails(int budgetId, string userId)
+        {
+            Budget budget = context.Budgets.Find(budgetId);
+
+            if (budget == null || !budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
+            {
+                return null;
+            }
+
+            return mapper.Map<BudgetEntity>(budget);
+        }
+
+        public BudgetEntity CreateBudget(string name, int currencyId, string userId)
+        {
+            Budget budget = CreateBudget_NoCommit(name, currencyId, userId);
+            new BudgetUserBusiness(context).CreateBudgetUser_NoCommit(budget.BudgetId, userId, userId);
+            context.SaveChanges();
+
+            return mapper.Map<BudgetEntity>(budget);
+        }
 
         public bool UpdateBudget(int budgetId, string name, int currencyId, string updateUserId)
         {
-            Budget budget = GetBudgetDetails(budgetId, updateUserId);
+            Budget budget = GetBudgetDetailsInternal(budgetId, updateUserId);
 
             if(budget != null)
             {
@@ -81,7 +125,7 @@ namespace ExpenseTracker.Business
 
         public bool DeleteBudget(int budgetId, string updateUserId)
         {
-            Budget budget = GetBudgetDetails(budgetId, updateUserId);
+            Budget budget = GetBudgetDetailsInternal(budgetId, updateUserId);
 
             if (budget != null)
             {
@@ -96,6 +140,13 @@ namespace ExpenseTracker.Business
             }
 
             return false;
+        }
+
+        public void SetActiveBudget(string userId, int budgetId)
+        {
+            var userToUpdate = context.Users.Find(userId);
+            userToUpdate.ActiveBudgetId = budgetId;
+            context.SaveChanges();
         }
     }
 }

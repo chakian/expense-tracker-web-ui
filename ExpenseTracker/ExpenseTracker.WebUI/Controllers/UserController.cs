@@ -1,11 +1,10 @@
 ﻿using ExpenseTracker.Business;
 using ExpenseTracker.Persistence.Identity;
-using ExpenseTracker.WebUI.Models.Account;
+using ExpenseTracker.WebUI.Models.User;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
-using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -13,16 +12,16 @@ using System.Web.Mvc;
 namespace ExpenseTracker.WebUI.Controllers
 {
     [Authorize]
-    public class AccountController : BaseController
+    public class UserController : BaseController
     {
         private ExpenseSignInManager _signInManager;
         private ExpenseUserManager _userManager;
 
-        public AccountController()
+        public UserController()
         {
         }
 
-        public AccountController(ExpenseUserManager userManager, ExpenseSignInManager signInManager)
+        public UserController(ExpenseUserManager userManager, ExpenseSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -52,8 +51,7 @@ namespace ExpenseTracker.WebUI.Controllers
             }
         }
 
-        //
-        // GET: /Account/Register
+        // GET: /User/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -61,8 +59,7 @@ namespace ExpenseTracker.WebUI.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/Register
+        // POST: /User/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -79,19 +76,15 @@ namespace ExpenseTracker.WebUI.Controllers
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    // var callbackUrl = Url.Action("ConfirmEmail", "User", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your user account", "Please confirm your user account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    BudgetBusiness budgetBusiness = new BudgetBusiness(context);
+                    BudgetBusiness budgetBusiness = new BudgetBusiness();
                     var budget = budgetBusiness.CreateBudget("My Budget", 1, user.Id);
+                    budgetBusiness.SetActiveBudget(user.Id, budget.BudgetId);
 
                     Session["ActiveBudgetId"] = budget.BudgetId;
                     Session["ActiveBudgetName"] = budget.Name;
-
-                    var userToUpdate = context.Users.Find(user.Id);
-                    userToUpdate.ActiveBudgetId = budget.BudgetId;
-                    context.Entry(userToUpdate).State = EntityState.Modified;
-                    context.SaveChanges();
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -102,8 +95,7 @@ namespace ExpenseTracker.WebUI.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/Login
+        // GET: /User/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -111,8 +103,7 @@ namespace ExpenseTracker.WebUI.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
+        // POST: /User/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -141,10 +132,6 @@ namespace ExpenseTracker.WebUI.Controllers
             }
         }
 
-        //
-        // POST: /Account/Logout
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

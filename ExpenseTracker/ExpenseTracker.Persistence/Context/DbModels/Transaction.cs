@@ -2,7 +2,7 @@
 
 namespace ExpenseTracker.Persistence.Context.DbModels
 {
-    public class Transaction : AuditableEntity
+    public class Transaction : AuditableDbo
     {
         public int TransactionId { get; set; }
 

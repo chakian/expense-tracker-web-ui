@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ExpenseTracker.WebUI.Models.Account
+namespace ExpenseTracker.WebUI.Models.User
 {
     public class LoginViewModel : BaseModel
     {

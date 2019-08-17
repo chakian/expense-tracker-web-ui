@@ -1,4 +1,6 @@
 ﻿using ExpenseTracker.Business;
+using ExpenseTracker.Entities;
+using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.WebUI.Models;
 using ExpenseTracker.WebUI.Models.Transaction;
 using System;
@@ -17,10 +19,10 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public TransactionController()
         {
-            budgetAccountBusiness = new BudgetAccountBusiness(context);
-            categoryBusiness = new CategoryBusiness(context);
-            transactionBusiness = new TransactionBusiness(context);
-            transactionTemplateBusiness = new TransactionTemplateBusiness(context);
+            budgetAccountBusiness = new BudgetAccountBusiness();
+            categoryBusiness = new CategoryBusiness();
+            transactionBusiness = new TransactionBusiness();
+            transactionTemplateBusiness = new TransactionTemplateBusiness();
         }
 
         [HttpGet]
@@ -33,14 +35,14 @@ namespace ExpenseTracker.WebUI.Controllers
             SetTransactionSummaryListForModel(model, DateTime.Now);
             SetTemplateListForModel(model);
 
-            var currentPeriodTransactionsGroupedList = transactionBusiness.GetTransactionsForPeriodByGivenDate_GroupedByCategory(DateTime.Now, UserId, ActiveBudgetId);
+            List<TransactionEntity> currentPeriodTransactionsGroupedList = transactionBusiness.GetTransactionsForPeriodByGivenDate_GroupedByCategory(DateTime.Now, UserId, ActiveBudgetId);
             model.CategoryStatusList = new List<AddModel.CategoryStatus>();
-            currentPeriodTransactionsGroupedList.ForEach(g =>
+            currentPeriodTransactionsGroupedList.ForEach(t =>
             {
                 model.CategoryStatusList.Add(new AddModel.CategoryStatus()
                 {
-                    CategoryId = g.CategoryId,
-                    SpentAmount = g.Amount * -1
+                    CategoryId = t.CategoryId,
+                    SpentAmount = t.Amount * -1
                 });
             });
 
@@ -51,7 +53,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
         private void SetTemplateListForModel(AddModel model)
         {
-            var templates = transactionTemplateBusiness.GetTransactionTemplates(ActiveBudgetId, UserId);
+            List<TransactionTemplateEntity> templates = transactionTemplateBusiness.GetTransactionTemplates(ActiveBudgetId, UserId);
             if (templates != null)
             {
                 model.TemplateListForView = new SelectList(templates.OrderBy(q => q.Name), "Id", "Name");
@@ -74,7 +76,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
         private void SetCategoryListForModel(BaseEditableTransactionModel model)
         {
-            var categories = categoryBusiness.GetCategoriesByBudgetId(ActiveBudgetId, UserId);
+            List<CategoryEntity> categories = categoryBusiness.GetCategoriesByBudgetId(ActiveBudgetId, UserId);
             if (categories != null)
             {
                 model.CategoryList = new SelectList(categories.OrderBy(q => q.Name), "CategoryId", "Name");
@@ -83,7 +85,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
         private void SetAccountListForModel(BaseEditableTransactionModel model)
         {
-            var accounts = budgetAccountBusiness.GetAccountsOfUser(UserId, ActiveBudgetId);
+            List<AccountEntity> accounts = budgetAccountBusiness.GetAccountsOfUser(UserId, ActiveBudgetId);
             if (accounts != null)
             {
                 model.AccountList = new SelectList(accounts, "AccountId", "Name");
@@ -92,9 +94,9 @@ namespace ExpenseTracker.WebUI.Controllers
 
         private void SetTransactionSummaryListForModel(BaseTransactionModel model, DateTime periodDate)
         {
-            model.TransactionSummaries = new System.Collections.Generic.List<BaseTransactionModel.TransactionSummary>();
+            model.TransactionSummaries = new List<BaseTransactionModel.TransactionSummary>();
 
-            var transactions = transactionBusiness.GetTransactionsForPeriodByGivenDate(periodDate, UserId, ActiveBudgetId).OrderByDescending(q => q.Date).ToList();
+            List<TransactionEntity> transactions = transactionBusiness.GetTransactionsForPeriodByGivenDate(periodDate, UserId, ActiveBudgetId).OrderByDescending(q => q.Date).ToList();
             if (transactions != null)
             {
                 transactions.ForEach(t =>
@@ -143,7 +145,7 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 model.TransactionId = TransactionId.Value;
 
-                var transaction = transactionBusiness.GetTransactionById(TransactionId.Value, UserId);
+                TransactionEntity transaction = transactionBusiness.GetTransactionById(TransactionId.Value, UserId);
                 if (transaction.Amount < 0)
                 {
                     model.Amount = transaction.Amount * -1;
@@ -178,7 +180,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 return RedirectToAction("List");
             }
 
-            var transaction = transactionBusiness.GetTransactionById(model.TransactionId, UserId);
+            TransactionEntity transaction = transactionBusiness.GetTransactionById(model.TransactionId, UserId);
             if (transaction.Amount < 0)
             {
                 model.Amount *= -1;

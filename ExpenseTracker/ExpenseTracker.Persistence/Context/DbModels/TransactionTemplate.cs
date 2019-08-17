@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpenseTracker.Persistence.Context.DbModels
 {
-    public class TransactionTemplate : AuditableEntity
+    public class TransactionTemplate : AuditableDbo
     {
         public int Id { get; set; }
 

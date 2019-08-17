@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Persistence.Context;
+﻿using ExpenseTracker.Entities;
+using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,17 +9,14 @@ namespace ExpenseTracker.Business
 {
     public class BudgetCategoryBusiness : BaseBusiness
     {
-        public BudgetCategoryBusiness(ExpenseTrackerContext context) : base(context)
-        {
-        }
+        #region constructor
+        public BudgetCategoryBusiness() : base() { }
 
-        public List<Category> GetCategoriesOfUser(string userId, int budgetId) => context.Categories.Where(a => a.IsActive && a.BudgetId == budgetId && a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
-            .Include(a => a.Budget)
-            .Include(a => a.InsertUser)
-            .Include(a => a.UpdateUser)
-            .ToList();
+        public BudgetCategoryBusiness(ExpenseTrackerContext context) : base(context) { }
+        #endregion
 
-        public Category GetCategoryById(int categoryId, string userId)
+        #region Private Methods
+        private Category GetCategoryById(int categoryId, string userId)
         {
             Category category = context.Categories.Find(categoryId);
 
@@ -27,10 +25,22 @@ namespace ExpenseTracker.Business
                 return null;
             }
 
-            //category.InsertUser = context.Users.Find(category.InsertUserId);
-            //category.UpdateUser = context.Users.Find(category.UpdateUserId);
-
             return category;
+        }
+        #endregion
+
+        #region Internal Methods
+        #endregion
+
+        public List<CategoryEntity> GetCategoriesOfUser(string userId, int budgetId)
+        {
+            var contextObjectList = context.Categories.Where(a => a.IsActive && a.BudgetId == budgetId && a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
+                .Include(a => a.Budget)
+                .Include(a => a.InsertUser)
+                .Include(a => a.UpdateUser)
+                .ToList();
+
+            return null;
         }
     }
 }

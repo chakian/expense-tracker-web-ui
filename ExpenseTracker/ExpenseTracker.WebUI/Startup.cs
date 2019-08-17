@@ -1,7 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(ExpenseTracker.WebUI.Startup))]
+[assembly: OwinStartup(typeof(ExpenseTracker.WebUI.Startup))]
 namespace ExpenseTracker.WebUI
 {
     public partial class Startup

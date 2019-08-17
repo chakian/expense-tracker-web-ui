@@ -1,10 +1,6 @@
 ﻿using ExpenseTracker.Business;
-using ExpenseTracker.Persistence.Context;
-using ExpenseTracker.Persistence.Context.DbModels;
-using ExpenseTracker.WebUI.Helpers;
+using ExpenseTracker.Entities;
 using Microsoft.AspNet.Identity;
-using System.Data.Entity;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace ExpenseTracker.WebUI.Controllers
@@ -12,8 +8,6 @@ namespace ExpenseTracker.WebUI.Controllers
     [RequireHttps]
     public class BaseController : Controller
     {
-        protected readonly ExpenseTrackerContext context;
-
         protected string UserId
         {
             get
@@ -44,12 +38,12 @@ namespace ExpenseTracker.WebUI.Controllers
 
         private void SetActiveBudgetProperties()
         {
-            Budget budget = null;
+            BudgetEntity budget = null;
 
             int? activeBudgetId = (int?)Session["ActiveBudgetId"];
             if (!activeBudgetId.HasValue)
             {
-                budget = GetBudgetFromDb();
+                budget = GetActiveBudget();
                 if (budget != null)
                 {
                     activeBudgetId = budget.BudgetId;
@@ -57,6 +51,8 @@ namespace ExpenseTracker.WebUI.Controllers
                 }
                 else
                 {
+                    /// TODO: We should create a budget and set is as the "active budget" in any case. 
+                    /// Therefore if this block is hit during execution, there has to be a problem somewhere.
                     activeBudgetId = -1;
                 }
             }
@@ -71,9 +67,9 @@ namespace ExpenseTracker.WebUI.Controllers
             ViewBag.ActiveBudgetName = activeBudgetName;
         }
 
-        private Budget GetBudgetFromDb()
+        private BudgetEntity GetActiveBudget()
         {
-            Budget budget = GetActiveButgetFromUserPreferences();
+            BudgetEntity budget = GetActiveButgetFromUserPreferences();
 
             if (budget == null)
             {
@@ -83,32 +79,21 @@ namespace ExpenseTracker.WebUI.Controllers
             return budget;
         }
 
-        private Budget GetActiveButgetFromUserPreferences()
+        private BudgetEntity GetActiveButgetFromUserPreferences()
         {
-            var user = context.Users.Find(UserId);
-            if(user != null && user.ActiveBudgetId.HasValue)
+            var user = new UserBusiness().GetUserById(UserId);
+            if (user != null && user.ActiveBudgetId.HasValue)
             {
-                return new BudgetBusiness(context).GetBudgetDetails(user.ActiveBudgetId.Value, UserId);
+                return new BudgetBusiness().GetBudgetDetails(user.ActiveBudgetId.Value, UserId);
             }
             return null;
         }
 
-        private Budget GetUsersFirstBudget()
+        private BudgetEntity GetUsersFirstBudget()
         {
-            Budget budget = new BudgetBusiness(context).GetBudgetsOfUser(UserId).FirstOrDefault();
-            if (budget != null)
-            {
-                var user = context.Users.Find(UserId);
-                user.ActiveBudgetId = budget.BudgetId;
-                context.Entry(user).State = EntityState.Modified;
-                context.SaveChanges();
-            }
+            BudgetEntity budget = new BudgetBusiness().GetUsersFirstBudgetAndSetAsDefault(UserId);
+            
             return budget;
-        }
-
-        public BaseController()
-        {
-            context = DbContextFactory.GetExpenseTrackerContext();
         }
 
         protected ActionResult ReturnUnauthorized(string message = null)
@@ -120,7 +105,6 @@ namespace ExpenseTracker.WebUI.Controllers
         {
             if (disposing)
             {
-                context.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -1,4 +1,4 @@
-﻿namespace ExpenseTracker.Persistence.Context.DbModels
+﻿namespace ExpenseTracker.Entities.Base
 {
     public class BaseEntity
     {
