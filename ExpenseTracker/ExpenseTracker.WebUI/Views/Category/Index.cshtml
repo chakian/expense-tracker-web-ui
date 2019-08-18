@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ExpenseTracker.Persistence.Context.DbModels.Category>
+﻿@model IEnumerable<ExpenseTracker.Entities.CategoryEntity>
 
 @{
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var category in Model)
+            @foreach (ExpenseTracker.Entities.CategoryEntity category in Model)
             {
                 <tr>
                     <th scope="row">@category.Name</th>

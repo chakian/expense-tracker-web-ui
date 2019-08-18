@@ -1,50 +1,47 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using ExpenseTracker.Business;
 using ExpenseTracker.Entities;
-using Microsoft.AspNet.Identity;
+using ExpenseTracker.WebUI.Models.Category;
 
 namespace ExpenseTracker.WebUI.Controllers
 {
     public class CategoryController : BaseAuthenticatedController
     {
-        private readonly BudgetCategoryBusiness budgetCategoryBusiness;
         private readonly CategoryBusiness categoryBusiness;
 
         public CategoryController()
         {
-            budgetCategoryBusiness = new BudgetCategoryBusiness();
             categoryBusiness = new CategoryBusiness();
         }
 
         public ActionResult Index()
         {
-            var categories = budgetCategoryBusiness.GetCategoriesOfUser(UserId, ActiveBudgetId);
+            List<CategoryEntity> categories = categoryBusiness.GetCategoriesOfUser(UserId, ActiveBudgetId);
             return View(categories);
         }
 
         public ActionResult Create() => View();
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "CategoryId,Name,BudgetId")] Category category)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        categoryBusiness.CreateCategory(new CategoryEntity()
-        //        {
-        //            Name = category.Name,
-        //            BudgetId = ActiveBudgetId,
-        //            ParentId = category.ParentCategoryId
-        //        }, UserId);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CreateCategoryModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                categoryBusiness.CreateCategory(new CategoryEntity
+                {
+                    Name = model.Name,
+                    BudgetId = ActiveBudgetId,
+                    ParentCategoryId = model.ParentCategoryId
+                }, UserId);
 
-        //        return RedirectToAction("Index");
-        //    }
+                return RedirectToAction("Index");
+            }
 
-        //    return View(category);
-        //}
+            return View(model);
+        }
 
         public ActionResult Edit(int? id)
         {
@@ -52,45 +49,49 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Category category = budgetCategoryBusiness.GetCategoryById(id.Value, UserId);
-            //if (category == null)
-            //{
-            //    return HttpNotFound();
-            //}
+            CategoryEntity category = categoryBusiness.GetCategoryById(id.Value, UserId);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
 
-            return View();
+            CreateCategoryModel model = new CreateCategoryModel
+            {
+                CategoryId = category.CategoryId,
+                Name = category.Name,
+                BudgetId = category.BudgetId,
+                ParentCategoryId = category.ParentCategoryId ?? 0
+            };
+
+            return View(model);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "CategoryId,Name,BudgetId,InsertUserId,InsertTime,IsActive")] Category category)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        category.UpdateUserId = User.Identity.GetUserId();
-        //        category.UpdateTime = DateTime.Now;
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(CreateCategoryModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                categoryBusiness.UpdateCategory(new CategoryEntity
+                {
+                    CategoryId = model.CategoryId,
+                    Name = model.Name,
+                    BudgetId = model.BudgetId,
+                    ParentCategoryId = model.ParentCategoryId
+                }, UserId);
 
-        //        //TODO: Do not use context in Web project. Use the business methods instead!
-        //        //context.Entry(category).State = EntityState.Modified;
-        //        //context.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
+                return RedirectToAction("Index");
+            }
 
-        //    return View(category);
-        //}
+            return View(model);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int CategoryId)
         {
-            //Category category = context.Categories.Find(CategoryId);
-            //category.UpdateUserId = User.Identity.GetUserId();
-            //category.UpdateTime = DateTime.Now;
-            //category.IsActive = false;
+            categoryBusiness.DeleteCategory(CategoryId, UserId);
 
-            ////TODO: Do not use context in Web project. Use the business methods instead!
-            //context.Entry(category).State = EntityState.Modified;
-            //context.SaveChanges();
             return RedirectToAction("Index");
         }
     }
