@@ -12,14 +12,14 @@ namespace ExpenseTracker.WebUI.Controllers
 {
     public class TransactionController : BaseAuthenticatedController
     {
-        readonly BudgetAccountBusiness budgetAccountBusiness;
+        readonly AccountBusiness budgetAccountBusiness;
         readonly CategoryBusiness categoryBusiness;
         readonly TransactionBusiness transactionBusiness;
         readonly TransactionTemplateBusiness transactionTemplateBusiness;
 
         public TransactionController()
         {
-            budgetAccountBusiness = new BudgetAccountBusiness();
+            budgetAccountBusiness = new AccountBusiness();
             categoryBusiness = new CategoryBusiness();
             transactionBusiness = new TransactionBusiness();
             transactionTemplateBusiness = new TransactionTemplateBusiness();

@@ -64,7 +64,7 @@
   <ItemGroup>
     <Compile Include="AutoMapper\AutoMapperBootstrap.cs" />
     <Compile Include="Base\BaseBusiness.cs" />
-    <Compile Include="BudgetAccountBusiness.cs" />
+    <Compile Include="AccountBusiness.cs" />
     <Compile Include="BudgetBusiness.cs" />
     <Compile Include="BudgetCategoryBusiness.cs" />
     <Compile Include="BudgetPlanBusiness.cs" />

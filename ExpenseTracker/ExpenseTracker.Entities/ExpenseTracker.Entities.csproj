@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountEntity.cs" />
+    <Compile Include="AccountTypeEntity.cs" />
     <Compile Include="Base\AuditableEntity.cs" />
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="BudgetEntity.cs" />

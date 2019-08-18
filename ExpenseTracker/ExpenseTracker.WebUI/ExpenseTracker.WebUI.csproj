@@ -174,7 +174,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\Base\BaseAuthenticatedController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
-    <Compile Include="Controllers\BudgetAccountController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BudgetController.cs" />
     <Compile Include="Controllers\BudgetPlanController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -189,6 +189,7 @@
     <Compile Include="Helpers\DbContextFactory.cs" />
     <Compile Include="Helpers\LanguageHelper.cs" />
     <Compile Include="Helpers\LocalizationAttribute.cs" />
+    <Compile Include="Models\Account\CreateAccountModel.cs" />
     <Compile Include="Models\User\LoginViewModel.cs" />
     <Compile Include="Models\User\RegisterViewModel.cs" />
     <Compile Include="Models\Base\BaseModel.cs" />
@@ -475,9 +476,9 @@
     <Content Include="Views\Budget\Create.cshtml" />
     <Content Include="Views\Budget\Edit.cshtml" />
     <Content Include="Views\Budget\Index.cshtml" />
-    <Content Include="Views\BudgetAccount\Create.cshtml" />
-    <Content Include="Views\BudgetAccount\Edit.cshtml" />
-    <Content Include="Views\BudgetAccount\Index.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
