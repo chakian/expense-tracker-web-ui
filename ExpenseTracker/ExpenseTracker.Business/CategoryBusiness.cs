@@ -55,6 +55,10 @@ namespace ExpenseTracker.Business
             {
                 return null;
             }
+            if (categoryEntity.ParentCategoryId == 0)
+            {
+                categoryEntity.ParentCategoryId = null;
+            }
             if (categoryEntity.ParentCategoryId.HasValue && !GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.CategoryId.Equals(categoryEntity.ParentCategoryId)))
             {
                 return null;
@@ -76,6 +80,10 @@ namespace ExpenseTracker.Business
             if (category == null)
             {
                 return null;
+            }
+            if (categoryEntity.ParentCategoryId == 0)
+            {
+                categoryEntity.ParentCategoryId = null;
             }
             if (categoryEntity.ParentCategoryId.HasValue && !GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.CategoryId.Equals(categoryEntity.ParentCategoryId)))
             {

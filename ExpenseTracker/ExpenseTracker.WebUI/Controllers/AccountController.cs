@@ -67,7 +67,17 @@ namespace ExpenseTracker.WebUI.Controllers
             }
 
             SetViewBagValues(account.AccountTypeId);
-            return View(account);
+
+            CreateAccountModel model = new CreateAccountModel()
+            {
+                AccountId = account.AccountId,
+                AccountTypeId = account.AccountTypeId,
+                CurrentBalance = account.CurrentBalance,
+                Name = account.Name,
+                StartingBalance = account.StartingBalance
+            };
+
+            return View(model);
         }
 
         [HttpPost]
@@ -78,8 +88,9 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 AccountEntity accountEntity = new AccountEntity
                 {
+                    AccountId = model.AccountId,
                     Name = model.Name,
-                    CurrentBalance = model.StartingBalance,
+                    CurrentBalance = model.CurrentBalance,
                 };
 
                 accountBusiness.UpdateAccount(accountEntity, UserId);

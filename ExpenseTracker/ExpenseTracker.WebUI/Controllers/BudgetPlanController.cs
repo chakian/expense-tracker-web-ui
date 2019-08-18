@@ -1,7 +1,6 @@
 ﻿using ExpenseTracker.Business;
 using ExpenseTracker.Common.Helpers;
 using ExpenseTracker.Entities;
-using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.WebUI.Models.BudgetRelated;
 using System;
 using System.Collections.Generic;

@@ -484,15 +484,6 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aktif Bütçeyi Değiştir.
-        /// </summary>
-        public static string Menu_Budgets_ChangeActiveBudget {
-            get {
-                return ResourceManager.GetString("Menu_Budgets_ChangeActiveBudget", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Tüm Bütçeler.
         /// </summary>
         public static string Menu_Budgets_List {

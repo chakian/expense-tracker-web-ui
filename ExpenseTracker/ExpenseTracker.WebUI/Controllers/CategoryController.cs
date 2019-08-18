@@ -34,7 +34,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 {
                     Name = model.Name,
                     BudgetId = ActiveBudgetId,
-                    ParentCategoryId = model.ParentCategoryId
+                    ParentCategoryId = model.ParentCategoryId == 0 ? (int?)null : model.ParentCategoryId
                 }, UserId);
 
                 return RedirectToAction("Index");
@@ -77,7 +77,7 @@ namespace ExpenseTracker.WebUI.Controllers
                     CategoryId = model.CategoryId,
                     Name = model.Name,
                     BudgetId = model.BudgetId,
-                    ParentCategoryId = model.ParentCategoryId
+                    ParentCategoryId = model.ParentCategoryId == 0 ? (int?)null : model.ParentCategoryId
                 }, UserId);
 
                 return RedirectToAction("Index");

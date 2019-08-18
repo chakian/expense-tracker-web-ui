@@ -216,9 +216,6 @@
   <data name="Menu_Budgets_Add" xml:space="preserve">
     <value>Yeni Bütçe Oluştur</value>
   </data>
-  <data name="Menu_Budgets_ChangeActiveBudget" xml:space="preserve">
-    <value>Aktif Bütçeyi Değiştir</value>
-  </data>
   <data name="Menu_Budgets_List" xml:space="preserve">
     <value>Tüm Bütçeler</value>
   </data>

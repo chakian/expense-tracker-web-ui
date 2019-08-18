@@ -43,21 +43,12 @@ namespace ExpenseTracker.Business
 
         public List<AccountEntity> GetAccountsOfUser(string userId, int budgetId)
         {
-            var list = context.Accounts.Where(a => a.IsActive && a.BudgetId == budgetId && a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
+            List<Account> list = context.Accounts.Where(a => a.IsActive && a.BudgetId == budgetId && a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
                 .Include(a => a.AccountType)
                 .Include(a => a.Budget)
                 .ToList();
 
-            List<AccountEntity> accountEntities = new List<AccountEntity>();
-
-            list.ForEach(a =>
-            {
-                accountEntities.Add(new AccountEntity()
-                {
-                    AccountId = a.AccountId,
-                    Name = a.Name
-                });
-            });
+            List<AccountEntity> accountEntities = mapper.Map<List<AccountEntity>>(list);
 
             return accountEntities;
         }
@@ -80,6 +71,7 @@ namespace ExpenseTracker.Business
             };
 
             context.Accounts.Add(account);
+            context.SaveChanges();
         }
 
         public AccountEntity UpdateAccount(AccountEntity accountEntity, string userId)
@@ -95,7 +87,7 @@ namespace ExpenseTracker.Business
             account.UpdateTime = DateTime.Now;
 
             account.Name = accountEntity.Name;
-            account.CurrentBalance = accountEntity.StartingBalance;
+            account.CurrentBalance = accountEntity.CurrentBalance;
 
             context.SaveChanges();
 
