@@ -103,11 +103,13 @@ namespace ExpenseTracker.Business
 
         public bool DeleteCategory(int categoryId, string userId)
         {
-            var category = GetCategoryById(categoryId, userId);
-            if (category == null)
+            Category category = context.Categories.Find(categoryId);
+
+            if (category == null || !category.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
             {
                 return false;
             }
+
             if (GetCategoriesByBudgetIdInternal(category.BudgetId, userId).Any(q => q.ParentCategoryId.Equals(categoryId)))
             {
                 return false;

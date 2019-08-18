@@ -51,7 +51,7 @@ namespace ExpenseTracker.Business.Tests.CategoryTests
             {
                 BudgetId = DefaultTestBudgetId,
                 Name = "child",
-                ParentId = parent.CategoryId
+                ParentCategoryId = parent.CategoryId
             };
             var child = categoryBusiness.CreateCategory(categoryEntity, DefaultUserId);
             Assert.NotNull(child);
