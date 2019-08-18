@@ -20,9 +20,6 @@ namespace ExpenseTracker.Business
         #region Internal Methods
         #endregion
 
-        public List<CurrencyEntity> GetCurrencyList()
-        {
-            return mapper.Map<List<CurrencyEntity>>(context.Currencies.Where(c => c.IsActive).ToList());
-        }
+        public List<CurrencyEntity> GetCurrencyList() => mapper.Map<List<CurrencyEntity>>(context.Currencies.Where(c => c.IsActive).ToList());
     }
 }
