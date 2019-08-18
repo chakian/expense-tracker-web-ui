@@ -16,11 +16,11 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             string userId = DefaultUserId;
             int budgetPlanId = CreateBudgetPlan(DefaultTestBudgetId, 2019, 05, userId);
 
-            //// ACT
-            //var budgetPlan = business.GetBudgetPlanById(budgetPlanId, userId);
+            // ACT
+            var budgetPlan = business.GetBudgetPlanById(budgetPlanId, userId);
 
-            ////ASSERT
-            //Assert.NotNull(budgetPlan);
+            //ASSERT
+            Assert.NotNull(budgetPlan);
         }
 
         [Fact]
@@ -33,11 +33,11 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
             int year = DateTime.Now.Year;
             int month = DateTime.Now.Month;
 
-            //// ACT
-            //var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, year, month, userId);
+            // ACT
+            var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, year, month, userId);
 
-            ////ASSERT
-            //Assert.NotNull(budgetPlan);
+            //ASSERT
+            Assert.NotNull(budgetPlan);
         }
 
         [Fact]
@@ -52,11 +52,11 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
 
             CreateBudgetPlan(budgetId, year, month, userId);
 
-            //// ACT
-            //var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, year, month, userId);
+            // ACT
+            var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, year, month, userId);
 
-            ////ASSERT
-            //Assert.NotNull(budgetPlan);
+            //ASSERT
+            Assert.NotNull(budgetPlan);
         }
 
         [Fact]
@@ -72,11 +72,11 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
 
             DateTime adjacentDate = currentDate.AddMonths(1);
 
-            //// ACT
-            //var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, adjacentDate.Year, adjacentDate.Month, userId);
+            // ACT
+            var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, adjacentDate.Year, adjacentDate.Month, userId);
 
-            ////ASSERT
-            //Assert.NotNull(budgetPlan);
+            //ASSERT
+            Assert.NotNull(budgetPlan);
         }
 
         [Fact]
@@ -92,11 +92,11 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
 
             DateTime adjacentDate = currentDate.AddMonths(-1);
 
-            //// ACT
-            //var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, adjacentDate.Year, adjacentDate.Month, userId);
+            // ACT
+            var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, adjacentDate.Year, adjacentDate.Month, userId);
 
-            ////ASSERT
-            //Assert.NotNull(budgetPlan);
+            //ASSERT
+            Assert.NotNull(budgetPlan);
         }
 
         [Fact]
@@ -112,11 +112,11 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
 
             DateTime notAdjacentDate = currentDate.AddMonths(2);
 
-            //// ACT
-            //var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, notAdjacentDate.Year, notAdjacentDate.Month, userId);
+            // ACT
+            var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, notAdjacentDate.Year, notAdjacentDate.Month, userId);
 
-            ////ASSERT
-            //Assert.Null(budgetPlan);
+            //ASSERT
+            Assert.Null(budgetPlan);
         }
 
         [Fact]
@@ -132,11 +132,11 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
 
             DateTime notAdjacentDate = currentDate.AddMonths(2);
 
-            //// ACT
-            //var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, notAdjacentDate.Year, notAdjacentDate.Month, unauthorizedUserId);
+            // ACT
+            var budgetPlan = business.GetBudgetPlanByYearAndMonth(budgetId, notAdjacentDate.Year, notAdjacentDate.Month, unauthorizedUserId);
 
-            ////ASSERT
-            //Assert.Null(budgetPlan);
+            //ASSERT
+            Assert.Null(budgetPlan);
         }
     }
 }

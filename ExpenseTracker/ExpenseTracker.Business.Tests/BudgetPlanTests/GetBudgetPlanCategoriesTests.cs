@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Business.Tests.Base;
+using ExpenseTracker.Entities;
 using ExpenseTracker.Persistence.Context.DbModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,21 +19,12 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
 
             return added;
         }
-        private void CreatePlanCategory(int categoryId, int budgetPlanId, decimal amount)
-        {
-            BudgetPlanCategory category = CreateNewAuthorizedEntity<BudgetPlanCategory>();
-            category.BudgetPlanId = budgetPlanId;
-            category.CategoryId = categoryId;
-            category.PlannedAmount = amount;
-            context.BudgetPlanCategories.Add(category);
-            context.SaveChanges();
-        }
 
         [Fact]
         public void Success_NoRecordedPlan()
         {
             // ARRANGE
-            var business = new BudgetPlanCategoryBusiness(context);
+            var business = new BudgetPlanBusiness(context);
             string userId = DefaultUserId;
             int budgetPlanId = CreateBudgetPlan(DefaultTestBudgetId, 2019, 05, userId);
 
@@ -44,46 +36,16 @@ namespace ExpenseTracker.Business.Tests.BudgetPlanTests
                 categoryNames.Add(categoryName);
             }
 
-            //// ACT
-            //var budgetPlanCategories = business.GetBudgetPlanCategoriesByPlanId(budgetPlanId, userId);
+            // ACT
+            BudgetPlanEntity budgetPlan = business.GetBudgetPlanById(budgetPlanId, userId);
 
-            ////ASSERT
-            //Assert.NotNull(budgetPlanCategories);
-            //Assert.Equal(categoryNames.Count, budgetPlanCategories.Select(q => q.Category.Name).ToList().Count);
-        }
-
-        [Fact]
-        public void Success_SomeRecordedPlan()
-        {
-            // ARRANGE
-            var business = new BudgetPlanCategoryBusiness(context);
-            string userId = DefaultUserId;
-            int budgetPlanId = CreateBudgetPlan(DefaultTestBudgetId, 2019, 05, userId);
-
-            List<string> categoryNames = new List<string>();
-            for (int i = 0; i < 5; i++)
+            //ASSERT
+            Assert.NotNull(budgetPlan);
+            Assert.Equal(categoryNames.Count, budgetPlan.BudgetPlanCategories.Select(q => q.Category.Name).ToList().Count);
+            foreach (BudgetPlanCategoryEntity item in budgetPlan.BudgetPlanCategories)
             {
-                string categoryName = "category" + i.ToString();
-                var addedCategory = CreateCategory(categoryName, DefaultTestBudgetId);
-                categoryNames.Add(categoryName);
-
-                if (i % 2 == 0)
-                {
-                    CreatePlanCategory(addedCategory.CategoryId, budgetPlanId, 10 * (i + 1));
-                }
+                Assert.NotNull(item.Category);
             }
-
-            //// ACT
-            //var budgetPlanCategories = business.GetBudgetPlanCategoriesByPlanId(budgetPlanId, userId);
-
-            ////ASSERT
-            //Assert.NotNull(budgetPlanCategories);
-            //Assert.Equal(categoryNames.Count, budgetPlanCategories.Select(q => q.Category.Name).ToList().Count);
-            //Assert.Equal(10, budgetPlanCategories.Single(q => q.Category.Name.Equals("category0")).PlannedAmount);
-            //Assert.Equal(0, budgetPlanCategories.Single(q => q.Category.Name.Equals("category1")).PlannedAmount);
-            //Assert.Equal(30, budgetPlanCategories.Single(q => q.Category.Name.Equals("category2")).PlannedAmount);
-            //Assert.Equal(0, budgetPlanCategories.Single(q => q.Category.Name.Equals("category3")).PlannedAmount);
-            //Assert.Equal(50, budgetPlanCategories.Single(q => q.Category.Name.Equals("category4")).PlannedAmount);
         }
     }
 }

@@ -48,7 +48,7 @@ namespace ExpenseTracker.Business
             return false;
         }
 
-        private int CreateBudgetPlanForPeriod(int budgetId, int year, int month, string userId)
+        private BudgetPlan CreateBudgetPlanForPeriod(int budgetId, int year, int month, string userId)
         {
             BudgetPlan budgetPlan = new BudgetPlan
             {
@@ -66,7 +66,9 @@ namespace ExpenseTracker.Business
             context.BudgetPlans.Add(budgetPlan);
             context.SaveChanges();
 
-            return budgetPlan.BudgetPlanId;
+            budgetPlan.BudgetPlanCategories = new BudgetPlanCategoryBusiness(context).GetBudgetPlanCategoriesByPlanId(budgetPlan.BudgetPlanId, userId);
+
+            return budgetPlan;
         }
         #endregion
 
@@ -97,8 +99,8 @@ namespace ExpenseTracker.Business
             {
                 if (IsRequestedDateEqualToCurrentDate(year, month) || IsRequestedDateAdjacentToAnExistingBudgetPlanPeriod(budgetId, year, month, userId))
                 {
-                    int newBudgetPlanId = CreateBudgetPlanForPeriod(budgetId, year, month, userId);
-                    return GetBudgetPlanById(newBudgetPlanId, userId);
+                    budgetPlan = CreateBudgetPlanForPeriod(budgetId, year, month, userId);
+                    return mapper.Map<BudgetPlanEntity>(budgetPlan);
                 }
                 else
                 {

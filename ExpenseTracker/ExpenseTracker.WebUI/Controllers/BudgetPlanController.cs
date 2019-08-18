@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Business;
 using ExpenseTracker.Common.Helpers;
 using ExpenseTracker.Entities;
+using ExpenseTracker.Persistence.Context.DbModels;
 using ExpenseTracker.WebUI.Models.BudgetRelated;
 using System;
 using System.Collections.Generic;
@@ -65,12 +66,12 @@ namespace ExpenseTracker.WebUI.Controllers
                 model.BudgetPlan.NextMonth = nextDateTime.Month;
                 model.BudgetPlan.NextYear = nextDateTime.Year;
 
-                var currentPeriodTransactionsGroupedList = transactionBusiness.GetTransactionsForPeriodByGivenDate_GroupedByCategory(currentDateTime, UserId, ActiveBudgetId);
+                List<TransactionEntity> currentPeriodTransactionsGroupedList = transactionBusiness.GetTransactionsForPeriodByGivenDate_GroupedByCategory(currentDateTime, UserId, ActiveBudgetId);
 
-                foreach (var bpCategory in budgetPlan.BudgetPlanCategories)
+                foreach (BudgetPlanCategoryEntity bpCategory in budgetPlan.BudgetPlanCategories)
                 {
-                    var transactionForCategory = currentPeriodTransactionsGroupedList.SingleOrDefault(t => t.CategoryId.Equals(bpCategory.CategoryId));
-                    var category = new Models.ContextObjects.BudgetPlanCategory()
+                    TransactionEntity transactionForCategory = currentPeriodTransactionsGroupedList.SingleOrDefault(t => t.CategoryId.Equals(bpCategory.CategoryId));
+                    Models.ContextObjects.BudgetPlanCategory category = new Models.ContextObjects.BudgetPlanCategory
                     {
                         BudgetPlanCategoryId = bpCategory.BudgetPlanCategoryId,
                         CategoryId = bpCategory.CategoryId,
