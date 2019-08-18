@@ -148,7 +148,7 @@
     <value>Bu kategoriyi silmek istediğinizden emin misiniz?</value>
   </data>
   <data name="Categories_Label_Name" xml:space="preserve">
-    <value>Kategori</value>
+    <value>Kategori Adı</value>
   </data>
   <data name="Categories_Link_CreateNewCategory" xml:space="preserve">
     <value>Yeni Kategori Ekle</value>
@@ -431,5 +431,23 @@
   </data>
   <data name="Transaction_Add_Label_AlreadySpent" xml:space="preserve">
     <value>Harcanan</value>
+  </data>
+  <data name="Categories_Label_IsItIncomeCategory" xml:space="preserve">
+    <value>Gelir Kategorisi Mi?</value>
+  </data>
+  <data name="Categories_Label_Type" xml:space="preserve">
+    <value>Kategori Tipi</value>
+  </data>
+  <data name="Categories_Label_Type_Expense" xml:space="preserve">
+    <value>Gider</value>
+  </data>
+  <data name="Categories_Label_Type_Income" xml:space="preserve">
+    <value>Gelir</value>
+  </data>
+  <data name="Categories_Table_Caption_ExpenseCategories" xml:space="preserve">
+    <value>Gider Kategorileri</value>
+  </data>
+  <data name="Categories_Table_Caption_IncomeCategories" xml:space="preserve">
+    <value>Gelir Kategorileri</value>
   </data>
 </root>

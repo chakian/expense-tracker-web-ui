@@ -18,11 +18,14 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public ActionResult Index()
         {
-            List<CategoryEntity> categories = categoryBusiness.GetCategoriesOfUser(UserId, ActiveBudgetId);
-            return View(categories);
+            CategoryListModel model = new CategoryListModel
+            {
+                Categories = categoryBusiness.GetCategoriesOfUser(UserId, ActiveBudgetId)
+            };
+            return View(model);
         }
 
-        public ActionResult Create() => View();
+        public ActionResult Create() => View(new CreateCategoryModel());
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -32,8 +35,9 @@ namespace ExpenseTracker.WebUI.Controllers
             {
                 categoryBusiness.CreateCategory(new CategoryEntity
                 {
-                    Name = model.Name,
                     BudgetId = ActiveBudgetId,
+                    Name = model.Name,
+                    IsIncomeCategory = model.IsIncomeCategory,
                     ParentCategoryId = model.ParentCategoryId == 0 ? (int?)null : model.ParentCategoryId
                 }, UserId);
 
