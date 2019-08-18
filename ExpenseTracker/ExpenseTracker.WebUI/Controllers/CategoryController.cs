@@ -8,12 +8,12 @@ using Microsoft.AspNet.Identity;
 
 namespace ExpenseTracker.WebUI.Controllers
 {
-    public class CategoriesController : BaseAuthenticatedController
+    public class CategoryController : BaseAuthenticatedController
     {
         private readonly BudgetCategoryBusiness budgetCategoryBusiness;
         private readonly CategoryBusiness categoryBusiness;
 
-        public CategoriesController()
+        public CategoryController()
         {
             budgetCategoryBusiness = new BudgetCategoryBusiness();
             categoryBusiness = new CategoryBusiness();
