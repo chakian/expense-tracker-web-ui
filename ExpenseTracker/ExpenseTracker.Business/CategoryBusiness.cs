@@ -1,7 +1,9 @@
 ﻿using ExpenseTracker.Entities;
 using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace ExpenseTracker.Business
@@ -21,7 +23,7 @@ namespace ExpenseTracker.Business
             category.Name = entity.Name;
             category.BudgetId = entity.BudgetId;
             category.IsIncomeCategory = entity.IsIncomeCategory;
-            category.ParentCategoryId = entity.ParentId;
+            category.ParentCategoryId = entity.ParentCategoryId;
             return category;
         }
 
@@ -32,13 +34,7 @@ namespace ExpenseTracker.Business
             category.Name = dbo.Name;
             category.BudgetId = dbo.BudgetId;
             category.IsIncomeCategory = dbo.IsIncomeCategory;
-            category.ParentId = dbo.ParentCategoryId;
-            return category;
-        }
-
-        private Category GetCategoryById(int categoryId, string userId)
-        {
-            var category = context.Categories.SingleOrDefault(q => q.IsActive && q.CategoryId.Equals(categoryId) && q.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)));
+            category.ParentCategoryId = dbo.ParentCategoryId;
             return category;
         }
 
@@ -59,7 +55,11 @@ namespace ExpenseTracker.Business
             {
                 return null;
             }
-            if (categoryEntity.ParentId.HasValue && !GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.CategoryId.Equals(categoryEntity.ParentId)))
+            if (categoryEntity.ParentCategoryId == 0)
+            {
+                categoryEntity.ParentCategoryId = null;
+            }
+            if (categoryEntity.ParentCategoryId.HasValue && !GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.CategoryId.Equals(categoryEntity.ParentCategoryId)))
             {
                 return null;
             }
@@ -81,7 +81,11 @@ namespace ExpenseTracker.Business
             {
                 return null;
             }
-            if (categoryEntity.ParentId.HasValue && !GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.CategoryId.Equals(categoryEntity.ParentId)))
+            if (categoryEntity.ParentCategoryId == 0)
+            {
+                categoryEntity.ParentCategoryId = null;
+            }
+            if (categoryEntity.ParentCategoryId.HasValue && !GetCategoriesByBudgetId(categoryEntity.BudgetId, userId).Any(q => q.CategoryId.Equals(categoryEntity.ParentCategoryId)))
             {
                 return null;
             }
@@ -92,7 +96,12 @@ namespace ExpenseTracker.Business
                 category.Name = categoryEntity.Name;
             }
             category.IsIncomeCategory = categoryEntity.IsIncomeCategory;
-            category.ParentCategoryId = categoryEntity.ParentId;
+            category.ParentCategoryId = categoryEntity.ParentCategoryId;
+
+            category.UpdateUserId = userId;
+            category.UpdateTime = DateTime.Now;
+
+            context.Entry(category).State = EntityState.Modified;
 
             context.SaveChanges();
 
@@ -102,17 +111,23 @@ namespace ExpenseTracker.Business
 
         public bool DeleteCategory(int categoryId, string userId)
         {
-            var category = GetCategoryById(categoryId, userId);
-            if (category == null)
+            Category category = context.Categories.Find(categoryId);
+
+            if (category == null || !category.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
             {
                 return false;
             }
+
             if (GetCategoriesByBudgetIdInternal(category.BudgetId, userId).Any(q => q.ParentCategoryId.Equals(categoryId)))
             {
                 return false;
             }
 
+            category.UpdateUserId = userId;
+            category.UpdateTime = DateTime.Now;
             category.IsActive = false;
+
+            context.Entry(category).State = EntityState.Modified;
             context.SaveChanges();
 
             return true;
@@ -133,6 +148,33 @@ namespace ExpenseTracker.Business
             });
 
             return entityList;
+        }
+
+        public List<CategoryEntity> GetCategoriesOfUser(string userId, int budgetId)
+        {
+            List<Category> contextObjectList = context.Categories.Where(a => a.IsActive && a.BudgetId == budgetId && a.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
+                .Include(a => a.Budget)
+                .Include(a => a.InsertUser)
+                .Include(a => a.UpdateUser)
+                .ToList();
+
+            List<CategoryEntity> categoryEntities = mapper.Map<List<CategoryEntity>>(contextObjectList);
+
+            return categoryEntities;
+        }
+
+        public CategoryEntity GetCategoryById(int categoryId, string userId)
+        {
+            Category category = context.Categories.Find(categoryId);
+
+            if (category == null || !category.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)))
+            {
+                return null;
+            }
+
+            CategoryEntity categoryEntity = mapper.Map<CategoryEntity>(category);
+
+            return categoryEntity;
         }
     }
 }

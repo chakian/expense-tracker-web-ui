@@ -15,6 +15,14 @@ namespace ExpenseTracker.Business.AutoMapper
                 cfg.CreateMap<UserEntity, User>().IgnoreAllPropertiesWithAnInaccessibleSetter();
 
                 cfg.CreateMap<Budget, BudgetEntity>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+                cfg.CreateMap<BudgetPlan, BudgetPlanEntity>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+                cfg.CreateMap<BudgetPlanCategory, BudgetPlanCategoryEntity>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+
+                cfg.CreateMap<Account, AccountEntity>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+
+                cfg.CreateMap<AccountType, AccountTypeEntity>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+
+                cfg.CreateMap<Category, CategoryEntity>().IgnoreAllPropertiesWithAnInaccessibleSetter();
 
                 cfg.CreateMap<Currency, CurrencyEntity>().IgnoreAllPropertiesWithAnInaccessibleSetter();
             });

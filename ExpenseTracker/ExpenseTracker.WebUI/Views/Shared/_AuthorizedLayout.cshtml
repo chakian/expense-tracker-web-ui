@@ -162,8 +162,8 @@
                     <p>@Resources.Menu_BudgetPlan</p>
                 </a>
             </li>
-            <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+            <li class="nav-item has-treeview@(controller.ToLowerInvariant().Equals("account") ? " menu-open" : "")">
+                <a href="#" class="nav-link@(controller.ToLowerInvariant().Equals("account") ? " active" : "")">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>
                         @Resources.Menu_Accounts
@@ -173,21 +173,21 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="@Url.Action("Index", "BudgetAccount")" class="nav-link">
+                        <a href="@Url.Action("Index", "Account")" class="nav-link@(controller.ToLowerInvariant().Equals("account") && action.ToLowerInvariant().Equals("index") ? " active" : "")">
                             <i class="far fa-circle nav-icon"></i>
                             <p>@Resources.Menu_Accounts_List</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Url.Action("Create", "BudgetAccount")" class="nav-link">
+                        <a href="@Url.Action("Create", "Account")" class="nav-link@(controller.ToLowerInvariant().Equals("account") && action.ToLowerInvariant().Equals("create") ? " active" : "")">
                             <i class="far fa-circle nav-icon"></i>
                             <p>@Resources.Menu_Accounts_Add</p>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+            <li class="nav-item has-treeview@(controller.ToLowerInvariant().Equals("category") ? " menu-open" : "")">
+                <a href="#" class="nav-link@(controller.ToLowerInvariant().Equals("category") ? " active" : "")">
                     <i class="nav-icon fas fa-chart-pie"></i>
                     <p>
                         @Resources.Menu_Categories
@@ -197,21 +197,21 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="@Url.Action("Index", "Categories")" class="nav-link">
+                        <a href="@Url.Action("Index", "Category")" class="nav-link@(controller.ToLowerInvariant().Equals("category") && action.ToLowerInvariant().Equals("index") ? " active" : "")">
                             <i class="far fa-circle nav-icon"></i>
                             <p>@Resources.Menu_Category_List</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Url.Action("Create", "Categories")" class="nav-link">
+                        <a href="@Url.Action("Create", "Category")" class="nav-link@(controller.ToLowerInvariant().Equals("category") && action.ToLowerInvariant().Equals("create") ? " active" : "")">
                             <i class="far fa-circle nav-icon"></i>
                             <p>@Resources.Menu_Category_Add</p>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+            <li class="nav-item has-treeview@(controller.ToLowerInvariant().Equals("budget") ? " menu-open" : "")">
+                <a href="#" class="nav-link@(controller.ToLowerInvariant().Equals("budget") ? " menu-open" : "")">
                     <i class="nav-icon fas fa-tree"></i>
                     <p>
                         @Resources.Menu_Budgets
@@ -220,21 +220,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="@Url.Action("Index", "Budget")" class="nav-link">
+                        <a href="@Url.Action("Index", "Budget")" class="nav-link@(controller.ToLowerInvariant().Equals("budget") && action.ToLowerInvariant().Equals("index") ? " active" : "")">
                             <i class="far fa-circle nav-icon"></i>
                             <p>@Resources.Menu_Budgets_List</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Url.Action("Create", "Budget")" class="nav-link">
+                        <a href="@Url.Action("Create", "Budget")" class="nav-link@(controller.ToLowerInvariant().Equals("budget") && action.ToLowerInvariant().Equals("create") ? " active" : "")">
                             <i class="far fa-circle nav-icon"></i>
                             <p>@Resources.Menu_Budgets_Add</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("SelectActiveBudget", "Budget")" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>@Resources.Menu_Budgets_ChangeActiveBudget</p>
                         </a>
                     </li>
                 </ul>

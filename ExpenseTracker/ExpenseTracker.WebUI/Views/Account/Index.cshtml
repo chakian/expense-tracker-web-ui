@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ExpenseTracker.Persistence.Context.DbModels.Account>
+﻿@model IEnumerable<ExpenseTracker.Entities.AccountEntity>
 
 @{
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
@@ -27,7 +27,7 @@
                     <td>@account.AccountType.Name</td>
                     <td>@account.CurrentBalance</td>
                     <td>
-                        <a href="@Url.Action("Edit", "BudgetAccount", new { id = account.AccountId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+                        <a href="@Url.Action("Edit", "Account", new { id = account.AccountId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
                         <button type="button" class="delete-account-button btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete" data-id="@account.AccountId">
                             <i class="fas fa-trash-alt"></i>
                         </button>
@@ -51,7 +51,7 @@
                 <p>@Resources.BudgetAccounts_Delete_Modal_Text</p>
             </div>
             <div class="modal-footer justify-content-between">
-                @using (Html.BeginForm("Delete", "BudgetAccount", FormMethod.Post))
+                @using (Html.BeginForm("Delete", "Account", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken();
                     @Html.Hidden("AccountId")

@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Net;
 using System.Web.Mvc;
 using ExpenseTracker.Business;
+using ExpenseTracker.Entities;
 using ExpenseTracker.WebUI.Models.BudgetRelated;
 
 namespace ExpenseTracker.WebUI.Controllers
@@ -26,11 +27,11 @@ namespace ExpenseTracker.WebUI.Controllers
                 BudgetList = new List<BasicBudgetInfo>()
             };
 
-            //List<Budget> budgets = budgetBusiness.GetBudgetsOfUser(UserId);
-            //budgets.ForEach(b =>
-            //{
-            //    model.BudgetList.Add(new BasicBudgetInfo { Id = b.BudgetId, Name = b.Name, CurrencyDisplayName = b.Currency.DisplayName });
-            //});
+            List<BudgetEntity> budgets = budgetBusiness.GetBudgetsOfUser(UserId);
+            budgets.ForEach(b =>
+            {
+                model.BudgetList.Add(new BasicBudgetInfo { Id = b.BudgetId, Name = b.Name, CurrencyDisplayName = b.Currency.DisplayName });
+            });
 
             return View(model);
         }
@@ -39,7 +40,7 @@ namespace ExpenseTracker.WebUI.Controllers
         public ActionResult Create()
         {
             CurrencyBusiness currencyBusiness = new CurrencyBusiness();
-            //ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName");
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName");
 
             BudgetCreateModel model = new BudgetCreateModel();
 
@@ -53,12 +54,12 @@ namespace ExpenseTracker.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                //budgetBusiness.CreateBudget(model.Name, model.CurrencyId, UserId);
+                budgetBusiness.CreateBudget(model.Name, model.CurrencyId, UserId);
                 return RedirectToAction("Index");
             }
 
             CurrencyBusiness currencyBusiness = new CurrencyBusiness();
-            //ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName", model.CurrencyId);
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName", model.CurrencyId);
             return View(model);
         }
 
@@ -70,23 +71,23 @@ namespace ExpenseTracker.WebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            //Budget budget = budgetBusiness.GetBudgetDetails(id.Value, UserId);
+            BudgetEntity budget = budgetBusiness.GetBudgetDetails(id.Value, UserId);
 
-            //if (budget == null)
-            //{
-            //    //TODO: return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
-            //    return HttpNotFound();
-            //}
+            if (budget == null)
+            {
+                //TODO: return ReturnUnauthorized(UNAUTHORIZED_MESSAGE);
+                return HttpNotFound();
+            }
 
             BudgetDetailModel model = new BudgetDetailModel
             {
-                //Id = budget.BudgetId,
-                //Name = budget.Name,
-                //CurrencyId = budget.CurrencyId
+                Id = budget.BudgetId,
+                Name = budget.Name,
+                CurrencyId = budget.CurrencyId
             };
 
             CurrencyBusiness currencyBusiness = new CurrencyBusiness();
-            //ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName", model.CurrencyId);
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName", model.CurrencyId);
 
             return View(model);
         }
@@ -110,7 +111,7 @@ namespace ExpenseTracker.WebUI.Controllers
             }
 
             CurrencyBusiness currencyBusiness = new CurrencyBusiness();
-            //ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName", model.CurrencyId);
+            ViewBag.CurrencyId = new SelectList(currencyBusiness.GetCurrencyList(), "CurrencyId", "DisplayName", model.CurrencyId);
 
             return View(model);
         }
@@ -132,14 +133,10 @@ namespace ExpenseTracker.WebUI.Controllers
         public ActionResult SetActive(int budgetId)
         {
             Session["ActiveBudgetId"] = budgetId;
-            //Session["ActiveBudgetName"] = budgetBusiness.GetBudgetDetails(budgetId, UserId).Name;
+            Session["ActiveBudgetName"] = budgetBusiness.GetBudgetDetails(budgetId, UserId).Name;
 
-            //TODO: Do not use context in Web project. Use the business methods instead!
-            //var user = context.Users.Find(UserId);
-            //user.ActiveBudgetId = budgetId;
-            //context.Entry(user).State = EntityState.Modified;
-            //context.SaveChanges();
-
+            budgetBusiness.SetActiveBudget(UserId, budgetId);
+            
             return RedirectToAction("Index");
         }
     }

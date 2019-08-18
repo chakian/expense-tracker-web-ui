@@ -81,12 +81,12 @@ namespace ExpenseTracker.Business.Tests.CategoryTests
             Assert.NotNull(parent);
 
             // ACT
-            initialInsert.ParentId = parent.CategoryId;
+            initialInsert.ParentCategoryId = parent.CategoryId;
             CategoryEntity actual = categoryBusiness.UpdateCategory(initialInsert, DefaultUserId);
 
             // ASSERT
             Assert.Equal(initialInsert.CategoryId, actual.CategoryId);
-            Assert.Equal(parent.CategoryId, actual.ParentId);
+            Assert.Equal(parent.CategoryId, actual.ParentCategoryId);
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace ExpenseTracker.Business.Tests.CategoryTests
             Assert.NotNull(initialInsert);
 
             // ACT
-            initialInsert.ParentId = -1;
+            initialInsert.ParentCategoryId = -1;
             CategoryEntity actual = categoryBusiness.UpdateCategory(initialInsert, DefaultUserId);
 
             // ASSERT
@@ -132,18 +132,18 @@ namespace ExpenseTracker.Business.Tests.CategoryTests
                 BudgetId = DefaultTestBudgetId,
                 IsIncomeCategory = false,
                 Name = "child",
-                ParentId = parent.CategoryId
+                ParentCategoryId = parent.CategoryId
             };
             var initialInsert = categoryBusiness.CreateCategory(categoryEntity, DefaultUserId);
             Assert.NotNull(initialInsert);
 
             // ACT
-            initialInsert.ParentId = null;
+            initialInsert.ParentCategoryId = null;
             CategoryEntity actual = categoryBusiness.UpdateCategory(initialInsert, DefaultUserId);
 
             // ASSERT
             Assert.NotNull(actual);
-            Assert.Null(actual.ParentId);
+            Assert.Null(actual.ParentCategoryId);
         }
     }
 }

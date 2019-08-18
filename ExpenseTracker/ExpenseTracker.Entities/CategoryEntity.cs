@@ -9,7 +9,7 @@ namespace ExpenseTracker.Entities
         public bool IsIncomeCategory { get; set; }
         public int BudgetId { get; set; }
         public BudgetEntity Budget { get; set; }
-        public int? ParentId { get; set; }
+        public int? ParentCategoryId { get; set; }
         public CategoryEntity ParentCategory { get; set; }
     }
 }

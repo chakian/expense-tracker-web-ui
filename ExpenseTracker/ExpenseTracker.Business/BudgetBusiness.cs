@@ -17,7 +17,7 @@ namespace ExpenseTracker.Business
         #endregion
 
         #region Private Methods
-        private List<Budget> GetBudgetsOfUser(string userId) => context.Budgets.Where(b => b.IsActive && b.BudgetUsers.Any(bu => bu.IsActive && bu.UserId.Equals(userId)))
+        private List<Budget> GetBudgetsOfUserInternal(string userId) => context.Budgets.Where(b => b.IsActive && b.BudgetUsers.Any(bu => bu.IsActive && bu.UserId.Equals(userId)))
                 .Include(b => b.Currency)
                 .ToList();
 
@@ -59,9 +59,16 @@ namespace ExpenseTracker.Business
         #region Internal Methods
         #endregion
 
+        public List<BudgetEntity> GetBudgetsOfUser(string userId)
+        {
+            List<Budget> budgets = GetBudgetsOfUserInternal(userId);
+            List<BudgetEntity> budgetEntities = mapper.Map<List<BudgetEntity>>(budgets);
+            return budgetEntities;
+        }
+
         public BudgetEntity GetUsersFirstBudgetAndSetAsDefault(string userId, bool setAsActive = true)
         {
-            var firstBudget = GetBudgetsOfUser(userId).FirstOrDefault();
+            var firstBudget = GetBudgetsOfUserInternal(userId).FirstOrDefault();
             BudgetEntity budgetEntity = null;
 
             if (firstBudget != null)
@@ -146,6 +153,7 @@ namespace ExpenseTracker.Business
         {
             var userToUpdate = context.Users.Find(userId);
             userToUpdate.ActiveBudgetId = budgetId;
+            context.Entry(userToUpdate).State = EntityState.Modified;
             context.SaveChanges();
         }
     }

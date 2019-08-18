@@ -14,13 +14,13 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             var business = new BudgetBusiness(context);
             string userId = DefaultUserId;
 
-            //// ACT
-            //var budgets = business.GetBudgetsOfUser(userId);
+            // ACT
+            var budgets = business.GetBudgetsOfUser(userId);
 
-            ////ASSERT
-            //Assert.NotEmpty(budgets);
-            //Assert.Single(budgets);
-            //Assert.Equal("Budget_1", budgets[0].Name);
+            //ASSERT
+            Assert.NotEmpty(budgets);
+            Assert.Single(budgets);
+            Assert.Equal("Budget_1", budgets[0].Name);
         }
 
         [Fact]
@@ -43,12 +43,12 @@ namespace ExpenseTracker.Business.Tests.BudgetTests
             context.BudgetUsers.Add(budgetUser);
             context.SaveChanges();
 
-            //// ACT
-            //var budgets = business.GetBudgetsOfUser(userId);
+            // ACT
+            var budgets = business.GetBudgetsOfUser(userId);
 
-            ////ASSERT
-            //Assert.Single(budgets);
-            //Assert.Null(budgets.FirstOrDefault(b => b.Name.Equals(nonExistingBudgetName)));
+            //ASSERT
+            Assert.Single(budgets);
+            Assert.Null(budgets.FirstOrDefault(b => b.Name.Equals(nonExistingBudgetName)));
         }
     }
 }

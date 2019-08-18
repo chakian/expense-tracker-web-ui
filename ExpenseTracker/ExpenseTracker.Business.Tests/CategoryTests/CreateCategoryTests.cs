@@ -96,13 +96,13 @@ namespace ExpenseTracker.Business.Tests.CategoryTests
                 BudgetId = DefaultTestBudgetId,
                 IsIncomeCategory = false,
                 Name = "This is child",
-                ParentId = parent.CategoryId
+                ParentCategoryId = parent.CategoryId
             };
             CategoryEntity child = categoryBusiness.CreateCategory(categoryEntity, DefaultUserId);
 
             // ASSERT
             Assert.NotNull(child);
-            Assert.Equal(parent.CategoryId, child.ParentId);
+            Assert.Equal(parent.CategoryId, child.ParentCategoryId);
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace ExpenseTracker.Business.Tests.CategoryTests
                 BudgetId = DefaultTestBudgetId,
                 IsIncomeCategory = false,
                 Name = "This is child",
-                ParentId = -1
+                ParentCategoryId = -1
             };
             CategoryEntity child = categoryBusiness.CreateCategory(categoryEntity, DefaultUserId);
 

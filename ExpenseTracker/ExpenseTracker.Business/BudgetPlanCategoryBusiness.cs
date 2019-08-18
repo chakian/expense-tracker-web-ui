@@ -19,7 +19,7 @@ namespace ExpenseTracker.Business
         {
             var budgetId = context.BudgetPlans.First(q => q.BudgetPlanId.Equals(budgetPlanId)).BudgetId;
             var planCategories = context.BudgetPlanCategories.Where(q => q.IsActive && q.BudgetPlanId.Equals(budgetPlanId)).ToList();
-            var categories = new BudgetCategoryBusiness().GetCategoriesOfUser(userId, budgetId);
+            var categories = new CategoryBusiness(context).GetCategoriesOfUser(userId, budgetId);
 
             foreach (var category in categories)
             {

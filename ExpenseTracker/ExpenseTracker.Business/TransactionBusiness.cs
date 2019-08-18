@@ -43,24 +43,6 @@ namespace ExpenseTracker.Business
 
             return GetTransactionsForGivenRange(startOfMonth, endOfMonth, userId, activeBudgetId);
         }
-
-        private List<Transaction> GetTransactionsForCurrentPeriodInternal(string userId, int activeBudgetId)
-        {
-            DateTime today = DateTime.Now;
-
-            return GetTransactionsForPeriodByGivenDateInternal(today, userId, activeBudgetId);
-        }
-
-        private Transaction GetTransactionByIdInternal(int transactionId, string userId)
-        {
-            var transaction = context.Transactions.Find(transactionId);
-            if (!transaction.IsActive || !transaction.SourceAccount.Budget.BudgetUsers.Any(q => q.UserId.Equals(userId)))
-            {
-                return null;
-            }
-
-            return transaction;
-        }
         #endregion
 
         #region Internal Methods
@@ -122,7 +104,7 @@ namespace ExpenseTracker.Business
             rawList.GroupBy(t => t.CategoryId).Select(t => new
             {
                 Amount = t.Sum(q => q.Amount),
-                CategoryId = t.First().CategoryId
+                t.First().CategoryId
             }).ToList().ForEach(g =>
             {
                 groupedList.Add(new TransactionEntity

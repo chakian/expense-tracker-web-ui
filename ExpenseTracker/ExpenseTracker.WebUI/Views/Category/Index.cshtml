@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ExpenseTracker.Persistence.Context.DbModels.Category>
+﻿@model IEnumerable<ExpenseTracker.Entities.CategoryEntity>
 
 @{
     Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
@@ -18,12 +18,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var category in Model)
+            @foreach (ExpenseTracker.Entities.CategoryEntity category in Model)
             {
                 <tr>
                     <th scope="row">@category.Name</th>
                     <td>
-                        <a href="@Url.Action("Edit", "Categories", new { id = category.CategoryId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+                        <a href="@Url.Action("Edit", "Category", new { id = category.CategoryId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
                         <button type="button" class="delete-category-button btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete" data-id="@category.CategoryId">
                             <i class="fas fa-trash-alt"></i>
                         </button>
@@ -47,7 +47,7 @@
                 <p>@Resources.Categories_Delete_Modal_Text</p>
             </div>
             <div class="modal-footer justify-content-between">
-                @using (Html.BeginForm("Delete", "Categories", FormMethod.Post))
+                @using (Html.BeginForm("Delete", "Category", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken();
                     @Html.Hidden("CategoryId")

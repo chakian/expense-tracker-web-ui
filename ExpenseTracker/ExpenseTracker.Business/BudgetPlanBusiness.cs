@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Persistence.Context;
+﻿using ExpenseTracker.Entities;
+using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Context.DbModels;
 using System;
 using System.Collections.Generic;
@@ -15,54 +16,6 @@ namespace ExpenseTracker.Business
         #endregion
 
         #region Private Methods
-        #endregion
-
-        #region Internal Methods
-        #endregion
-
-        private BudgetPlan GetBudgetPlanById(int budgetPlanId, string userId)
-        {
-            BudgetPlan budgetPlan = context.BudgetPlans.Find(budgetPlanId);
-            budgetPlan.Budget = context.Budgets.Find(budgetPlan.BudgetId);
-
-            if (budgetPlan == null || !budgetPlan.Budget.BudgetUsers.Any(bp => bp.UserId.Equals(userId)))
-            {
-                return null;
-            }
-
-            budgetPlan.BudgetPlanCategories = new BudgetPlanCategoryBusiness(context).GetBudgetPlanCategoriesByPlanId(budgetPlan.BudgetPlanId, userId);
-
-            //budgetPlan.InsertUser = context.Users.Find(budgetPlan.InsertUserId);
-            //budgetPlan.UpdateUser = context.Users.Find(budgetPlan.UpdateUserId);
-
-            return budgetPlan;
-        }
-
-        private BudgetPlan GetBudgetPlanByYearAndMonth(int budgetId, int year, int month, string userId)
-        {
-            BudgetPlan budgetPlan = context.BudgetPlans.FirstOrDefault(bp => bp.IsActive && bp.BudgetId.Equals(budgetId) && bp.Year.Equals(year) && bp.Month.Equals(month));
-
-            if (budgetPlan == null || !budgetPlan.Budget.BudgetUsers.Any(bp => bp.UserId.Equals(userId)))
-            {
-                if (IsRequestedDateEqualToCurrentDate(year, month) || IsRequestedDateAdjacentToAnExistingBudgetPlanPeriod(budgetId, year, month, userId))
-                {
-                    int newBudgetPlanId = CreateBudgetPlanForPeriod(budgetId, year, month, userId);
-                    return GetBudgetPlanById(newBudgetPlanId, userId);
-                }
-                else
-                {
-                    return null;
-                }
-            }
-
-            budgetPlan.BudgetPlanCategories = new BudgetPlanCategoryBusiness(context).GetBudgetPlanCategoriesByPlanId(budgetPlan.BudgetPlanId, userId);
-
-            //budgetPlan.InsertUser = context.Users.Find(budgetPlan.InsertUserId);
-            //budgetPlan.UpdateUser = context.Users.Find(budgetPlan.UpdateUserId);
-
-            return budgetPlan;
-        }
-
         private BudgetPlan GetBudgetPlanByYearAndMonth_NonRecursive(int budgetId, int year, int month, string userId)
         {
             BudgetPlan budgetPlan = context.BudgetPlans.FirstOrDefault(bp => bp.IsActive && bp.BudgetId.Equals(budgetId) && bp.Year.Equals(year) && bp.Month.Equals(month));
@@ -73,9 +26,6 @@ namespace ExpenseTracker.Business
             }
 
             budgetPlan.BudgetPlanCategories = new BudgetPlanCategoryBusiness(context).GetBudgetPlanCategoriesByPlanId(budgetPlan.BudgetPlanId, userId);
-
-            //budgetPlan.InsertUser = context.Users.Find(budgetPlan.InsertUserId);
-            //budgetPlan.UpdateUser = context.Users.Find(budgetPlan.UpdateUserId);
 
             return budgetPlan;
         }
@@ -98,7 +48,7 @@ namespace ExpenseTracker.Business
             return false;
         }
 
-        private int CreateBudgetPlanForPeriod(int budgetId, int year, int month, string userId)
+        private BudgetPlan CreateBudgetPlanForPeriod(int budgetId, int year, int month, string userId)
         {
             BudgetPlan budgetPlan = new BudgetPlan
             {
@@ -116,10 +66,56 @@ namespace ExpenseTracker.Business
             context.BudgetPlans.Add(budgetPlan);
             context.SaveChanges();
 
-            return budgetPlan.BudgetPlanId;
+            budgetPlan.BudgetPlanCategories = new BudgetPlanCategoryBusiness(context).GetBudgetPlanCategoriesByPlanId(budgetPlan.BudgetPlanId, userId);
+
+            return budgetPlan;
+        }
+        #endregion
+
+        #region Internal Methods
+        #endregion
+
+        public BudgetPlanEntity GetBudgetPlanById(int budgetPlanId, string userId)
+        {
+            BudgetPlan budgetPlan = context.BudgetPlans.Find(budgetPlanId);
+            budgetPlan.Budget = context.Budgets.Find(budgetPlan.BudgetId);
+
+            if (budgetPlan == null || !budgetPlan.Budget.BudgetUsers.Any(bp => bp.UserId.Equals(userId)))
+            {
+                return null;
+            }
+
+            budgetPlan.BudgetPlanCategories = new BudgetPlanCategoryBusiness(context).GetBudgetPlanCategoriesByPlanId(budgetPlan.BudgetPlanId, userId);
+
+            BudgetPlanEntity budgetPlanEntity = mapper.Map<BudgetPlanEntity>(budgetPlan);
+            return budgetPlanEntity;
         }
 
-        private void UpdatePlan(List<BudgetPlanCategory> budgetPlanCategories, string userId)
+        public BudgetPlanEntity GetBudgetPlanByYearAndMonth(int budgetId, int year, int month, string userId)
+        {
+            BudgetPlan budgetPlan = context.BudgetPlans.FirstOrDefault(bp => bp.IsActive && bp.BudgetId.Equals(budgetId) && bp.Year.Equals(year) && bp.Month.Equals(month));
+
+            if (budgetPlan == null || !budgetPlan.Budget.BudgetUsers.Any(bp => bp.UserId.Equals(userId)))
+            {
+                if (IsRequestedDateEqualToCurrentDate(year, month) || IsRequestedDateAdjacentToAnExistingBudgetPlanPeriod(budgetId, year, month, userId))
+                {
+                    budgetPlan = CreateBudgetPlanForPeriod(budgetId, year, month, userId);
+                    return mapper.Map<BudgetPlanEntity>(budgetPlan);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            budgetPlan.BudgetPlanCategories = new BudgetPlanCategoryBusiness(context).GetBudgetPlanCategoriesByPlanId(budgetPlan.BudgetPlanId, userId);
+
+            BudgetPlanEntity budgetPlanEntity = mapper.Map<BudgetPlanEntity>(budgetPlan);
+
+            return budgetPlanEntity;
+        }
+
+        public void UpdatePlan(List<BudgetPlanCategoryEntity> budgetPlanCategories, string userId)
         {
             foreach (var category in budgetPlanCategories)
             {
