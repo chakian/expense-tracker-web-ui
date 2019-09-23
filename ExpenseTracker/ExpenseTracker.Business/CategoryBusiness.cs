@@ -135,17 +135,8 @@ namespace ExpenseTracker.Business
 
         public List<CategoryEntity> GetCategoriesByBudgetId(int budgetId, string userId)
         {
-            var categories = context.Categories.Where(q => q.IsActive && q.BudgetId.Equals(budgetId) && q.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId))).ToList();
-            var entityList = new List<CategoryEntity>();
-
-            categories.ForEach(c =>
-            {
-                entityList.Add(new CategoryEntity
-                {
-                    CategoryId = c.CategoryId,
-                    Name = c.Name
-                });
-            });
+            List<Category> categories = context.Categories.Where(q => q.IsActive && q.BudgetId.Equals(budgetId) && q.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId))).ToList();
+            List<CategoryEntity> entityList = mapper.Map<List<CategoryEntity>>(categories);
 
             return entityList;
         }

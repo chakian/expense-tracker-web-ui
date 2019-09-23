@@ -394,6 +394,24 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gider.
+        /// </summary>
+        public static string GenericText_Expense {
+            get {
+                return ResourceManager.GetString("GenericText_Expense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gelir.
+        /// </summary>
+        public static string GenericText_Income {
+            get {
+                return ResourceManager.GetString("GenericText_Income", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Giriş yaparak harcamalarınızı bir güzel takip edebilirsiniz.
         /// </summary>
         public static string Home_LoginDescription {

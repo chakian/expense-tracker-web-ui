@@ -1,5 +1,6 @@
 ﻿using ExpenseTracker.Business;
 using ExpenseTracker.Entities;
+using ExpenseTracker.Language;
 using ExpenseTracker.WebUI.Models;
 using ExpenseTracker.WebUI.Models.Transaction;
 using System;
@@ -76,9 +77,36 @@ namespace ExpenseTracker.WebUI.Controllers
         private void SetCategoryListForModel(BaseEditableTransactionModel model)
         {
             List<CategoryEntity> categories = categoryBusiness.GetCategoriesByBudgetId(ActiveBudgetId, UserId);
+            model.CategoryList = new List<SelectListItem>();
+
             if (categories != null)
             {
-                model.CategoryList = new SelectList(categories.OrderBy(q => q.Name), "CategoryId", "Name");
+                if (categories.Any(c => c.IsIncomeCategory))
+                {
+                    var optionGroup = new SelectListGroup() { Name = Resources.GenericText_Income };
+                    foreach (CategoryEntity category in categories.Where(c => c.IsIncomeCategory))
+                    {
+                        model.CategoryList.Add(new SelectListItem()
+                        {
+                            Value = category.CategoryId.ToString(),
+                            Text = category.Name,
+                            Group = optionGroup
+                        });
+                    }
+                }
+                if (categories.Any(c => c.IsIncomeCategory == false))
+                {
+                    var optionGroup = new SelectListGroup() { Name = Resources.GenericText_Expense };
+                    foreach (CategoryEntity category in categories.Where(c => c.IsIncomeCategory == false))
+                    {
+                        model.CategoryList.Add(new SelectListItem()
+                        {
+                            Value = category.CategoryId.ToString(),
+                            Text = category.Name,
+                            Group = optionGroup
+                        });
+                    }
+                }
             }
         }
 

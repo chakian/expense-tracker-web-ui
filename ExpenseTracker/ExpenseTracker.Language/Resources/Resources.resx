@@ -450,4 +450,10 @@
   <data name="Categories_Table_Caption_IncomeCategories" xml:space="preserve">
     <value>Gelir Kategorileri</value>
   </data>
+  <data name="GenericText_Expense" xml:space="preserve">
+    <value>Gider</value>
+  </data>
+  <data name="GenericText_Income" xml:space="preserve">
+    <value>Gelir</value>
+  </data>
 </root>
