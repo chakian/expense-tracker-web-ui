@@ -16,33 +16,6 @@ namespace ExpenseTracker.Business
         #endregion
 
         #region Private Methods
-        private List<Transaction> GetTransactionsForGivenRange(DateTime startDate, DateTime endDate, string userId, int activeBudgetId)
-        {
-            if (startDate > endDate)
-            {
-                throw new Exception("End Date must be a later date than Start Date!");
-            }
-
-            startDate = new DateTime(startDate.Year, startDate.Month, startDate.Day, 0, 0, 0);
-            endDate = new DateTime(endDate.Year, endDate.Month, endDate.Day, 23, 59, 59);
-
-            var transactions = context.Transactions.Where(trx =>
-                trx.IsActive &&
-                trx.SourceAccount.BudgetId.Equals(activeBudgetId) &&
-                trx.SourceAccount.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)) &&
-                trx.Date >= startDate &&
-                trx.Date <= endDate).ToList();
-
-            return transactions;
-        }
-
-        private List<Transaction> GetTransactionsForPeriodByGivenDateInternal(DateTime inputDate, string userId, int activeBudgetId)
-        {
-            DateTime startOfMonth = new DateTime(inputDate.Year, inputDate.Month, 1, 0, 0, 0);
-            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59).AddSeconds(59);
-
-            return GetTransactionsForGivenRange(startOfMonth, endOfMonth, userId, activeBudgetId);
-        }
         #endregion
 
         #region Internal Methods
@@ -70,7 +43,26 @@ namespace ExpenseTracker.Business
 
         public List<TransactionEntity> GetTransactionsForPeriodByGivenDate(DateTime inputDate, string userId, int activeBudgetId)
         {
-            List<Transaction> list = GetTransactionsForPeriodByGivenDateInternal(inputDate, userId, activeBudgetId);
+            DateTime startOfMonth = new DateTime(inputDate.Year, inputDate.Month, 1, 0, 0, 0);
+            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59).AddSeconds(59);
+
+            if (startOfMonth > endOfMonth)
+            {
+                throw new Exception("End Date must be a later date than Start Date!");
+            }
+
+            startOfMonth = new DateTime(startOfMonth.Year, startOfMonth.Month, startOfMonth.Day, 0, 0, 0);
+            endOfMonth = new DateTime(endOfMonth.Year, endOfMonth.Month, endOfMonth.Day, 23, 59, 59);
+
+            var transactions = context.Transactions.Where(trx =>
+                trx.IsActive &&
+                trx.SourceAccount.BudgetId.Equals(activeBudgetId) &&
+                trx.SourceAccount.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId)) &&
+                trx.Date >= startOfMonth &&
+                trx.Date <= endOfMonth).ToList();
+
+            List<Transaction> list = transactions;
+
             List<TransactionEntity> transactionEntities = new List<TransactionEntity>();
             list.ForEach(t =>
             {
@@ -96,6 +88,8 @@ namespace ExpenseTracker.Business
             });
             return transactionEntities;
         }
+
+        public TransactionEntity InsertTransaction(TransactionEntity transactionEntity, string userId) => throw new NotImplementedException();
 
         public List<TransactionEntity> GetTransactionsForPeriodByGivenDate_GroupedByCategory(DateTime inputDate, string userId, int activeBudgetId)
         {

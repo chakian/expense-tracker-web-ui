@@ -27,6 +27,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Language", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Entities", "ExpenseTracker.Entities\ExpenseTracker.Entities.csproj", "{0A2B7B32-2DA7-4FC2-8BCE-06D1D97F649F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{EFC08F1D-03B0-4D88-B71C-0A376FBBDD0B}"
+	ProjectSection(SolutionItems) = preProject
+		..\Future_Development.md = ..\Future_Development.md
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

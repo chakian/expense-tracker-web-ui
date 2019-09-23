@@ -10,6 +10,7 @@ namespace ExpenseTracker.Persistence.Context.DbModels
         {
             BudgetPlanCategories = new HashSet<BudgetPlanCategory>();
             Transactions = new HashSet<Transaction>();
+            TransactionItems = new HashSet<TransactionItem>();
         }
 
         public int CategoryId { get; set; }
@@ -32,5 +33,7 @@ namespace ExpenseTracker.Persistence.Context.DbModels
         public virtual ICollection<BudgetPlanCategory> BudgetPlanCategories { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }
+
+        public virtual ICollection<TransactionItem> TransactionItems { get; set; }
     }
 }

@@ -39,11 +39,12 @@ namespace ExpenseTracker.WebUI.Controllers
             model.CategoryStatusList = new List<AddModel.CategoryStatus>();
             currentPeriodTransactionsGroupedList.ForEach(t =>
             {
-                model.CategoryStatusList.Add(new AddModel.CategoryStatus()
-                {
-                    CategoryId = t.CategoryId,
-                    SpentAmount = t.Amount * -1
-                });
+                //model.CategoryStatusList.Add(new AddModel.CategoryStatus()
+                //{
+                //    CategoryId = t.CategoryId,
+                //    SpentAmount = t.Amount * -1
+                //});
+                throw new Exception();
             });
 
             model.Date = DateTime.Now;
@@ -185,7 +186,8 @@ namespace ExpenseTracker.WebUI.Controllers
                 }
                 model.Date = transaction.Date;
                 model.Description = transaction.Description;
-                model.CategoryId = transaction.CategoryId;
+                //model.CategoryId = transaction.CategoryId;
+                throw new Exception();
                 model.AccountId = transaction.SourceAccountId;
 
                 SetAccountListForModel(model);

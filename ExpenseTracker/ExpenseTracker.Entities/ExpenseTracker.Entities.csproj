@@ -62,9 +62,11 @@
     <Compile Include="BudgetPlanCategoryEntity.cs" />
     <Compile Include="BudgetPlanEntity.cs" />
     <Compile Include="CategoryEntity.cs" />
+    <Compile Include="CategorySummaryEntity.cs" />
     <Compile Include="CurrencyEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionEntity.cs" />
+    <Compile Include="TransactionItemEntity.cs" />
     <Compile Include="TransactionTemplateEntity.cs" />
     <Compile Include="TransferObjects\ExpenseTrackerRequest.cs" />
     <Compile Include="TransferObjects\ExpenseTrackerResponse.cs" />

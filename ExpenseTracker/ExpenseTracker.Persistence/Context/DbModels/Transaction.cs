@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ExpenseTracker.Persistence.Context.DbModels
 {
@@ -12,7 +13,7 @@ namespace ExpenseTracker.Persistence.Context.DbModels
 
         public string Description { get; set; }
 
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public virtual Category Category { get; set; }
 
         public int SourceAccountId { get; set; }
@@ -21,5 +22,6 @@ namespace ExpenseTracker.Persistence.Context.DbModels
         public int? TargetAccountId { get; set; }
         public virtual Account TargetAccount { get; set; }
 
+        public virtual ICollection<TransactionItem> TransactionItems { get; set; }
     }
 }

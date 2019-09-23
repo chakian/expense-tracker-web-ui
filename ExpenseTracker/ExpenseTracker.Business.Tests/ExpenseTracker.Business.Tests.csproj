@@ -103,6 +103,7 @@
     <Compile Include="Base\BaseBudgetPlanTest.cs" />
     <Compile Include="Base\BaseBudgetTest.cs" />
     <Compile Include="Base\BaseTest.cs" />
+    <Compile Include="Base\BaseTransactionTest.cs" />
     <Compile Include="BudgetPlanTests\GetBudgetPlanCategoriesTests.cs" />
     <Compile Include="BudgetPlanTests\GetBudgetPlanTests.cs" />
     <Compile Include="BudgetTests\ListBudgetsOfUserTests.cs" />
@@ -116,6 +117,8 @@
     <Compile Include="TransactionTemplateTests\DeleteTransactionTemplateTests.cs" />
     <Compile Include="TransactionTemplateTests\EditTransactionTemplateTests.cs" />
     <Compile Include="TransactionTemplateTests\GetTransactionTemplateTests.cs" />
+    <Compile Include="TransactionTests\GetTransactionListTests.cs" />
+    <Compile Include="TransactionTests\NewTransactionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
