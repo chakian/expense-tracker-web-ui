@@ -10,7 +10,7 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public TransactionTemplateController()
         {
-            transactionTemplateBusiness = new TransactionTemplateBusiness(context);
+            transactionTemplateBusiness = new TransactionTemplateBusiness();
         }
 
         [HttpPost]

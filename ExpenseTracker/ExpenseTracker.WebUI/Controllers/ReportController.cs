@@ -1,6 +1,6 @@
 ﻿using ExpenseTracker.Business;
 using ExpenseTracker.Common.Helpers;
-using ExpenseTracker.Persistence.Context.DbModels;
+using ExpenseTracker.Entities;
 using ExpenseTracker.WebUI.Models.Report;
 using System;
 using System.Collections.Generic;
@@ -16,8 +16,8 @@ namespace ExpenseTracker.WebUI.Controllers
 
         public ReportController()
         {
-            budgetPlanBusiness = new BudgetPlanBusiness(context);
-            transactionBusiness = new TransactionBusiness(context);
+            budgetPlanBusiness = new BudgetPlanBusiness();
+            transactionBusiness = new TransactionBusiness();
         }
 
         [HttpGet]
@@ -32,7 +32,7 @@ namespace ExpenseTracker.WebUI.Controllers
                 PlanCategories = new List<Models.ContextObjects.BudgetPlanCategory>()
             };
 
-            BudgetPlan budgetPlan = null;
+            BudgetPlanEntity budgetPlan = null;
 
             if (budgetPlanId.HasValue)
             {
@@ -65,11 +65,11 @@ namespace ExpenseTracker.WebUI.Controllers
                 model.BudgetPlan.NextMonth = nextDateTime.Month;
                 model.BudgetPlan.NextYear = nextDateTime.Year;
 
-                List<Transaction> transactions = transactionBusiness.GetTransactionsForPeriodByGivenDate(currentDateTime, UserId, ActiveBudgetId);
+                List<TransactionEntity> transactions = transactionBusiness.GetTransactionsForPeriodByGivenDate(currentDateTime, UserId, ActiveBudgetId);
 
                 foreach (var bpCategory in budgetPlan.BudgetPlanCategories)
                 {
-                    var categoryTransactions = transactions.Where(t => t.IsActive && t.CategoryId == bpCategory.CategoryId).ToList();
+                    var categoryTransactions = transactions.Where(t => t.CategoryId == bpCategory.CategoryId).ToList();
 
                     model.PlanCategories.Add(new Models.ContextObjects.BudgetPlanCategory()
                     {

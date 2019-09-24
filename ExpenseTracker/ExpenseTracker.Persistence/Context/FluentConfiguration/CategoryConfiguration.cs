@@ -11,6 +11,12 @@ namespace ExpenseTracker.Persistence.Context.FluentConfiguration
                 .HasMany(e => e.Transactions)
                 .WithRequired(e => e.Category)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Category>()
+                .HasOptional(e => e.ParentCategory)
+                .WithMany()
+                .HasForeignKey(e => e.ParentCategoryId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -43,8 +46,8 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -59,18 +62,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\AutoMapperBootstrap.cs" />
     <Compile Include="Base\BaseBusiness.cs" />
-    <Compile Include="BudgetAccountBusiness.cs" />
+    <Compile Include="AccountBusiness.cs" />
     <Compile Include="BudgetBusiness.cs" />
-    <Compile Include="BudgetCategoryBusiness.cs" />
     <Compile Include="BudgetPlanBusiness.cs" />
     <Compile Include="BudgetPlanCategoryBusiness.cs" />
     <Compile Include="BudgetUserBusiness.cs" />
+    <Compile Include="CategoryBusiness.cs" />
     <Compile Include="TransactionBusiness.cs" />
     <Compile Include="AccountTypeBusiness.cs" />
     <Compile Include="CurrencyBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionTemplateBusiness.cs" />
+    <Compile Include="UserBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -84,6 +89,10 @@
     <ProjectReference Include="..\ExpenseTracker.Common\ExpenseTracker.Common.csproj">
       <Project>{65C9F7E5-739A-401A-A9FE-76EC2B583067}</Project>
       <Name>ExpenseTracker.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExpenseTracker.Entities\ExpenseTracker.Entities.csproj">
+      <Project>{0A2B7B32-2DA7-4FC2-8BCE-06D1D97F649F}</Project>
+      <Name>ExpenseTracker.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExpenseTracker.Persistence\ExpenseTracker.Persistence.csproj">
       <Project>{EACAE983-5259-49A9-A7B5-FA5A4C14C2DB}</Project>

@@ -1,0 +1,55 @@
+﻿@model ExpenseTracker.WebUI.Models.Account.CreateAccountModel
+
+@{
+    Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
+    ViewBag.Title = Resources.Page_Title_BudgetAccount_Edit;
+}
+
+@section content_header{
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">@Resources.Page_Title_BudgetAccount_Edit</h1>
+    </div><!-- /.col -->
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@Resources.Nav_Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Account")">@Resources.Page_Title_BudgetAccount_Index</a></li>
+            <li class="breadcrumb-item active">@Resources.Page_Title_BudgetAccount_Edit</li>
+        </ol>
+    </div>
+    <!-- /.col -->
+}
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        @using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { @class = "needs-validation" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.AccountId)
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Name, Resources.BudgetAccount_Label_AccountName)
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.CurrentBalance, Resources.BudgetAccount_Label_CurrentBalance)
+                            @Html.EditorFor(model => model.CurrentBalance, new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.01", @class = "form-control", style = "width:100%" } })
+                            @Html.ValidationMessageFor(model => model.CurrentBalance, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button class="btn btn-primary" type="submit">@Resources.Generic_Save_Button</button>
+                    @Html.ActionLink(Resources.Generic_Back, "Index")
+                </div>
+            </div>
+            <!-- /.card -->
+        }
+    </div>
+</div>

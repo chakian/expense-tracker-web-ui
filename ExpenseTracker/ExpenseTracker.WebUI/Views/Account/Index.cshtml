@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ExpenseTracker.Entities.AccountEntity>
+
+@{
+    Layout = "~/Views/Shared/_AuthorizedLayout.cshtml";
+    ViewBag.Title = Resources.Page_Title_BudgetAccount_Index;
+}
+
+<p>
+    @Html.ActionLink(Resources.BudgetAccount_Link_CreateNewAccount, "Create")
+</p>
+
+<div class="table-responsive">
+    <table id="account-list-grid" class="table table-striped table-hover table-sm">
+        <thead class="thead">
+            <tr class="table-primary">
+                <th scope="col">@Resources.BudgetAccount_Label_AccountName</th>
+                <th scope="col">@Resources.BudgetAccount_Label_AccountType</th>
+                <th scope="col">@Resources.BudgetAccount_Label_CurrentBalance</th>
+                <th scope="col">@Resources.Generic_OneSpace</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var account in Model)
+            {
+                <tr>
+                    <th scope="row">@account.Name</th>
+                    <td>@account.AccountType.Name</td>
+                    <td>@account.CurrentBalance</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Account", new { id = account.AccountId })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+                        <button type="button" class="delete-account-button btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete" data-id="@account.AccountId">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="modal-delete">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">@Resources.BudgetAccounts_Delete_Modal_Header</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="@Resources.Generic_Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>@Resources.BudgetAccounts_Delete_Modal_Text</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                @using (Html.BeginForm("Delete", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.Hidden("AccountId")
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">@Resources.Generic_No</button>
+                    <button type="submit" class="btn btn-outline-light">@Resources.Generic_Yes</button>
+                }
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+@section scripts{
+    <script>
+        $(document).on("click", ".delete-account-button", function () {
+            var accountId = $(this).data('id');
+            $(".modal-footer #AccountId").val(accountId);
+        });
+    </script>
+}

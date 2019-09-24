@@ -16,7 +16,7 @@
     <RootNamespace>ExpenseTracker.WebUI</RootNamespace>
     <AssemblyName>ExpenseTracker.WebUI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <MvcBuildViews>true</MvcBuildViews>
+    <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44387</IISExpressSSLPort>
@@ -171,13 +171,13 @@
     <Compile Include="App_Start\BundleStyleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\Base\BaseAuthenticatedController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
-    <Compile Include="Controllers\BudgetAccountController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BudgetController.cs" />
     <Compile Include="Controllers\BudgetPlanController.cs" />
-    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
@@ -189,8 +189,11 @@
     <Compile Include="Helpers\DbContextFactory.cs" />
     <Compile Include="Helpers\LanguageHelper.cs" />
     <Compile Include="Helpers\LocalizationAttribute.cs" />
-    <Compile Include="Models\Account\LoginViewModel.cs" />
-    <Compile Include="Models\Account\RegisterViewModel.cs" />
+    <Compile Include="Models\Account\CreateAccountModel.cs" />
+    <Compile Include="Models\Category\CategoryListModel.cs" />
+    <Compile Include="Models\Category\CreateCategoryModel.cs" />
+    <Compile Include="Models\User\LoginViewModel.cs" />
+    <Compile Include="Models\User\RegisterViewModel.cs" />
     <Compile Include="Models\Base\BaseModel.cs" />
     <Compile Include="Models\Base\BaseTransactionModel.cs" />
     <Compile Include="Models\BudgetRelated\BudgetCreateModel.cs" />
@@ -375,7 +378,6 @@
     <Content Include="Content\adminlte\plugins\fontawesome-free\webfonts\fa-regular-400.svg" />
     <Content Include="Content\adminlte\plugins\fontawesome-free\webfonts\fa-solid-900.svg" />
     <Content Include="Content\adminlte\plugins\select2\css\select2.min.css" />
-    <Content Include="Content\adminlte\plugins\select2\js\i18n\build.txt" />
     <Content Include="Content\adminlte\plugins\select2\js\i18n\en.js" />
     <Content Include="Content\adminlte\plugins\select2\js\i18n\tr.js" />
     <Content Include="Content\adminlte\plugins\select2\js\select2.full.min.js" />
@@ -471,17 +473,17 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="tsScripts\tsconfig.json" />
     <Content Include="Views\Shared\_TopMenuBar.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Budget\Create.cshtml" />
     <Content Include="Views\Budget\Edit.cshtml" />
     <Content Include="Views\Budget\Index.cshtml" />
-    <Content Include="Views\BudgetAccount\Create.cshtml" />
-    <Content Include="Views\BudgetAccount\Edit.cshtml" />
-    <Content Include="Views\BudgetAccount\Index.cshtml" />
-    <Content Include="Views\Categories\Create.cshtml" />
-    <Content Include="Views\Categories\Edit.cshtml" />
-    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\BudgetPlan\Update.cshtml" />
     <Content Include="Views\Transaction\Add.cshtml" />
     <Content Include="Views\Transaction\_List.cshtml" />
@@ -518,6 +520,14 @@
     <ProjectReference Include="..\ExpenseTracker.Common\ExpenseTracker.Common.csproj">
       <Project>{65C9F7E5-739A-401A-A9FE-76EC2B583067}</Project>
       <Name>ExpenseTracker.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExpenseTracker.Entities\ExpenseTracker.Entities.csproj">
+      <Project>{0A2B7B32-2DA7-4FC2-8BCE-06D1D97F649F}</Project>
+      <Name>ExpenseTracker.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExpenseTracker.Interfaces\ExpenseTracker.Interfaces.csproj">
+      <Project>{7154BA1F-9A4A-4A09-A28C-4B1CFDD1C0C2}</Project>
+      <Name>ExpenseTracker.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExpenseTracker.Language\ExpenseTracker.Language.csproj">
       <Project>{38c7fed0-ba12-4159-9fe4-26c474ab136d}</Project>

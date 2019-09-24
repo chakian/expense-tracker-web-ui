@@ -1,23 +1,14 @@
-﻿using ExpenseTracker.Persistence.Context;
+﻿using ExpenseTracker.Business.Tests.Base;
+using ExpenseTracker.Persistence.Context;
 using Xunit;
 
 namespace ExpenseTracker.Business.Tests.LookupTests
 {
-    public class CurrencyTests : BaseQueryTest
+    public class CurrencyTests : BaseTest
     {
-        //[TestInitialize()]
-        private void CurrencyTestInitialize()
-        {
-            var connection = Effort.DbConnectionFactory.CreateTransient();
-            context = new ExpenseTrackerContext(connection);
-
-            CreateDefaultCurrencies();
-        }
-
         [Fact]
         public void GetCurrencyList_Success()
         {
-            CurrencyTestInitialize();
             // ARRANGE
             var business = new CurrencyBusiness(context);
 

@@ -1,179 +1,120 @@
-﻿using ExpenseTracker.Business;
-using ExpenseTracker.Persistence.Identity;
-using ExpenseTracker.WebUI.Models.Account;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using System;
+﻿using System;
 using System.Data.Entity;
-using System.Threading.Tasks;
-using System.Web;
+using System.Net;
 using System.Web.Mvc;
+using ExpenseTracker.Business;
+using ExpenseTracker.Entities;
+using ExpenseTracker.WebUI.Models.Account;
 
 namespace ExpenseTracker.WebUI.Controllers
 {
-    [Authorize]
-    public class AccountController : BaseController
+    public class AccountController : BaseAuthenticatedController
     {
-        private ExpenseSignInManager _signInManager;
-        private ExpenseUserManager _userManager;
+        private readonly AccountBusiness accountBusiness;
 
         public AccountController()
         {
+            accountBusiness = new AccountBusiness();
         }
 
-        public AccountController(ExpenseUserManager userManager, ExpenseSignInManager signInManager)
+        public ActionResult Index()
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            var accounts = accountBusiness.GetAccountsOfUser(UserId, ActiveBudgetId);
+            return View(accounts);
         }
 
-        public ExpenseSignInManager SignInManager
+        public ActionResult Create()
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ExpenseSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
-
-        public ExpenseUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ExpenseUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
-        //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            RegisterViewModel model = new RegisterViewModel();
-            return View(model);
-        }
-
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new User { UserName = model.Email, Email = model.Email, InsertTime = DateTime.Now };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    BudgetBusiness budgetBusiness = new BudgetBusiness(context);
-                    var budget = budgetBusiness.CreateBudget("My Budget", 1, user.Id);
-
-                    Session["ActiveBudgetId"] = budget.BudgetId;
-                    Session["ActiveBudgetName"] = budget.Name;
-
-                    var userToUpdate = context.Users.Find(user.Id);
-                    userToUpdate.ActiveBudgetId = budget.BudgetId;
-                    context.Entry(userToUpdate).State = EntityState.Modified;
-                    context.SaveChanges();
-
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        //
-        // GET: /Account/Login
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
+            SetViewBagValues(null);
             return View();
         }
 
-        //
-        // POST: /Account/Login
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Create(CreateAccountModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid && new BudgetBusiness().GetBudgetDetails(ActiveBudgetId, UserId) != null)
             {
-                return View(model);
+                AccountEntity account = new AccountEntity
+                {
+                    Name = model.Name,
+                    StartingBalance = model.StartingBalance,
+                    CurrentBalance = model.StartingBalance,
+                    BudgetId = ActiveBudgetId,
+                    AccountTypeId = model.AccountTypeId
+                };
+
+                accountBusiness.CreateAccount(account, UserId);
+                return RedirectToAction("Index");
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            SetViewBagValues(model.AccountTypeId);
+            return View(model);
         }
 
-        //
-        // POST: /Account/Logout
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Logout()
+        public ActionResult Edit(int? id)
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            AccountEntity account = accountBusiness.GetAccountById(id.Value, UserId);
+
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
+
+            SetViewBagValues(account.AccountTypeId);
+
+            CreateAccountModel model = new CreateAccountModel()
+            {
+                AccountId = account.AccountId,
+                AccountTypeId = account.AccountTypeId,
+                CurrentBalance = account.CurrentBalance,
+                Name = account.Name,
+                StartingBalance = account.StartingBalance
+            };
+
+            return View(model);
         }
 
-        private ActionResult RedirectToLocal(string returnUrl)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(CreateAccountModel model)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (ModelState.IsValid)
             {
-                return Redirect(returnUrl);
+                AccountEntity accountEntity = new AccountEntity
+                {
+                    AccountId = model.AccountId,
+                    Name = model.Name,
+                    CurrentBalance = model.CurrentBalance,
+                };
+
+                accountBusiness.UpdateAccount(accountEntity, UserId);
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Add", "Transaction");
+
+            SetViewBagValues(model.AccountTypeId);
+            return View(model);
         }
 
-        private IAuthenticationManager AuthenticationManager
+        private void SetViewBagValues(int? selectedAccountTypeId)//, int? selectedBudgetId)
         {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
+            AccountTypeBusiness accountTypeBusiness = new AccountTypeBusiness();
+
+            ViewBag.AccountTypeId = new SelectList(accountTypeBusiness.GetAccountTypeList(), "AccountTypeId", "Name", selectedAccountTypeId);
         }
 
-        private void AddErrors(IdentityResult result)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int AccountId)
         {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
+            accountBusiness.DeleteAccount(AccountId, UserId);
+
+            return RedirectToAction("Index");
         }
     }
 }

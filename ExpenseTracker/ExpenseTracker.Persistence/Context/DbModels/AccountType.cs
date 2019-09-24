@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpenseTracker.Persistence.Context.DbModels
 {
-    public class AccountType : BaseEntity
+    public class AccountType : BaseDbo
     {
         public AccountType()
         {

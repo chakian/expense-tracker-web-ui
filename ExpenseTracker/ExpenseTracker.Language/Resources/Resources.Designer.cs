@@ -223,11 +223,47 @@ namespace ExpenseTracker.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kategori.
+        ///   Looks up a localized string similar to Gelir Kategorisi Mi?.
+        /// </summary>
+        public static string Categories_Label_IsItIncomeCategory {
+            get {
+                return ResourceManager.GetString("Categories_Label_IsItIncomeCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategori Adı.
         /// </summary>
         public static string Categories_Label_Name {
             get {
                 return ResourceManager.GetString("Categories_Label_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategori Tipi.
+        /// </summary>
+        public static string Categories_Label_Type {
+            get {
+                return ResourceManager.GetString("Categories_Label_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gider.
+        /// </summary>
+        public static string Categories_Label_Type_Expense {
+            get {
+                return ResourceManager.GetString("Categories_Label_Type_Expense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gelir.
+        /// </summary>
+        public static string Categories_Label_Type_Income {
+            get {
+                return ResourceManager.GetString("Categories_Label_Type_Income", resourceCulture);
             }
         }
         
@@ -237,6 +273,24 @@ namespace ExpenseTracker.Language {
         public static string Categories_Link_CreateNewCategory {
             get {
                 return ResourceManager.GetString("Categories_Link_CreateNewCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gider Kategorileri.
+        /// </summary>
+        public static string Categories_Table_Caption_ExpenseCategories {
+            get {
+                return ResourceManager.GetString("Categories_Table_Caption_ExpenseCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gelir Kategorileri.
+        /// </summary>
+        public static string Categories_Table_Caption_IncomeCategories {
+            get {
+                return ResourceManager.GetString("Categories_Table_Caption_IncomeCategories", resourceCulture);
             }
         }
         
@@ -336,6 +390,24 @@ namespace ExpenseTracker.Language {
         public static string Generic_Yes {
             get {
                 return ResourceManager.GetString("Generic_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gider.
+        /// </summary>
+        public static string GenericText_Expense {
+            get {
+                return ResourceManager.GetString("GenericText_Expense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gelir.
+        /// </summary>
+        public static string GenericText_Income {
+            get {
+                return ResourceManager.GetString("GenericText_Income", resourceCulture);
             }
         }
         
@@ -480,15 +552,6 @@ namespace ExpenseTracker.Language {
         public static string Menu_Budgets_Add {
             get {
                 return ResourceManager.GetString("Menu_Budgets_Add", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Aktif Bütçeyi Değiştir.
-        /// </summary>
-        public static string Menu_Budgets_ChangeActiveBudget {
-            get {
-                return ResourceManager.GetString("Menu_Budgets_ChangeActiveBudget", resourceCulture);
             }
         }
         

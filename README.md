@@ -1,6 +1,6 @@
 # Expense Tracker
 
-## Version 0.4
+## Version 1.0 ([Roadmap](https://github.com/chakian/expense-tracker-web-ui/wiki/Roadmap))
 
 [![HitCount](http://hits.dwyl.io/chakian/expense-tracker-web-ui.svg)](http://hits.dwyl.io/chakian/expense-tracker-web-ui) 
 [OpenHub Report](https://www.openhub.net/p/756697)
@@ -22,6 +22,14 @@ This is the code that is running on the [test environment](https://harcatest.cag
 
 [![Build status](https://ci.appveyor.com/api/projects/status/brlasjaa4a8q5e42?svg=true&branch=develop)](https://ci.appveyor.com/project/chakian/expense-tracker-web-ui/branch/develop)
 [![Coverage Status](https://coveralls.io/repos/github/chakian/expense-tracker-web-ui/badge.svg?branch=develop)](https://coveralls.io/github/chakian/expense-tracker-web-ui?branch=develop)
+
+-----
+
+## What is this project about?
+
+Expense Tracker has been one of the projects that I've been diving in and jumping out of for about 10 years now. All I wanted to be able to do is keep track of my money to see what I am spending on; and during this voyage of mine, I have found many great, and some not-so-great applications that helped me in tracking my money. I even wrote formula-loaded-excel files and several applications to achieve my goal but to no avail.
+
+Now, Expense Tracker has started off pretty neat. I'll complete the base features and then go on to change the infrastructure into a WebAPI + MVC (or React) application. After the WebAPI is completed, I will be able to move on to build a mobile app. I'm thinking that I'll use ReactNative.
 
 -----
 

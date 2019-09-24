@@ -8,20 +8,18 @@ namespace ExpenseTracker.Business
 {
     public class BudgetPlanCategoryBusiness : BaseBusiness
     {
+        #region constructor
+        public BudgetPlanCategoryBusiness() : base() { }
+
         public BudgetPlanCategoryBusiness(ExpenseTrackerContext context) : base(context) { }
+        #endregion
 
-        public List<BudgetPlanCategory> GetBudgetPlanCategoriesByPlanId(int budgetPlanId, string userId)
-        {
-            InsertMissingCategoriesToBudgetPlan(budgetPlanId, userId);
-            var categories = context.BudgetPlanCategories.Where(q => q.IsActive && q.BudgetPlanId.Equals(budgetPlanId)).ToList();
-            return categories;
-        }
-
+        #region Private Methods
         private void InsertMissingCategoriesToBudgetPlan(int budgetPlanId, string userId)
         {
             var budgetId = context.BudgetPlans.First(q => q.BudgetPlanId.Equals(budgetPlanId)).BudgetId;
             var planCategories = context.BudgetPlanCategories.Where(q => q.IsActive && q.BudgetPlanId.Equals(budgetPlanId)).ToList();
-            var categories = new BudgetCategoryBusiness(context).GetCategoriesOfUser(userId, budgetId);
+            var categories = new CategoryBusiness(context).GetCategoriesOfUser(userId, budgetId);
 
             foreach (var category in categories)
             {
@@ -43,16 +41,15 @@ namespace ExpenseTracker.Business
             }
             context.SaveChanges();
         }
-    }
+        #endregion
 
-    public class CategoryBusiness : BaseBusiness
-    {
-        public CategoryBusiness(ExpenseTrackerContext context) : base(context) { }
-
-        public List<Category> GetCategoriesByBudgetId(int budgetId, string userId)
+        #region Internal Methods
+        internal List<BudgetPlanCategory> GetBudgetPlanCategoriesByPlanId(int budgetPlanId, string userId)
         {
-            var categories = context.Categories.Where(q => q.IsActive && q.BudgetId.Equals(budgetId) && q.Budget.BudgetUsers.Any(bu => bu.UserId.Equals(userId))).ToList();
+            InsertMissingCategoriesToBudgetPlan(budgetPlanId, userId);
+            var categories = context.BudgetPlanCategories.Where(q => q.IsActive && q.BudgetPlanId.Equals(budgetPlanId)).ToList();
             return categories;
         }
+        #endregion
     }
 }

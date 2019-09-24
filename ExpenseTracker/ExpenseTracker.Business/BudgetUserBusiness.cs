@@ -6,19 +6,31 @@ namespace ExpenseTracker.Business
 {
     public class BudgetUserBusiness : BaseBusiness
     {
+        #region constructor
+        public BudgetUserBusiness() : base() { }
+
         public BudgetUserBusiness(ExpenseTrackerContext context) : base(context) { }
+        #endregion
+
+        #region Private Methods
+        #endregion
+
+        #region Internal Methods
+        #endregion
 
         internal void CreateBudgetUser_NoCommit(int budgetId, string userId, string insertUserId)
         {
-            BudgetUser budgetUser = new BudgetUser();
-            budgetUser.InsertUserId = insertUserId;
-            budgetUser.InsertTime = DateTime.Now;
-            budgetUser.UpdateUserId = insertUserId;
-            budgetUser.UpdateTime = DateTime.Now;
-            budgetUser.IsActive = true;
+            BudgetUser budgetUser = new BudgetUser
+            {
+                InsertUserId = insertUserId,
+                InsertTime = DateTime.Now,
+                UpdateUserId = insertUserId,
+                UpdateTime = DateTime.Now,
+                IsActive = true,
 
-            budgetUser.BudgetId = budgetId;
-            budgetUser.UserId = userId;
+                BudgetId = budgetId,
+                UserId = userId
+            };
 
             context.BudgetUsers.Add(budgetUser);
         }

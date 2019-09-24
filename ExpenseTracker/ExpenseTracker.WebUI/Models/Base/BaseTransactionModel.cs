@@ -36,7 +36,7 @@ namespace ExpenseTracker.WebUI.Models
         public SelectList AccountList { get; set; }
 
         public int CategoryId { get; set; }
-        public SelectList CategoryList { get; set; }
+        public List<SelectListItem> CategoryList { get; set; }
 
         public bool IsIncome { get; set; }
     }
