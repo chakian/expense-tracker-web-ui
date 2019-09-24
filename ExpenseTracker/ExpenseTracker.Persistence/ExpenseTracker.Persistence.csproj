@@ -111,6 +111,10 @@
     <Compile Include="Migrations\201907251831232_Category_IsIncome_ParentId_Order.Designer.cs">
       <DependentUpon>201907251831232_Category_IsIncome_ParentId_Order.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909241756044_AddTable_TransactionItems.cs" />
+    <Compile Include="Migrations\201909241756044_AddTable_TransactionItems.Designer.cs">
+      <DependentUpon>201909241756044_AddTable_TransactionItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -133,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907251831232_Category_IsIncome_ParentId_Order.resx">
       <DependentUpon>201907251831232_Category_IsIncome_ParentId_Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909241756044_AddTable_TransactionItems.resx">
+      <DependentUpon>201909241756044_AddTable_TransactionItems.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
