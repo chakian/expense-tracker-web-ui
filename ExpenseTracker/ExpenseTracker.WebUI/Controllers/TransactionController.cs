@@ -264,13 +264,13 @@ namespace ExpenseTracker.WebUI.Controllers
 
             ///////////////////////////////////////////////
             var categories = categoryBusiness.GetCategoriesByBudgetId(ActiveBudgetId, UserId);
-            categories.Insert(0, new Persistence.Context.DbModels.Category() { CategoryId = 0, Name = "--- Kategori ---" });
+            categories.Insert(0, new CategoryEntity { CategoryId = 0, Name = "--- Kategori ---" });
             if (categories != null)
             {
                 model.CategoryList = new SelectList(categories, "CategoryId", "Name");
             }
             var accounts = budgetAccountBusiness.GetAccountsOfUser(UserId, ActiveBudgetId);
-            accounts.Insert(0, new Persistence.Context.DbModels.Account() { AccountId = 0, Name = "--- Hesap ---" });
+            accounts.Insert(0, new AccountEntity { AccountId = 0, Name = "--- Hesap ---" });
             if (accounts != null)
             {
                 model.AccountList = new SelectList(accounts, "AccountId", "Name");
