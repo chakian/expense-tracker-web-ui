@@ -13,6 +13,14 @@
             </tr>
         </thead>
         <tbody>
+            <tr class="table-secondary">
+                <th scope="row">&nbsp;</th>
+                <td>@Model.Sum(q => q.Amount)</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
             @foreach (var transaction in Model)
             {
                 <tr>

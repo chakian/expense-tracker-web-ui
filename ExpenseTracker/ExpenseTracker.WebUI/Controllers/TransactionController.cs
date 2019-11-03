@@ -133,7 +133,9 @@ namespace ExpenseTracker.WebUI.Controllers
                         TransactionId = t.TransactionId,
                         Date = t.Date,
                         Amount = t.Amount,
+                        AccountId = t.SourceAccount.AccountId,
                         Account = t.SourceAccount.Name,
+                        CategoryId = t.Category.CategoryId,
                         Category = t.Category.Name,
                         Description = t.Description
                     });
@@ -228,9 +230,10 @@ namespace ExpenseTracker.WebUI.Controllers
         [HttpGet]
         [Route("TransactionList", Name = "CurrentMonthList", Order = 0)]
         [Route("TransactionList/{year:int}/{month:int}", Name = "ListByYearAndMonth", Order = 1)]
-        public ActionResult List(int? year, int? month)
+        [Route("TransactionList/{year:int}/{month:int}/{accountId:int}/{categoryId:int}", Name = "ListByYearAndMonthAndByAccountAndCategory", Order = 2)]
+        public ActionResult List(int? year, int? month, int? accountId, int? categoryId)
         {
-            if (!year.HasValue || !month.HasValue)
+            if (!year.HasValue || year.Value == 0 || !month.HasValue || month.Value == 0)
             {
                 year = DateTime.Now.Year;
                 month = DateTime.Now.Month;
@@ -249,6 +252,30 @@ namespace ExpenseTracker.WebUI.Controllers
             };
 
             SetTransactionSummaryListForModel(model, currentDateTime);
+
+            if(accountId.HasValue && accountId > 0)
+            {
+                model.TransactionSummaries = model.TransactionSummaries.Where(q => q.AccountId == accountId.Value).ToList();
+            }
+            if(categoryId.HasValue && categoryId > 0)
+            {
+                model.TransactionSummaries = model.TransactionSummaries.Where(q => q.CategoryId == categoryId.Value).ToList();
+            }
+
+            ///////////////////////////////////////////////
+            var categories = categoryBusiness.GetCategoriesByBudgetId(ActiveBudgetId, UserId);
+            categories.Insert(0, new Persistence.Context.DbModels.Category() { CategoryId = 0, Name = "--- Kategori ---" });
+            if (categories != null)
+            {
+                model.CategoryList = new SelectList(categories, "CategoryId", "Name");
+            }
+            var accounts = budgetAccountBusiness.GetAccountsOfUser(UserId, ActiveBudgetId);
+            accounts.Insert(0, new Persistence.Context.DbModels.Account() { AccountId = 0, Name = "--- Hesap ---" });
+            if (accounts != null)
+            {
+                model.AccountList = new SelectList(accounts, "AccountId", "Name");
+            }
+            ///////////////////////////////////////////////
 
             return View(model);
         }
