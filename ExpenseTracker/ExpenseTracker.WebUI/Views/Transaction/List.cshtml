@@ -12,6 +12,17 @@
         @Html.ActionLink(Resources.Generic_NextMonth, "List", new { year = Model.NextYear, month = Model.NextMonth })
     </div>
 </div>
+<div class="row">
+    <div class="col-md-5">
+        @Html.DropDownListFor(model => model.AccountId, Model.AccountList, htmlAttributes: new { @class = "form-control select2" })
+    </div>
+    <div class="col-md-5">
+        @Html.DropDownListFor(model => model.CategoryId, Model.CategoryList, htmlAttributes: new { @class = "form-control select2" })
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary" type="button" onclick="filter(this)">Filtrele</button>
+    </div>
+</div>
 
 @{Html.RenderPartial("_List", Model.TransactionSummaries);}
 
@@ -21,5 +32,23 @@
             var transactionId = $(this).data('id');
             $(".modal-footer #TransactionId").val(transactionId);
         });
+
+        function filter(e) {
+            var dateQuery = "";
+            var year = "@Model.Year";
+            var month = "@Model.Month";
+            if (year > 0 && month > 0) {
+                dateQuery = "/" + year + "/" + month;
+            }
+            else {
+                dateQuery = "/0/0";
+            }
+
+            var categoryId = $('#CategoryId').val();
+            var accountId = $('#AccountId').val();
+
+            var baseUrl = "@Url.Action("List", "Transaction")";
+            window.location.replace(baseUrl + dateQuery + "/" + accountId + "/" + categoryId);
+        }
     </script>
 }
