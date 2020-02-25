@@ -1,38 +1,52 @@
-// import React, { Component } from 'react';
-// import { Nav, NavItem, Button } from 'react-bootstrap';
-// import Sidebar from 'react-bootstrap-sidebar';
-// import { MdMenu } from "react-icons/md";
+import React, { Component } from 'react';
+import { Nav } from 'react-bootstrap';
+import { Route, Link, Switch } from 'react-router-dom';
+import { MdMenu } from "react-icons/md";
 
-// export default class SideMenu extends Component {
+import Login from './user/Login';
+import Register from './user/Register';
+import Home from './Home'
 
-//     constructor(props) {
-//         super(props);
+export default class SideMenu extends Component {
 
-//         this.state = {
-//             isVisible: false,
-//         };
-//     }
+    constructor(props) {
+        super(props);
 
-//     updateModal(isVisible) {
-//         this.setState({
-//             isVisible: isVisible
-//         });
-//         this.forceUpdate();
-//     }
+        this.state = {
+            isVisible: false,
+        };
+    }
 
-//     render() {
-//         return (
-//             <div>
-//                 <Button bsStyle="primary" onClick={() => this.updateModal(true)}><img src={MdMenu} alt="" /></Button>
-//                 <Sidebar side='left' isVisible={this.state.isVisible} onHide={() => this.updateModal(false)}>
-//                     <Nav>
-//                         <NavItem href="#">Link 1</NavItem>
-//                         <NavItem href="#">Link 2</NavItem>
-//                         <NavItem href="#">Link 3</NavItem>
-//                         <NavItem href="#">Link 4</NavItem>
-//                     </Nav>
-//                 </Sidebar>
-//             </div>
-//         );
-//     }
-// }
+    updateModal(isVisible) {
+        this.setState({
+            isVisible: isVisible
+        });
+        this.forceUpdate();
+    }
+
+    render() {
+        return (
+            <>
+            <MdMenu />
+            <Nav variant="pills" defaultActiveKey="/" as="ul">
+                <Nav.Item as="li">
+                    <Nav.Link as={Link} eventKey="home" to="/">Home</Nav.Link>
+                </Nav.Item>
+                <Nav.Item as="li">
+                    <Nav.Link as={Link} eventKey="login" to="/login">Login</Nav.Link>
+                </Nav.Item>
+                <Nav.Item as="li">
+                    <Nav.Link as={Link} eventKey="register" to="/register">Register</Nav.Link>
+                </Nav.Item>
+            </Nav>
+
+            <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route component={Home} />
+            </Switch>
+            </>
+        );
+    }
+}
