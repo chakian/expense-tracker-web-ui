@@ -1,23 +1,9 @@
 {
-  "name": "src",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.1",
-    "@testing-library/user-event": "^7.2.1",
-    "bootstrap": "^4.4.1",
-    "materialize-css": "^1.0.0",
-    "react": "^16.12.0",
-    "react-bootstrap": "^1.0.0-beta.16",
-    "react-bootstrap-sidebar": "0.0.1",
-    "react-dom": "^16.12.0",
-    "react-icons": "^3.9.0",
-    "react-materialize": "^3.5.9",
-    "react-router-bootstrap": "^0.25.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0"
-  },
+  "name": "expense-tracker",
+  "author": "Cagdas",
+  "licence": "MIT",
+  "version": "0.3.0",
+  "private": false,
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -38,5 +24,34 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.2.1",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/styles": "^4.2.1",
+    "chart.js": "^2.8.0",
+    "clsx": "^1.0.4",
+    "history": "^4.9.0",
+    "moment": "^2.24.0",
+    "node-sass": "^4.12.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-chartjs-2": "^2.7.6",
+    "react-dom": "^16.8.6",
+    "react-perfect-scrollbar": "^1.5.3",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "^3.0.1",
+    "recompose": "^0.30.0",
+    "underscore": "^1.9.1",
+    "uuid": "^3.3.2",
+    "validate.js": "^0.13.1"
+  },
+  "devDependencies": {
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.19.0",
+    "prettier": "^1.17.1",
+    "prettier-eslint": "^8.8.2",
+    "prettier-eslint-cli": "^4.7.1",
+    "typescript": "^3.5.1"
   }
 }

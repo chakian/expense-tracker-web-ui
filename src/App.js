@@ -1,44 +1,36 @@
-import React from 'react';
-import { Container } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { Chart } from 'react-chartjs-2';
+import { ThemeProvider } from '@material-ui/styles';
+import validate from 'validate.js';
 
-import TopBar from './components/TopBar'
-import SideMenu from './components/SideMenu'
+import { chartjs } from './helpers';
+import theme from './theme';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import './assets/scss/index.scss';
+import validators from './common/validators';
+import Routes from './Routes';
 
-import "materialize-css/dist/css/materialize.min.css";
-import "materialize-css/dist/js/materialize.min.js";
+const browserHistory = createBrowserHistory();
 
-import './App.css';
+Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
+  draw: chartjs.draw
+});
 
-import { Button, MediaBox } from "react-materialize";
+validate.validators = {
+  ...validate.validators,
+  ...validators
+};
 
-const App = () => (
-  <Container fluid>
-    <Button > Click Me </Button>
-    <CustomMediaBox></CustomMediaBox>
-    <TopBar />
-    <SideMenu />
-  </Container>
-)
-
-function CustomMediaBox() {
-  return (
-    <MediaBox
-      options={{
-        inDuration: 275,
-        onCloseEnd: null,
-        onCloseStart: null,
-        onOpenEnd: null,
-        onOpenStart: null,
-        outDuration: 200
-      }}
-    >
-      <img
-        alt=""
-        src="https://materializecss.com/images/sample-1.jpg"
-        width="650"
-      />
-    </MediaBox>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <ThemeProvider theme={theme}>
+        <Router history={browserHistory}>
+          <Routes />
+        </Router>
+      </ThemeProvider>
+    );
+  }
 }
-
-export default App;
