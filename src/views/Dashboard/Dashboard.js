@@ -22,6 +22,8 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
   const classes = useStyles();
 
+  // TODO: If user has an active budget render "BudgetOverview", else render "NewBudget"
+
   return (
     <div className={classes.root}>
       <Grid
