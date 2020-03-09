@@ -1,7 +1,7 @@
 # GCP App Engine Routing Rules
 dispatch:
-  - url: harcamatest.chakian.com
+  - url: "harcamatest.chakian.com/*"
     service: staging
   
-  - url: harcama.chakian.com
+  - url: "harcama.chakian.com/*"
     service: default
