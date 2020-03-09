@@ -8,6 +8,9 @@ handlers:
   - url: /
     static_files: build/index.html
     upload: build/index.html
+  - url: /manifest.json
+    static_files: build/manifest.json
+    upload: build/manifest.json
   - url: /.*
     static_files: build/index.html
     upload: build/index.html
