@@ -25,9 +25,13 @@ const Topbar = props => {
     >
       <Toolbar>
         <RouterLink to="/">
-          <img
+          {/* <img
             alt="Logo"
             src="/images/logos/logo--white.svg"
+          /> */}
+          <img
+            alt="Logo"
+            src="/harcama-logo.png"
           />
         </RouterLink>
       </Toolbar>
