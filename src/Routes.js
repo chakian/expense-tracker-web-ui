@@ -9,6 +9,7 @@ import {
   ProductList as ProductListView,
   UserList as UserListView,
   Settings as SettingsView,
+  SignIn as SignInView,
   NotFound as NotFoundView
 } from './views';
 
@@ -43,6 +44,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/settings"
+      />
+      <RouteWithLayout
+        component={SignInView}
+        exact
+        layout={MainLayout}
+        path="/login"
       />
       <RouteWithLayout
         component={NotFoundView}
