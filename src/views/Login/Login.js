@@ -12,6 +12,7 @@ import {
   Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { apiHelper } from 'helpers';
 
 const schema = {
   email: {
@@ -171,9 +172,15 @@ const Login = props => {
   const handleLogin = event => {
     event.preventDefault();
 
-    alert('clicked');
-
-    history.push('/');
+    let loginPayload = { email: formState.values.email, password: formState.values.password};
+    
+    //apiHelper.postServiceData('https://test-dot-expense-track-api.appspot.com/api/v1/user/login', loginPayload)
+    apiHelper.postServiceData('http://localhost:8000/api/v1/user/login', loginPayload)
+      .then(items => { 
+        //this.setState({ datastore: items })
+        console.log(items);
+      });
+    //history.push('/');
   };
 
   const hasError = field =>
@@ -196,21 +203,20 @@ const Login = props => {
                 className={classes.quoteText}
                 variant="h1"
               >
-                Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
-                they sold out High Life.
+                Bütçenizi toparlayın hemen.
               </Typography>
               <div className={classes.person}>
                 <Typography
                   className={classes.name}
                   variant="body1"
                 >
-                  Takamaru Ayako
+                  Watashiwa ElDis
                 </Typography>
                 <Typography
                   className={classes.bio}
                   variant="body2"
                 >
-                  Manager at inVision
+                  Manager at DesuNoto
                 </Typography>
               </div>
             </div>
@@ -326,7 +332,7 @@ const Login = props => {
                   Don't have an account?{' '}
                   <Link
                     component={RouterLink}
-                    to="/sign-up"
+                    to="/register"
                     variant="h6"
                   >
                     Sign up
