@@ -1,1 +1,0 @@
-<Playlist Version="1.0"><Add Test="ExpenseTracker.Business.Tests.Budget.BudgetTests.ListBudgetsOfUser_Success" /><Add Test="ExpenseTracker.Business.Tests.Budget.BudgetTests.GetBudgetDetails_Success" /></Playlist>
