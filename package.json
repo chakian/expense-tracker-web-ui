@@ -2,7 +2,7 @@
   "name": "expense-tracker",
   "author": "Cagdas",
   "licence": "MIT",
-  "version": "0.3.0",
+  "version": "0.0.1",
   "private": false,
   "scripts": {
     "start": "serve -s build",
