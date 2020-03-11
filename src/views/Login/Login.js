@@ -175,7 +175,7 @@ const Login = props => {
     let loginPayload = { email: formState.values.email, password: formState.values.password};
     
     //apiHelper.postServiceData('https://test-dot-expense-track-api.appspot.com/api/v1/user/login', loginPayload)
-    apiHelper.postServiceData('http://localhost:8000/api/v1/user/login', loginPayload)
+    apiHelper.postServiceData('/user/login', loginPayload)
       .then(items => { 
         //this.setState({ datastore: items })
         console.log(items);

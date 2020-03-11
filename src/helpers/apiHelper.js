@@ -1,12 +1,13 @@
 // let cachedData = null;
 // let cachedPostData = null;
+let baseUrl = 'http://localhost:8000/api/v1';
 
 const postServiceData = (url, params) => {
   //TODO: This cache mechanism seems nice. I will find a way to use it properly
   //console.log('cache status' + cachedPostData );
   //if (cachedPostData === null) {
   console.log('post-data: requesting data');
-  return fetch(url, {
+  return fetch(baseUrl + url, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -30,7 +31,7 @@ const getServiceData = (url) => {
   // console.log('cache status' + cachedData);
   // if (cachedData === null) {
   console.log('get-data: requesting data');
-  return fetch(url, {})
+  return fetch(baseUrl + url, {})
     .then(response => {
       // cachedData = response.json();
       return response.json();
