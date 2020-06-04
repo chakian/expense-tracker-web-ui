@@ -10,7 +10,7 @@ class HomePage extends React.Component {
         const { user } = this.props;
         return (
             <div className="col-md-6 col-md-offset-3">
-                <h1>Hi {user.user.name}!</h1>
+                <h1>Hi {user.name}!</h1>
                 <p>You're logged in with React & JWT!!</p>
                 <p>
                     <Link to="/login">Logout</Link>
@@ -21,11 +21,10 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { users, authentication } = state;
+    const { authentication } = state;
     const { user } = authentication;
     return {
-        user,
-        users
+        user
     };
 }
 
