@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { alertActions } from '../_actions';
 import { PrivateRoute, PublicRoute } from '../_components';
-import { HomePage } from '../HomePage';
+import { LandingPage } from '../LandingPage';
 import { LoginPage } from '../LoginPage';
+import { Dashboard } from '../BudgetPages';
 
 class App extends React.Component {
     constructor(props) {
@@ -29,8 +30,16 @@ class App extends React.Component {
                     }
                     <Router history={history}>
                         <div>
-                            <PrivateRoute exact path="/" component={HomePage} />
+                            <PublicRoute exact path="/" component={LandingPage} />
+
                             <PublicRoute path="/login" component={LoginPage} />
+                            
+                            <PrivateRoute path="/Dashboard" component={Dashboard} />
+                            {/* <PrivateRoute exact path="/" component={HomePage} />
+                            <PrivateRoute exact path="/" component={HomePage} />
+                            <PrivateRoute exact path="/" component={HomePage} />
+                            <PrivateRoute exact path="/" component={HomePage} />
+                            <PrivateRoute exact path="/" component={HomePage} /> */}
                         </div>
                     </Router>
                 </div>
