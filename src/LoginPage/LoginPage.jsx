@@ -1,3 +1,4 @@
+//https://medium.com/javascript-in-plain-english/simple-guide-for-layouts-in-react-router-e32b26c12cee
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
