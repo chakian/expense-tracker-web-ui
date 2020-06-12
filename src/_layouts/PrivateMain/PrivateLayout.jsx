@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/styles';
-import { useMediaQuery } from '@material-ui/core';
+// import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import { Topbar, Sidebar, Footer } from './components';
 
@@ -49,7 +49,7 @@ const PrivateLayout = ({ children, props }) => {
                 [classes.root]: true,
                 [classes.shiftContent]: isDesktop
             })}
-        >        
+        >
             <Topbar onSidebarOpen={handleSidebarOpen} />
             <Sidebar
                 onClose={handleSidebarClose}
