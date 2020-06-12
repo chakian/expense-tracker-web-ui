@@ -45,34 +45,34 @@ const Sidebar = props => {
   const pages = [
     {
       title: 'Dashboard',
-      href: '/dashboard',
+      href: '/Dashboard',
       icon: <DashboardIcon />
     },
-    {
-      title: 'Users',
-      href: '/users',
-      icon: <PeopleIcon />
-    },
-    {
-      title: 'Products',
-      href: '/products',
-      icon: <ShoppingBasketIcon />
-    },
-    {
-      title: 'Authentication',
-      href: '/sign-in',
-      icon: <LockOpenIcon />
-    },
-    {
-      title: 'Typography',
-      href: '/typography',
-      icon: <TextFieldsIcon />
-    },
-    {
-      title: 'Icons',
-      href: '/icons',
-      icon: <ImageIcon />
-    },
+    // {
+    //   title: 'Users',
+    //   href: '/users',
+    //   icon: <PeopleIcon />
+    // },
+    // {
+    //   title: 'Products',
+    //   href: '/products',
+    //   icon: <ShoppingBasketIcon />
+    // },
+    // {
+    //   title: 'Authentication',
+    //   href: '/sign-in',
+    //   icon: <LockOpenIcon />
+    // },
+    // {
+    //   title: 'Typography',
+    //   href: '/typography',
+    //   icon: <TextFieldsIcon />
+    // },
+    // {
+    //   title: 'Icons',
+    //   href: '/icons',
+    //   icon: <ImageIcon />
+    // },
     {
       title: 'Account',
       href: '/account',
@@ -103,7 +103,7 @@ const Sidebar = props => {
           className={classes.nav}
           pages={pages}
         />
-        <UpgradePlan />
+        {/* <UpgradePlan /> */}
       </div>
     </Drawer>
   );
