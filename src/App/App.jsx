@@ -8,7 +8,7 @@ import { PrivateRoute, PublicRoute } from '../_components';
 import { LandingPage } from '../LandingPage';
 import { LoginPage } from '../LoginPage';
 import { Dashboard } from '../BudgetPages';
-import { PublicLayout } from '../_layouts/PublicLayout';
+import { PublicLayout, PrivateLayout } from '../_layouts';
 
 class App extends React.Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class App extends React.Component {
 
                             <PublicRoute path="/login" component={LoginPage} layout={PublicLayout} />
                             
-                            <PrivateRoute path="/Dashboard" component={Dashboard} />
+                            <PrivateRoute path="/Dashboard" component={Dashboard} layout={PrivateLayout} />
                             {/* <PrivateRoute exact path="/" component={HomePage} />
                             <PrivateRoute exact path="/" component={HomePage} />
                             <PrivateRoute exact path="/" component={HomePage} />
