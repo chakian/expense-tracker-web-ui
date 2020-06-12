@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { history } from '../_helpers';
@@ -8,6 +8,7 @@ import { PrivateRoute, PublicRoute } from '../_components';
 import { LandingPage } from '../LandingPage';
 import { LoginPage } from '../LoginPage';
 import { Dashboard } from '../BudgetPages';
+import { PublicLayout } from '../_layouts/PublicLayout';
 
 class App extends React.Component {
     constructor(props) {
@@ -29,10 +30,10 @@ class App extends React.Component {
                         <div className={`alert ${alert.type}`}>{alert.message}</div>
                     }
                     <Router history={history}>
-                        <div>
-                            <PublicRoute exact path="/" component={LandingPage} />
+                        <Switch>
+                            <PublicRoute exact path="/" component={LandingPage} layout={PublicLayout} />
 
-                            <PublicRoute path="/login" component={LoginPage} />
+                            <PublicRoute path="/login" component={LoginPage} layout={PublicLayout} />
                             
                             <PrivateRoute path="/Dashboard" component={Dashboard} />
                             {/* <PrivateRoute exact path="/" component={HomePage} />
@@ -40,7 +41,7 @@ class App extends React.Component {
                             <PrivateRoute exact path="/" component={HomePage} />
                             <PrivateRoute exact path="/" component={HomePage} />
                             <PrivateRoute exact path="/" component={HomePage} /> */}
-                        </div>
+                        </Switch>
                     </Router>
                 </div>
             </div>
