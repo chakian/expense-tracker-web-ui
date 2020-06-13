@@ -1,64 +1,24 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/styles';
-// import { useMediaQuery } from '@material-ui/core';
-import clsx from 'clsx';
-import { Topbar, Sidebar, Footer } from './components';
 
-const classes = makeStyles(theme => ({
-    root: {
-        paddingTop: 56,
-        height: '100%',
-        [theme.breakpoints.up('sm')]: {
-            paddingTop: 64
-        }
-    },
-    shiftContent: {
-        paddingLeft: 240
-    },
-    content: {
-        height: '100%'
-    }
-}));
-
-
-
-const PrivateLayout = ({ children, props }) => {
-    const theme = useTheme();
-    // const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
-    //     defaultMatches: true
-    // });
-    const isDesktop = true;
-
-    // const { authentication } = props;
-    // const [openSidebar, setOpenSidebar] = useState(false);
-
-    const handleSidebarOpen = () => {
-        setOpenSidebar(true);
-    };
-
-    const handleSidebarClose = () => {
-        setOpenSidebar(false);
-    };
-
-    // const shouldOpenSidebar = isDesktop ? true : openSidebar;
-    const shouldOpenSidebar = true;
-
+const PrivateLayout = ({ children }) => {
     return (
-        <div
-            className={clsx({
-                [classes.root]: true,
-                [classes.shiftContent]: isDesktop
-            })}
-        >
-            <Topbar onSidebarOpen={handleSidebarOpen} />
-            <Sidebar
-                onClose={handleSidebarClose}
-                open={shouldOpenSidebar}
-                variant={isDesktop ? 'persistent' : 'temporary'}
-            />
-            <main className={classes.content}>
+        <div>
+            <div>Top Bar</div>
+            <div>Sidebar Navigation</div>
+            <main>
                 {children}
-                <Footer />
+                <div>
+                    Footer
+                    <br/><br/><br/><hr/><br/><br/>
+                    <div>
+                        <p>
+                            <a href="https://chakian.com" target="_blank">Chakian</a>
+                        </p>
+                        <p>
+                            <a href="https://cagdaskorkut.com" target="_blank">Çağdaş Korkut</a>
+                        </p>
+                    </div>
+                </div>
             </main>
             
         </div>

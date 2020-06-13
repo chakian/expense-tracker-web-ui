@@ -10,11 +10,6 @@
     "start": "webpack-dev-server --open"
   },
   "dependencies": {
-    "@material-ui/core": "^4.2.1",
-    "@material-ui/icons": "^4.2.1",
-    "@material-ui/styles": "^4.2.1",
-    "chart.js": "^2.8.0",
-    "clsx": "^1.0.4",
     "history": "^4.6.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
