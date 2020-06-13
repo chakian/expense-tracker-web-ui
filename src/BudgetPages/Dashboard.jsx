@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { MonthSelection } from './components';
 
 class Dashboard extends React.Component {
     componentDidMount() {
@@ -8,7 +9,8 @@ class Dashboard extends React.Component {
     render() {
         const { user } = this.props;
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <div>
+                <MonthSelection />
                 <h1>Hi {user.name}!</h1>
                 <p>
                     Hallo!

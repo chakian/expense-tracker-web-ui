@@ -3,13 +3,20 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     mode: 'development',
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: [".ts", ".tsx", ".js", ".jsx"]
     },
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
-                loader: 'babel-loader'
+                test: /\.(t|j)sx?$/, 
+                use: { loader: 'ts-loader' }, 
+                exclude: /node_modules/ 
+            },
+            {
+                enforce: "pre", 
+                test: /\.js$/, 
+                exclude: /node_modules/, 
+                loader: "source-map-loader" 
             }
         ]
     },
@@ -24,5 +31,6 @@ module.exports = {
         config: JSON.stringify({
             apiUrl: 'http://localhost:8000/api/v1'
         })
-    }
+    },
+    devtool: "source-map"
 }
