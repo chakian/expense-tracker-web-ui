@@ -3,7 +3,6 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { history } from '../_helpers';
-import { alertActions } from '../_actions';
 import { PrivateRoute, PublicRoute } from '../_components';
 import { LandingPage } from '../LandingPage';
 import { LoginPage } from '../LoginPage';

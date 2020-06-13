@@ -1,16 +1,15 @@
-//https://medium.com/javascript-in-plain-english/simple-guide-for-layouts-in-react-router-e32b26c12cee
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { userActions } from '../_actions';
+import { login, logout } from '../_actions/user.actions';
 
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
 
         // reset login status
-        this.props.dispatch(userActions.logout());
+        this.props.dispatch(logout());
 
         this.state = {
             username: '',
@@ -34,12 +33,11 @@ class LoginPage extends React.Component {
         const { username, password } = this.state;
         const { dispatch } = this.props;
         if (username && password) {
-            dispatch(userActions.login(username, password));
+            dispatch(login(username, password));
         }
     }
 
     render() {
-        const { loggingIn } = this.props;
         const { username, password, submitted } = this.state;
         return (
             <div className="col-md-6 col-md-offset-3">
@@ -61,9 +59,6 @@ class LoginPage extends React.Component {
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary">Login</button>
-                        {loggingIn &&
-                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                        }
                     </div>
                 </form>
             </div>
@@ -72,10 +67,7 @@ class LoginPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { loggingIn } = state.authentication;
-    return {
-        loggingIn
-    };
+    return {}
 }
 
 const connectedLoginPage = connect(mapStateToProps)(LoginPage);
