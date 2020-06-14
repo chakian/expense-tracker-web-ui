@@ -3,9 +3,9 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { history } from '../_helpers';
-import { PrivateRoute, PublicRoute } from '../_components';
+import { PrivateRoute, PublicRoute } from '../_routes';
 import { LandingPage } from '../LandingPage';
-import { LoginPage } from '../LoginPage';
+import { LoginPage } from '../user/LoginPage';
 import { Dashboard } from '../BudgetPages';
 import { PublicLayout, PrivateLayout } from '../_layouts';
 
