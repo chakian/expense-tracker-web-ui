@@ -17,7 +17,21 @@ module.exports = {
                 test: /\.js$/, 
                 exclude: /node_modules/, 
                 loader: "source-map-loader" 
-            }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                  // style-loader
+                  { loader: 'style-loader' },
+                  // css-loader
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      modules: true
+                    }
+                  }
+                ]
+              }
         ]
     },
     plugins: [new HtmlWebpackPlugin({
