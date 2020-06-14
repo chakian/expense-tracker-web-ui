@@ -1,4 +1,4 @@
-import { ILoginUserAction } from "./actions";
+import { ILoginUserAction, ICheckUserLoggedInAction } from "./actions";
 import { ReduxActionTypes } from "../_store/rootReducer";
 
 export interface IUserState {
@@ -13,7 +13,7 @@ const initialState: IUserState = {
     name: ""
 };
 
-type UserReducerActions = ILoginUserAction;// | UserLogoutAction;
+type UserReducerActions = ILoginUserAction | ICheckUserLoggedInAction;
 
 export default function(
     state: IUserState = initialState,
@@ -22,6 +22,13 @@ export default function(
     switch (action.type) {
         case ReduxActionTypes.USER_LOGIN:
             return {
+                ...state,
+                email: action.data.email,
+                name: action.data.name,
+                token: action.data.token
+            };
+        case ReduxActionTypes.CHECK_LOGGED_IN:
+            return{
                 ...state,
                 email: action.data.email,
                 name: action.data.name,

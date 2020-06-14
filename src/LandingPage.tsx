@@ -2,16 +2,20 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AppState } from './_store/rootReducer';
+import { checkLoggedIn } from './user/actions';
+import { Dispatch, AnyAction, bindActionCreators } from 'redux';
 
-class LandingPage extends React.Component<any, any> {
-
+class LandingPage extends React.Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>> {
+    componentDidMount(){
+        const { checkUser } = this.props;
+        checkUser();
+    }
     render() {
         const { user } = this.props;
         if(user && user.token) {
             return (
                 <div>
-                    LOGGED IN
-                {/* <Redirect to={{ pathname: '/Dashboard' }} /> */}
+                    <Redirect to={{ pathname: '/Dashboard' }} />
                 </div>
             )
         }
@@ -35,6 +39,14 @@ function mapStateToProps(state: AppState) {
     };
 }
 
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
+    bindActionCreators(
+        {
+            checkUser: checkLoggedIn
+        },
+        dispatch);
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(LandingPage);

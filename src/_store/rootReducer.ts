@@ -7,6 +7,7 @@ import userReducer from '../user/reducer';
 
 export enum ReduxActionTypes {
     USER_LOGIN = "USER_LOGIN",
+    CHECK_LOGGED_IN = "CHECK_LOGGED_IN",
     USER_LOGOUT = "USER_LOGOUT",
     CHANGE_PASSWORD = "CHANGE_PASSWORD",
     FORGOT_PASSWORD = "FORGOT_PASSWORD",
