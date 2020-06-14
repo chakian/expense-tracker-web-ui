@@ -29,15 +29,17 @@ class App extends React.Component<AppProps> {
 
     render() {
         return (
-            <BrowserRouter>
-                <Switch>
-                    <PublicRoute exact path="/" component={LandingPage} layout={PublicLayout} />
+            <div className="container-fluid">
+                <BrowserRouter>
+                    <Switch>
+                        <PublicRoute exact path="/" component={LandingPage} layout={PublicLayout} />
 
-                    <PublicRoute path="/login" component={LoginPage} layout={PublicLayout} />
-                    
-                    <PrivateRoute path="/Dashboard" component={Dashboard} layout={PrivateLayout} />
-                </Switch>
-            </BrowserRouter>
+                        <PublicRoute path="/login" component={LoginPage} layout={PublicLayout} />
+                        
+                        <PrivateRoute path="/Dashboard" component={Dashboard} layout={PrivateLayout} />
+                    </Switch>
+                </BrowserRouter>
+            </div>
         );
     }
 }

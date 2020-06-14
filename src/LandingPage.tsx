@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Dispatch, AnyAction, bindActionCreators } from 'redux';
+
 import { AppState } from './_store/rootReducer';
 import { checkLoggedIn } from './user/actions';
-import { Dispatch, AnyAction, bindActionCreators } from 'redux';
+
+import { Button } from 'antd';
 
 class LandingPage extends React.Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>> {
     componentDidMount(){
@@ -21,10 +24,11 @@ class LandingPage extends React.Component<ReturnType<typeof mapStateToProps> & R
         }
         else{
             return (
-                <div className="col-md-6 col-md-offset-3">
+                <div id="col-md-6 col-md-offset-3">
                     <h1>Hi!</h1>
                     <p>
-                        <Link to={'/login'}>Login Now</Link>
+                        <Button type="primary">Giriş</Button>
+                        {/* <Link to={'/login'}>Login Now</Link> */}
                     </p>
                 </div>
             );
