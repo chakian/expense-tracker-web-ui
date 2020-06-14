@@ -8,13 +8,15 @@ import { AppState } from "./_store/rootReducer";
 import "./main.css";
 
 // Generic imports
-import { PrivateRoute, PublicRoute } from './_routes';
-import { PublicLayout, PrivateLayout } from './_layouts';
+import { PrivateRoute } from './_routes/PrivateRoute';
+import { PublicRoute } from './_routes/PublicRoute';
+import { PublicLayout } from './_layouts/PublicLayout';
+import { PrivateLayout } from './_layouts/PrivateMain/PrivateLayout';
 
 // Page imports
 import LandingPage from './LandingPage';
 import LoginPage from './user/LoginPage';
-// import { Dashboard } from './BudgetPages';
+import Dashboard from './dashboard/Dashboard';
 
 // Props for App
 interface AppProps {
@@ -33,7 +35,7 @@ class App extends React.Component<AppProps> {
 
                     <PublicRoute path="/login" component={LoginPage} layout={PublicLayout} />
                     
-                    {/* <PrivateRoute path="/Dashboard" component={Dashboard} layout={PrivateLayout} /> */}
+                    <PrivateRoute path="/Dashboard" component={Dashboard} layout={PrivateLayout} />
                 </Switch>
             </BrowserRouter>
         );

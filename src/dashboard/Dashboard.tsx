@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, AnyAction, bindActionCreators } from 'redux';
 
-class MonthSelection extends Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>, {}> {
+import MonthSelection from './components/MonthSelection';
+
+class Dashboard extends Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>, {}> {
     componentDidMount() {
     }
 
@@ -10,12 +12,15 @@ class MonthSelection extends Component<ReturnType<typeof mapStateToProps> & Retu
         const { user } = this.props;
         return (
             <div>
-                <h1>Month Selection: {user.token}</h1>
+                <MonthSelection />
+                <h1>Hi {user.name}!</h1>
+                <p>
+                    Hallo!
+                </p>
             </div>
         );
     }
 }
-
 
 function mapStateToProps(state) {
     const { user } = state;
@@ -33,4 +38,5 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MonthSelection);
+)(Dashboard);
+

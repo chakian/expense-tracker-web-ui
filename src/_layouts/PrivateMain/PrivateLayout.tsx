@@ -1,9 +1,11 @@
 import React from 'react';
 
+import TopBar from './TopBar';
+
 const PrivateLayout = ({ children }) => {
     return (
         <div>
-            <div>Top Bar</div>
+            <TopBar />
             <div>Sidebar Navigation</div>
             <main>
                 {children}
