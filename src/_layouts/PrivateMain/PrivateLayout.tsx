@@ -1,30 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import TopBar from './TopBar';
 
-const PrivateLayout = ({ children }) => {
-    return (
-        <div>
-            <TopBar />
-            <div>Sidebar Navigation</div>
-            <main>
-                {children}
-                <div>
-                    Footer
-                    <br/><br/><br/><hr/><br/><br/>
+class PrivateLayout extends Component {
+    render() { 
+        return(
+            <div>
+                <TopBar />
+                <div>Sidebar Navigation</div>
+                <main>
+                    {this.props.children}
                     <div>
-                        <p>
-                            <a href="https://chakian.com" target="_blank">Chakian</a>
-                        </p>
-                        <p>
-                            <a href="https://cagdaskorkut.com" target="_blank">Çağdaş Korkut</a>
-                        </p>
+                        Footer
+                        <br/><br/><br/><hr/><br/><br/>
+                        <div>
+                            <p>
+                                <a href="https://chakian.com" target="_blank">Chakian</a>
+                            </p>
+                            <p>
+                                <a href="https://cagdaskorkut.com" target="_blank">Çağdaş Korkut</a>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </main>
-            
-        </div>
-    );
+                </main>
+            </div>
+        );
+    }
 }
 
 export { PrivateLayout };
