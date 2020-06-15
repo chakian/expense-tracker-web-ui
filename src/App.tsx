@@ -5,7 +5,6 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 
 // App imports
 import { AppState } from "./_store/rootReducer";
-import "./main.css";
 
 // Generic imports
 import { PrivateRoute } from './_routes/PrivateRoute';
@@ -29,7 +28,7 @@ class App extends React.Component<AppProps> {
 
     render() {
         return (
-            <div className="container-fluid">
+            <div>
                 <BrowserRouter>
                     <Switch>
                         <PublicRoute exact path="/" component={LandingPage} layout={PublicLayout} />
