@@ -5,6 +5,8 @@ import configureStore from "./_store/rootReducer";
 
 import App from "./App";
 
+import 'antd/dist/antd.css';
+
 const store = configureStore();
 
 const Root = () => (
