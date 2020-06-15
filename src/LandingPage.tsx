@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Dispatch, AnyAction, bindActionCreators } from 'redux';
@@ -6,7 +6,9 @@ import { Dispatch, AnyAction, bindActionCreators } from 'redux';
 import { AppState } from './_store/rootReducer';
 import { checkLoggedIn } from './user/actions';
 
-import { Button } from 'antd';
+const hugeImageCss: CSSProperties = {
+    fontSize: "10rem"
+};
 
 class LandingPage extends React.Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>> {
     componentDidMount(){
@@ -24,11 +26,9 @@ class LandingPage extends React.Component<ReturnType<typeof mapStateToProps> & R
         }
         else{
             return (
-                <div id="col-md-6 col-md-offset-3">
-                    <h1>Hi!</h1>
-                    <p>
-                        <Button type="primary">Giriş</Button>
-                        {/* <Link to={'/login'}>Login Now</Link> */}
+                <div>
+                    <p style={{textAlign:"center"}}>
+                        <Link id="loginLink" to={'/login'} style={hugeImageCss}>Giriş</Link>
                     </p>
                 </div>
             );
