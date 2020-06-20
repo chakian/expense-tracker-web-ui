@@ -19,14 +19,7 @@ class TopBar extends Component<ReturnType<typeof mapStateToProps> & ReturnType<t
     render() {
         const { user } = this.props;
         return (
-            <Row>
-                <Col offset={4} span={16}><h1 style={textWhite}>Harcama Takibi</h1></Col>
-                <Col span={4} style={{textAlign: "right"}}>
-                    <Link to='/logout'>
-                        <Button type="dashed">Çıkış</Button>
-                    </Link>
-                </Col>
-            </Row>
+            <h1 style={textWhite}>Harcama Takibi</h1>
         );
     }
 }
