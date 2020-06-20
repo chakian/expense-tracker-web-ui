@@ -15,6 +15,7 @@ import { PrivateLayout } from './_layouts/PrivateMain/PrivateLayout';
 // Page imports
 import LandingPage from './LandingPage';
 import LoginPage from './user/LoginPage';
+import LogoutPage from './user/LogoutPage';
 import Dashboard from './dashboard/Dashboard';
 
 // Props for App
@@ -34,6 +35,7 @@ class App extends React.Component<AppProps> {
                         <PublicRoute exact path="/" component={LandingPage} layout={PublicLayout} />
 
                         <PublicRoute path="/login" component={LoginPage} layout={PublicLayout} />
+                        <PublicRoute path="/logout" component={LogoutPage} layout={PublicLayout} />
                         
                         <PrivateRoute path="/Dashboard" component={Dashboard} layout={PrivateLayout} />
                     </Switch>
