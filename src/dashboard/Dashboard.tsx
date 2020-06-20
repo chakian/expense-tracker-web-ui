@@ -9,14 +9,9 @@ class Dashboard extends Component<ReturnType<typeof mapStateToProps> & ReturnTyp
     }
 
     render() {
-        const { user } = this.props;
         return (
             <div>
                 <MonthSelection />
-                <h1>Hi {user.name}!</h1>
-                <p>
-                    Hallo!
-                </p>
             </div>
         );
     }
@@ -39,4 +34,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(Dashboard);
-
