@@ -8,30 +8,23 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(t|j)sx?$/, 
-                use: { loader: 'ts-loader' }, 
-                exclude: /node_modules/ 
+                test: /\.(t|j)sx?$/,
+                use: { loader: 'ts-loader' },
+                exclude: /node_modules/
             },
             {
-                enforce: "pre", 
-                test: /\.js$/, 
-                exclude: /node_modules/, 
-                loader: "source-map-loader" 
+                enforce: "pre",
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "source-map-loader"
             },
             {
                 test: /\.css$/,
                 use: [
-                  // style-loader
-                  { loader: 'style-loader' },
-                  // css-loader
-                  {
-                    loader: 'css-loader',
-                    options: {
-                      modules: true
-                    }
-                  }
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' }
                 ]
-              }
+            }
         ]
     },
     plugins: [new HtmlWebpackPlugin({

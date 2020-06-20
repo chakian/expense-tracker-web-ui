@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, AnyAction, Dispatch } from 'redux';
 
@@ -6,74 +6,62 @@ import { userLogin } from './actions';
 import { AppState } from '../_store/rootReducer';
 import { Redirect } from 'react-router';
 
-class LoginPage extends Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>, {}> {
-    state = {
-        email: "",
-        password: "",
-        submitted: false
-    };
+import { Form, Input, Button, Row, Col } from 'antd';
 
+const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+};
+const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+};
+
+class LoginPage extends Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>, {}> {
     public componentDidMount() {
     }
 
-    handleChange: React.ReactEventHandler<HTMLInputElement> = (e) => {
-        //e.persist();
-        const { name, value } = e.currentTarget;
-        if (name == 'email') {
-            this.setState({ email: value });
-        }
-        else if (name == 'password') {
-            this.setState({ password: value });
-        }
-        // this.setState({ [name]: value });
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-
-        this.setState({ submitted: true });
-
+    onFinish = values => {
+        console.log('Success:', values);
         const { login } = this.props;
-        const { email, password } = this.state;
+        const { email, password } = values;
 
         if (email && password) {
             login(email, password);
         }
-    }
+    };
+
+    onFinishFailed = errorInfo => {
+        console.log('Failed:', errorInfo);
+    };
 
     public render() {
-        const { email, password, submitted } = this.state;
         const { user } = this.props;
 
-        if(user != undefined && user.token != undefined && user.token != ""){
-            return(
+        if (user != undefined && user.token != undefined && user.token != "") {
+            return (
                 <Redirect to={"/Dashboard"} />
             );
         }
-        else{
+        else {
+            document.title = "Giriş";
             return (
-                <div>
-                    <h2>Login</h2>
-                    <form name="form" onSubmit={this.handleSubmit}>
-                        <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
-                            <label htmlFor="email">Email</label>
-                            <input type="text" name="email" value={email} onChange={this.handleChange.bind(this)} />
-                            {submitted && !email &&
-                                <div className="help-block">Email is required</div>
-                            }
-                        </div>
-                        <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-                            <label htmlFor="password">Password</label>
-                            <input type="password" name="password" value={password} onChange={this.handleChange} />
-                            {submitted && !password &&
-                                <div className="help-block">Password is required</div>
-                            }
-                        </div>
-                        <div className="form-group">
-                            <button className="btn btn-primary">Login</button>
-                        </div>
-                    </form>
-                </div>
+                <Row>
+                    <Col span={8} offset={8}>
+                        <Form {...layout} name="login" size="large"
+                            onFinish={this.onFinish}
+                            onFinishFailed={this.onFinishFailed}>
+                            <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Email adresi zorunludur!' }, { type: "email", message: "Email adresi geçersiz!" }]}>
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Şifre" name="password" rules={[{ required: true, message: 'Şifre zorunludur!' }]}>
+                                <Input.Password />
+                            </Form.Item>
+                            <Form.Item {...tailLayout}>
+                                <Button type="primary" htmlType="submit">Giriş</Button>
+                            </Form.Item>
+                        </Form>
+                    </Col>
+                </Row>
             );
         }
     }
