@@ -10,7 +10,7 @@ import { AppState } from "./_store/rootReducer";
 import { PrivateRoute } from './_routes/PrivateRoute';
 import { PublicRoute } from './_routes/PublicRoute';
 import { PublicLayout } from './_layouts/PublicLayout';
-import { PrivateLayout } from './_layouts/PrivateMain/PrivateLayout';
+import PrivateLayout from './_layouts/PrivateMain/PrivateLayout';
 
 // Page imports
 import LandingPage from './LandingPage';
