@@ -1,25 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, CSSProperties } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, AnyAction, bindActionCreators } from 'redux';
+// import { withRouter } from 'react-router-dom';
 
-import { userLogout } from '../../user/actions'
+import { Row, Col, Button } from 'antd';
+
+import { userLogout } from '../../user/actions';
+import { Link } from 'react-router-dom';
+
+const textWhite: CSSProperties = {
+    color: "#ffffff"
+}
 
 class TopBar extends Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>, {}> {
     componentDidMount() {
     }
 
-    handleLogout = (e) => {
-        const { logout } = this.props;
-        logout();
-    }
-
     render() {
         const { user } = this.props;
         return (
-            <div>
-                <h1>Topbar</h1>
-                <span><button onClick={this.handleLogout}>Logout</button></span>
-            </div>
+            <Row>
+                <Col offset={4} span={16}><h1 style={textWhite}>Harcama Takibi</h1></Col>
+                <Col span={4} style={{textAlign: "right"}}>
+                    <Link to='/logout'>
+                        <Button type="dashed">Çıkış</Button>
+                    </Link>
+                </Col>
+            </Row>
         );
     }
 }
