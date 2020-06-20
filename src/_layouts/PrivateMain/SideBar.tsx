@@ -9,7 +9,8 @@ import {
     BankOutlined,
     CreditCardOutlined,
     LogoutOutlined,
-    DashboardOutlined
+    DashboardOutlined,
+    SwitcherOutlined
 } from '@ant-design/icons';
 
 import { Layout, Button, Menu } from 'antd';
@@ -59,6 +60,8 @@ class SideBar extends Component<ReturnType<typeof mapStateToProps> & ReturnType<
                         <Menu.Item key="c_2" icon={<CreditCardOutlined />}>Kart 2</Menu.Item>
                         <Menu.Item key="c_3" icon={<CreditCardOutlined />}>Kart 3</Menu.Item>
                     </SubMenu>
+
+                    <Menu.Item key="changeBudget" icon={<SwitcherOutlined/>}><Link to='/switchbudget'>Bütçe Değiştir</Link></Menu.Item>
 
                     <Menu.Item key="logout" icon={<LogoutOutlined/>}><Link to='/logout'><Button type="dashed" style={backRed}>Çıkış</Button></Link></Menu.Item>
 

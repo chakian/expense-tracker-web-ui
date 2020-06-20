@@ -17,6 +17,7 @@ import LandingPage from './LandingPage';
 import LoginPage from './user/LoginPage';
 import LogoutPage from './user/LogoutPage';
 import Dashboard from './dashboard/Dashboard';
+import SwitchBudget from './budget/SwitchBudget';
 
 // Props for App
 interface AppProps {
@@ -38,6 +39,8 @@ class App extends React.Component<AppProps> {
                         <PublicRoute path="/logout" component={LogoutPage} layout={PublicLayout} />
                         
                         <PrivateRoute path="/Dashboard" component={Dashboard} layout={PrivateLayout} />
+
+                        <PrivateRoute exact path="/switchbudget" component={SwitchBudget} layout={PrivateLayout} />
                     </Switch>
                 </BrowserRouter>
             </div>
