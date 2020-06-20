@@ -12,18 +12,16 @@ const textCenter: CSSProperties = {
 class PrivateLayout extends Component {
     render() { 
         return(
-            <div>
-                <Header style={textCenter}>
-                    <TopBar />
-                </Header>
-                <Content>
-                    <Sider>Sidebar Navigation</Sider>
-                    {this.props.children}
-                </Content>
-                <Footer>
-                    by Çağdaş Korkut
-                </Footer>
-            </div>
+            <Layout>
+                <Sider>Sidebar Navigation</Sider>
+                <Layout>
+                    <Header style={textCenter}><TopBar /></Header>
+                    <Content>{this.props.children}</Content>
+                    <Footer style={{borderTop: "1px solid", marginTop: "50px"}}>
+                        by Çağdaş Korkut
+                    </Footer>
+                </Layout>
+            </Layout>
         );
     }
 }
