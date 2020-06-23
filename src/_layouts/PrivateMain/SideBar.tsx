@@ -55,11 +55,11 @@ class SideBar extends Component<ReturnType<typeof mapStateToProps> & ReturnType<
                         <Menu.Item key="a_3" icon={<AccountBookOutlined />}>Hesap 3</Menu.Item>
                     </SubMenu>
 
-                    <SubMenu key="subCreditCards" icon={<CreditCardOutlined/>} title="Kredi Kartları">
+                    {/* <SubMenu key="subCreditCards" icon={<CreditCardOutlined/>} title="Kredi Kartları">
                         <Menu.Item key="c_1" icon={<CreditCardOutlined />}>Kart 1</Menu.Item>
                         <Menu.Item key="c_2" icon={<CreditCardOutlined />}>Kart 2</Menu.Item>
                         <Menu.Item key="c_3" icon={<CreditCardOutlined />}>Kart 3</Menu.Item>
-                    </SubMenu>
+                    </SubMenu> */}
 
                     <Menu.Item key="changeBudget" icon={<SwitcherOutlined/>}><Link to='/switchbudget'>Bütçe Değiştir</Link></Menu.Item>
 
@@ -73,7 +73,8 @@ class SideBar extends Component<ReturnType<typeof mapStateToProps> & ReturnType<
 
 
 const mapStateToProps = (state: AppState) => ({
-    user: state.user
+    user: state.user,
+    accounts: state.account
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
