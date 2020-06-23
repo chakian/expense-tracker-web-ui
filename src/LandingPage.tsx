@@ -1,26 +1,34 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Dispatch, AnyAction, bindActionCreators } from 'redux';
+
 import { AppState } from './_store/rootReducer';
+import { checkLoggedIn } from './user/actions';
 
-class LandingPage extends React.Component<any, any> {
+const hugeImageCss: CSSProperties = {
+    fontSize: "10rem"
+};
 
+class LandingPage extends React.Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>> {
+    componentDidMount(){
+        const { checkUser } = this.props;
+        checkUser();
+    }
     render() {
         const { user } = this.props;
         if(user && user.token) {
             return (
                 <div>
-                    LOGGED IN
-                {/* <Redirect to={{ pathname: '/Dashboard' }} /> */}
+                    <Redirect to={{ pathname: '/Dashboard' }} />
                 </div>
             )
         }
         else{
             return (
-                <div className="col-md-6 col-md-offset-3">
-                    <h1>Hi!</h1>
-                    <p>
-                        <Link to={'/login'}>Login Now</Link>
+                <div>
+                    <p style={{textAlign:"center"}}>
+                        <Link id="loginLink" to={'/login'} style={hugeImageCss}>Giriş</Link>
                     </p>
                 </div>
             );
@@ -35,6 +43,14 @@ function mapStateToProps(state: AppState) {
     };
 }
 
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
+    bindActionCreators(
+        {
+            checkUser: checkLoggedIn
+        },
+        dispatch);
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(LandingPage);

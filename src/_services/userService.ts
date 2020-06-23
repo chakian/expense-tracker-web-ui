@@ -1,5 +1,5 @@
 // import config from 'config';
-import { authHeader } from '../_helpers';
+import { authHeader } from '../_helpers/auth-header';
 import { IUserState } from '../user/reducer';
 
 export const userService = {

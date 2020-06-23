@@ -5,16 +5,19 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 
 // App imports
 import { AppState } from "./_store/rootReducer";
-import "./main.css";
 
 // Generic imports
-import { PrivateRoute, PublicRoute } from './_routes';
-import { PublicLayout, PrivateLayout } from './_layouts';
+import { PrivateRoute } from './_routes/PrivateRoute';
+import { PublicRoute } from './_routes/PublicRoute';
+import { PublicLayout } from './_layouts/PublicLayout';
+import PrivateLayout from './_layouts/PrivateMain/PrivateLayout';
 
 // Page imports
 import LandingPage from './LandingPage';
 import LoginPage from './user/LoginPage';
-// import { Dashboard } from './BudgetPages';
+import LogoutPage from './user/LogoutPage';
+import Dashboard from './dashboard/Dashboard';
+import SwitchBudget from './budget/SwitchBudget';
 
 // Props for App
 interface AppProps {
@@ -27,15 +30,20 @@ class App extends React.Component<AppProps> {
 
     render() {
         return (
-            <BrowserRouter>
-                <Switch>
-                    <PublicRoute exact path="/" component={LandingPage} layout={PublicLayout} />
+            <div>
+                <BrowserRouter>
+                    <Switch>
+                        <PublicRoute exact path="/" component={LandingPage} layout={PublicLayout} />
 
-                    <PublicRoute path="/login" component={LoginPage} layout={PublicLayout} />
-                    
-                    {/* <PrivateRoute path="/Dashboard" component={Dashboard} layout={PrivateLayout} /> */}
-                </Switch>
-            </BrowserRouter>
+                        <PublicRoute path="/login" component={LoginPage} layout={PublicLayout} />
+                        <PublicRoute path="/logout" component={LogoutPage} layout={PublicLayout} />
+                        
+                        <PrivateRoute path="/Dashboard" component={Dashboard} layout={PrivateLayout} />
+
+                        <PrivateRoute exact path="/switchbudget" component={SwitchBudget} layout={PrivateLayout} />
+                    </Switch>
+                </BrowserRouter>
+            </div>
         );
     }
 }
