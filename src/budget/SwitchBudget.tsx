@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, AnyAction, bindActionCreators } from 'redux';
 import { Table, Space } from 'antd';
@@ -48,21 +48,31 @@ const data = [
 ];
 
 class SwitchBudget extends Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>, {}> {
+    state = {
+        isLoading: true
+    };
+
     componentDidMount() {
+        setTimeout(() => {
+            this.setState({isLoading: false});
+        }, 3000);
     }
 
     render() {
+        const { isLoading } = this.state;
+
         return (
             <div>
                 <header>Bütçe Değiştir</header>
-                <Table columns={columns} dataSource={data} />
+                <Table columns={columns} dataSource={data} loading={isLoading} />
             </div>
         );
     }
 }
 
 const mapStateToProps = (state: AppState) => ({
-    user: state.user
+    user: state.user,
+    budget: state.budget
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>

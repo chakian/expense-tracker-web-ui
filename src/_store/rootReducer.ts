@@ -5,6 +5,7 @@ import { createLogger } from 'redux-logger';
 
 import userReducer from '../user/reducer';
 import accountReducer from '../account/reducer';
+import budgetReducer from '../budget/reducer';
 
 export enum ReduxActionTypes {
     USER_LOGIN = "USER_LOGIN",
@@ -17,6 +18,10 @@ export enum ReduxActionTypes {
     GET_ACCOUNT_LIST = "GET_ACCOUNT_LIST",
     CREATE_ACCOUNT = "CREATE_ACCOUNT",
     UPDATE_ACCOUNT = "UPDATE_ACCOUNT",
+
+    GET_BUDGET_LIST = "GET_BUDGET_LIST",
+    CREATE_BUDGET = "CREATE_BUDGET",
+    UPDATE_BUDGET = "UPDATE_BUDGET",
 }
 
 export interface IReduxBaseAction {
@@ -26,6 +31,7 @@ export interface IReduxBaseAction {
 const rootReducer = combineReducers({
     user: userReducer,
     account: accountReducer,
+    budget: budgetReducer,
 });
 
 const loggerMiddleware = createLogger();
