@@ -40,7 +40,8 @@ export function checkLoggedIn() : ThunkAction<Promise<ICheckUserLoggedInAction>,
         let myUser: IUserState = {
             email: "",
             name: "",
-            token: ""
+            token: "",
+            defaultBudgetId: 0
         };
         if(localUser != undefined && localUser != ""){
             myUser = JSON.parse(localUser);
@@ -60,7 +61,8 @@ export function userLogout(): ThunkAction<Promise<ILogoutUserAction>, IUserState
             data: {
                 email: "",
                 name: "",
-                token: ""
+                token: "",
+                defaultBudgetId: 0
             }
         });
     }

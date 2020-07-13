@@ -24,7 +24,8 @@ function login(email, password): Promise<IUserState> {
             const myUser: IUserState = {
                 email: user.user.email,
                 name: user.user.name,
-                token: user.user.token
+                token: user.user.token,
+                defaultBudgetId: user.user.defaultBudgetId
             };
             return myUser;
         });

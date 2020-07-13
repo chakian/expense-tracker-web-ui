@@ -8,6 +8,10 @@ export interface IBudgetState {
     isActive: boolean;
 }
 
+export interface IBudgetListState {
+    list: IBudgetState[];
+}
+
 const initialState: IBudgetState = {
     id: 0,
     name: "",

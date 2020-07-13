@@ -1,9 +1,10 @@
 import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, AnyAction, bindActionCreators } from 'redux';
-import { Table, Space } from 'antd';
+import { Table, Space, Button } from 'antd';
 
 import { AppState } from '../_store/rootReducer';
+import { getBudgetList } from '../_services/budgetService';
 
 const columns = [
     {
@@ -53,9 +54,16 @@ class SwitchBudget extends Component<ReturnType<typeof mapStateToProps> & Return
     };
 
     componentDidMount() {
-        setTimeout(() => {
-            this.setState({isLoading: false});
-        }, 3000);
+        this.getList();
+    }
+
+    getList() {
+        const { user } = this.props;
+        let prm = getBudgetList(user.token);
+        prm.then((list) => {
+            alert(list);
+            this.setState({ isLoading: false });
+        });
     }
 
     render() {
@@ -63,7 +71,7 @@ class SwitchBudget extends Component<ReturnType<typeof mapStateToProps> & Return
 
         return (
             <div>
-                <header>Bütçe Değiştir</header>
+                <header>Bütçe Değiştir <Button onClick={this.getList}>Yenile</Button> </header>
                 <Table columns={columns} dataSource={data} loading={isLoading} />
             </div>
         );
