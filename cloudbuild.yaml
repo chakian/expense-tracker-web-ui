@@ -1,6 +1,7 @@
 steps:
 # Install
-- name: 'gcr.io/cloud-builders/yarn'
+- name: node
+  entrypoint: yarn
   args: ['install']
 
 # Test
@@ -8,8 +9,9 @@ steps:
 #  args: ['run', 'test:unit']
 
 # Build
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['run', 'build']
+- name: node
+  entrypoint: yarn
+  args: ['run', $_BUILD_SCRIPT_NAME]
 
 # Deploy
 - name: 'gcr.io/cloud-builders/yarn'
