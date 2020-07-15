@@ -13,7 +13,7 @@ module.exports = merge(common, {
   ],
   externals: {
     Config: JSON.stringify({
-      apiUrl: 'http://localhost:8000/api/v1'
+      apiUrl: 'https://expense-track-api.appspot.com/api/v1'
     })
   }
 })
