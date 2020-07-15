@@ -15,6 +15,6 @@ steps:
 
 # Deploy
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy', 'app_staging.yaml']
+  args: ['app', 'deploy', $_DEPLOY_APP_YAML_NAME]
 
 timeout: '300s'
