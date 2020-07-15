@@ -1,0 +1,20 @@
+steps:
+# Install
+- name: node
+  entrypoint: yarn
+  args: ['install']
+
+# Test
+#- name: 'gcr.io/cloud-builders/yarn'
+#  args: ['run', 'test:unit']
+
+# Build
+- name: node
+  entrypoint: yarn
+  args: ['run', $_BUILD_SCRIPT_NAME]
+
+# Deploy
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy', $_DEPLOY_APP_YAML_NAME]
+
+timeout: '300s'
