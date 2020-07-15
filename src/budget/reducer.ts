@@ -2,8 +2,8 @@ import { IGetBudgetsAction } from "./actions";
 import { ReduxActionTypes } from "../_store/rootReducer";
 
 export interface IBudgetState {
-    id: number;
-    name: string;
+    budgetId: number;
+    budgetName: string;
     isDefault: boolean;
     isActive: boolean;
 }
@@ -13,8 +13,8 @@ export interface IBudgetListState {
 }
 
 const initialState: IBudgetState = {
-    id: 0,
-    name: "",
+    budgetId: 0,
+    budgetName: "",
     isDefault: false,
     isActive: false
 };

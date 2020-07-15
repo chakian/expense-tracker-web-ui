@@ -6,73 +6,84 @@ import { Table, Space, Button } from 'antd';
 import { AppState } from '../_store/rootReducer';
 import { getBudgetList } from '../_services/budgetService';
 
-const columns = [
-    {
-        title: 'Bütçe Adı',
-        dataIndex: 'budgetName',
-        key: 'budgetName',
-    },
-    {
-        title: 'Son Güncelleme',
-        dataIndex: 'lastUpdate',
-        key: 'lastUpdate',
-    },
-    {
-        title: 'Değişim',
-        key: 'action',
-        render: (text, record) =>
-            (
-                <Space size="middle">
-                    {
-                        record.isDefault == true ?
-                            "Aktif" :
-                            <a>Aktifleştir</a>
-                    }
-                </Space>
-            ),
-    },
-];
-
-const data = [
-    {
-        key: '1',
-        budgetName: 'Deneme',
-        lastUpdate: '2020-01-01',
-        isDefault: true,
-    },
-    {
-        key: '2',
-        budgetName: 'Deneme 2',
-        lastUpdate: '2020-07-01',
-        isDefault: false,
-    },
-];
+class budgetData {
+    key: number;
+    budgetName: string;
+    isDefault: boolean;
+}
 
 class SwitchBudget extends Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>, {}> {
     state = {
-        isLoading: true
+        isLoading: true,
+        columns: [
+            {
+                title: 'Bütçe Adı',
+                dataIndex: 'budgetName',
+                key: 'budgetName',
+            },
+            // {
+            //     title: 'Son Güncelleme',
+            //     dataIndex: 'lastUpdate',
+            //     key: 'lastUpdate',
+            // },
+            {
+                title: 'Değişim',
+                key: 'action',
+                render: (text, record) =>
+                    (
+                        <Space size="middle">
+                            {
+                                record.isDefault == true ?
+                                    "Aktif" :
+                                    "Aktifleştir ?"
+                                    // <a>Aktifleştir</a>
+                            }
+                        </Space>
+                    ),
+            },
+        ],
+        tableData: []
     };
 
     componentDidMount() {
-        this.getList();
+        this.onGetList();
     }
 
-    getList() {
+    onGetList = () => {
         const { user } = this.props;
         let prm = getBudgetList(user.token);
         prm.then((list) => {
-            alert(list);
             this.setState({ isLoading: false });
+
+            const { defaultBudgetId } = user;
+
+            let dataArr = Array<budgetData>();
+
+            for (let item of list.list) {
+                let dataPart = {
+                    key: item.budgetId,
+                    budgetName: item.budgetName,
+                    isDefault: false,
+                };
+                if (item.budgetId === defaultBudgetId) {
+                    dataPart.isDefault = true;
+                }
+                dataArr.push(dataPart);
+            }
+
+            this.setState({ tableData: dataArr });
+        }, (error) => {
+            alert(error);
         });
     }
 
     render() {
-        const { isLoading } = this.state;
+        const { isLoading, columns, tableData } = this.state;
 
         return (
             <div>
-                <header>Bütçe Değiştir <Button onClick={this.getList}>Yenile</Button> </header>
-                <Table columns={columns} dataSource={data} loading={isLoading} />
+                <header>Bütçe Değiştir <Button onClick={this.onGetList}>Yenile</Button> </header>
+                <Table columns={columns} dataSource={tableData} loading={isLoading} />
             </div>
         );
     }

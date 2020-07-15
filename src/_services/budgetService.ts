@@ -1,5 +1,7 @@
 import { IBudgetListState } from "../budget/reducer";
 
+var Config = require('Config');
+
 export function getBudgetList(token: string): Promise<IBudgetListState> {
     const requestOptions = {
         method: 'GET',
@@ -8,9 +10,8 @@ export function getBudgetList(token: string): Promise<IBudgetListState> {
             'Authorization': 'Bearer ' + token,
         }
     };
-    //http://localhost:8000/api/v1
-    // return fetch(`${config.apiUrl}/user/login`, requestOptions)
-    return fetch(`http://localhost:8000/api/v1/budget`, requestOptions)
+    
+    return fetch(`${Config.apiUrl}/budget`, requestOptions)
         .then(handleResponse)
         .then(bl => {
             const list: IBudgetListState = { 

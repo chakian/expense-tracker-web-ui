@@ -25,7 +25,7 @@ export function getBudgets(
 ): ThunkAction<Promise<IGetBudgetsAction>, IBudgetState, undefined, IGetBudgetsAction> {
     return async (dispatch: ThunkDispatch<IBudgetState, undefined, IGetBudgetsAction>) => {
         //call service
-        const budgetList: IBudgetState = { id: 0, isActive: false, name: "", isDefault: false } //= await userService.login(email, password);
+        const budgetList: IBudgetState = { budgetId: 0, isActive: false, budgetName: "", isDefault: false } //= await userService.login(email, password);
         return await dispatch({
             type: ReduxActionTypes.GET_BUDGET_LIST,
             data: budgetList

@@ -1,6 +1,7 @@
-// import config from 'config';
 import { authHeader } from '../_helpers/auth-header';
 import { IUserState } from '../user/reducer';
+
+var Config = require('Config');
 
 export const userService = {
     login,
@@ -13,9 +14,8 @@ function login(email, password): Promise<IUserState> {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
     };
-    //http://localhost:8000/api/v1
-    // return fetch(`${config.apiUrl}/user/login`, requestOptions)
-    return fetch(`http://localhost:8000/api/v1/user/login`, requestOptions)
+    
+    return fetch(`${Config.apiUrl}/user/login`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
