@@ -1,5 +1,5 @@
 // React and Redux imports
-import * as React from "react";
+import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { BrowserRouter, Switch } from 'react-router-dom';
 
@@ -18,13 +18,22 @@ import LoginPage from './user/LoginPage';
 import LogoutPage from './user/LogoutPage';
 import Dashboard from './dashboard/Dashboard';
 import SwitchBudget from './budget/SwitchBudget';
+import { Dispatch, AnyAction, bindActionCreators } from "redux";
+
+import { checkLoggedIn } from './user/actions';
+import { supportsGoWithoutReloadUsingHash } from 'history/DOMUtils';
 
 // Props for App
 interface AppProps {
 }
 
 // Class implenmentation
-class App extends React.Component<AppProps> {
+class App extends Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>, {}> {
+    constructor(prp){
+        super(prp);
+        const { checkUser } = this.props;
+        checkUser();
+    }
     componentDidMount() {
     }
 
@@ -51,6 +60,14 @@ class App extends React.Component<AppProps> {
 const mapStateToProps = (state: AppState) => ({
 });
 
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
+    bindActionCreators(
+        {
+            checkUser: checkLoggedIn
+        },
+        dispatch);
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(App);

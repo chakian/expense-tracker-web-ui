@@ -5,12 +5,14 @@ export interface IUserState {
     email: string;
     name: string;
     token: string;
+    defaultBudgetId: number;
 }
 
 const initialState: IUserState = {
     email: "",
     token: "",
-    name: ""
+    name: "",
+    defaultBudgetId: 0
 };
 
 type UserReducerActions = ILoginUserAction | ICheckUserLoggedInAction;
@@ -25,14 +27,16 @@ export default function(
                 ...state,
                 email: action.data.email,
                 name: action.data.name,
-                token: action.data.token
+                token: action.data.token,
+                defaultBudgetId: action.data.defaultBudgetId
             };
         case ReduxActionTypes.CHECK_LOGGED_IN:
             return{
                 ...state,
                 email: action.data.email,
                 name: action.data.name,
-                token: action.data.token
+                token: action.data.token,
+                defaultBudgetId: action.data.defaultBudgetId
             };
         default:
             return state;

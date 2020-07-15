@@ -16,8 +16,8 @@ const textCenter: CSSProperties = {
 
 class PrivateLayout extends Component<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>, {}> {
     public componentDidMount(){
-        const { checkUser } = this.props;
-        checkUser();
+        // const { checkUser } = this.props;
+        // checkUser();
     }
 
     render() {
